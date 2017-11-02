@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" 
+         version="2.5" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <display-name>Archetype Created Web Application</display-name>
+  
+  
+  
+  	<servlet>
+		
+		<servlet-name>Accueil</servlet-name>
+		<servlet-class>fr.escalade_presentation.controller.Accueil</servlet-class>
+	</servlet>
+	
+	<servlet>
+		
+		<servlet-name>TopoController</servlet-name>
+		<servlet-class>fr.escalade_presentation.controller.TopoController</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Accueil</servlet-name>
+		<url-pattern>/accueil</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>TopoController</servlet-name>
+		<url-pattern>/ListeTopo</url-pattern>
+	</servlet-mapping>
+
+<!-- 	<jsp-config> -->
+<!-- 	<jsp-property-group> -->
+<!-- 		<url-pattern>*.jsp</url-pattern> -->
+<!-- 		<include-prelude>/WEB-INF/vue/taglibs.jsp</include-prelude> -->
+<!-- 	</jsp-property-group> -->
+<!-- </jsp-config>  -->
+		
+	
+</web-app>

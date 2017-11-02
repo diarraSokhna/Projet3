@@ -1,0 +1,14 @@
+body{
+    
+    
+   
+	background: fixed;
+    background-image: URL(../img/bg.jpg);
+    background-repeat: no-repeat;
+}
+
+.navbar{
+	 font-family: 'georgia', sans-serif;
+    font-size:16px;
+	
+}
