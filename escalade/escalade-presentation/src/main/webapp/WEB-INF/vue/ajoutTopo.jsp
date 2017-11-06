@@ -15,9 +15,12 @@
 </head>
 <body>
 
-
 <%@ include file="menu.jsp" %>
-  
-
+  <form method="post" action="AjoutTopo" enctype="multipart/form-data" name="formt"></form>
+Nom: <input type="text" name="nom" /> <br/>
+Description: <input type="text" name="description" /><br/>
+User: <input type="text" name="user" /><br/>
+Nbr page: <input type="text" name="page" /><br/>
+Choisir image: <input type="text" name="img" />
 </body>
 </html>

@@ -17,29 +17,7 @@
 
 </head>
 <body>
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="<%=request.getContextPath()+"/accueil"%>"> <i class="glyphicon glyphicon-home"></i></a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="<%=request.getContextPath()+"/ListeTopo"%>">Topo</a></li>
-         <li><a href="">Site</a></li>
-        <li><a href="#">Article</a></li>
-        <li><a href="#">S'inscrire</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Connexion</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<%@ include file="menu.jsp" %>
 
 <div class="container">
  <div class="row">
@@ -59,23 +37,6 @@
                      </c:forEach>
 </div>
 
-<!-- 		<table class="table table-striped table-bordered" -->
-<!-- 			style="font-size: 20px"> -->
-<!-- 			<thead> -->
-<!-- 				<tr> -->
-<!-- 					<th>Nom</th> -->
-<!-- 					<th>Description</th> -->
-<!-- 					<th>Nbr page</th> -->
-<!-- 				</tr> -->
-<%-- 				<c:forEach var="topo" items="${ topos }"> --%>
-<!-- 					<tr> -->
-<%-- 						<td><c:out value="${ topo.nom }" /></td> --%>
-<%-- 						<td><c:out value="${ topo.description}" /></td> --%>
-<%-- 						<td><c:out value="${ topo.nbpage}" /></td> --%>
-<!-- 					</tr> -->
-<%-- 				</c:forEach> --%>
-<!-- 			</thead> -->
-<!-- 		</table> -->
 
 
 
