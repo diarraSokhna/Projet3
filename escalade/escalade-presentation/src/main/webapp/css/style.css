@@ -12,3 +12,12 @@ body{
     font-size:16px;
 	
 }
+.requis {
+    color: #c00;
+}
+.succes {
+    color: green;
+}
+.erreur {
+    color: red;
+}

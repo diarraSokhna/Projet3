@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<web-app xmlns="http://java.sun.com/xml/ns/javaee" 
-         version="2.5" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+      version="3.0" id="WebApp_ID">
+         
   <display-name>Archetype Created Web Application</display-name>
-  
-  
-  
   	<servlet>
 		
 		<servlet-name>Accueil</servlet-name>
@@ -19,6 +17,28 @@
 		<servlet-name>TopoController</servlet-name>
 		<servlet-class>fr.escalade_presentation.controller.TopoController</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>AjoutTopo</servlet-name>
+		<servlet-class>fr.escalade_presentation.controller.AjoutTopo</servlet-class>
+		
+	</servlet>
+	<servlet>
+		
+		<servlet-name>Upload</servlet-name>
+		<servlet-class>fr.escalade_presentation.controller.Upload</servlet-class>
+		<multipart-config>
+		<location>c:/fichiers</location>
+		<max-file-size>10485760</max-file-size> <!-- 10 Mo -->
+		<max-request-size>52428800</max-request-size> <!-- 5 x 10 Mo -->
+		<file-size-threshold>1048576</file-size-threshold> <!-- 1 Mo -->
+	   </multipart-config>
+	
+	</servlet>
+	<servlet>
+		
+		<servlet-name>Inscription</servlet-name>
+		<servlet-class>fr.escalade_presentation.controller.Inscription</servlet-class>
+	</servlet>
 	
 	<servlet-mapping>
 		<servlet-name>Accueil</servlet-name>
@@ -29,6 +49,31 @@
 		<servlet-name>TopoController</servlet-name>
 		<url-pattern>/ListeTopo</url-pattern>
 	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>AjoutTopo</servlet-name>
+		<url-pattern>/AjoutTopo</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Upload</servlet-name>
+		<url-pattern>/Upload</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Inscription</servlet-name>
+		<url-pattern>/Inscription</url-pattern>
+	</servlet-mapping>
+
+<listener>
+    <listener-class>fr.escalade.config.InitialisationDaoFactory</listener-class>
+</listener>
+<welcome-file-list>
+	<welcome-file>index.html</welcome-file>
+	<welcome-file>index.htm</welcome-file>
+	<welcome-file>index.jsp</welcome-file>
+	<welcome-file>default.html</welcome-file>
+	<welcome-file>default.htm</welcome-file>
+	<welcome-file>default.jsp</welcome-file>
+</welcome-file-list>
 
 <!-- 	<jsp-config> -->
 <!-- 	<jsp-property-group> -->
