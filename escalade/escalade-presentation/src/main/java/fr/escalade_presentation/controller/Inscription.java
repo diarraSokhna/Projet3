@@ -2,6 +2,7 @@ package fr.escalade_presentation.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +12,7 @@ import fr.escalade.persistance.DaoFactory;
 import fr.escalade.persistance.UtilisateurDao;
 import fr.escalade_metier.forms.InscriptionForm;
 
-
+@WebServlet("/Inscription" )
 public class Inscription extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
