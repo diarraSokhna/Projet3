@@ -3,6 +3,7 @@ package fr.escalade_presentation.controller;
 
 import java.io.IOException;
 
+import javax.persistence.Entity;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,9 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import fr.escalade.metier.service.UtilisateurService;
 
+@EnableJpaRepositories(basePackages="fr.escalade.persistance.dao")
 @WebServlet("/ListeUtilisateur" )
 public class ListeUtilisateur extends HttpServlet {
 	private static final long serialVersionUID = 1L;

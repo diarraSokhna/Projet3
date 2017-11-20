@@ -54,6 +54,20 @@ public class Utilisateur implements Serializable {
 	}
 	
 	
+	public Utilisateur(String nom, String prenom, String adresse, int tel, String email, String motpass,
+			Timestamp dateinscription, String photo) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.adresse = adresse;
+		this.tel = tel;
+		this.email = email;
+		this.motpass = motpass;
+		this.dateinscription = dateinscription;
+		this.photo = photo;
+	}
+
+
 	public long getIduser() {
 		return iduser;
 	}

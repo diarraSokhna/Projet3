@@ -22,7 +22,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="<%=request.getContextPath()+"/accueil"%>"> <i class="glyphicon glyphicon-home"></i></a>
+      <a class="navbar-brand" href="<%=request.getContextPath()+"/Accueil"%>"> <i class="glyphicon glyphicon-home"></i></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -31,14 +31,14 @@
         <a class="dropdown-toggle" data-toggle="dropdown"  href="">Topo
         <span class="caret"></span></a>
          <ul class="dropdown-menu">
-           <li class=""><a href="<%=request.getContextPath()+"/AjoutTopo"%>">Ajouter topo</a></li> 
-           <li class=""><a href="<%=request.getContextPath()+"/ListeTopo"%>">Liste des topos</a></li> 
+           <li class=""><a href="">Ajouter topo</a></li> 
+           <li class=""><a href="">Liste des topos</a></li> 
             
         </ul>
         </li>
        
         <li><a href="#">Article</a></li>
-        <li><a href="<%=request.getContextPath()+"/Inscription"%>">S'inscrire</a></li>
+        <li><a href="">S'inscrire</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Connexion</a></li>

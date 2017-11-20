@@ -14,7 +14,7 @@ import fr.escalade.persistance.dao.UtilisateurDao;
 @Transactional
 public class UtilisateurService {
 	
-	@Autowired
+	
 	private final UtilisateurDao utilisateurdao;
 
 	public UtilisateurService(UtilisateurDao utilisateurdao) {
