@@ -23,6 +23,11 @@
     <version>3.0.1</version>
     <scope>provided</scope>
 </dependency>
+  <dependency>
+    <groupId>eu.medsea.mimeutil</groupId>
+    <artifactId>mime-util</artifactId>
+    <version>2.1.3</version>
+</dependency>
   
     <dependency>
       <groupId>junit</groupId>
@@ -40,6 +45,13 @@
     	<artifactId>escalade-modele</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>
+    <!-- Dépendances vers spring -->
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        
+    </dependency>
+    
   </dependencies>
   
 </project>

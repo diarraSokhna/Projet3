@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import fr.escalade.metier.service.UtilisateurService;
 
 @WebServlet("/ListeUtilisateur" )
@@ -18,7 +20,7 @@ public class ListeUtilisateur extends HttpServlet {
 	
 	    public static final String VUE  = "/WEB-INF/vue/listeUtilisateurs.jsp";
 	    
-	  
+		@Autowired
 	     private UtilisateurService utilisateurService;
 	
     public ListeUtilisateur() {}

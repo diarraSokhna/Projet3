@@ -31,6 +31,36 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    
+     <!-- Dépendances vers spring -->
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        
+    </dependency>
+    <dependency>
+    <groupId>org.springframework.data</groupId>
+    <artifactId>spring-data-jpa</artifactId>
+    <version>2.0.1.RELEASE</version>
+</dependency>
+
+    <!-- JSR-250 -->
+<dependency>
+    <groupId>javax.annotation</groupId>
+    <artifactId>javax.annotation-api</artifactId>
+    <version>1.2</version>
+</dependency>
+<!-- JSR-330 -->
+<dependency>
+    <groupId>javax.inject</groupId>
+    <artifactId>javax.inject</artifactId>
+    <version>1</version>
+</dependency>
+     <dependency>
+   <groupId>org.eclipse.persistence</groupId>
+   <artifactId>javax.persistence</artifactId>
+   <version>2.1.0</version>
+  </dependency>
   </dependencies>
   
 </project>

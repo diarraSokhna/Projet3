@@ -10,6 +10,7 @@
   
   <artifactId>escalade-persistance</artifactId>
   <name>escalade-persistance</name>
+  
   <url>http://maven.apache.org</url>
   
   <properties>
@@ -35,6 +36,32 @@
     	<artifactId>escalade-modele</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>
+    
+     <!-- Dépendances vers spring -->
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        
+    </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+<dependency>
+    <groupId>org.springframework.data</groupId>
+    <artifactId>spring-data-jpa</artifactId>
+    <version>2.0.1.RELEASE</version>
+</dependency>
+
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-jdbc</artifactId>
+</dependency>
+
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-tx</artifactId>
+  	</dependency>
   </dependencies>
   
 </project>
