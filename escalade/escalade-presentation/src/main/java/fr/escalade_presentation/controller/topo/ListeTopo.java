@@ -1,19 +1,22 @@
-package fr.escalade_presentation.controller;
+package fr.escalade_presentation.controller.topo;
 
 
 import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.escalade.beans.Topo;
+import fr.escalade.persistance.dao.DaoException;
+import fr.escalade.persistance.dao.TopoDao;
+import fr.escalade.persistance.impl.DaoFactory;
+import fr.escalade.persistance.impl.TopoDaoImp;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import fr.escalade.persistance.TopoDao;
-
-
+@WebServlet("/ListeTopo")
 public class ListeTopo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -21,11 +24,17 @@ public class ListeTopo extends HttpServlet {
 	    public static final String ATT_TOPO       = "topo";
 
 	    public static final String VUE  = "/WEB-INF/vue/listeTopos.jsp";
-          public TopoDao topoDao;
-	     
-//	    org.springframework.context.ApplicationContext context = new ClassPathXmlApplicationContext("BootstrapContext.xml");
-//	    TopoDao topoDao = (TopoDao) context.getBean("topoDao");
-
+	    
+	private TopoDao topoDao;
+       
+    
+	public void init() throws ServletException {
+		
+		  /* Récupération d'une instance de notre DAO topo */
+        this.topoDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTopoDao();
+		
+		
+	}
 	
     public ListeTopo() {
         super();

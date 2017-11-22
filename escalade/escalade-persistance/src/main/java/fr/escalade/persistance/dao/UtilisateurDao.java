@@ -1,6 +1,4 @@
-package fr.escalade.persistance.dao;
-
-
+package fr.escalade.persistance;
 
 import java.util.List;
 
@@ -8,12 +6,12 @@ import org.springframework.data.repository.CrudRepository;
 
 import fr.escalade.beans.Utilisateur;
 
+public interface UtilisateurDao {
 
-public interface UtilisateurDao extends CrudRepository<Utilisateur , Long>{
+	   void creer( Utilisateur utilisateur ) throws DaoException;
 
-	   void creer( Utilisateur utilisateur ) ;
-
-	   Utilisateur trouver( String email );
+	    Utilisateur trouver( String email ) throws DaoException;
 	    
-        List<Utilisateur> lister();
+	    List<Utilisateur> lister() throws DaoException;
+
 }

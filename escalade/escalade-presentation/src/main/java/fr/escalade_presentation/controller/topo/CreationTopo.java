@@ -1,4 +1,4 @@
-package fr.escalade_presentation.controller;
+package fr.escalade_presentation.controller.topo;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.escalade.beans.Topo;
-import fr.escalade.persistance.DaoFactory;
-import fr.escalade.persistance.TopoDao;
+import fr.escalade.persistance.dao.TopoDao;
+import fr.escalade.persistance.impl.DaoFactory;
 import fr.escalade_metier.forms.CreationTopoForm;
 
 @MultipartConfig
@@ -27,10 +27,10 @@ public class CreationTopo extends HttpServlet {
 	private TopoDao topoDao;
        
     
-//	public void init() throws ServletException {
-//		   /* Récupération d'une instance de notre DAO topo */
-//        this.topoDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTopoDao();
-//	}
+	public void init() throws ServletException {
+		   /* Récupération d'une instance de notre DAO topo */
+        this.topoDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTopoDao();
+	}
   
     public CreationTopo() {
         super();

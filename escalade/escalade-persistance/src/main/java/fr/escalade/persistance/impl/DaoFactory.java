@@ -1,5 +1,5 @@
 
-package fr.escalade.persistance;
+package fr.escalade.persistance.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,6 +7,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+
+import fr.escalade.persistance.dao.DaoConfigurationException;
+import fr.escalade.persistance.dao.TopoDao;
+import fr.escalade.persistance.dao.UtilisateurDao;
 
 public class DaoFactory {
 	  private static final String FICHIER_PROPERTIES       = "/fr/escalade/persistance/dao.properties";
@@ -78,9 +82,9 @@ public class DaoFactory {
 	    }
 
 	   // R�cup�ration du Dao
-//	   public TopoDao getTopoDao() {
-//		    return new  TopoDaoImp(dataSource);
-//	}
+	   public TopoDao getTopoDao() {
+		    return new TopoDaoImp(this);
+	}
 	
 	
 }

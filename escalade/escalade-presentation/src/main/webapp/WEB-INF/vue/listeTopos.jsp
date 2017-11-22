@@ -10,7 +10,7 @@
  <c:forEach var = "topo" items = "${ topos }">
                     <div class="col-sm-6 col-md-3 colonn">
                         <div class="thumbnail">
-                            <img src="/escalade-presentation/img/1.jpg" alt=""/>
+                            <img src="<c:out value="${ topo.image }"/>" alt=""/>
                             <div class="caption">
                             
                                 <h3><c:out value="${ topo.nom }"/> </h3>
