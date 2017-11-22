@@ -70,7 +70,7 @@
            
                  </div>
                     </div>
-                <p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>
+               <p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>
           </div>
           </div>
           </div>

@@ -10,20 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-
 import fr.escalade.metier.service.UtilisateurService;
 
-@EnableJpaRepositories(basePackages="fr.escalade.persistance.dao")
-@WebServlet("/ListeUtilisateur" )
+@WebServlet("/ListeUtilisateur")
 public class ListeUtilisateur extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	
 	    public static final String VUE  = "/WEB-INF/vue/listeUtilisateurs.jsp";
 	    
-		@Autowired
+		
 	     private UtilisateurService utilisateurService;
 	
     public ListeUtilisateur() {}

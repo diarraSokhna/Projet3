@@ -45,7 +45,6 @@ public final class InscriptionForm {
 		String nom = getValeurChamp( request, CHAMP_NOM );
 		String prenom = getValeurChamp( request, CHAMP_PRENOM );
 	    String email = getValeurChamp( request, CHAMP_EMAIL );
-	    String id_role = getValeurChamp( request, CHAMP_ID_ROLE );
 	    String motDePasse = getValeurChamp( request, CHAMP_PASS );
 	    String confirmation = getValeurChamp( request, CHAMP_CONF );
 	    

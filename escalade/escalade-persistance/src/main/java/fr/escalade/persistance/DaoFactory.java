@@ -19,6 +19,7 @@ public class DaoFactory {
 	    private String              username;
 	    private String              password;
 
+	    //constructeur avec field
 	    DaoFactory( String url, String username, String password ) {
 	        this.url = url;
 	        this.username = username;
@@ -77,9 +78,9 @@ public class DaoFactory {
 	    }
 
 	   // R�cup�ration du Dao
-	   public TopoDao getTopoDao() {
-		    return new TopoDaoImp(this);
-	}
+//	   public TopoDao getTopoDao() {
+//		    return new  TopoDaoImp(dataSource);
+//	}
 	
 	
 }

@@ -5,15 +5,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 import fr.escalade.beans.Utilisateur;
 import static fr.escalade.persistance.DaoUtilitaire.*;
+
 
 public class UtilisateurDaoImp implements UtilisateurDao{
 
 	   private DaoFactory  daoFactory;
 	   private static final String SQL_SELECT_PAR_EMAIL = "SELECT id_user, nom, prenom, adresse, tel, email, passw, dateinscription FROM Utilisateur WHERE email = ?";
-	   private static final String SQL_INSERT = "INSERT INTO Utilisateur (nom, prenom, adresse, tel, email, passw, dateinscription) VALUES (?, ?, ?, ?, ?, ?, NOW())";
+	   private static final String SQL_INSERT = "INSERT INTO Utilisateur (nom, prenom, adresse, tel, email, passw, dateinscription, id_role) VALUES (?, ?, ?, ?, ?, ?, NOW(), 3)";
 	   
 	   //pr accesder aux methodes de daofactory comm getconnection on crée un conctructeur ki prend en argument un obj daofactory
 	  UtilisateurDaoImp(DaoFactory daoFactory) {
@@ -110,6 +112,61 @@ public class UtilisateurDaoImp implements UtilisateurDao{
 	    utilisateur.setDateinscription( resultSet.getTimestamp( "dateinscription" ) );
 	    
 	    return utilisateur;
+	}
+
+	public long count() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public void delete(Utilisateur arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteAll() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteAll(Iterable<? extends Utilisateur> arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteById(Long arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean existsById(Long arg0) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public Iterable<Utilisateur> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Iterable<Utilisateur> findAllById(Iterable<Long> arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Optional<Utilisateur> findById(Long arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public <S extends Utilisateur> S save(S arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public <S extends Utilisateur> Iterable<S> saveAll(Iterable<S> arg0) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
