@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.escalade.beans.Utilisateur;
-import fr.escalade.persistance.DaoFactory;
 import fr.escalade.persistance.UtilisateurDao;
+import fr.escalade.persistance.DaoFactory;
 import fr.escalade_metier.forms.InscriptionForm;
 
 @WebServlet("/Inscription" )

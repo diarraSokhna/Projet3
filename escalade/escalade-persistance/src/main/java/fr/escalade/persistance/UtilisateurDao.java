@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import fr.escalade.beans.Utilisateur;
 
-public interface UtilisateurDao {
+public interface UtilisateurDao extends CrudRepository<Utilisateur , Long>{
 
 	   void creer( Utilisateur utilisateur ) throws DaoException;
 

@@ -10,7 +10,10 @@
  <c:forEach var = "topo" items = "${ topos }">
                     <div class="col-sm-6 col-md-3 colonn">
                         <div class="thumbnail">
-                            <img src="<c:out value="${ topo.image }"/>" alt=""/>
+<%--                           <c:set var="image"><c:out value="${ topo.image }"></c:out></c:set> --%>
+                        
+                <img src="<c:url value="/images/${ topo.image }"/>" alt=""/>
+                            
                             <div class="caption">
                             
                                 <h3><c:out value="${ topo.nom }"/> </h3>

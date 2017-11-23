@@ -1,54 +1,41 @@
 package fr.escalade.persistance;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import static fr.escalade.persistance.DaoUtilitaire.*;
+
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Named;
-import javax.sql.DataSource;
-
 import fr.escalade.beans.Topo;
-import static fr.escalade.persistance.DaoUtilitaire.*;
+import fr.escalade.persistance.DaoException;
+import fr.escalade.persistance.TopoDao;
 
-@Named
-public class TopoDaoImp extends AbstractDaoImpl implements TopoDao{
+
+public class TopoDaoImp implements TopoDao{
 	
     private static final String SQL_INSERT = "INSERT INTO topo(nom, description, nbr_page, id_user, image) VALUES(?, ?, ?, ?, ?)";
     private static final String SQL_SELECT = "SELECT id_topo, nom, description, nbr_page, id_user, image FROM topo ORDER BY id_topo";
     
-    
-    private DataSource dataSource;
-
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
-//     private DaoFactory daoFactory;
-//     
-	
+     private DaoFactory daoFactory;
+     
      //constructeur avec argument
-	public TopoDaoImp(DataSource dataSource) {
-		this.dataSource = dataSource;
+	 TopoDaoImp(DaoFactory daoFactory) {
+		this.daoFactory = daoFactory;
 	}
-
+   
 	 /* Implémentation de la méthode définie dans l'interface TopoDao */
 	   
-	    public TopoDaoImp() {
-	}
-
-		public void creer( Topo topo ) throws DaoException {
+	    public void creer( Topo topo ) throws DaoException {
 	        Connection connexion = null;
 	        PreparedStatement preparedStatement = null;
 	        ResultSet valeursAutoGenerees = null;
 
 	        try {
-	            connexion = dataSource.getConnection();
+	            connexion = daoFactory.getConnection();
 	            preparedStatement = initialisationRequetePreparee( connexion, SQL_INSERT, true,
 	                    topo.getNom(), 
 	                    topo.getDescription(), 
@@ -73,15 +60,14 @@ public class TopoDaoImp extends AbstractDaoImpl implements TopoDao{
 	    }
 
 	    
-
-		public List<Topo> lister() throws DaoException {
+	    public List<Topo> lister() throws DaoException {
 	        Connection connection = null;
 	        PreparedStatement preparedStatement = null;
 	        ResultSet resultSet = null;
 	        List<Topo> topos = new ArrayList<Topo>();
 
 	        try {
-	            connection = dataSource.getConnection();
+	            connection = daoFactory.getConnection();
 	            preparedStatement = connection.prepareStatement( SQL_SELECT );
 	            resultSet = preparedStatement.executeQuery();
 	            while ( resultSet.next() ) {

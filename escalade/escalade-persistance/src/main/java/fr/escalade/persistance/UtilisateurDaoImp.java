@@ -1,5 +1,7 @@
 package fr.escalade.persistance;
 
+import static fr.escalade.persistance.DaoUtilitaire.*;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 import fr.escalade.beans.Utilisateur;
-import static fr.escalade.persistance.DaoUtilitaire.*;
+import fr.escalade.persistance.DaoException;
+import fr.escalade.persistance.UtilisateurDao;
 
 
 public class UtilisateurDaoImp implements UtilisateurDao{

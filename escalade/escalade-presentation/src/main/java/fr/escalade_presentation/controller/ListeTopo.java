@@ -1,4 +1,4 @@
-package fr.escalade_presentation.controller.topo;
+package fr.escalade_presentation.controller;
 
 
 import java.io.IOException;
@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.escalade.beans.Topo;
-import fr.escalade.persistance.dao.DaoException;
-import fr.escalade.persistance.dao.TopoDao;
-import fr.escalade.persistance.impl.DaoFactory;
-import fr.escalade.persistance.impl.TopoDaoImp;
+import fr.escalade.persistance.DaoException;
+import fr.escalade.persistance.TopoDao;
+import fr.escalade.persistance.DaoFactory;
+import fr.escalade.persistance.TopoDaoImp;
 
 @WebServlet("/ListeTopo")
 public class ListeTopo extends HttpServlet {

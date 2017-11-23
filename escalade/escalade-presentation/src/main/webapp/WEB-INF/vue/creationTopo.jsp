@@ -2,11 +2,15 @@
 
 <html>
 <head>
+<title>Escalade</title>
+ <link rel="shortcut icon" type="image/x-icon" href="/escalade-presentation/img/favicon.png" />
 </head>
 <body>
 <%@ include file="menu.jsp" %>
+
+<div class="container">
  <form method="post" action="CreationTopo" enctype="multipart/form-data">
-  <div class="col-sm-5">
+  <div class="col-sm-9">
     <div class="panel panel-default">
              <div class="panel-body form-horizontal payment-form">
                     <div class="form-group">
@@ -19,21 +23,22 @@
                     <div class="form-group">
                         <label for="description" class="col-sm-3 control-label">Description <span class="requis">*</span></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="description" name="description" value="<c:out value="${topo.description}"/>" >
+                            <textarea  class="form-control" id="description" name="description" value="<c:out value="${topo.description}"/>" >
+                           </textarea>
                             <span class="erreur">${form.erreurs['description']}</span>
                         </div>
                     </div> 
                        <div class="form-group">
                         <label for="iduser" class="col-sm-3 control-label">Utilisateur</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="iduser" name="iduser" value="<c:out value="${topo.iduser}"/>" >
+                            <input type="text" class="form-control" id="utilisateur" name="utilisateur" value="<c:out value="${topo.iduser}"/>" >
                             <span class="erreur">${form.erreurs['utilisateur']}</span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="nbpage" class="col-sm-3 control-label">Nombre de page</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="nbpage" name="nbpage" value="<c:out value="${topo.nbpage}"/>" >
+                            <input type="text" class="form-control" id="nbrpage" name="nbrpage" value="<c:out value="${topo.nbpage}"/>" >
                             <span class="erreur">${form.erreurs['nbpage']}</span>
                         </div>
                     </div>
@@ -42,7 +47,7 @@
                     <div class="form-group">
                         <label for="photo" class="col-sm-3 control-label">Choisir photo</label>
                         <div class="col-sm-9">
-                            <input type="file" class="form-control" id="photo" name="photo" value="<c:out value="${topo.image}"/>" onchange="" multiple/>
+                            <input type="file" class="form-control" id="image" name="image" value="<c:out value="${topo.image}"/>" onchange="" multiple/>
                             <span class="erreur">${form.erreurs['image']}</span>
                         </div>
                     </div>   
@@ -64,6 +69,6 @@
 
 
  </form>
-
+</div>
 </body>
 </html>

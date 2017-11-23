@@ -70,13 +70,13 @@ public final class CreationTopoForm {
 	        try {
 	            if ( erreurs.isEmpty() ) {
 	                topoDao.creer( topo );
-	                resultat = "Succès de la création du client.";
+	                resultat = "Succès de la création du topo.";
 	            } else {
-	                resultat = "Échec de la création du client.";
+	                resultat = "Échec de la création du topo.";
 	            }
 	        } catch ( DaoException e ) {
 	            setErreur( "imprévu", "Erreur imprévue lors de la création." );
-	            resultat = "Échec de la création du client : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
+	            resultat = "Échec de la création du topo : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
 	            e.printStackTrace();
 	        }
 
@@ -85,21 +85,38 @@ public final class CreationTopoForm {
 
 	    
 		private void traiterNbrPage(String nbrpage, Topo topo) {
+			
+			int nbpage=-1;
 			   try {
-		            validationNbrPage( nbrpage );
+				   nbpage= validationNbrPage( nbrpage );
 		        } catch ( FormValidationException e ) {
-		            setErreur( CHAMP_NOM, e.getMessage() );
+		            setErreur( CHAMP_NOMBRE_PAGE, e.getMessage() );
 		        }
-		        topo.setNom( nbrpage );
+		        topo.setNbpage(nbpage);
 			
 		}
 
-		private void validationNbrPage(String nbrpage) throws FormValidationException {
-			 if ( nbrpage != null && nbrpage.length() < 2 ) {
-		            throw new FormValidationException( "Le nombre de page doit contenir au moins 2 caractères." );
-		        }
+		private int validationNbrPage(String nbrpage) throws FormValidationException {
 			
-		}
+		    int temp;
+	        if ( nbrpage != null ) {
+	            try {
+	                temp = Integer.parseInt( nbrpage );
+	                if ( temp < 0 ) {
+	                    throw new FormValidationException( "Le montant doit être un nombre positif." );
+	                }
+	            } catch ( NumberFormatException e ) {
+	                temp = -1;
+	                throw new FormValidationException( "Le montant doit être un nombre." );
+	            }
+	        } else {
+	            temp = -1;
+	            throw new FormValidationException( "Merci d'entrer un montant." );
+	        }
+	        return temp;
+	    }
+			
+	
 
 		private void traiterImage(Topo topo, HttpServletRequest request, String chemin) {
 			 String image = null;
@@ -192,19 +209,33 @@ public final class CreationTopoForm {
 		}
 
 		private void traiterUtilisateur(String utilisateur, Topo topo) {
+			int user = 0 ;
 			   try {
-		            validationUtilisateur( utilisateur );
+				   user= validationUtilisateur( utilisateur );
 		        } catch ( FormValidationException e ) {
-		            setErreur( CHAMP_NOM, e.getMessage() );
+		            setErreur( CHAMP_UTILISATEUR, e.getMessage() );
 		        }
-		        topo.setNom( utilisateur );
+		        topo.setIduser(user);
 			
 		}
 
-		private void validationUtilisateur(String utilisateur) throws FormValidationException {
-			 if ( utilisateur != null && utilisateur.length() < 2 ) {
-		            throw new FormValidationException( "L'id de l'utilisateur doit numeric." );
+		private int validationUtilisateur(String utilisateur) throws FormValidationException {
+			 int temp;
+		        if ( utilisateur != null ) {
+		            try {
+		                temp = Integer.parseInt( utilisateur );
+		                if ( temp < 0 ) {
+		                    throw new FormValidationException( "Le montant doit être un nombre positif." );
+		                }
+		            } catch ( NumberFormatException e ) {
+		                temp = -1;
+		                throw new FormValidationException( "Le montant doit être un nombre." );
+		            }
+		        } else {
+		            temp = -1;
+		            throw new FormValidationException( "Merci d'entrer un montant." );
 		        }
+		        return temp;
 			
 		}
 
@@ -214,7 +245,7 @@ public final class CreationTopoForm {
 		        } catch ( FormValidationException e ) {
 		            setErreur( CHAMP_NOM, e.getMessage() );
 		        }
-		        topo.setNom( description );
+		        topo.setDescription( description );
 			
 		}
 

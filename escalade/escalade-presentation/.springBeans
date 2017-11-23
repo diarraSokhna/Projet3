@@ -9,6 +9,7 @@
 	<configs>
 	</configs>
 	<autoconfigs>
+		<config>src/main/resources/BootstrapContext.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
