@@ -41,19 +41,15 @@
     <div class="well">
         <h4>Vous aussi donnez votre avis</h4>
     <div class="input-group">
-    <form method="post" accept-charset="UTF-8" action="AjoutCommentaire">
-    <input type="text"  class="form-control" id="id_user" name="id_user" placeholder="Utilisateur"
-								value="<c:out value="${commentaire.id_user}"/>" size="20"
-								maxlength="60" />
-		 <input type="text"  class="form-control" id="id_art" name="id_art" placeholder="Article"
-								value="<c:out value="${article.id_art}"/>" size="20"
-								maxlength="60" />						
-								
-        <input type="text" id="libelle" name="libelle" value="<c:out value="${commentaire.libelle}"/>" class="form-control input-sm chat-input" placeholder="Votre message ici..." />
-	    <button  type="submit" value="" class="btn btn-primary">
-                                Ajouter commentaire
-                            </button>
+    <form method="post"  action="DetailsArticle">
+    <input type="text"  class="form-control" id="utilisateur" name="utilisateur" placeholder="Utilisateur"
+								value="<c:out value="${commentaire.id_user}"/>" size="20"maxlength="60" />
+	<input type="text"  class="form-control" id="article" name="article" placeholder="Article"
+								value="<c:out value="${article.id_art}"/>" size="20" maxlength="60" />						
+	<input type="text" id="libelle" name="libelle" value="<c:out value="${commentaire.libelle}"/>" class="form-control input-sm chat-input" placeholder="Votre message ici..." />
+	<button  type="submit" value="" class="btn btn-primary">Ajouter commentaire</button>
         </form>
+        
     </div>
     <c:forEach var = "commentaire" items = "${ commentaires }">
     <hr data-brackets-id="12673">
