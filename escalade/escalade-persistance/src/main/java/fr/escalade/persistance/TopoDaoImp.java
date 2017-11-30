@@ -19,6 +19,7 @@ public class TopoDaoImp implements TopoDao{
 	
     private static final String SQL_INSERT = "INSERT INTO topo(nom, description, nbr_page, id_user, image) VALUES(?, ?, ?, ?, ?)";
     private static final String SQL_SELECT = "SELECT id_topo, nom, description, nbr_page, id_user, image FROM topo ORDER BY id_topo";
+    private static final String SQL_SELECT_PAR_NOM = "SELECT id_topo, nom,description, nbr_page, id_user, image FROM topo WHERE nom = ?";
     
      private DaoFactory daoFactory;
      
@@ -28,7 +29,7 @@ public class TopoDaoImp implements TopoDao{
 	}
    
 	 /* Implémentation de la méthode définie dans l'interface TopoDao */
-	   
+	    
 	    public void creer( Topo topo ) throws DaoException {
 	        Connection connexion = null;
 	        PreparedStatement preparedStatement = null;
@@ -59,7 +60,7 @@ public class TopoDaoImp implements TopoDao{
 	        }
 	    }
 
-	    
+	  
 	    public List<Topo> lister() throws DaoException {
 	        Connection connection = null;
 	        PreparedStatement preparedStatement = null;
@@ -99,102 +100,33 @@ public class TopoDaoImp implements TopoDao{
 	       
 	        return topo;
 	    }
+      
+		public Topo trouver(String nom) throws DaoException {
+			
+		    Connection connexion = null;
+		    PreparedStatement preparedStatement = null;
+		    ResultSet resultSet = null;
+		    Topo topo = null;
+
+		    try {
+		        /* Récupération d'une connexion depuis la Factory */
+		        connexion = daoFactory.getConnection();
+		        preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_PAR_NOM, false, nom );
+		        resultSet = preparedStatement.executeQuery();
+		        /* Parcours de la ligne de données de l'éventuel ResulSet retourné */
+		        if ( resultSet.next() ) {
+		            topo = map( resultSet );
+		        }
+		    } catch ( SQLException e ) {
+		        throw new DaoException( e );
+		    } finally {
+		        fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+		    }
+
+		    return topo;
+		}
 	    
 	 
-	 
-	 
-//		public void crer(Topo topo) throws DaoException {
-//			Connection conn = null;
-//			PreparedStatement preparedStatement = null;
-//			String sql;
-//			File file = new File("");
-//			FileInputStream fis = null;
-//			try {
-//				fis = new FileInputStream(file);
-//			} catch (FileNotFoundException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
-//			
-//			try {
-//				conn = daoFactory.getConnection();
-//			    sql = "INSERT INTO topo(nom,description,nbr_page,id_user) VALUES(?,?,?,?)";
-//			    preparedStatement = conn.prepareStatement(sql);
-//			    preparedStatement.setString(1, topo.getNom());
-//			    preparedStatement.setString(2, topo.getDescription());
-//			    preparedStatement.setInt(3, topo.getNbpage());
-//			    
-////			    preparedStatement.setBinaryStream(4, fis, file.length());
-//			    preparedStatement.setInt(4, topo.getIduser());
-////			    preparedStatement.setString(6, file.getName());
-//			    
-//			  //on execute la mise a jour des donnees
-//			    preparedStatement.executeUpdate();
-//	            conn.commit();
-//	        } catch (SQLException e) {
-//	            try {
-//	                if (conn != null) {
-//	                    conn.rollback();
-//	                }
-//	            } catch (SQLException e2) {
-//	            }
-//	            throw new DaoException("Impossible de communiquer avec la base de données");
-//	        }
-//	        finally {
-//	            try {
-//	                if (conn != null) {
-//	                    conn.close();  
-//	                }
-//	            } catch (SQLException e) {
-//	                throw new DaoException("Impossible de communiquer avec la base de données");
-//	            }
-//	        }
-//			
-//		}
 
-
-//	public List<Topo> lister() throws DaoException {
-//		List<Topo> topos = new ArrayList<Topo>();
-//		Connection conn = null;
-//		Statement statement = null;
-//		ResultSet resultSet = null;
-//		String sql;
-//		
-//		
-//		try {
-//			
-//			sql="Select nom,description,nbr_page from topo";
-//		    conn = daoFactory.getConnection();
-//	        statement = conn.createStatement();
-//		    resultSet = statement.executeQuery(sql);
-//		   
-//		    //r�cup�ration des donn�es
-//	    while (resultSet.next()){
-//		     String nom = resultSet.getString("nom");
-//		     String description = resultSet.getString("description");
-//		     int nbpage = resultSet.getInt("nbr_page");
-//		     
-//		     //on  r�e un objet utilisateur ou on stocke les donn�es recup�r� depuis notre table
-//		      Topo topo =  new Topo();
-//		      topo.setNom(nom);
-//		      topo.setDescription(description);
-//		      topo.setNbpage(nbpage);
-//		      
-//		      //on ajoute les utilisateurs ds notre liste 
-//		       topos.add(topo);
-//			}
-//		} catch (SQLException e) {
-//			throw new DaoException("Impossible de communiquer avec la base de donn�es");
-//		} finally {
-//			try {
-//				if (conn != null) {
-//					conn.close();
-//				}
-//			} catch (SQLException e) {
-//				throw new DaoException("Impossible de communiquer avec la base de donn�es");
-//			}
-//		}
-//		return topos;
-//	}
 
 }

@@ -13,45 +13,22 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 
-@Entity
-@Table(name="utilisateur")
+
 public class Utilisateur implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name="id_user" , nullable=false)
-	@GeneratedValue(strategy=GenerationType.AUTO)
+
 	private long iduser;
-	
-	@Column(name = "nom", length = 30, nullable = false) 
-	private String nom;
-	
-	@Column(name = "prenom", length = 30, nullable = false) 
-	private String prenom;
-	
-	@Column(name = "adresse", length = 30, nullable = true) 
+	private String nom; 
+	private String prenom; 
 	private String adresse;
-	
-	@Column(name = "tel", length = 30, nullable = true) 
 	private int tel;
-	
-	@Column(name = "email", length = 30, nullable = false, unique=true) 
 	private String email;
-	
-	@Column(name = "motpass", length = 30, nullable = false) 
 	private String motpass;
-	
-	@Column(name = "dateinscription", length = 30, nullable = true)
-	@Temporal(TemporalType.TIMESTAMP)
 	private Timestamp dateinscription;
-	
-	@Column(name = "photo", length = 300, nullable = true) 
 	private String photo;
 	
-	
-	public Utilisateur() {
-		
-	}
+	public Utilisateur() {}
 	
 	
 	public Utilisateur(String nom, String prenom, String adresse, int tel, String email, String motpass,

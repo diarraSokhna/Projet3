@@ -22,10 +22,6 @@ public class DaoFactory {
 	    private static final String PROPERTY_MOT_DE_PASSE    = "motdepasse";
 
 	    BoneCP connexionPool = null;
-	    
-	    
-	    
-	   
 
 	    public DaoFactory(BoneCP connexionPool) {
 			
@@ -111,5 +107,12 @@ public class DaoFactory {
 		    return new TopoDaoImp(this);
 	}
 	
+	   public ArticleDao getArticleDao(){
+		   return new ArticleDaoImpl(this);
+	   }
+	   
+	   public CommentaireDao getCommentaireDao(){
+		   return new CommentaireDaoImpl(this);
+	   }
 	
 }

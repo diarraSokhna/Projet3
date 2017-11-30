@@ -1,11 +1,14 @@
 package fr.escalade_metier.forms;
 
+import java.security.MessageDigest;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.jasypt.util.password.ConfigurablePasswordEncryptor;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 
 import fr.escalade.beans.Utilisateur;
 import fr.escalade.persistance.DaoException;
@@ -95,20 +98,10 @@ public final class InscriptionForm {
             setErreur( CHAMP_PASS, e.getMessage() );
             setErreur( CHAMP_CONF, null );
         }
-        /*
-         * Utilisation de la bibliothèque Jasypt pour chiffrer le mot de passe
-         * efficacement.
-         * 
-         * L'algorithme SHA-256 est ici utilisé, avec par défaut un salage
-         * aléatoire et un grand nombre d'itérations de la fonction de hashage.
-         * 
-         * La String retournée est de longueur 56 et contient le hash en Base64.
-         */
-        ConfigurablePasswordEncryptor passwordEncryptor = new ConfigurablePasswordEncryptor();
-        passwordEncryptor.setAlgorithm( ALGO_CHIFFREMENT );
-        passwordEncryptor.setPlainDigest( false );
-        String motDePasseChiffre = passwordEncryptor.encryptPassword( motDePasse );
 
+        StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+        String motDePasseChiffre = passwordEncryptor.encryptPassword(motDePasse);
+        
         utilisateur.setMotpass( motDePasseChiffre );
     }
     /*

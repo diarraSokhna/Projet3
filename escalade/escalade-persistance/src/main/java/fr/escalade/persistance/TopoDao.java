@@ -10,4 +10,5 @@ public interface TopoDao {
 		void creer(Topo topo) throws DaoException;
 	//fonction lister qui liste les topos
 	  List<Topo> lister() throws DaoException;
+	  Topo trouver( String nom ) throws DaoException;
 }

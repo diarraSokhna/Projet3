@@ -14,7 +14,8 @@
 <script src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-default">
+
+<nav class="navbar navbar-default ">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -31,20 +32,30 @@
         <a class="dropdown-toggle" data-toggle="dropdown"  href="">Topo
         <span class="caret"></span></a>
          <ul class="dropdown-menu">
-           <li class=""><a href="<%=request.getContextPath()+"/CreationTopo"%>">Ajouter topo</a></li> 
-           <li class=""><a href="<%=request.getContextPath()+"/ListeTopo"%>">Liste des topos</a></li> 
+           <li class=""><a href="<c:url value="/CreationTopo" />">Proposer topo</a></li> 
+           <li class=""><a href="<c:url value="/ListeTopo" />">Liste des topos</a></li> 
             
         </ul>
         </li>
        
-        <li><a href="#">Article</a></li>
-        <li><a href="<%=request.getContextPath()+"/Inscription"%>">S'inscrire</a></li>
+          <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown"  href="">Article
+        <span class="caret"></span></a>
+         <ul class="dropdown-menu">
+           <li class=""><a href="<c:url value="/CreationArticle" />">Ajouter article</a></li> 
+           <li class=""><a href="<c:url value="/ListeArticle" />">Liste des articles</a></li> 
+            
+        </ul>
+        </li>
+       
+        <li><a href="<c:url value="/Inscription" />">S'inscrire</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Connexion</a></li>
+        <li><a href="<c:url value="/Connection" />"><span class="glyphicon glyphicon-log-in"></span> Connexion</a></li>
       </ul>
     </div>
   </div>
 </nav>
+
 </body>
 </html>

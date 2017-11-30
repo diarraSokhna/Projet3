@@ -29,6 +29,11 @@
     <version>2.1.3</version>
 </dependency>
   
+  <dependency>
+    <groupId>org.jasypt</groupId>
+    <artifactId>jasypt</artifactId>
+    <version>1.9.2</version>
+</dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -45,12 +50,7 @@
     	<artifactId>escalade-modele</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>
-    <!-- Dépendances vers spring -->
-    <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-context</artifactId>
-        
-    </dependency>
+   
     
   </dependencies>
   

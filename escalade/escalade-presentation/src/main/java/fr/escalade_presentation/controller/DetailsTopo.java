@@ -16,14 +16,14 @@ import fr.escalade.persistance.TopoDao;
 import fr.escalade.persistance.DaoFactory;
 import fr.escalade.persistance.TopoDaoImp;
 
-@WebServlet("/ListeTopo")
-public class ListeTopo extends HttpServlet {
+@WebServlet("/DetailsTopo")
+public class DetailsTopo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	 public static final String CONF_DAO_FACTORY = "daofactory";
-	    public static final String ATT_TOPO       = "topo";
+	 public static final String PARAM_NOM_TOPO = "nomtopo";
 
-	    public static final String VUE  = "/WEB-INF/vue/listeTopos.jsp";
+	    public static final String VUE  = "/WEB-INF/vue/detailsTopo.jsp";
 	    
 	private TopoDao topoDao;
        
@@ -36,16 +36,13 @@ public class ListeTopo extends HttpServlet {
 		
 	}
 	
-    public ListeTopo() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+    public DetailsTopo() { }
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		    
-		request.setAttribute("topos", topoDao.lister());
+		String nomtopo = getValeurParametre( request, PARAM_NOM_TOPO ); 
+		request.setAttribute("topo", topoDao.trouver(nomtopo));
 		
 	    //on dit a notre servlet d'afficher la page jsp
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
@@ -59,4 +56,13 @@ public class ListeTopo extends HttpServlet {
 		
 	}
 
+	
+    private static String getValeurParametre( HttpServletRequest request, String nomChamp ) {
+        String valeur = request.getParameter( nomChamp );
+        if ( valeur == null || valeur.trim().length() == 0 ) {
+            return null;
+        } else {
+            return valeur;
+        }
+    }
 }

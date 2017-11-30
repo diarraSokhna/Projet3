@@ -9,10 +9,12 @@
 <%@ include file="menu.jsp" %>
 
 <div class="container">
- <form method="post" action="CreationTopo" enctype="multipart/form-data">
+ <form method="post" accept-charset="UTF-8" action="CreationTopo" enctype="multipart/form-data">
   <div class="col-sm-9">
     <div class="panel panel-default">
              <div class="panel-body form-horizontal payment-form">
+              <fieldset>
+                <legend>Proposez un topo </legend>
                     <div class="form-group">
                         <label for="nom" class="col-sm-3 control-label">Nom <span class="requis">*</span></label>
                         <div class="col-sm-9">
@@ -47,7 +49,7 @@
                     <div class="form-group">
                         <label for="photo" class="col-sm-3 control-label">Choisir photo</label>
                         <div class="col-sm-9">
-                            <input type="file" class="form-control" id="image" name="image" value="<c:out value="${topo.image}"/>" onchange="" multiple/>
+                            <input type="file" class="form-control-file" id="image" name="image" value="<c:out value="${topo.image}"/>" onchange="" multiple/>
                             <span class="erreur">${form.erreurs['image']}</span>
                         </div>
                     </div>   
@@ -63,12 +65,17 @@
                         </div>
                     </div>
                      <p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>
+              </fieldset>
                 </div>
                 </div>
  </div>
 
 
+
  </form>
+ 
+
+ 
 </div>
 </body>
 </html>

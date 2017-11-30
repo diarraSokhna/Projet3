@@ -6,9 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import fr.escalade.beans.Topo;
 import fr.escalade.beans.Utilisateur;
 import fr.escalade.persistance.DaoException;
 import fr.escalade.persistance.UtilisateurDao;
@@ -18,6 +20,8 @@ public class UtilisateurDaoImp implements UtilisateurDao{
 
 	   private DaoFactory  daoFactory;
 	   private static final String SQL_SELECT_PAR_EMAIL = "SELECT id_user, nom, prenom, adresse, tel, email, passw, dateinscription FROM Utilisateur WHERE email = ?";
+	   private static final String SQL_SELECT_PAR_PASSE = "SELECT id_user, nom, prenom, email, passw FROM Utilisateur WHERE passw = ?";
+	   private static final String SQL_SELECT = "SELECT * FROM Utilisateur ORDER BY id_user";
 	   private static final String SQL_INSERT = "INSERT INTO Utilisateur (nom, prenom, adresse, tel, email, passw, dateinscription, id_role) VALUES (?, ?, ?, ?, ?, ?, NOW(), 3)";
 	   
 	   //pr accesder aux methodes de daofactory comm getconnection on crée un conctructeur ki prend en argument un obj daofactory
@@ -91,8 +95,25 @@ public class UtilisateurDaoImp implements UtilisateurDao{
     }
 
 	public List<Utilisateur> lister() throws DaoException {
-		// TODO Auto-generated method stub
-		return null;
+	      Connection connection = null;
+	        PreparedStatement preparedStatement = null;
+	        ResultSet resultSet = null;
+	        List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
+
+	        try {
+	            connection = daoFactory.getConnection();
+	            preparedStatement = connection.prepareStatement( SQL_SELECT );
+	            resultSet = preparedStatement.executeQuery();
+	            while ( resultSet.next() ) {
+	                utilisateurs.add( map( resultSet ) );
+	            }
+	        } catch ( SQLException e ) {
+	            throw new DaoException( e );
+	        } finally {
+	            fermeturesSilencieuses( resultSet, preparedStatement, connection );
+	        }
+
+	        return utilisateurs;
 	}
 
 	
@@ -117,60 +138,32 @@ public class UtilisateurDaoImp implements UtilisateurDao{
 	    return utilisateur;
 	}
 
-	public long count() {
-		// TODO Auto-generated method stub
-		return 0;
+
+
+	public Utilisateur trouverParPasse(String motdepasse) throws DaoException {
+		   Connection connexion = null;
+   	    PreparedStatement preparedStatement = null;
+   	    ResultSet resultSet = null;
+   	    Utilisateur utilisateur = null;
+
+   	    try {
+   	        /* Récupération d'une connexion depuis la Factory */
+   	        connexion = daoFactory.getConnection();
+               preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_PAR_PASSE, false, motdepasse );
+   	        resultSet = preparedStatement.executeQuery();
+   	        /* Parcours de la ligne de données de l'éventuel ResulSet retourné */
+   	        if ( resultSet.next() ) {
+   	            utilisateur = map( resultSet );
+   	        }
+   	    } catch ( SQLException e ) {
+   	        throw new DaoException( e );
+   	    } finally {
+   	        fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+   	    }
+
+   	    return utilisateur;
 	}
 
-	public void delete(Utilisateur arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void deleteAll() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void deleteAll(Iterable<? extends Utilisateur> arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void deleteById(Long arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public boolean existsById(Long arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public Iterable<Utilisateur> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Iterable<Utilisateur> findAllById(Iterable<Long> arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Optional<Utilisateur> findById(Long arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public <S extends Utilisateur> S save(S arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public <S extends Utilisateur> Iterable<S> saveAll(Iterable<S> arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	
 }

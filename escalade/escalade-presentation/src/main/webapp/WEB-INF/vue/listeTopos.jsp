@@ -1,6 +1,7 @@
 
 <html>
 <head>
+<link rel="shortcut icon" type="image/x-icon" href="/escalade-presentation/img/favicon.png" />
 </head>
 <body>
 <%@ include file="menu.jsp" %>
@@ -10,7 +11,7 @@
  <c:forEach var = "topo" items = "${ topos }">
                     <div class="col-sm-6 col-md-3 colonn">
                         <div class="thumbnail">
-<%--                           <c:set var="image"><c:out value="${ topo.image }"></c:out></c:set> --%>
+
                         
                 <img src="<c:url value="/images/${ topo.image }"/>" alt=""/>
                             
@@ -18,16 +19,15 @@
                             
                                 <h3><c:out value="${ topo.nom }"/> </h3>
                                 <p><c:out value="${ topo.description}" /></p>
-                                <p> <a href="#" class="btn btn-default boutton" role="button">Voir détail</a></p>
+                                
+                                <a href="<c:url value="/DetailsTopo"><c:param name="nomtopo" value="${ topo.nom }" ></c:param></c:url>">
+                              Voir détail</a>
                             </div>
                         </div>
                     </div>
                  
                      </c:forEach>
 </div>
-
-
-
 
 	</div>
   </body>
