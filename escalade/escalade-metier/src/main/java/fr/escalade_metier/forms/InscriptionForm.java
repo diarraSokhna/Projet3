@@ -1,13 +1,11 @@
 package fr.escalade_metier.forms;
 
-import java.security.MessageDigest;
-import java.util.Base64;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
 import fr.escalade.beans.Utilisateur;

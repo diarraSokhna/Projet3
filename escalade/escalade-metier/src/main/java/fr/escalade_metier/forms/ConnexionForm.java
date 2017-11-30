@@ -14,8 +14,7 @@ import fr.escalade.persistance.UtilisateurDao;
 public final class ConnexionForm {
     private static final String CHAMP_EMAIL  = "email";
     private static final String CHAMP_PASS   = "motdepasse";
-
-    private static final String ALGO_CHIFFREMENT = "SHA-256";
+    
     private String              resultat;
     private Map<String, String> erreurs      = new HashMap<String, String>();
     
