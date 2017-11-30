@@ -57,17 +57,21 @@ public final class ConnexionForm {
         }
         utilisateur.setEmail( email );
 
+        
         /* Validation du champ mot de passe. */
+        
         try {
             validationMotDePasse( motDePasse );
         } catch ( FormValidationException e ) {
             setErreur( CHAMP_PASS, e.getMessage() );
         }
-
-      
+        
+        
         utilisateur.setMotpass(motDePasse);
 
         /* Initialisation du résultat global de la validation. */
+        
+        
         if ( erreurs.isEmpty()) {
             resultat = "Succès de la connexion.";
         } else {
@@ -85,12 +89,11 @@ public final class ConnexionForm {
     }
     
     private void validationMotDePasse( String motDePasse ) throws FormValidationException {
-   
-    	//if (passwordEncryptor.checkPassword(inputPassword, encryptedPassword))
-        if (passwordEncryptor.checkPassword(motDePasse, utilisateurDao.trouverParPasse(motDePasse).getMotpass())){
-            throw new FormValidationException( "mot de passe correct." );
+    	String motdepassbase = utilisateur.getMotpass();
+    	   if (utilisateurDao.trouverParPasse(motDePasse) == null &&  passwordEncryptor.checkPassword(motDePasse, motdepassbase)){
+            throw new FormValidationException( "mot de passe incorrect." );
         }else{
-        	throw new FormValidationException( "Mot de passe incorect." );
+        	throw new FormValidationException( "Mot de passe correct." );
         }
     }
 

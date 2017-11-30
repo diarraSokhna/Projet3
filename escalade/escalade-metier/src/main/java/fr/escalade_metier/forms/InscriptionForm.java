@@ -18,11 +18,10 @@ public final class InscriptionForm {
 	 private static final String CHAMP_NOM     = "nom";
 	 private static final String CHAMP_PRENOM        = "prenom";
      private static final String CHAMP_EMAIL      = "email";
-     private static final String CHAMP_ID_ROLE      = "id_role";
      private static final String CHAMP_PASS       = "motdepasse";
      private static final String CHAMP_CONF       = "confirmation";
     
-     private static final String ALGO_CHIFFREMENT = "SHA-256";
+    
 
     private String  resultat;
     private Map<String, String> erreurs = new HashMap<String, String>();
