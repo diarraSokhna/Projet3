@@ -70,9 +70,7 @@ public final class ConnexionForm {
         utilisateur.setMotpass(motDePasse);
 
         /* Initialisation du résultat global de la validation. */
-        
-        
-        if ( erreurs.isEmpty()) {
+       if ( erreurs.isEmpty()) {
             resultat = "Succès de la connexion.";
         } else {
             resultat = "Échec de la connexion.";

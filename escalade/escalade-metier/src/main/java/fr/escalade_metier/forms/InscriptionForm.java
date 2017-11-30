@@ -20,13 +20,11 @@ public final class InscriptionForm {
      private static final String CHAMP_EMAIL      = "email";
      private static final String CHAMP_PASS       = "motdepasse";
      private static final String CHAMP_CONF       = "confirmation";
-    
-    
 
-    private String  resultat;
-    private Map<String, String> erreurs = new HashMap<String, String>();
-  
-	private UtilisateurDao      utilisateurDao;
+	private String resultat;
+	private Map<String, String> erreurs = new HashMap<String, String>();
+
+	private UtilisateurDao utilisateurDao;
 
 	public InscriptionForm(UtilisateurDao utilisateurDao) {
 		this.utilisateurDao = utilisateurDao;
