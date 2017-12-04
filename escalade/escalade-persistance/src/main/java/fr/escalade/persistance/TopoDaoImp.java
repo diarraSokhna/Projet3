@@ -20,17 +20,15 @@ public class TopoDaoImp implements TopoDao{
     private static final String SQL_INSERT = "INSERT INTO topo(nom, description, nbr_page, id_user, image) VALUES(?, ?, ?, ?, ?)";
     private static final String SQL_SELECT = "SELECT id_topo, nom, description, nbr_page, id_user, image FROM topo ORDER BY id_topo";
     private static final String SQL_SELECT_PAR_NOM = "SELECT id_topo, nom,description, nbr_page, id_user, image FROM topo WHERE nom = ?";
-    
+    private static final String SQL_SELECT_PAR_ID = "SELECT id_topo, nom,description, nbr_page, id_user, image FROM topo WHERE id_topo = ?";
+    private static final String SQL_DELETE_PAR_ID = "DELETE FROM topo WHERE id_topo = ?";
+	   
      private DaoFactory daoFactory;
-     
-     //constructeur avec argument
-	 TopoDaoImp(DaoFactory daoFactory) {
+     TopoDaoImp(DaoFactory daoFactory) {
 		this.daoFactory = daoFactory;
 	}
    
-	 /* Implémentation de la méthode définie dans l'interface TopoDao */
-	    
-	    public void creer( Topo topo ) throws DaoException {
+	 public void creer( Topo topo ) throws DaoException {
 	        Connection connexion = null;
 	        PreparedStatement preparedStatement = null;
 	        ResultSet valeursAutoGenerees = null;
@@ -41,7 +39,7 @@ public class TopoDaoImp implements TopoDao{
 	                    topo.getNom(), 
 	                    topo.getDescription(), 
 	                    topo.getNbpage(), 
-	                    topo.getIduser(), 
+	                    topo.getUtilisateur().getIduser(), 
 	                    topo.getImage() );
 	            int statut = preparedStatement.executeUpdate();
 	            if ( statut == 0 ) {
@@ -60,6 +58,31 @@ public class TopoDaoImp implements TopoDao{
 	        }
 	    }
 
+	 
+	 
+	 private Topo trouver( String sql, Object... objets ) throws DaoException {
+	        Connection connexion = null;
+	        PreparedStatement preparedStatement = null;
+	        ResultSet resultSet = null;
+	        Topo topo = null;
+
+	        try {
+	            connexion = daoFactory.getConnection();
+	            preparedStatement = initialisationRequetePreparee( connexion, sql, false, objets );
+	            resultSet = preparedStatement.executeQuery();
+	           
+	            if ( resultSet.next() ) {
+	                topo = map( resultSet );
+	            }
+	        } catch ( SQLException e ) {
+	            throw new DaoException( e );
+	        } finally {
+	            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+	        }
+
+	        return topo;
+	    }
+	 
 	  
 	    public List<Topo> lister() throws DaoException {
 	        Connection connection = null;
@@ -83,47 +106,47 @@ public class TopoDaoImp implements TopoDao{
 	        return topos;
 	    }
 	    
-	    /*
-	     * Simple méthode utilitaire permettant de faire la correspondance (le
-	     * mapping) entre une ligne issue de la table des topos (un ResultSet) et
-	     * un bean Topo.
-	     */
-	    private static Topo map( ResultSet resultSet ) throws SQLException {
+	    private  Topo map( ResultSet resultSet ) throws SQLException {
 	        Topo topo = new Topo();
-	        
 	        topo.setIdtopo(resultSet.getLong( "id_topo"));
 	        topo.setNom(resultSet.getString( "nom"));
 	        topo.setDescription(resultSet.getString( "description"));
 	        topo.setNbpage(resultSet.getInt( "nbr_page"));
-	        topo.setIduser(resultSet.getInt( "id_user"));
+	        
+	        UtilisateurDao utilisateurDao = daoFactory.getUtilisateurDao();
+	        topo.setUtilisateur(utilisateurDao.trouver(resultSet.getLong("id_user")));;
 	        topo.setImage( resultSet.getString( "image" ) );
 	       
 	        return topo;
 	    }
       
 		public Topo trouver(String nom) throws DaoException {
-			
-		    Connection connexion = null;
-		    PreparedStatement preparedStatement = null;
-		    ResultSet resultSet = null;
-		    Topo topo = null;
+			return trouver( SQL_SELECT_PAR_NOM, nom);
+		}
 
-		    try {
-		        /* Récupération d'une connexion depuis la Factory */
-		        connexion = daoFactory.getConnection();
-		        preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_PAR_NOM, false, nom );
-		        resultSet = preparedStatement.executeQuery();
-		        /* Parcours de la ligne de données de l'éventuel ResulSet retourné */
-		        if ( resultSet.next() ) {
-		            topo = map( resultSet );
+		public Topo trouver(Long id_topo) throws DaoException {
+			return trouver( SQL_SELECT_PAR_ID, id_topo);
+		}
+
+		public void supprimer(Topo topo) throws DaoException {
+			   Connection connexion = null;
+		        PreparedStatement preparedStatement = null;
+
+		        try {
+		            connexion = daoFactory.getConnection();
+		            preparedStatement = initialisationRequetePreparee( connexion, SQL_DELETE_PAR_ID, true, topo.getIdtopo());
+		            int statut = preparedStatement.executeUpdate();
+		            if ( statut == 0 ) {
+		                throw new DaoException( "Échec de la suppression du topo, aucune ligne supprimée de la table." );
+		            } else {
+		                topo.setIdtopo(0);	
+		            }
+		        } catch ( SQLException e ) {
+		            throw new DaoException( e );
+		        } finally {
+		            fermeturesSilencieuses( preparedStatement, connexion );
 		        }
-		    } catch ( SQLException e ) {
-		        throw new DaoException( e );
-		    } finally {
-		        fermeturesSilencieuses( resultSet, preparedStatement, connexion );
-		    }
-
-		    return topo;
+			
 		}
 	    
 	 

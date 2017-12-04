@@ -2,29 +2,39 @@ package fr.escalade.beans;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
-@Entity
 public class Topo implements Serializable{
     
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue( strategy = GenerationType.AUTO )
-	@Column( name = "id_topo" )
+	
 	private long idtopo;
 	private String nom;
 	private String description;
-	@Column( name = "nbr_page" )
 	private int nbpage;
-	@Column( name = "id_user" )
-	private int iduser;
+	private Utilisateur utilisateur;
 	private String image;
 	
+	
+	
+	public Topo() {}
+
+	public Topo(long idtopo, String nom, String description, int nbpage, Utilisateur utilisateur, String image) {
+		super();
+		this.idtopo = idtopo;
+		this.nom = nom;
+		this.description = description;
+		this.nbpage = nbpage;
+		this.utilisateur = utilisateur;
+		this.image = image;
+	}
+	
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
 	public long getIdtopo() {
 		return idtopo;
 	}
@@ -37,12 +47,7 @@ public class Topo implements Serializable{
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public int getIduser() {
-		return iduser;
-	}
-	public void setIduser(int iduser) {
-		this.iduser = iduser;
-	}
+
 	public String getNom() {
 		return nom;
 	}

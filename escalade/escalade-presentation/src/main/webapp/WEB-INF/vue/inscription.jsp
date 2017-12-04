@@ -75,6 +75,13 @@
                  </div>
                     </div>
                <p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>
+               	<c:if test="${!empty sessionScope.sessionUtilisateur}">
+								<%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
+								<p class="succes">Vous êtes connecté(e) avec l'adresse :
+									${sessionScope.sessionUtilisateur.email} passe:
+									${sessionScope.sessionUtilisateur.motpass}
+									${sessionScope.sessionUtilisateur.iduser}</p>
+							</c:if>
                </fieldset>
           </div>
           </div>

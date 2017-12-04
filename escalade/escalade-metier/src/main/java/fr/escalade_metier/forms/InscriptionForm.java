@@ -14,17 +14,17 @@ import fr.escalade.persistance.UtilisateurDao;
 
 public final class InscriptionForm {
 	 private static final String CHAMP_NOM     = "nom";
-	 private static final String CHAMP_PRENOM        = "prenom";
-     private static final String CHAMP_EMAIL      = "email";
-     private static final String CHAMP_PASS       = "motdepasse";
-     private static final String CHAMP_CONF       = "confirmation";
+	 private static final String CHAMP_PRENOM  = "prenom";
+     private static final String CHAMP_EMAIL   = "email";
+     private static final String CHAMP_PASS    = "motdepasse";
+     private static final String CHAMP_CONF    = "confirmation";
 
-	private String resultat;
-	private Map<String, String> erreurs = new HashMap<String, String>();
+	 private String resultat;
+	 private Map<String, String> erreurs = new HashMap<String, String>();
 
-	private UtilisateurDao utilisateurDao;
+	 private UtilisateurDao utilisateurDao;
 
-	public InscriptionForm(UtilisateurDao utilisateurDao) {
+     public InscriptionForm(UtilisateurDao utilisateurDao) {
 		this.utilisateurDao = utilisateurDao;
 	}
 	
@@ -69,11 +69,7 @@ public final class InscriptionForm {
 	    return utilisateur;
 	}
 	
-	  /*
-     * Appel Ã  la validation de l'adresse email reÃ§ue et initialisation de la
-     * propriÃ©tÃ© email du bean
-     */
-    private void traiterEmail( String email, Utilisateur utilisateur ) {
+	private void traiterEmail( String email, Utilisateur utilisateur ) {
         try {
             validationEmail( email );
         } catch ( FormValidationException e ) {
@@ -82,10 +78,6 @@ public final class InscriptionForm {
         utilisateur.setEmail( email );
     }
 
-    /*
-     * Appel à la validation des mots de passe reçus, chiffrement du mot de
-     * passe et initialisation de la propriété motDePasse du bean
-     */
     private void traiterMotsDePasse( String motDePasse, String confirmation, Utilisateur utilisateur ) {
         try {
             validationMotsDePasse( motDePasse, confirmation );
@@ -93,16 +85,12 @@ public final class InscriptionForm {
             setErreur( CHAMP_PASS, e.getMessage() );
             setErreur( CHAMP_CONF, null );
         }
-
-        StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
-        String motDePasseChiffre = passwordEncryptor.encryptPassword(motDePasse);
-        
-        utilisateur.setMotpass( motDePasseChiffre );
+//        StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+//        String motDePasseChiffre = passwordEncryptor.encryptPassword(motDePasse);
+//        
+        utilisateur.setMotpass( motDePasse );
     }
-    /*
-     * Appel Ã  la validation du nom reÃ§u et initialisation de la propriÃ©tÃ© nom
-     * du bean
-     */
+  
     private void traiterNom( String nom, Utilisateur utilisateur ) {
         try {
             validationNom( nom );
@@ -111,6 +99,7 @@ public final class InscriptionForm {
         }
         utilisateur.setNom( nom );
     }
+   
     
     private void traiterPrenom( String prenom, Utilisateur utilisateur ) {
         try {
@@ -121,7 +110,7 @@ public final class InscriptionForm {
         utilisateur.setPrenom( prenom );
     }
 
-    /* Validation de l'adresse email */
+   
     private void validationEmail( String email ) throws FormValidationException {
         if ( email != null ) {
             if ( !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
@@ -133,8 +122,8 @@ public final class InscriptionForm {
             throw new FormValidationException( "Merci de saisir une adresse mail." );
         }
     }
+   
     
-    /* Validation des mots de passe */
     private void validationMotsDePasse( String motDePasse, String confirmation ) throws FormValidationException {
         if ( motDePasse != null && confirmation != null ) {
             if ( !motDePasse.equals( confirmation ) ) {
@@ -147,7 +136,7 @@ public final class InscriptionForm {
         }
     }
 
-    /* Validation du nom */
+   
     private void validationNom( String nom ) throws FormValidationException {
         if ( nom != null && nom.length() < 3 ) {
             throw new FormValidationException( "Le nom d'utilisateur doit contenir au moins 3 caractéres." );
@@ -158,21 +147,14 @@ public final class InscriptionForm {
         if ( prenom != null && prenom.length() < 3 ) {
             throw new FormValidationException( "Le prénom d'utilisateur doit contenir au moins 3 caractéres." );
         }
-        
-        
     }
 
-    /*
-     * Ajoute un message correspondant au champ spécifié à la map des erreurs.
-     */
+    
     private void setErreur( String champ, String message ) {
         erreurs.put( champ, message );
     }
 
-    /*
-     * MÃ©thode utilitaire qui retourne null si un champ est vide, et son contenu
-     * sinon.
-     */
+   
     private static String getValeurChamp( HttpServletRequest request, String nomChamp ) {
         String valeur = request.getParameter( nomChamp );
         if ( valeur == null || valeur.trim().length() == 0 ) {

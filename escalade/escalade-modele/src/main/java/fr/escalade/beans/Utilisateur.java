@@ -48,7 +48,7 @@ public class Utilisateur implements Serializable {
 	public long getIduser() {
 		return iduser;
 	}
-	public void setId_user(int iduser) {
+	public void setId_user(Long iduser) {
 		this.iduser = iduser;
 	}
 	

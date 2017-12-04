@@ -28,11 +28,7 @@ public class DaoFactory {
 			this.connexionPool = connexionPool;
 		}
 
-		/*
-	     * Méthode chargée de récupérer les informations de connexion à la base de
-	     * données, charger le driver JDBC et retourner une instance de la Factory
-	     */
-	    public static DaoFactory getInstance() throws DaoConfigurationException {
+		 public static DaoFactory getInstance() throws DaoConfigurationException {
 	        Properties properties = new Properties();
 	        String url;
 	        String driver;
@@ -40,8 +36,7 @@ public class DaoFactory {
 	        String motDePasse;
 	        BoneCP connexionPool = null;
 
-	        //ouverture du fichier properties
-	        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+	       ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 	        InputStream fichierProperties = classLoader.getResourceAsStream( FICHIER_PROPERTIES );
 
 	        if ( fichierProperties == null ) {
@@ -66,13 +61,8 @@ public class DaoFactory {
 
 	        
 	        try {
-	            /*
-	             * Création d'une configuration de pool de connexions via l'objet
-	             * BoneCPConfig et les différents setters associés.
-	             */
 	            BoneCPConfig config = new BoneCPConfig();
-	            /* Mise en place de l'URL, du nom et du mot de passe */
-	            config.setJdbcUrl( url );
+	           config.setJdbcUrl( url );
 	            config.setUsername( nomUtilisateur );
 	            config.setPassword( motDePasse );
 	            /* Paramétrage de la taille du pool */
@@ -90,19 +80,15 @@ public class DaoFactory {
 	        return instance;
 	    }
 
-	    /* Méthode chargée de fournir une connexion à la base de données */
-	    Connection getConnection() throws SQLException {
+	   Connection getConnection() throws SQLException {
 	        return connexionPool.getConnection();
 	    }
-	        
-	        
-	    // Méthodes de récupération de l'implémentation des différents DAO 
-	   
-	    public UtilisateurDao getUtilisateurDao() {
+	  
+	   public UtilisateurDao getUtilisateurDao() {
 	        return new UtilisateurDaoImp( this );
 	    }
 
-	   // R�cup�ration du Dao
+	  
 	   public TopoDao getTopoDao() {
 		    return new TopoDaoImp(this);
 	}
@@ -114,5 +100,10 @@ public class DaoFactory {
 	   public CommentaireDao getCommentaireDao(){
 		   return new CommentaireDaoImpl(this);
 	   }
+	   
+	   public PaysDao getPaysDao(){
+		   return new PaysDaoImpl(this);
+	   }
+	   
 	
 }

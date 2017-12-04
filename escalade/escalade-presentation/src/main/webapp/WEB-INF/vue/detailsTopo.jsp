@@ -18,7 +18,7 @@
 				<ul class="items">
 					<li><b>Description: </b> <c:out value="${ topo.description}" /></li>
 					<li><b>Nombre de pages: </b> <c:out value="${ topo.nbpage}" /> pages</li>
-					<li><b>Proposé par: </b> <c:out value="${ topo.iduser}" /> </li>
+					<li><b>Proposé par: </b> <c:out value="${ topo.utilisateur}" /> </li>
 				</ul>
 				    <p> <a href="<c:url value="/Inscription" />" class="btn btn-primary" role="button">Réserver</a>
                                 <a href="<c:url value="/ListeTopo"/>" class="btn btn-primary" role="button">Retour</a></p>

@@ -42,7 +42,7 @@
         <a class="dropdown-toggle" data-toggle="dropdown"  href="">Article
         <span class="caret"></span></a>
          <ul class="dropdown-menu">
-           <li class=""><a href="<c:url value="/CreationArticle" />">Ajouter article</a></li> 
+           <li class=""><a href="<c:url value="/AjoutArticle" />">Ajouter article</a></li> 
            <li class=""><a href="<c:url value="/ListeArticle" />">Liste des articles</a></li> 
             
         </ul>

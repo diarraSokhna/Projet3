@@ -51,9 +51,8 @@ public class DetailsArticle extends HttpServlet {
 		request.setAttribute("article", articleDao.trouver(titrearticle));
 		
 	
-		int idArt = Integer.parseInt(getValeurParametre( request, PARAM_ID_ART )); 
+		Long idArt = Long.parseLong(getValeurParametre( request, PARAM_ID_ART )); 
 		request.setAttribute("commentaires", commentaireDao.lister(idArt));
-		
 		
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 		
@@ -61,7 +60,7 @@ public class DetailsArticle extends HttpServlet {
 		
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 AjoutCommentaireForm form = new AjoutCommentaireForm(commentaireDao);
+		    AjoutCommentaireForm form = new AjoutCommentaireForm(commentaireDao);
 
 	        /* Traitement de la requête et récupération du bean en résultant */
 	        Commentaire commentaire = form.ajouterCommentaire( request );

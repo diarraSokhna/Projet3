@@ -22,6 +22,18 @@
                             <span class="erreur">${form.erreurs['nom']}</span>
                         </div>
                     </div>
+                       <div class="form-group">
+        <label class="col-xs-3 control-label">Site</label>
+        <div class="col-sm-9 selectContainer">
+            <select class="form-control" name="size">
+            <option value="0"> Choisir un site </option>
+             <c:forEach var = "pays" items = "${ payss }">
+                <option value="<c:out value="${ pays.nompays}" />"><c:out value="${ pays.nompays}" /></option>
+               </c:forEach>
+            </select>
+             Si le site n'existe pas vous pouvez l'ajouter <a href="">ici</a>
+        </div>
+    </div>
                     <div class="form-group">
                         <label for="description" class="col-sm-3 control-label">Description <span class="requis">*</span></label>
                         <div class="col-sm-9">
@@ -30,13 +42,7 @@
                             <span class="erreur">${form.erreurs['description']}</span>
                         </div>
                     </div> 
-                       <div class="form-group">
-                        <label for="iduser" class="col-sm-3 control-label">Utilisateur</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="utilisateur" name="utilisateur" value="<c:out value="${topo.iduser}"/>" >
-                            <span class="erreur">${form.erreurs['utilisateur']}</span>
-                        </div>
-                    </div>
+                    
                     <div class="form-group">
                         <label for="nbpage" class="col-sm-3 control-label">Nombre de page</label>
                         <div class="col-sm-9">
@@ -64,6 +70,17 @@
                             </button>
                         </div>
                     </div>
+                    
+                    <c:choose>
+                        <c:when test="${ empty sessionScope.sessionUtilisateur }">
+                <p class="erreur">Veuillez vous connecter d'abord! <a href="<c:url value="/Connection" />">ici</a></p>
+            </c:when>
+            <c:otherwise>   <input type="hidden"  class="form-control" id="utilisateur" name="utilisateur" value="<c:out value="${sessionScope.sessionUtilisateur.iduser}"/>" >
+                            <span class="erreur">${form.erreurs['utilisateur']}</span>
+                       
+                      
+</c:otherwise>
+</c:choose>
                      <p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>
               </fieldset>
                 </div>

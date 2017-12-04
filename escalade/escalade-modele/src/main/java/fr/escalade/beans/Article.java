@@ -1,7 +1,8 @@
 package fr.escalade.beans;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
+
 
 public class Article implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -10,20 +11,24 @@ public class Article implements Serializable {
 	private Date datepubli;
 	private String titre; 
 	private String contenu; 
-	private long id_user;
+	private Utilisateur utilisateur;
 	private String photo;
 	
 	public Article() {}
 
-	public Article(long id_art, Date datepubli, String titre, String contenu, long id_user, String photo) {
+
+
+	public Article(long id_art, Date datepubli, String titre, String contenu, Utilisateur utilisateur, String photo) {
 		super();
 		this.id_art = id_art;
 		this.datepubli = datepubli;
 		this.titre = titre;
 		this.contenu = contenu;
-		this.id_user = id_user;
+		this.utilisateur = utilisateur;
 		this.photo = photo;
 	}
+
+
 
 	public long getId_art() {
 		return id_art;
@@ -57,13 +62,18 @@ public class Article implements Serializable {
 		this.contenu = contenu;
 	}
 
-	public long getId_user() {
-		return id_user;
+	
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 
-	public void setId_user(long id_user) {
-		this.id_user = id_user;
+
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
+
+
 
 	public String getPhoto() {
 		return photo;

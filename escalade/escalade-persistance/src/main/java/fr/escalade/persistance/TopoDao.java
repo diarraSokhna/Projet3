@@ -6,9 +6,13 @@ import fr.escalade.beans.Topo;
 
 public interface TopoDao {
 
-	//définition de la fonction créer qui crée un topo
-		void creer(Topo topo) throws DaoException;
-	//fonction lister qui liste les topos
+	  void creer(Topo topo) throws DaoException;
+	  
 	  List<Topo> lister() throws DaoException;
+	  
 	  Topo trouver( String nom ) throws DaoException;
+	  
+	  Topo trouver( Long id_topo ) throws DaoException;
+	  
+	  void supprimer( Topo topo ) throws DaoException;
 }

@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 
+import fr.escalade.beans.Article;
 import fr.escalade.beans.Commentaire;
 import fr.escalade.beans.Utilisateur;
 import fr.escalade.persistance.CommentaireDao;
@@ -16,9 +18,12 @@ import fr.escalade.persistance.UtilisateurDao;
 public class AjoutCommentaireForm {
 
 	 private static final String CHAMP_lIBELLE     = "libelle";
-	 private static final String CHAMP_ID_USER        = "Utilisateur";
-	 private static final String CHAMP_ID_ART       = "article";
+	 private static final String CHAMP_UTILISATEUR        = "utilisateur";
+	 private static final String CHAMP_ARTICLE       = "article";
+	 
+	 private static final String SESSION_UTILISATEURS        = "sessionUtilisateur";
     
+	 private static final String SESSION_ARTICLES        = "sessionArticle";
 
      private String  resultat;
      private Map<String, String> erreurs = new HashMap<String, String>();
@@ -39,20 +44,24 @@ public class AjoutCommentaireForm {
         return resultat;
     }
 	
+	
 	public Commentaire ajouterCommentaire( HttpServletRequest request ) {
-		
-		String libelle = getValeurChamp( request, CHAMP_lIBELLE );
-		String utilisateur = getValeurChamp( request, CHAMP_ID_USER );
-		String article = getValeurChamp( request, CHAMP_ID_ART );
-		
-		
-	    Commentaire commentaire = new Commentaire();
+		   HttpSession session = request.getSession();
+          
+		   Utilisateur utilisateur =  (Utilisateur) session.getAttribute( SESSION_UTILISATEURS);
+         
+           Article article =  (Article) session.getAttribute( SESSION_ARTICLES);
+           
+           
+		   String libelle = getValeurChamp( request, CHAMP_lIBELLE );
+	       Commentaire commentaire = new Commentaire();
 	    
 	    try {
 	    	
 	        traiterLibelle( libelle, commentaire );
-	        traiterUtilisateur( utilisateur, commentaire );
-	        traiterArticle( article, commentaire );
+	        traiterUtilisateur(utilisateur, commentaire);
+	        traiterArticle(article, commentaire);
+	        
 	        
 	        if ( erreurs.isEmpty() ) {
 	            commentaireDao.laisser(commentaire);
@@ -79,51 +88,31 @@ public class AjoutCommentaireForm {
     }
 
     
-    private void traiterUtilisateur( String utilisateur, Commentaire commentaire ) {
-    	int id_user=0;
-        try {
-            validationUtilisateur( utilisateur );
-        } catch ( FormValidationException e ) {
-            setErreur( CHAMP_ID_USER, e.getMessage() );
-        }
-        commentaire.setId_user(id_user);
+    private void traiterUtilisateur( Utilisateur utilisateur, Commentaire commentaire ) {
+   
+    	  if ( utilisateur == null ) {
+         setErreur( CHAMP_UTILISATEUR, "Utilisateur inconnu, merci d'utiliser le formulaire prévu à cet effet." );
+         
+      }
+      
+        commentaire.setUtilisateur(utilisateur);
     }
     
-    private void traiterArticle( String article, Commentaire commentaire ) {
-    	int id_art=0;
-        try {
-            validationArticle( article );
-        } catch ( FormValidationException e ) {
-            setErreur( CHAMP_ID_USER, e.getMessage() );
-        }
-        commentaire.setId_art(id_art);
+    private void traiterArticle( Article article, Commentaire commentaire ) {
+       if ( article == null ) {
+            setErreur( CHAMP_ARTICLE, "l'article inconnu, merci d'utiliser le formulaire prévu à cet effet." );
+    }
+        commentaire.setArticle(article);
     }
     
 
-    /* Validation de l'adresse email */
     private void validationLibelle( String libelle ) throws FormValidationException {
-        if ( libelle.length() < 3  ) {
+        if (libelle.length() < 3  ) {
                 throw new FormValidationException( "Le libellé doit contenir au moins 3 caractéres." );
         }
     }
     
-    /* Validation des mots de passe */
-    private void validationUtilisateur( String utilisateur ) throws FormValidationException {
-       if ( utilisateur == null ) {
-                throw new FormValidationException( "ko" );
-            
-        }
-    }
-    
-    private void validationArticle( String article ) throws FormValidationException {
-        if ( article == null ) {
-                 throw new FormValidationException( "ko" );
-             
-         }
-     }
-
-
-
+  
     private void setErreur( String champ, String message ) {
         erreurs.put( champ, message );
     }

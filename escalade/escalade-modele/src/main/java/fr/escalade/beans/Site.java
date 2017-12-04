@@ -9,17 +9,17 @@ public class Site implements Serializable{
 	private String nomsite; 
 	private String exposition; 
 	private String classement;
-	private long idpays;
+	private Pays pays;
 	
 	public Site() {}
 
-	public Site(long idsite, String nomsite, String exposition, String classement, long idpays) {
+	public Site(long idsite, String nomsite, String exposition, String classement, Pays pays) {
 		super();
 		this.idsite = idsite;
 		this.nomsite = nomsite;
 		this.exposition = exposition;
 		this.classement = classement;
-		this.idpays = idpays;
+		this.pays = pays;
 	}
 
 	public long getIdsite() {
@@ -54,13 +54,12 @@ public class Site implements Serializable{
 		this.classement = classement;
 	}
 
-	public long getIdpays() {
-		return idpays;
+	public Pays getPays() {
+		return pays;
 	}
 
-	public void setIdpays(long idpays) {
-		this.idpays = idpays;
+	public void setPays(Pays pays) {
+		this.pays = pays;
 	}
-	
-	
+
 }

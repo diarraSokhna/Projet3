@@ -10,11 +10,15 @@ public interface UtilisateurDao {
 
 	   void creer( Utilisateur utilisateur ) throws DaoException;
 
+	    Utilisateur trouver( String email, String motpasse) throws DaoException;
+	    
 	    Utilisateur trouver( String email) throws DaoException;
 	    
-	    Utilisateur trouverParPasse( String motdepasse) throws DaoException;
+	    Utilisateur trouver( Long idUser) throws DaoException;
 	    
 	    List<Utilisateur> lister() throws DaoException;
+	    
+	    void supprimer(Utilisateur utilisateur) throws DaoException;
 	    
 
 } 

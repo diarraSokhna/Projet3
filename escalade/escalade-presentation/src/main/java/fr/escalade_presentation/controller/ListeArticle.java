@@ -19,13 +19,14 @@ public class ListeArticle extends HttpServlet {
 	    public static final String CONF_DAO_FACTORY = "daofactory";
 	    public static final String ATT_ARTICLE       = "article";
 	    public static final String VUE  = "/WEB-INF/vue/listeArticles.jsp";
+
+	    public static final String SESSION_ARTICLES  = "sessionArticle";
 	    public static final String PARAM_ID_ART = "idArt";
 	    
 	    private ArticleDao articleDao;
     
 	public void init() throws ServletException {
 		
-		  /* Récupération d'une instance de notre DAO topo */
         this.articleDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getArticleDao();
         
 		

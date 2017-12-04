@@ -1,4 +1,4 @@
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <link rel="shortcut icon" type="image/x-icon" href="/escalade-presentation/img/favicon.png" />
@@ -17,17 +17,17 @@
             <div class="media">
                 <div class="media-left">
                     <a href="#">
-                        <img class="media-object" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Canis_lupus.jpg/260px-Canis_lupus.jpg" alt="Kurt">
+                        <img class="media-object" src="<c:url value="/images/${ article.photo }"/>" alt="" width="250" height="250">
                     </a>
                 </div>
                 <div class="media-body">
                 <h3 class="media-heading"><c:out value="${ article.titre }"/></h3><br/>
-                Ecrit par <c:out value="${ article.id_user }"/><br/><br/>
+                Ecrit par <c:out value="${ article.utilisateur }"/><br/><br/>
                 <c:out value="${ article.contenu}" /> <br/>
                          <section style="margin-top: 75px">
 		                    
-		                    <i class="glyphicon glyphicon-comment"></i>2
-                            <i class="glyphicon glyphicon-calendar"></i><c:out value="${ article.datepubli }"/>
+		                    <i class="glyphicon glyphicon-comment"></i><c:out value=""/>
+                            <i class="glyphicon glyphicon-calendar"></i><fmt:formatDate pattern="dd-MM-yyyy" value="${article.datepubli}" />
 		                    <a href="<c:url value="/DetailsArticle"> 
 		                    <c:param name="titrearticle" value="${ article.titre }" > </c:param>
 		                    <c:param name="idArt" value="${ article.id_art }" > </c:param></c:url> " class="btn btn-default btn-sm pull-right" >Lire la suite ... </a>

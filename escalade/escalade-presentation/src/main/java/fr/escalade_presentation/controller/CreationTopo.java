@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import fr.escalade.beans.Topo;
 import fr.escalade.persistance.TopoDao;
 import fr.escalade.persistance.DaoFactory;
+import fr.escalade.persistance.PaysDao;
 import fr.escalade_metier.forms.CreationTopoForm;
 
 @MultipartConfig
@@ -24,39 +25,32 @@ public class CreationTopo extends HttpServlet {
 	    public static final String VUE    = "/WEB-INF/vue/creationTopo.jsp";
 	
 	
-	private TopoDao topoDao;
+	  private TopoDao topoDao;
+	  private PaysDao paysDao;
        
     
 	public void init() throws ServletException {
-		   /* Récupération d'une instance de notre DAO topo */
-        this.topoDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTopoDao();
+		 this.topoDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTopoDao();
+		 this.paysDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getPaysDao();	
 	}
   
-    public CreationTopo() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+    public CreationTopo() { }
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setAttribute("payss", paysDao.lister());
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
-         * Lecture du paramètre 'chemin' passé à la servlet via la déclaration
-         * dans le web.xml
-         */
-        String chemin = this.getServletConfig().getInitParameter( CHEMIN );
+		String chemin = this.getServletConfig().getInitParameter( CHEMIN );
 
-        /* Préparation de l'objet formulaire */
-        CreationTopoForm form = new CreationTopoForm( topoDao );
+		CreationTopoForm form = new CreationTopoForm( topoDao );
 
-        /* Traitement de la requête et récupération du bean en résultant */
         Topo topo = form.creerTopo( request, chemin );
 
-        /* Ajout du bean et de l'objet métier à l'objet requête */
         request.setAttribute( ATT_TOPO, topo );
         request.setAttribute( ATT_FORM, form );
 

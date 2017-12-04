@@ -9,19 +9,41 @@ public class Commentaire implements Serializable {
 	private long id_com;
 	private String libelle; 
 	private Date datecom;
-	private long id_user;
-	private long id_art;
+	private Utilisateur utilisateur;
+	private Article article;
 	
 	public Commentaire() {}
 
-	public Commentaire(long id_com, String libelle, Date datecom, long id_user, long id_art) {
+	
+	public Commentaire(long id_com, String libelle, Date datecom, Utilisateur utilisateur, Article article) {
 		super();
 		this.id_com = id_com;
 		this.libelle = libelle;
 		this.datecom = datecom;
-		this.id_user = id_user;
-		this.id_art = id_art;
+		this.utilisateur = utilisateur;
+		this.article = article;
 	}
+
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+
+
+	public Article getArticle() {
+		return article;
+	}
+
+
+	public void setArticle(Article article) {
+		this.article = article;
+	}
+
 
 	public long getId_com() {
 		return id_com;
@@ -47,22 +69,7 @@ public class Commentaire implements Serializable {
 		this.datecom = datecom;
 	}
 
-	public long getId_user() {
-		return id_user;
-	}
 
-	public void setId_user(long id_user) {
-		this.id_user = id_user;
-	}
-
-	public long getId_art() {
-		return id_art;
-	}
-
-	public void setId_art(long id_art) {
-		this.id_art = id_art;
-	}
-	
 	
 	
 	

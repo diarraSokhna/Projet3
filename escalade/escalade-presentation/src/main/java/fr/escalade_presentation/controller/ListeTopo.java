@@ -29,17 +29,11 @@ public class ListeTopo extends HttpServlet {
        
     
 	public void init() throws ServletException {
-		
-		  /* Récupération d'une instance de notre DAO topo */
-        this.topoDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTopoDao();
-		
+		this.topoDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTopoDao();
 		
 	}
 	
-    public ListeTopo() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+    public ListeTopo() { }
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,10 +41,7 @@ public class ListeTopo extends HttpServlet {
 		    
 		request.setAttribute("topos", topoDao.lister());
 		
-	    //on dit a notre servlet d'afficher la page jsp
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-		
-		
 		
 	}
 
