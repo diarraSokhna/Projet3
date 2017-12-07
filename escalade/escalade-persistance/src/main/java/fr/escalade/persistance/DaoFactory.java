@@ -4,9 +4,15 @@ package fr.escalade.persistance;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+
+import com.jolbox.bonecp.BoneCP;
+import com.jolbox.bonecp.BoneCPConfig;
+
+import fr.escalade.persistance.DaoConfigurationException;
+import fr.escalade.persistance.TopoDao;
+import fr.escalade.persistance.UtilisateurDao;
 
 public class DaoFactory {
 	  private static final String FICHIER_PROPERTIES       = "/fr/escalade/persistance/dao.properties";
@@ -15,29 +21,22 @@ public class DaoFactory {
 	    private static final String PROPERTY_NOM_UTILISATEUR = "nomutilisateur";
 	    private static final String PROPERTY_MOT_DE_PASSE    = "motdepasse";
 
-	    private String              url;
-	    private String              username;
-	    private String              password;
+	    BoneCP connexionPool = null;
 
-	    DaoFactory( String url, String username, String password ) {
-	        this.url = url;
-	        this.username = username;
-	        this.password = password;
-	    }
+	    public DaoFactory(BoneCP connexionPool) {
+			
+			this.connexionPool = connexionPool;
+		}
 
-	    /*
-	     * Méthode chargée de récupérer les informations de connexion à la base de
-	     * données, charger le driver JDBC et retourner une instance de la Factory
-	     */
-	    public static DaoFactory getInstance() throws DaoConfigurationException {
+		 public static DaoFactory getInstance() throws DaoConfigurationException {
 	        Properties properties = new Properties();
 	        String url;
 	        String driver;
 	        String nomUtilisateur;
 	        String motDePasse;
+	        BoneCP connexionPool = null;
 
-	        //ouverture du fichier properties
-	        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+	       ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 	        InputStream fichierProperties = classLoader.getResourceAsStream( FICHIER_PROPERTIES );
 
 	        if ( fichierProperties == null ) {
@@ -60,26 +59,61 @@ public class DaoFactory {
 	            throw new DaoConfigurationException( "Le driver est introuvable dans le classpath.", e );
 	        }
 
-	        DaoFactory instance = new DaoFactory( url, nomUtilisateur, motDePasse );
+	        
+	        try {
+	            BoneCPConfig config = new BoneCPConfig();
+	           config.setJdbcUrl( url );
+	            config.setUsername( nomUtilisateur );
+	            config.setPassword( motDePasse );
+	            /* Paramétrage de la taille du pool */
+	            config.setMinConnectionsPerPartition( 10 );
+	            config.setMaxConnectionsPerPartition( 15 );
+	            config.setPartitionCount( 2 );
+	            /* Création du pool à partir de la configuration, via l'objet BoneCP */
+	            connexionPool = new BoneCP( config );
+	        } catch ( SQLException e ) {
+	            e.printStackTrace();
+	            throw new DaoConfigurationException( "Erreur de configuration du pool de connexions.", e );
+	        }
+	   
+	        DaoFactory instance = new DaoFactory( connexionPool );
 	        return instance;
 	    }
 
-	    /* Méthode chargée de fournir une connexion à la base de données */
-	    Connection getConnection() throws SQLException {
-	        return DriverManager.getConnection( url, username, password );
+	   Connection getConnection() throws SQLException {
+	        return connexionPool.getConnection();
 	    }
-
-	   
-	    // Méthodes de récupération de l'implémentation des différents DAO 
-	   
-	    public UtilisateurDao getUtilisateurDao() {
+	  
+	   public UtilisateurDao getUtilisateurDao() {
 	        return new UtilisateurDaoImp( this );
 	    }
 
-	   // R�cup�ration du Dao
+	  
 	   public TopoDao getTopoDao() {
 		    return new TopoDaoImp(this);
 	}
 	
+	   public ArticleDao getArticleDao(){
+		   return new ArticleDaoImpl(this);
+	   }
+	   
+	   public CommentaireDao getCommentaireDao(){
+		   return new CommentaireDaoImpl(this);
+	   }
+	   
+	   public PaysDao getPaysDao(){
+		   return new PaysDaoImpl(this);
+	   }
+	   
+	   public SiteDao getSiteDao(){
+		   return new SiteDaoImpl(this);
+	   }
 	
+	   public ClassementDao getClassementDao(){
+		   return new ClassementDaoImpl(this);
+	   }
+	   
+	   public ExpositionDao getExpositionDao(){
+		   return new ExpositionDaoImpl(this);
+	   }
 }
