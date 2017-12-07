@@ -25,12 +25,13 @@
                        <div class="form-group">
         <label class="col-xs-3 control-label">Site</label>
         <div class="col-sm-9 selectContainer">
-            <select class="form-control" name="size">
+            <select multiple class="form-control" name="idsite" id="idsite">
             <option value="0"> Choisir un site </option>
              <c:forEach var = "site" items = "${ sites }">
                 <option value="<c:out value="${ site.idsite}" />"><c:out value="${ site.nomsite}" /></option>
                </c:forEach>
             </select>
+            <span class="erreur">${form.erreurs['idsite']}</span>
           
 <!--   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">ici</button> -->
 

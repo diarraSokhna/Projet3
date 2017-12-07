@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -16,15 +17,20 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import eu.medsea.mimeutil.*;
-
+import fr.escalade.beans.Pays;
+import fr.escalade.beans.Site;
 import fr.escalade.beans.Topo;
+import fr.escalade.beans.TopoSite;
 import fr.escalade.beans.Utilisateur;
 import fr.escalade.persistance.DaoException;
+import fr.escalade.persistance.SiteDao;
 import fr.escalade.persistance.TopoDao;
+import fr.escalade.persistance.TopoSiteDao;
 
 public final class CreationTopoForm {
 
 	    private static final String CHAMP_NOM       = "nom";
+	    private static final String CHOIX_SITE    = "idsite";
 	    private static final String CHAMP_DESCRIPTION    = "description";
 	    private static final String CHAMP_NOMBRE_PAGE   = "nbrpage";
 	    private static final String CHAMP_UTILISATEUR = "utilisateur";
@@ -38,11 +44,15 @@ public final class CreationTopoForm {
 	    private Map<String, String> erreurs = new HashMap<String, String>();
 	    
 	    private TopoDao topoDao;
+	    private TopoSiteDao topoSiteDao;
+	    private SiteDao siteDao;
 	   
 	    
-	    public CreationTopoForm(TopoDao topoDao) {
+	    public CreationTopoForm(TopoDao topoDao, TopoSiteDao topoSiteDao,SiteDao siteDao ) {
 			super();
 			this.topoDao = topoDao;
+			this.topoSiteDao = topoSiteDao;
+			this.siteDao = siteDao;
 		}
 
 		public Map<String, String> getErreurs() {
@@ -58,13 +68,26 @@ public final class CreationTopoForm {
 	    	 HttpSession session = request.getSession();
 	         Utilisateur utilisateur =  (Utilisateur) session.getAttribute( SESSION_UTILISATEURS);
 
-	        String nom = getValeurChamp( request, CHAMP_NOM );
-	        String description = getValeurChamp( request, CHAMP_DESCRIPTION );
-	        String nbrpage = getValeurChamp( request, CHAMP_NOMBRE_PAGE );
+	         String idsite = getValeurChamp( request, CHOIX_SITE);
+	         Long id_site = Long.parseLong(idsite);
+		     Site site = siteDao.trouver(id_site);
+	         
+	         String nom = getValeurChamp( request, CHAMP_NOM );
+	         String description = getValeurChamp( request, CHAMP_DESCRIPTION );
+	         String nbrpage = getValeurChamp( request, CHAMP_NOMBRE_PAGE );
 	        
 
-	        Topo topo = new Topo();
-
+	         Topo topo = new Topo();
+	         TopoSite topoSite = new TopoSite();
+		       
+	         if ( site == null ) {
+		            setErreur( CHOIX_SITE, "Merci de choisir un site.");
+		            }
+	         
+	         
+	        topoSite.setSite(site);
+	        topoSite.setTopo(topo);
+	        
 	        traiterNom( nom, topo );
 	        traiterDescription( description, topo );
 	        traiterNbrPage( nbrpage, topo );
@@ -73,7 +96,11 @@ public final class CreationTopoForm {
           
 	        try {
 	            if ( erreurs.isEmpty() ) {
+	            	
 	                topoDao.creer( topo );
+	                
+	                topoSiteDao.creer(topoSite);
+	                
 	                resultat = "Succès de la création du topo.";
 	            } else {
 	                resultat = "Échec de la création du topo.";
@@ -128,6 +155,8 @@ public final class CreationTopoForm {
 		
 		}
 
+		
+		
 		private void traiterNom(String nom, Topo topo) {
 			
 			   try {
@@ -201,7 +230,7 @@ public final class CreationTopoForm {
 		private void validationDescription(String description) throws FormValidationException {
 			 if ( description != null && description.length() < 10 ) {
 		            throw new FormValidationException( "La description  du topo doit contenir au moins 10 caractères." );
-		        }else {
+		        }else if(description == null) {
 		        	throw new FormValidationException( "Il faut une description du topo." );
 			 	       
 		        }
@@ -213,7 +242,7 @@ public final class CreationTopoForm {
 		private void validationNom(String nom) throws FormValidationException {
 			 if ( nom != null && nom.length() < 2 ) {
 		            throw new FormValidationException( "Le nom du topo doit contenir au moins 2 caractères." );
-		        }else {
+		        }else if(nom == null) {
 		        	throw new FormValidationException( "Le nom du topo est obligatoire." );
 			 	       
 		        }

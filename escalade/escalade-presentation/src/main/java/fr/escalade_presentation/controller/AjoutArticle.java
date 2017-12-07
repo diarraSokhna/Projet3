@@ -52,7 +52,7 @@ public class AjoutArticle extends HttpServlet {
          HttpSession session = request.getSession();
          if ( form.getErreurs().isEmpty() ) {
              session.setAttribute( SESSION_ARTICLES, article );
-             this.getServletContext().getRequestDispatcher( VUE_SUCCES ).forward( request, response );
+             this.getServletContext().getRequestDispatcher( VUE_FORM ).forward( request, response );
         
     }else {
     	session.setAttribute( SESSION_ARTICLES, null );

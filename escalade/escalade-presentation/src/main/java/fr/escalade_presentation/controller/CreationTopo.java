@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.escalade.beans.Topo;
 import fr.escalade.persistance.TopoDao;
+import fr.escalade.persistance.TopoSiteDao;
 import fr.escalade.persistance.DaoFactory;
 import fr.escalade.persistance.SiteDao;
 import fr.escalade_metier.forms.CreationTopoForm;
@@ -26,12 +27,14 @@ public class CreationTopo extends HttpServlet {
 	
 		private TopoDao topoDao;
 		private SiteDao siteDao;
+		private TopoSiteDao topoSiteDao;
 	       
     
 	public void init() throws ServletException {
 		 this.topoDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTopoDao();
 		 this.siteDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getSiteDao();	
-			
+		 this.topoSiteDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTopoSiteDao();
+				
 	}
   
     public CreationTopo() { }
@@ -47,7 +50,7 @@ public class CreationTopo extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String chemin = this.getServletConfig().getInitParameter( CHEMIN );
 
-		CreationTopoForm form = new CreationTopoForm( topoDao );
+		CreationTopoForm form = new CreationTopoForm( topoDao,topoSiteDao, siteDao );
 
         Topo topo = form.creerTopo( request, chemin );
 

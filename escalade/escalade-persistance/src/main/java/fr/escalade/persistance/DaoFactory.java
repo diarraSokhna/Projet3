@@ -91,7 +91,7 @@ public class DaoFactory {
 	  
 	   public TopoDao getTopoDao() {
 		    return new TopoDaoImp(this);
-	}
+	   }
 	
 	   public ArticleDao getArticleDao(){
 		   return new ArticleDaoImpl(this);
@@ -116,4 +116,8 @@ public class DaoFactory {
 	   public ExpositionDao getExpositionDao(){
 		   return new ExpositionDaoImpl(this);
 	   }
+	   
+	   public TopoSiteDao getTopoSiteDao() {
+		    return new TopoSiteDaoImpl(this);
+	  }
 }

@@ -29,7 +29,7 @@ public class SiteDaoImpl implements SiteDao{
 	}
 
 	public void creer(Site site) throws DaoException {
-		 Connection connexion = null;
+		    Connection connexion = null;
 	        PreparedStatement preparedStatement = null;
 	        ResultSet valeursAutoGenerees = null;
 
@@ -87,8 +87,6 @@ public class SiteDaoImpl implements SiteDao{
 	}
 		
 
-	 
-	 
 	public List<Site> lister() throws DaoException {
 	        Connection connection = null;
 	        PreparedStatement preparedStatement = null;
