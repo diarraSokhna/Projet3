@@ -1,0 +1,45 @@
+body{
+    
+    
+   
+	background: fixed;
+    background-image: URL(../img/bg.jpg);
+    background-repeat: no-repeat;
+}
+
+.navbar{
+	 font-family: 'georgia', sans-serif;
+    font-size:16px;
+	
+}
+
+.requis {
+    color: #c00;
+}
+.succes {
+    color: green;
+}
+.erreur {
+    color: red;
+}
+.img{
+	
+	height: 500px;
+}
+article{
+    background-color: #E0E0E0;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+figure img{
+    width: 100%;
+    height: 100%;
+}
+.glyphicon-folder-open,
+.glyphicon-user,
+.glyphicon-calendar,
+.glyphicon-eye-open,
+.glyphicon-comment{
+    padding: 5px;
+}

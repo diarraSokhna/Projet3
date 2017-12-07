@@ -10,6 +10,7 @@
   
   <artifactId>escalade-persistance</artifactId>
   <name>escalade-persistance</name>
+  
   <url>http://maven.apache.org</url>
   
   <properties>
@@ -35,6 +36,14 @@
     	<artifactId>escalade-modele</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>
+    
+    <dependency>
+    <groupId>com.jolbox</groupId>
+    <artifactId>bonecp</artifactId>
+    <version>0.8.0.RELEASE</version>
+</dependency>
+
+  	
   </dependencies>
   
 </project>
