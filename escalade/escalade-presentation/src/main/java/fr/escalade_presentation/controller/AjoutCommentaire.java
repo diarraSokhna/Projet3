@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.escalade.beans.Commentaire;
 import fr.escalade.beans.Utilisateur;
+import fr.escalade.persistance.ArticleDao;
 import fr.escalade.persistance.CommentaireDao;
 import fr.escalade.persistance.DaoFactory;
 import fr.escalade.persistance.UtilisateurDao;
@@ -34,10 +35,12 @@ public class AjoutCommentaire extends HttpServlet {
 	}
 
     private CommentaireDao  commentaireDao;
+    private ArticleDao articleDao;
     
     public void init() throws ServletException {
-        /* Récupération d'une instance de notre DAO Utilisateur */
         this.commentaireDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getCommentaireDao();
+        this.articleDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getArticleDao();
+        
     }
 
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
@@ -45,9 +48,8 @@ public class AjoutCommentaire extends HttpServlet {
     }
 
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-       AjoutCommentaireForm form = new AjoutCommentaireForm(commentaireDao);
+        AjoutCommentaireForm form = new AjoutCommentaireForm(commentaireDao,articleDao);
 
-        /* Traitement de la requête et récupération du bean en résultant */
         Commentaire commentaire = form.ajouterCommentaire( request );
        
         request.setAttribute( ATT_FORM, form );

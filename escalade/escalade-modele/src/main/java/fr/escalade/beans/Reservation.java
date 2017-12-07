@@ -2,24 +2,26 @@ package fr.escalade.beans;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class Reservation implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private long id_resa;
-	private Timestamp date_resa;
-	private long id_topo;
-	private long id_user;
+	private Date date_resa;
+	private Topo topo;
+	private Utilisateur utilisateur;
 	
-	public Reservation() {}
-
-	public Reservation(long id_resa, Timestamp date_resa, long id_topo, long id_user) {
+	
+	public Reservation(long id_resa, Date date_resa, Topo topo, Utilisateur utilisateur) {
 		super();
 		this.id_resa = id_resa;
 		this.date_resa = date_resa;
-		this.id_topo = id_topo;
-		this.id_user = id_user;
+		this.topo = topo;
+		this.utilisateur = utilisateur;
 	}
+
+	public Reservation() {}
 
 	public long getId_resa() {
 		return id_resa;
@@ -29,30 +31,30 @@ public class Reservation implements Serializable{
 		this.id_resa = id_resa;
 	}
 
-	public Timestamp getDate_resa() {
+	public Date getDate_resa() {
 		return date_resa;
 	}
 
-	public void setDate_resa(Timestamp date_resa) {
+	public void setDate_resa(Date date_resa) {
 		this.date_resa = date_resa;
 	}
 
-	public long getId_topo() {
-		return id_topo;
+	public Topo getTopo() {
+		return topo;
 	}
 
-	public void setId_topo(long id_topo) {
-		this.id_topo = id_topo;
+	public void setTopo(Topo topo) {
+		this.topo = topo;
 	}
 
-	public long getId_user() {
-		return id_user;
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 
-	public void setId_user(long id_user) {
-		this.id_user = id_user;
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
-	
-	
+
+
 	
 } 

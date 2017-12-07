@@ -49,8 +49,6 @@ public class Connection extends HttpServlet {
         HttpSession session = request.getSession();
         
         if ( form.getErreurs().isEmpty()) {
-        	
-        	
             session.setAttribute( ATT_SESSION_USER, utilisateur );
             this.getServletContext().getRequestDispatcher( VUE_SUCCES ).forward( request, response );
             

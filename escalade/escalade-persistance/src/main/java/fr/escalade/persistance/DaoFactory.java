@@ -66,8 +66,8 @@ public class DaoFactory {
 	            config.setUsername( nomUtilisateur );
 	            config.setPassword( motDePasse );
 	            /* Paramétrage de la taille du pool */
-	            config.setMinConnectionsPerPartition( 5 );
-	            config.setMaxConnectionsPerPartition( 10 );
+	            config.setMinConnectionsPerPartition( 10 );
+	            config.setMaxConnectionsPerPartition( 15 );
 	            config.setPartitionCount( 2 );
 	            /* Création du pool à partir de la configuration, via l'objet BoneCP */
 	            connexionPool = new BoneCP( config );
@@ -105,5 +105,15 @@ public class DaoFactory {
 		   return new PaysDaoImpl(this);
 	   }
 	   
+	   public SiteDao getSiteDao(){
+		   return new SiteDaoImpl(this);
+	   }
 	
+	   public ClassementDao getClassementDao(){
+		   return new ClassementDaoImpl(this);
+	   }
+	   
+	   public ExpositionDao getExpositionDao(){
+		   return new ExpositionDaoImpl(this);
+	   }
 }

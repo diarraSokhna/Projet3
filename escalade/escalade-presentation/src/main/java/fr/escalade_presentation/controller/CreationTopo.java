@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import fr.escalade.beans.Topo;
 import fr.escalade.persistance.TopoDao;
 import fr.escalade.persistance.DaoFactory;
-import fr.escalade.persistance.PaysDao;
+import fr.escalade.persistance.SiteDao;
 import fr.escalade_metier.forms.CreationTopoForm;
 
 @MultipartConfig
@@ -24,14 +24,14 @@ public class CreationTopo extends HttpServlet {
 
 	    public static final String VUE    = "/WEB-INF/vue/creationTopo.jsp";
 	
-	
-	  private TopoDao topoDao;
-	  private PaysDao paysDao;
-       
+		private TopoDao topoDao;
+		private SiteDao siteDao;
+	       
     
 	public void init() throws ServletException {
 		 this.topoDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTopoDao();
-		 this.paysDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getPaysDao();	
+		 this.siteDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getSiteDao();	
+			
 	}
   
     public CreationTopo() { }
@@ -39,7 +39,7 @@ public class CreationTopo extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setAttribute("payss", paysDao.lister());
+		request.setAttribute("sites", siteDao.lister());
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
 

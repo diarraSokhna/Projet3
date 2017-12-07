@@ -11,6 +11,7 @@ import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 import fr.escalade.beans.Article;
 import fr.escalade.beans.Commentaire;
 import fr.escalade.beans.Utilisateur;
+import fr.escalade.persistance.ArticleDao;
 import fr.escalade.persistance.CommentaireDao;
 import fr.escalade.persistance.DaoException;
 import fr.escalade.persistance.UtilisateurDao;
@@ -23,15 +24,15 @@ public class AjoutCommentaireForm {
 	 
 	 private static final String SESSION_UTILISATEURS        = "sessionUtilisateur";
     
-	 private static final String SESSION_ARTICLES        = "sessionArticle";
-
-     private String  resultat;
+	 private String  resultat;
      private Map<String, String> erreurs = new HashMap<String, String>();
   
 	 private CommentaireDao  commentaireDao;
+	 private ArticleDao articleDao;
 
-     public AjoutCommentaireForm(CommentaireDao commentaireDao) {
+     public AjoutCommentaireForm(CommentaireDao commentaireDao, ArticleDao articleDao) {
 		this.commentaireDao = commentaireDao;
+		this.articleDao = articleDao;
 	}
 
 
@@ -50,18 +51,19 @@ public class AjoutCommentaireForm {
           
 		   Utilisateur utilisateur =  (Utilisateur) session.getAttribute( SESSION_UTILISATEURS);
          
-           Article article =  (Article) session.getAttribute( SESSION_ARTICLES);
-           
-           
+		   String idart = getValeurChamp(request, CHAMP_ARTICLE);
+		   Long id_art = Long.parseLong(idart);
+		   Article article = articleDao.trouver(id_art);
+		   
 		   String libelle = getValeurChamp( request, CHAMP_lIBELLE );
 	       Commentaire commentaire = new Commentaire();
-	    
+	       
+	      
 	    try {
 	    	
+	    	commentaire.setUtilisateur(utilisateur);
+	        commentaire.setArticle(article);
 	        traiterLibelle( libelle, commentaire );
-	        traiterUtilisateur(utilisateur, commentaire);
-	        traiterArticle(article, commentaire);
-	        
 	        
 	        if ( erreurs.isEmpty() ) {
 	            commentaireDao.laisser(commentaire);
@@ -87,24 +89,8 @@ public class AjoutCommentaireForm {
         commentaire.setLibelle(libelle);
     }
 
-    
-    private void traiterUtilisateur( Utilisateur utilisateur, Commentaire commentaire ) {
-   
-    	  if ( utilisateur == null ) {
-         setErreur( CHAMP_UTILISATEUR, "Utilisateur inconnu, merci d'utiliser le formulaire prévu à cet effet." );
-         
-      }
-      
-        commentaire.setUtilisateur(utilisateur);
-    }
-    
-    private void traiterArticle( Article article, Commentaire commentaire ) {
-       if ( article == null ) {
-            setErreur( CHAMP_ARTICLE, "l'article inconnu, merci d'utiliser le formulaire prévu à cet effet." );
-    }
-        commentaire.setArticle(article);
-    }
-    
+  
+ 
 
     private void validationLibelle( String libelle ) throws FormValidationException {
         if (libelle.length() < 3  ) {

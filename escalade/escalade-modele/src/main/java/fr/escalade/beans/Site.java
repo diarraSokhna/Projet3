@@ -7,19 +7,19 @@ public class Site implements Serializable{
 
 	private long idsite;
 	private String nomsite; 
-	private String exposition; 
-	private String classement;
 	private Pays pays;
+	private String image;
+	private Classement classement;
 	
 	public Site() {}
-
-	public Site(long idsite, String nomsite, String exposition, String classement, Pays pays) {
+	
+	public Site(long idsite, String nomsite, Pays pays, String image, Classement classement) {
 		super();
 		this.idsite = idsite;
 		this.nomsite = nomsite;
-		this.exposition = exposition;
-		this.classement = classement;
 		this.pays = pays;
+		this.image = image;
+		this.classement = classement;
 	}
 
 	public long getIdsite() {
@@ -38,22 +38,6 @@ public class Site implements Serializable{
 		this.nomsite = nomsite;
 	}
 
-	public String getExposition() {
-		return exposition;
-	}
-
-	public void setExposition(String exposition) {
-		this.exposition = exposition;
-	}
-
-	public String getClassement() {
-		return classement;
-	}
-
-	public void setClassement(String classement) {
-		this.classement = classement;
-	}
-
 	public Pays getPays() {
 		return pays;
 	}
@@ -62,4 +46,21 @@ public class Site implements Serializable{
 		this.pays = pays;
 	}
 
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public Classement getClassement() {
+		return classement;
+	}
+
+	public void setClassement(Classement classement) {
+		this.classement = classement;
+	}
+
+	
 }

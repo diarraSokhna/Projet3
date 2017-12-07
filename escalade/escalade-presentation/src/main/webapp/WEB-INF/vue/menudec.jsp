@@ -27,17 +27,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-      
-        <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown"  href="">Site
-        <span class="caret"></span></a>
-         <ul class="dropdown-menu">
-           <li class=""><a href="<c:url value="/AjoutSite" />">Ajouter site</a></li> 
-           <li class=""><a href="<c:url value="/ListeSite" />">Liste des sites</a></li> 
-            
-        </ul>
-        </li>
-        
+    <li class=""><a href="">Site</a></li> 
         <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown"  href="">Topo
         <span class="caret"></span></a>
@@ -61,7 +51,7 @@
         <li><a href="<c:url value="/Inscription" />">S'inscrire</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="<c:url value="/Connection" />"><span class="glyphicon glyphicon-log-in"></span> Connexion</a></li>
+        <li><a href="<c:url value="/Deconnexion" />"><span class="glyphicon glyphicon-log-in"></span> Déconnexion</a></li>
       </ul>
     </div>
   </div>

@@ -27,11 +27,31 @@
         <div class="col-sm-9 selectContainer">
             <select class="form-control" name="size">
             <option value="0"> Choisir un site </option>
-             <c:forEach var = "pays" items = "${ payss }">
-                <option value="<c:out value="${ pays.nompays}" />"><c:out value="${ pays.nompays}" /></option>
+             <c:forEach var = "site" items = "${ sites }">
+                <option value="<c:out value="${ site.idsite}" />"><c:out value="${ site.nomsite}" /></option>
                </c:forEach>
             </select>
-             Si le site n'existe pas vous pouvez l'ajouter <a href="">ici</a>
+          
+<!--   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">ici</button> -->
+
+<!--   <!-- Modal -->
+<!--   <div class="col-sm-9"> -->
+<!--   <div class="modal fade" id="myModal" role="dialog"> -->
+<!--     <div class="modal-dialog"> -->
+    
+<!--       Modal content -->
+<!--       <div class="modal-content"> -->
+<%--       <%@ include file="ajoutSite.jsp" %> --%>
+      
+<!--         <div class="modal-footer"> -->
+<!--           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+<!--         </div> -->
+<!--       </div> -->
+      
+<!--     </div> -->
+<!--   </div> -->
+<!--   </div> -->
+              Si le site n'existe pas vous pouvez l'<a href="<c:url value="/AjoutSite" />">ajouter</a>
         </div>
     </div>
                     <div class="form-group">

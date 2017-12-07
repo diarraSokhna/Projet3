@@ -30,7 +30,6 @@ public final class ConnexionForm {
 	}
 
 	public ConnexionForm(UtilisateurDao utilisateurDao) {
-		super();
 		this.utilisateurDao = utilisateurDao;
 	}
 
@@ -43,28 +42,26 @@ public final class ConnexionForm {
     }
 
     public Utilisateur connecterUtilisateur( HttpServletRequest request ) {
+    	
         String email = getValeurChamp( request, CHAMP_EMAIL );
         String motDePasse = getValeurChamp( request, CHAMP_PASS );
-        
 
         Utilisateur utilisateur = new Utilisateur();
 
        
         try {
-            validationEmailPasse(email, motDePasse);
+            validationEmailPasse(email,motDePasse);
         } catch ( Exception e ) {
             setErreur( CHAMP_EMAIL, e.getMessage() );
             setErreur( CHAMP_PASS, e.getMessage() );
         }
-//        StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
-//        String motDePasseChiffre = passwordEncryptor.encryptPassword(motDePasse);
-        
+    
          utilisateur.setEmail( email );
          utilisateur.setMotpass(motDePasse);
          
-//        String motdepassbase = utilisateur.getMotpass();
-        
-	            
+          //  String motdepassbase = utilisateurDao.trouver(email).getMotpass();
+         // && passwordEncryptor.checkPassword(motDePasse, motdepassbase)
+     
         if ( erreurs.isEmpty()) {
             resultat = "Succès de la connexion.";
             utilisateur.setId_user(utilisateurDao.trouver(email, motDePasse).getIduser());
@@ -76,8 +73,8 @@ public final class ConnexionForm {
     }
 
    
-    private void validationEmailPasse( String email, String motpasse ) throws Exception {
-        if ( utilisateurDao.trouver(email, motpasse) == null  ) {
+    private void validationEmailPasse( String email, String motDePasse) throws Exception {
+        if ( utilisateurDao.trouver(email,motDePasse) == null  ) {
             throw new Exception( "L'adresse mail ou le mot de passe est incorrect." );
         }
     }

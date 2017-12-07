@@ -16,8 +16,6 @@ public class Article implements Serializable {
 	
 	public Article() {}
 
-
-
 	public Article(long id_art, Date datepubli, String titre, String contenu, Utilisateur utilisateur, String photo) {
 		super();
 		this.id_art = id_art;

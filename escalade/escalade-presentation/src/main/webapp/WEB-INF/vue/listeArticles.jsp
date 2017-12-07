@@ -22,7 +22,7 @@
                 </div>
                 <div class="media-body">
                 <h3 class="media-heading"><c:out value="${ article.titre }"/></h3><br/>
-                Ecrit par <c:out value="${ article.utilisateur }"/><br/><br/>
+                Ecrit par <c:out value="${ article.utilisateur.nom }"/> <c:out value="${ article.utilisateur.prenom }"/><br/><br/>
                 <c:out value="${ article.contenu}" /> <br/>
                          <section style="margin-top: 75px">
 		                    

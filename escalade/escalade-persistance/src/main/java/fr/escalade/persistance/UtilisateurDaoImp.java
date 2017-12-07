@@ -19,10 +19,10 @@ import fr.escalade.persistance.UtilisateurDao;
 public class UtilisateurDaoImp implements UtilisateurDao{
 
 	   private DaoFactory  daoFactory;
-	   private static final String SQL_SELECT_PAR_EMAIL_PASS = "SELECT id_user, nom, prenom, adresse, tel, email, passw, dateinscription FROM Utilisateur WHERE email = ? and passw=?";
-	   private static final String SQL_SELECT_PAR_EMAIL = "SELECT id_user, nom, prenom, adresse, tel, email, passw, dateinscription FROM Utilisateur WHERE email = ?";
+	   private static final String SQL_SELECT_PAR_EMAIL_PASS = "SELECT * FROM Utilisateur WHERE email = ? and passw=?";
+	   private static final String SQL_SELECT_PAR_EMAIL = "SELECT * FROM Utilisateur WHERE email = ?";
       private static final String SQL_SELECT = "SELECT * FROM Utilisateur ORDER BY id_user";
-	   private static final String SQL_SELECT_PAR_ID = "SELECT id_user, nom, prenom, adresse, tel, email, passw, dateinscription FROM Utilisateur WHERE id_user = ?";
+	   private static final String SQL_SELECT_PAR_ID = "SELECT * FROM Utilisateur WHERE id_user = ?";
 	   private static final String SQL_INSERT = "INSERT INTO Utilisateur (nom, prenom, adresse, tel, email, passw, dateinscription, id_role) VALUES (?, ?, ?, ?, ?, ?, NOW(), 3)";
 	   private static final String SQL_DELETE_PAR_ID = "DELETE FROM utilisateur WHERE id_user = ?";
 	   

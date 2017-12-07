@@ -34,9 +34,7 @@ public class DetailsArticle extends HttpServlet {
       
    
 	public void init() throws ServletException {
-		
-		  /* Récupération d'une instance de notre DAO topo */
-       this.articleDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getArticleDao();
+	   this.articleDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getArticleDao();
        this.commentaireDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getCommentaireDao();
 		
 		
@@ -60,10 +58,8 @@ public class DetailsArticle extends HttpServlet {
 		
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		    AjoutCommentaireForm form = new AjoutCommentaireForm(commentaireDao);
-
-	        /* Traitement de la requête et récupération du bean en résultant */
-	        Commentaire commentaire = form.ajouterCommentaire( request );
+		    AjoutCommentaireForm form = new AjoutCommentaireForm(commentaireDao,articleDao);
+            Commentaire commentaire = form.ajouterCommentaire( request );
 	       
 	        request.setAttribute( ATT_FORM, form );
 	        request.setAttribute( ATT_COMMENTAIRE, commentaire );

@@ -7,15 +7,15 @@ public class Secteur implements Serializable{
 	
 	private long  idsect;
 	private String nomsect; 
-	private long idsite;
+	private Site site;
 	
 	public Secteur() {}
 
-	public Secteur(long idsect, String nomsect, long idsite) {
+	public Secteur(long idsect, String nomsect, Site site) {
 		super();
 		this.idsect = idsect;
 		this.nomsect = nomsect;
-		this.idsite = idsite;
+		this.site = site;
 	}
 
 	public long getIdsect() {
@@ -34,13 +34,14 @@ public class Secteur implements Serializable{
 		this.nomsect = nomsect;
 	}
 
-	public long getIdsite() {
-		return idsite;
+	public Site getSite() {
+		return site;
 	}
 
-	public void setIdsite(long idsite) {
-		this.idsite = idsite;
+	public void setSite(Site site) {
+		this.site = site;
 	}
+
 	
 	
 

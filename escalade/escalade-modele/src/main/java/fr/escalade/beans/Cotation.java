@@ -7,13 +7,15 @@ public class Cotation implements Serializable{
 
 	private long idcot;
 	private String type_escalade;
+	private String libelle_cot;
 	
 	public Cotation() {}
 
-	public Cotation(long idcot, String type_escalade) {
+	public Cotation(long idcot, String type_escalade, String libelle_cot) {
 		super();
 		this.idcot = idcot;
 		this.type_escalade = type_escalade;
+		this.libelle_cot = libelle_cot;
 	}
 
 	public long getIdcot() {
@@ -30,6 +32,14 @@ public class Cotation implements Serializable{
 
 	public void setType_escalade(String type_escalade) {
 		this.type_escalade = type_escalade;
+	}
+
+	public String getLibelle_cot() {
+		return libelle_cot;
+	}
+
+	public void setLibelle_cot(String libelle_cot) {
+		this.libelle_cot = libelle_cot;
 	} 
 	
 	

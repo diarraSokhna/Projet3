@@ -39,7 +39,7 @@ public final class CreationTopoForm {
 	    
 	    private TopoDao topoDao;
 	   
-	    //constructeur avec argument
+	    
 	    public CreationTopoForm(TopoDao topoDao) {
 			super();
 			this.topoDao = topoDao;
@@ -58,8 +58,6 @@ public final class CreationTopoForm {
 	    	 HttpSession session = request.getSession();
 	         Utilisateur utilisateur =  (Utilisateur) session.getAttribute( SESSION_UTILISATEURS);
 
-	    	
-	    	
 	        String nom = getValeurChamp( request, CHAMP_NOM );
 	        String description = getValeurChamp( request, CHAMP_DESCRIPTION );
 	        String nbrpage = getValeurChamp( request, CHAMP_NOMBRE_PAGE );
@@ -72,9 +70,7 @@ public final class CreationTopoForm {
 	        traiterNbrPage( nbrpage, topo );
 	        traiterUtilisateur( utilisateur, topo );
 	        traiterImage( topo, request, chemin );
-            
-	        
-	    
+          
 	        try {
 	            if ( erreurs.isEmpty() ) {
 	                topoDao.creer( topo );
@@ -94,7 +90,7 @@ public final class CreationTopoForm {
 	    
 		private void traiterNbrPage(String nbrpage, Topo topo) {
 			
-			int nbpage=-1;
+			int nbpage=0;
 			   try {
 				   nbpage= validationNbrPage( nbrpage );
 		        } catch ( FormValidationException e ) {
@@ -147,7 +143,7 @@ public final class CreationTopoForm {
 			   try {
 		            validationDescription( description );
 		        } catch ( FormValidationException e ) {
-		            setErreur( CHAMP_NOM, e.getMessage() );
+		            setErreur( CHAMP_DESCRIPTION, e.getMessage() );
 		        }
 		        topo.setDescription( description );
 			
@@ -200,15 +196,14 @@ public final class CreationTopoForm {
 
 	        return nomFichier;
 			
-			
-			
 		}
-
-	
-
+		
 		private void validationDescription(String description) throws FormValidationException {
 			 if ( description != null && description.length() < 10 ) {
 		            throw new FormValidationException( "La description  du topo doit contenir au moins 10 caractères." );
+		        }else {
+		        	throw new FormValidationException( "Il faut une description du topo." );
+			 	       
 		        }
 			
 		}
@@ -218,6 +213,9 @@ public final class CreationTopoForm {
 		private void validationNom(String nom) throws FormValidationException {
 			 if ( nom != null && nom.length() < 2 ) {
 		            throw new FormValidationException( "Le nom du topo doit contenir au moins 2 caractères." );
+		        }else {
+		        	throw new FormValidationException( "Le nom du topo est obligatoire." );
+			 	       
 		        }
 			
 		}

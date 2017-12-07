@@ -8,30 +8,28 @@ public class Voie implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private long id_voie;
-	private String nom_voie; 
-	private String oriantation; 
-	private String type_effort;
+	private String nom_voie;  
 	private float altitude;
 	private int nbr_longueur;
-	private long id_sect;
-	private long id_cot;
-	private long id_coor;
+	private Secteur secteur;
+	private Cotation cotation;
+	private Exposition exposition;
 	
 	public Voie() {}
 
-	public Voie(long id_voie, String nom_voie, String oriantation, String type_effort, float altitude, int nbr_longueur,
-			long id_sect, long id_cot, long id_coor) {
+	public Voie(long id_voie, String nom_voie, float altitude, int nbr_longueur, Secteur secteur, Cotation cotation,
+			Exposition exposition) {
 		super();
 		this.id_voie = id_voie;
 		this.nom_voie = nom_voie;
-		this.oriantation = oriantation;
-		this.type_effort = type_effort;
 		this.altitude = altitude;
 		this.nbr_longueur = nbr_longueur;
-		this.id_sect = id_sect;
-		this.id_cot = id_cot;
-		this.id_coor = id_coor;
+		this.secteur = secteur;
+		this.cotation = cotation;
+		this.exposition = exposition;
 	}
+
+
 
 	public long getId_voie() {
 		return id_voie;
@@ -47,22 +45,6 @@ public class Voie implements Serializable{
 
 	public void setNom_voie(String nom_voie) {
 		this.nom_voie = nom_voie;
-	}
-
-	public String getOriantation() {
-		return oriantation;
-	}
-
-	public void setOriantation(String oriantation) {
-		this.oriantation = oriantation;
-	}
-
-	public String getType_effort() {
-		return type_effort;
-	}
-
-	public void setType_effort(String type_effort) {
-		this.type_effort = type_effort;
 	}
 
 	public float getAltitude() {
@@ -81,30 +63,30 @@ public class Voie implements Serializable{
 		this.nbr_longueur = nbr_longueur;
 	}
 
-	public long getId_sect() {
-		return id_sect;
+	public Secteur getSecteur() {
+		return secteur;
 	}
 
-	public void setId_sect(long id_sect) {
-		this.id_sect = id_sect;
+	public void setSecteur(Secteur secteur) {
+		this.secteur = secteur;
 	}
 
-	public long getId_cot() {
-		return id_cot;
+	public Cotation getCotation() {
+		return cotation;
 	}
 
-	public void setId_cot(long id_cot) {
-		this.id_cot = id_cot;
+	public void setCotation(Cotation cotation) {
+		this.cotation = cotation;
 	}
 
-	public long getId_coor() {
-		return id_coor;
+	public Exposition getExposition() {
+		return exposition;
 	}
 
-	public void setId_coor(long id_coor) {
-		this.id_coor = id_coor;
+	public void setExposition(Exposition exposition) {
+		this.exposition = exposition;
 	}
-	
+
 	
 
 }
