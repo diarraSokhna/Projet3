@@ -6,12 +6,13 @@
 <body>
 <%@ include file="menu.jsp"%>
 	<div class="container">
+	 <div class="panel panel-default">
+  <div class="panel-heading"><h2>Connectez vous</h2></div>
+ <div class="panel-body">
+		
 		<form method="post" accept-charset="UTF-8" action="Connection">
-			<div class="col-sm-7">
-				<div class="panel panel-default">
 					<div class="panel-body form-horizontal payment-form">
 						<fieldset>
-							<legend>Connectez vous</legend>
 							<div class="form-group">
 								<label for="nom" class="col-sm-5 control-label">Adresse email <span class="requis">*</span>
 								</label>
@@ -52,11 +53,12 @@
 							</c:if>
 						</fieldset>
 					</div>
-				</div>
-			</div>
+			
+		
 
 		</form>
 	</div>
-
+</div>
+</div>
 </body>
 </html>

@@ -15,8 +15,6 @@ public class Topo implements Serializable{
 	private Utilisateur utilisateur;
 	private String image;
 	
-	
-	
 	public Topo() {}
 
 	public Topo(long idtopo, String nom, String description, int nbpage, Utilisateur utilisateur, String image) {

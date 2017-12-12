@@ -120,4 +120,20 @@ public class DaoFactory {
 	   public TopoSiteDao getTopoSiteDao() {
 		    return new TopoSiteDaoImpl(this);
 	  }
+	   
+	   public ReservationDao getReservationDao(){
+		   return new ReservationDaoImpl(this);
+	   }
+	   
+	   public SecteurDao getSecteurDao(){
+		   return new SecteurDaoImpl(this);
+	   }
+	   
+	   public VoieDao getVoieDao(){
+		   return new VoieDaoImpl(this);
+	   }
+	   
+	   public CotationDao getCotationDao(){
+		   return new CotationDaoImpl(this);
+	   }
 }

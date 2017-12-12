@@ -6,8 +6,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -43,6 +45,8 @@ public class AjoutSiteForm {
 	    private PaysDao paysDao;
 	    private ClassementDao classementDao;
 	    
+	    
+	    
 	    public AjoutSiteForm(SiteDao siteDao, PaysDao paysDao, ClassementDao classementDao){
 	    	this.siteDao = siteDao;
 	    	this.paysDao =  paysDao;
@@ -57,9 +61,8 @@ public class AjoutSiteForm {
 	        return resultat;
 	    }
 	    
+	
 	    public Site creerSite(HttpServletRequest request, String chemin){
-	    	
-	    	
 	    	Site site = new Site();
 	    	
 	    	String idpays = getValeurChamp( request, CHOIX_PAYS);
@@ -72,8 +75,15 @@ public class AjoutSiteForm {
 	    	
 	        
 	    	String nom = getValeurChamp( request, CHAMP_NOM );
+	    	
+	    	 if ( pays == null ) {
+		            setErreur( CHOIX_PAYS, "Merci de choisir un pays.");
+		            }
 	        
-	        
+	    	 if ( classement == null ) {
+		            setErreur( CHOIX_CLASSEMENT, "Merci de choisir un classement.");
+		            }
+	    	 
 	        site.setPays(pays);
 	        site.setClassement(classement);
 	        

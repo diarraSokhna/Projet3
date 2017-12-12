@@ -15,7 +15,7 @@ import fr.escalade.beans.Exposition;
 
 public class ClassementDaoImpl implements ClassementDao{
 
-	 private static final String SQL_SELECT_PAR_LIBELLE = "SELECT * FROM classement WHERE libelle_class = ?";
+	   private static final String SQL_SELECT_PAR_LIBELLE = "SELECT * FROM classement WHERE libelle_class = ?";
 	   private static final String SQL_SELECT_PAR_ID = "SELECT * FROM classement WHERE id_class = ?";
 	   private static final String SQL_SELECT = "SELECT * FROM classement ORDER BY id_class";
 	   private static final String SQL_INSERT = "INSERT INTO classement (libelle_class) VALUES (?)";

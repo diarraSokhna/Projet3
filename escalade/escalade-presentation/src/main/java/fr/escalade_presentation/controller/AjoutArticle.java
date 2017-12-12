@@ -42,7 +42,7 @@ public class AjoutArticle extends HttpServlet {
    
 	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         
-    	String chemin = this.getServletConfig().getInitParameter( CHEMIN );
+    	 String chemin = this.getServletConfig().getInitParameter( CHEMIN );
          AjoutArticleForm form = new AjoutArticleForm( articleDao );
          Article article = form.creerArticle(request, chemin);
 

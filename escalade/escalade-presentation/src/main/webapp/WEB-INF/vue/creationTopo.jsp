@@ -9,12 +9,14 @@
 <%@ include file="menu.jsp" %>
 
 <div class="container">
- <form method="post" accept-charset="UTF-8" action="CreationTopo" enctype="multipart/form-data">
-  <div class="col-sm-9">
-    <div class="panel panel-default">
+ <div class="panel panel-default">
+ <div class="panel-heading"><h2>Proposez un topo</h2></div>
+ <div class="panel-body">
+ <form method="post" accept-charset="UTF-8" action="ListeTopo" enctype="multipart/form-data">
+
              <div class="panel-body form-horizontal payment-form">
               <fieldset>
-                <legend>Proposez un topo </legend>
+          
                     <div class="form-group">
                         <label for="nom" class="col-sm-3 control-label">Nom <span class="requis">*</span></label>
                         <div class="col-sm-9">
@@ -33,25 +35,7 @@
             </select>
             <span class="erreur">${form.erreurs['idsite']}</span>
           
-<!--   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">ici</button> -->
 
-<!--   <!-- Modal -->
-<!--   <div class="col-sm-9"> -->
-<!--   <div class="modal fade" id="myModal" role="dialog"> -->
-<!--     <div class="modal-dialog"> -->
-    
-<!--       Modal content -->
-<!--       <div class="modal-content"> -->
-<%--       <%@ include file="ajoutSite.jsp" %> --%>
-      
-<!--         <div class="modal-footer"> -->
-<!--           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-<!--         </div> -->
-<!--       </div> -->
-      
-<!--     </div> -->
-<!--   </div> -->
-<!--   </div> -->
               Si le site n'existe pas vous pouvez l'<a href="<c:url value="/AjoutSite" />">ajouter</a>
         </div>
     </div>
@@ -105,15 +89,16 @@
                      <p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>
               </fieldset>
                 </div>
-                </div>
- </div>
+               
+
 
 
 
  </form>
  
-
+</div>
  
+</div>
 </div>
 </body>
 </html>

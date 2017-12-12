@@ -23,17 +23,12 @@ public class DetailsTopo extends HttpServlet {
 	 public static final String CONF_DAO_FACTORY = "daofactory";
 	 public static final String PARAM_NOM_TOPO = "nomtopo";
 
-	    public static final String VUE  = "/WEB-INF/vue/detailsTopo.jsp";
+	 public static final String VUE  = "/WEB-INF/vue/detailsTopo.jsp";
 	    
 	private TopoDao topoDao;
-       
-    
+	
 	public void init() throws ServletException {
-		
-		  /* Récupération d'une instance de notre DAO topo */
-        this.topoDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTopoDao();
-		
-		
+	  this.topoDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTopoDao();
 	}
 	
     public DetailsTopo() { }
@@ -44,8 +39,7 @@ public class DetailsTopo extends HttpServlet {
 		String nomtopo = getValeurParametre( request, PARAM_NOM_TOPO ); 
 		request.setAttribute("topo", topoDao.trouver(nomtopo));
 		
-	    //on dit a notre servlet d'afficher la page jsp
-		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+	   this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 		
 		
 		

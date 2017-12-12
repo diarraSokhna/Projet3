@@ -68,9 +68,28 @@ public final class CreationTopoForm {
 	    	 HttpSession session = request.getSession();
 	         Utilisateur utilisateur =  (Utilisateur) session.getAttribute( SESSION_UTILISATEURS);
 
-	         String idsite = getValeurChamp( request, CHOIX_SITE);
-	         Long id_site = Long.parseLong(idsite);
-		     Site site = siteDao.trouver(id_site);
+	         TopoSite topoSite = new TopoSite();
+//	         String idsite = getValeurChamp( request, CHOIX_SITE);
+	         String[] idsite1 = getValeurCombo(request, CHOIX_SITE);
+	         
+	         if(idsite1 != null)
+             {
+                 for(int i = 0 ; i < idsite1.length ; i++ ){
+             Long   id_site1 = (Long) Long.parseLong(idsite1[i]);
+             Site site = siteDao.trouver(id_site1);
+	         if ( site == null ) {
+		            setErreur( CHOIX_SITE, "Merci de choisir un site.");
+		            }
+	         
+	         
+	        topoSite.setSite(site);
+             
+                 }
+             }
+	         
+	         
+//	         Long id_site = Long.parseLong(idsite);
+//		     Site site = siteDao.trouver(id_site);
 	         
 	         String nom = getValeurChamp( request, CHAMP_NOM );
 	         String description = getValeurChamp( request, CHAMP_DESCRIPTION );
@@ -78,14 +97,9 @@ public final class CreationTopoForm {
 	        
 
 	         Topo topo = new Topo();
-	         TopoSite topoSite = new TopoSite();
+	         
 		       
-	         if ( site == null ) {
-		            setErreur( CHOIX_SITE, "Merci de choisir un site.");
-		            }
-	         
-	         
-	        topoSite.setSite(site);
+
 	        topoSite.setTopo(topo);
 	        
 	        traiterNom( nom, topo );
@@ -98,7 +112,6 @@ public final class CreationTopoForm {
 	            if ( erreurs.isEmpty() ) {
 	            	
 	                topoDao.creer( topo );
-	                
 	                topoSiteDao.creer(topoSite);
 	                
 	                resultat = "Succès de la création du topo.";
@@ -127,7 +140,7 @@ public final class CreationTopoForm {
 			
 		}
 
-		private int validationNbrPage(String nbrpage) throws FormValidationException {
+	private int validationNbrPage(String nbrpage) throws FormValidationException {
 			
 		    int temp;
 	        if ( nbrpage != null ) {
@@ -286,6 +299,16 @@ public final class CreationTopoForm {
 		        }
 		    }
 		 
+		private String[] getValeurCombo(HttpServletRequest request, String nomCombo) {
+			 String[] valeur = request.getParameterValues( nomCombo);
+		        if ( valeur == null || valeur.length == 0 ) {
+		            return null;
+		        } else {
+		            return valeur;
+		        }
+		
+		}
+		
 		private String getValeurChamp(HttpServletRequest request, String nomChamp) {
 			 String valeur = request.getParameter( nomChamp );
 		        if ( valeur == null || valeur.trim().length() == 0 ) {
@@ -295,7 +318,6 @@ public final class CreationTopoForm {
 		        }
 		
 		}
-		
 		private void setErreur( String champ, String message ) {
 	        erreurs.put( champ, message );
 	    }

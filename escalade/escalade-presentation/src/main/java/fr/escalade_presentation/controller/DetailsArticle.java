@@ -23,11 +23,12 @@ public class DetailsArticle extends HttpServlet {
 	
 	 public static final String CONF_DAO_FACTORY = "daofactory";
 	 public static final String ATT_COMMENTAIRE        = "commentaire";
-	    public static final String ATT_FORM         = "form";
+	 public static final String ATT_FORM         = "form";
 	 public static final String PARAM_TITRE_ART = "titrearticle";
 	 public static final String PARAM_ID_ART = "idArt";
 	 
-	    public static final String VUE  = "/WEB-INF/vue/detailArticle.jsp";
+	 public static final String VUE_FORM     = "/WEB-INF/vue/detailArticle.jsp";
+	 public static final String VUE_SUCCES   = "/WEB-INF/vue/detailArticle.jsp";
 	    
 	private ArticleDao articleDao;
 	private CommentaireDao commentaireDao;
@@ -52,7 +53,7 @@ public class DetailsArticle extends HttpServlet {
 		Long idArt = Long.parseLong(getValeurParametre( request, PARAM_ID_ART )); 
 		request.setAttribute("commentaires", commentaireDao.lister(idArt));
 		
-		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+		this.getServletContext().getRequestDispatcher(VUE_SUCCES).forward(request, response);
 		
 		
 		
@@ -64,7 +65,19 @@ public class DetailsArticle extends HttpServlet {
 	        request.setAttribute( ATT_FORM, form );
 	        request.setAttribute( ATT_COMMENTAIRE, commentaire );
 
-	        this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+	        if ( form.getErreurs().isEmpty() ) {
+	        	 String titrearticle = getValeurParametre( request, PARAM_TITRE_ART ); 
+	     		request.setAttribute("article", articleDao.trouver(titrearticle));
+	     		
+	     	
+	     		Long idArt = Long.parseLong(getValeurParametre( request, PARAM_ID_ART )); 
+	     		request.setAttribute("commentaires", commentaireDao.lister(idArt));
+	        	this.getServletContext().getRequestDispatcher( VUE_SUCCES ).forward( request, response );
+	        }
+	        else {
+	        	this.getServletContext().getRequestDispatcher( VUE_FORM ).forward( request, response );
+		        
+		    }
 		
 	}
 

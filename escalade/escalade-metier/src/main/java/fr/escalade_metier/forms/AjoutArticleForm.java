@@ -79,7 +79,7 @@ public class AjoutArticleForm {
 	            }
 	        } catch ( DaoException e ) {
 	            setErreur( "imprévu", "Erreur imprévue lors de la création." );
-	            resultat = "Échec de la création du client : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
+	            resultat = "Échec de la création de l'article : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
 	            e.printStackTrace();
 	        }
 

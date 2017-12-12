@@ -23,7 +23,8 @@ public class CreationTopo extends HttpServlet {
 	    public static final String ATT_TOPO       = "topo";
 	    public static final String ATT_FORM         = "form";
 
-	    public static final String VUE    = "/WEB-INF/vue/creationTopo.jsp";
+	    public static final String VUE_FORM    = "/WEB-INF/vue/creationTopo.jsp";
+	    public static final String VUE_SUCCES    = "/WEB-INF/vue/listeTopos.jsp";
 	
 		private TopoDao topoDao;
 		private SiteDao siteDao;
@@ -43,7 +44,7 @@ public class CreationTopo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setAttribute("sites", siteDao.lister());
-		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+		this.getServletContext().getRequestDispatcher(VUE_FORM).forward(request, response);
 	}
 
 	
@@ -56,9 +57,15 @@ public class CreationTopo extends HttpServlet {
 
         request.setAttribute( ATT_TOPO, topo );
         request.setAttribute( ATT_FORM, form );
+        
+        if ( form.getErreurs().isEmpty() ) {
 
-
-            this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+            this.getServletContext().getRequestDispatcher( VUE_SUCCES ).forward( request, response );
+        }else {
+        	this.getServletContext().getRequestDispatcher( VUE_FORM ).forward( request, response );
+        }
+        
+        
         }
 	
 }

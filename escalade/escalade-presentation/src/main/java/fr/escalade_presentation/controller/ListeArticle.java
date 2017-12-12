@@ -42,8 +42,7 @@ public class ListeArticle extends HttpServlet {
 //		int idArt = Integer.parseInt(getValeurParametre( request, PARAM_ID_ART )); 
 //		request.setAttribute("rowCount", articleDao.count(idArt));
 		
-	    //on dit a notre servlet d'afficher la page jsp
-		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+	   this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 		
 		
 	}

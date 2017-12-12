@@ -10,16 +10,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.escalade.beans.Commentaire;
 import fr.escalade.beans.Pays;
 import fr.escalade.beans.Site;
 
 public class SiteDaoImpl implements SiteDao{
     
-	private static final String SQL_INSERT = "INSERT INTO site(nom_site, id_pays, image, "
-			+ "id_class) VALUES(?, ?, ?, ?)";
+	private static final String SQL_INSERT = "INSERT INTO site(nom_site, id_pays, image,id_class) VALUES(?, ?, ?, ?)";
     private static final String SQL_SELECT = "SELECT * FROM site ORDER BY id_site";
     private static final String SQL_SELECT_PAR_ID = "SELECT * FROM site WHERE id_site = ?";
-    private static final String SQL_SELECT_PAR_PAYS = "SELECT * FROM site WHERE id_pays = ?";
+    private static final String SQL_SELECT_PAR_NOM = "SELECT * FROM site WHERE nom_site = ?";
+    private static final String SQL_SELECT_PAR_PAYS = "SELECT * FROM  site s, pays p WHERE s.id_pays=p.id_pays AND s.id_pays=?";
     private static final String SQL_DELETE_PAR_ID = "DELETE FROM site WHERE id_site = ?";
 	
     private  DaoFactory  daoFactory;
@@ -48,6 +49,7 @@ public class SiteDaoImpl implements SiteDao{
 	            valeursAutoGenerees = preparedStatement.getGeneratedKeys();
 	            if ( valeursAutoGenerees.next() ) {
 	                site.setIdsite( valeursAutoGenerees.getLong( 1 ) );
+	                
 	            } else {
 	                throw new DaoException( "Échec de la création du site en base, aucun ID auto-généré retourné." );
 	            }
@@ -86,6 +88,10 @@ public class SiteDaoImpl implements SiteDao{
 		return trouver( SQL_SELECT_PAR_ID, id_site);
 	}
 		
+	@Override
+	public Site trouver(String nomsite) throws DaoException {
+		return trouver( SQL_SELECT_PAR_NOM, nomsite);
+	}
 
 	public List<Site> lister() throws DaoException {
 	        Connection connection = null;
@@ -108,6 +114,30 @@ public class SiteDaoImpl implements SiteDao{
 
 	        return sites;
 	}
+
+	@Override
+	public List<Site> lister(long idpays) throws DaoException {
+		Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Site> sites = new ArrayList<Site>();
+
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee( connection, SQL_SELECT_PAR_PAYS, false, idpays);
+                    resultSet = preparedStatement.executeQuery();
+            while ( resultSet.next() ) {
+            	sites.add( map( resultSet ) );
+            }
+        } catch ( SQLException e ) {
+            throw new DaoException( e );
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connection );
+        }
+
+        return sites;
+	}
+	
 
 	public void supprimer(Site site) throws DaoException {
 		    Connection connexion = null;
@@ -144,7 +174,8 @@ public class SiteDaoImpl implements SiteDao{
         
         return site;
     }
-  
+
+
 	
 }
 

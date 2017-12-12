@@ -7,26 +7,30 @@
 <%@ include file="menu.jsp" %>
 
 <div class="container">
-                        <div class="thumbnail">
-                      
-                        
-                <img src="<c:url value="/images/${ topo.image }"/>" width="600" height="600" class="img-thumbnail" alt=""/>
+
+<div class="panel panel-default">
+  <div class="panel-heading"><h2><c:out value="${ topo.nom }"/></h2></div>
+ <div class="panel-body">
+                        <div class="thumbnail centre">
+                <img src="<c:url value="/images/${ topo.image }"/>" class="img-thumbnail taille" alt=""/>
                             
-                            <div class="caption">
+                            <div class="caption centre">
                             
                                 <h3><c:out value="${ topo.nom }"/> </h3>
 				<ul class="items">
 					<li><b>Description: </b> <c:out value="${ topo.description}" /></li>
 					<li><b>Nombre de pages: </b> <c:out value="${ topo.nbpage}" /> pages</li>
-					<li><b>Proposé par: </b> <c:out value="${ topo.utilisateur}" /> </li>
+					<li><b>Proposé par: </b> <c:out value="${ topo.utilisateur.nom}" /> <c:out value="${ topo.utilisateur.prenom}" /> </li>
 				</ul>
-				    <p> <a href="<c:url value="/Inscription" />" class="btn btn-primary" role="button">Réserver</a>
+				    <p> <a href="<c:url value="/Reservation" />" class="btn btn-primary" role="button">Réserver</a>
                                 <a href="<c:url value="/ListeTopo"/>" class="btn btn-primary" role="button">Retour</a></p>
                             </div>
                         </div>
                     </div>
                 
                      
+</div>
+</div>
 
 	
   </body>

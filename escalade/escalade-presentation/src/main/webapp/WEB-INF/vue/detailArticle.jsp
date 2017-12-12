@@ -8,11 +8,9 @@
 <%@ include file="menu.jsp" %>
 
 <div class="container">
-
-
-    <div class="panel panel-default">
-      
-        <div class="panel-body">
+ <div class="panel panel-default">
+  <div class="panel-heading"><h2><c:out value="${ article.titre }"/></h2></div>
+ <div class="panel-body">
          
             <div class="media">
                 <div class="media-left">
@@ -36,11 +34,12 @@
     </div>
     
     
-      <div class="col-lg-13 col-sm-13 text-left">
-    <div class="well">
-        <h4>Vous aussi donnez votre avis</h4>
- <div class="col-lg-13 col-sm-13 text-left">
-				<form method="post" action="DetailsArticle" class="form-inline">
+ <div class="panel panel-default">
+  <div class="panel-heading"><h2>Vous aussi exprimez vous</h2></div>
+ <div class="panel-body">
+				<form method="post" action="<c:url value="/DetailsArticle"> 
+	                    <c:param name="titrearticle" value="${ article.titre }" > </c:param>
+	                    <c:param name="idArt" value="${ article.id_art }" > </c:param></c:url>" class="form-inline">
 					<div class="form-group">
 					<input type="hidden" class="form-control" id="article"name= "article" placeholder="Article"
 						value="<c:out value="${article.id_art}"/>" size="20"maxlength="60" /> 
@@ -50,8 +49,8 @@
 					 
 						<input type="text" id="libelle" name="libelle" value="<c:out value="${commentaire.libelle}"/>" 
 						   class="form-control" placeholder="Votre message ici..." /> 
-						<button type="submit" value="" class="btn btn-primary btn-sm">Ajouter
-							commentaire</button>
+						<button type="submit" value="" class="btn btn-primary btn-sm" OnClick="" >Ajouter
+							commentaire </button>
 							<span class="erreur">${form.erreurs['libelle']}</span>
 					
 					<c:choose>
@@ -94,8 +93,6 @@
     
    
 </div>
-
- </div>
 
   </body>
 </html>

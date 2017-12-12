@@ -129,7 +129,7 @@ public class TopoDaoImp implements TopoDao{
 		}
 
 		public void supprimer(Topo topo) throws DaoException {
-			   Connection connexion = null;
+			    Connection connexion = null;
 		        PreparedStatement preparedStatement = null;
 
 		        try {
