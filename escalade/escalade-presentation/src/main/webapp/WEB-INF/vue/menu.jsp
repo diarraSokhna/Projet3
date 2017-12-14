@@ -24,7 +24,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="<%=request.getContextPath()+"/Accueil"%>"> <i class="glyphicon glyphicon-home"></i></a>
+      
+  
+      <a class="navbar-brand" href="<c:url value="/Accueil"/>" > <i class="glyphicon glyphicon-home"></i></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -62,7 +64,16 @@
         <li><a href="<c:url value="/Inscription" />">S'inscrire</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="<c:url value="/Connection" />"><span class="glyphicon glyphicon-log-in"></span> Connexion</a></li>
+      <c:choose>
+							<c:when test="${ empty sessionScope.sessionUtilisateur }">
+							<li><a href="<c:url value="/Connection" />"><span class="glyphicon glyphicon-log-in"></span> Connexion </a></li>
+							</c:when>
+							<c:otherwise>
+							<li><a href="<c:url value="/Deconnexion" />"><span class="glyphicon glyphicon-log-in"></span> Deconnexion</a></li>
+
+							</c:otherwise>
+						</c:choose>
+        
       </ul>
     </div>
   </div>

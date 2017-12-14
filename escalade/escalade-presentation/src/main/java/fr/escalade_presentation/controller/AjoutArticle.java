@@ -26,7 +26,7 @@ public class AjoutArticle extends HttpServlet {
     public static final String ATT_FORM         = "form";
     public static final String SESSION_ARTICLES  = "sessionArticle";
 
-    public static final String VUE_SUCCES       = "/WEB-INF/vue/listeArticles.jsp";
+    public static final String VUE_SUCCES       = "/escalade-presentation/ListeArticle";
     public static final String VUE_FORM         = "/WEB-INF/vue/ajoutArticle.jsp";
 
     private ArticleDao  articleDao;
@@ -51,20 +51,16 @@ public class AjoutArticle extends HttpServlet {
          
          HttpSession session = request.getSession();
          if ( form.getErreurs().isEmpty() ) {
+        	 
              session.setAttribute( SESSION_ARTICLES, article );
-             this.getServletContext().getRequestDispatcher( VUE_FORM ).forward( request, response );
+             response.sendRedirect(VUE_SUCCES);
         
     }else {
     	session.setAttribute( SESSION_ARTICLES, null );
         this.getServletContext().getRequestDispatcher( VUE_FORM ).forward( request, response );
    
     }
-//         else {
-//    	 session.setAttribute( SESSION_ARTICLES, null );
-//         
-//         this.getServletContext().getRequestDispatcher( VUE_FORM ).forward( request, response );
-//        
-//    }
+
 
 }
 }

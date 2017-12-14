@@ -12,7 +12,7 @@
  <div class="panel panel-default">
  <div class="panel-heading"><h2>Proposez un topo</h2></div>
  <div class="panel-body">
- <form method="post" accept-charset="UTF-8" action="ListeTopo" enctype="multipart/form-data">
+ <form method="post" accept-charset="UTF-8" action="CreationTopo" enctype="multipart/form-data">
 
              <div class="panel-body form-horizontal payment-form">
               <fieldset>

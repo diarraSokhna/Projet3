@@ -10,7 +10,7 @@
 </head>
 <body>
 	<%@ include file="menu.jsp"%>
-
+<jsp:useBean id="site" class="fr.escalade.beans.Site" scope="session"/>
 	<div class="container">
 		<div class="panel-group" id="accordion">
 			<div class="panel panel-default">
@@ -26,7 +26,7 @@
 							enctype="multipart/form-data">
 							<div class="panel-body form-horizontal payment-form">
 								<c:set var="pays" value="${ site.pays }" scope="request" />
-								<c:set var="classment" value="${ site.classement }"
+								<c:set var="classement" value="${ site.classement }"
 									scope="request" />
 								<fieldset>
 
@@ -35,8 +35,8 @@
 										</label>
 										<div class="col-sm-9">
 											<input type="text" class="form-control" id="nom" name="nom"
-												value="<c:out value="${site.nomsite}"/>"> <span
-												class="erreur">${form.erreurs['nom']}</span>
+												value="<c:out value="${site.nomsite}"/>"> 
+												 <span class="erreur">${form.erreurs['nom']}</span>
 										</div>
 									</div>
 									<div class="form-group">
@@ -96,6 +96,11 @@
 							</div>
 
 						</form>
+						
+<%-- 	<jsp:getProperty name="site" property="nomsite" /> --%>
+	<c:out value="${site.nomsite}"/>
+<%-- 	 <jsp:setProperty name="site" property="nomsite" value="Site 1"/> --%>
+   
 					</div>
 				</div>
 			</div>

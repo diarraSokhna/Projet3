@@ -2,27 +2,26 @@ package fr.escalade_presentation.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import fr.escalade.beans.Article;
 import fr.escalade.persistance.ArticleDao;
 import fr.escalade.persistance.CommentaireDao;
 import fr.escalade.persistance.DaoFactory;
 import fr.escalade.persistance.TopoDao;
+import fr.escalade_metier.forms.AjoutArticleForm;
 
 @WebServlet("/ListeArticle")
 public class ListeArticle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	    public static final String CONF_DAO_FACTORY = "daofactory";
-	    public static final String ATT_ARTICLE       = "article";
-	    public static final String VUE  = "/WEB-INF/vue/listeArticles.jsp";
-
-	    public static final String SESSION_ARTICLES  = "sessionArticle";
-	    public static final String PARAM_ID_ART = "idArt";
-	    
+	    public static final String VUE      = "/WEB-INF/vue/listeArticles.jsp";
 	    private ArticleDao articleDao;
     
 	public void init() throws ServletException {
@@ -47,16 +46,8 @@ public class ListeArticle extends HttpServlet {
 		
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 	}
 	
-	  private static String getValeurParametre( HttpServletRequest request, String nomChamp ) {
-	       String valeur = request.getParameter( nomChamp );
-	       if ( valeur == null || valeur.trim().length() == 0 ) {
-	           return null;
-	       } else {
-	           return valeur;
-	       }
-	   }
-
+	 
 }

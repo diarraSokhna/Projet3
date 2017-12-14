@@ -30,7 +30,7 @@
                         </div>
                     </div>
                  
-                     </c:forEach></div>s
+                     </c:forEach></div>
 </div>
 
 	</div>

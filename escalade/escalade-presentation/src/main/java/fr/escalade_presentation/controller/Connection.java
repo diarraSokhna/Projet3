@@ -23,7 +23,7 @@ public class Connection extends HttpServlet {
     public static final String ATT_FORM         = "form";
     public static final String ATT_SESSION_USER = "sessionUtilisateur";
     public static final String VUE              = "/WEB-INF/vue/connection.jsp";
-    public static final String VUE_SUCCES              = "/WEB-INF/vue/accueil.jsp";
+    public static final String VUE_SUCCES              = "/escalade-presentation/Accueil";
     
     
     public Connection() {
@@ -50,7 +50,7 @@ public class Connection extends HttpServlet {
         
         if ( form.getErreurs().isEmpty()) {
             session.setAttribute( ATT_SESSION_USER, utilisateur );
-            this.getServletContext().getRequestDispatcher( VUE_SUCCES ).forward( request, response );
+            response.sendRedirect(VUE_SUCCES);
             
         } else {
             session.setAttribute( ATT_SESSION_USER, null );

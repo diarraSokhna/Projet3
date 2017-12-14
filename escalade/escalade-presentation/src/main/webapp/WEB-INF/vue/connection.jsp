@@ -49,7 +49,7 @@
 								<p class="succes">Vous êtes connecté(e) avec l'adresse :
 									${sessionScope.sessionUtilisateur.email} passe:
 									${sessionScope.sessionUtilisateur.motpass}
-									nom: ${sessionScope.sessionUtilisateur.iduser}</p>
+									id: ${sessionScope.sessionUtilisateur.iduser}</p>
 							</c:if>
 						</fieldset>
 					</div>

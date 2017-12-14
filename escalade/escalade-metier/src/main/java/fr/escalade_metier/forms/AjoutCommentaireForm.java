@@ -93,8 +93,10 @@ public class AjoutCommentaireForm {
  
 
     private void validationLibelle( String libelle ) throws FormValidationException {
-        if (libelle.length() < 3  ) {
+        if (libelle != null && libelle.length() < 3  ) {
                 throw new FormValidationException( "Le libellé doit contenir au moins 3 caractéres." );
+        } else if(libelle == null){
+			throw new FormValidationException( "Merci d'entrer un commentaire." );
         }
     }
     

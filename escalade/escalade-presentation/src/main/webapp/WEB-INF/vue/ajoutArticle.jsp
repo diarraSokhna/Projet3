@@ -70,7 +70,7 @@
 									</p>
 								</c:when>
 								<c:otherwise>
-									<input type="text" class="form-control" id="utilisateur"
+									<input type="hidden" class="form-control" id="utilisateur"
 										name="utilisateur"
 										value="<c:out value="${sessionScope.sessionUtilisateur.iduser}"/>">
 									<span class="erreur">${form.erreurs['utilisateur']}</span>
