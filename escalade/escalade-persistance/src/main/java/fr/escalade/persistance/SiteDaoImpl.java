@@ -29,7 +29,7 @@ public class SiteDaoImpl implements SiteDao{
 		this.daoFactory = daoFactory;
 	}
 
-	public void creer(Site site) throws DaoException {
+	public Site creer(Site site) throws DaoException {
 		    Connection connexion = null;
 	        PreparedStatement preparedStatement = null;
 	        ResultSet valeursAutoGenerees = null;
@@ -58,6 +58,7 @@ public class SiteDaoImpl implements SiteDao{
 	        } finally {
 	            fermeturesSilencieuses( valeursAutoGenerees, preparedStatement, connexion );
 	        }
+	        return site;
 		
 	}
 	

@@ -14,7 +14,7 @@ import fr.escalade.persistance.DaoFactory;
 import fr.escalade.persistance.SiteDao;
 import fr.escalade_metier.forms.CreationTopoForm;
 
-@MultipartConfig
+
 public class CreationTopo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -28,13 +28,11 @@ public class CreationTopo extends HttpServlet {
 	
 		private TopoDao topoDao;
 		private SiteDao siteDao;
-		private TopoSiteDao topoSiteDao;
 	       
     
 	public void init() throws ServletException {
 		 this.topoDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTopoDao();
 		 this.siteDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getSiteDao();	
-		 this.topoSiteDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTopoSiteDao();
 				
 	}
   
@@ -51,7 +49,7 @@ public class CreationTopo extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String chemin = this.getServletConfig().getInitParameter( CHEMIN );
 
-		CreationTopoForm form = new CreationTopoForm( topoDao,topoSiteDao, siteDao );
+		CreationTopoForm form = new CreationTopoForm( topoDao, siteDao );
 
         Topo topo = form.creerTopo( request, chemin );
 

@@ -47,7 +47,9 @@ public class AjoutSiteForm {
 	    
 	    
 	    
-	    public AjoutSiteForm(SiteDao siteDao, PaysDao paysDao, ClassementDao classementDao){
+	    public AjoutSiteForm() {}
+
+		public AjoutSiteForm(SiteDao siteDao, PaysDao paysDao, ClassementDao classementDao){
 	    	this.siteDao = siteDao;
 	    	this.paysDao =  paysDao;
 	    	this.classementDao = classementDao;
@@ -94,7 +96,7 @@ public class AjoutSiteForm {
 	        try {
 	            if ( erreurs.isEmpty() ) {
 	            	
-	                siteDao.creer(site);
+//	                siteDao.creer(site);
 	                resultat = "Succès de la création du site.";
 	            } else {
 	                resultat = "Échec de la création du site.";
@@ -106,6 +108,8 @@ public class AjoutSiteForm {
 	        }
 	        return site;
 	    }
+	    
+	
 			
 	    private void traiterNom(String nom, Site site) {
 				

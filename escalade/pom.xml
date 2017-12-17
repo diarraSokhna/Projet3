@@ -15,11 +15,7 @@
      <spring.version>4.3.11.RELEASE</spring.version>
   </properties>
 
-      <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.5.9.RELEASE</version>
-</parent>
+
    
    <modules>
     <module>escalade-presentation</module>
@@ -30,14 +26,7 @@
    
    <dependencyManagement>
         <dependencies>
-          
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-framework-bom</artifactId>
-                <version>${spring.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+         
             
              <!-- Drivers JDBC PostgreSQL -->
             <dependency>

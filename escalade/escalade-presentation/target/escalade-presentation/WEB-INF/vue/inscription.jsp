@@ -7,14 +7,13 @@
 <%@ include file="menu.jsp" %>
 
   <div class="container">
-   
-        <form method="post" accept-charset="UTF-8" action="Inscription">
-        
-     <div class="col-sm-7">
     <div class="panel panel-default">
+  <div class="panel-heading"><h2>Inscrivez vous c'est gratuit!</h2></div>
+ <div class="panel-body">
+		
+        <form method="post" accept-charset="UTF-8" action="Inscription">
              <div class="panel-body form-horizontal payment-form">
               <fieldset>
-                <legend>Inscrivez vous c'est gratuit!</legend>
              <div class="form-group">
 						<label for="nom" class="col-sm-5 control-label">Nom d'utilisateur<span class="requis">*</span>
 						</label>
@@ -84,10 +83,11 @@
 							</c:if>
                </fieldset>
           </div>
-          </div>
-          </div>
+   
+         
         </form>
 </div>
-
+</div>
+</div>
 </body>
 </html>

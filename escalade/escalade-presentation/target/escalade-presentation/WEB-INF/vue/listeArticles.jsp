@@ -8,7 +8,9 @@
 <%@ include file="menu.jsp" %>
 
 <div class="container">
-
+ <div class="panel panel-default">
+  <div class="panel-heading"><h2>La liste des Articles</h2></div>
+ <div class="panel-body">
 <c:forEach var = "article" items = "${ articles }">
     <div class="panel panel-default">
       
@@ -38,6 +40,8 @@
         </div>
     </div>
      </c:forEach>
+</div>
+</div>
 </div>
 
  

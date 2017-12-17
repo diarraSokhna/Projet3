@@ -46,7 +46,7 @@ public class AjoutSecteurForm {
         
         try {
             if ( erreurs.isEmpty() ) {
-                secteurDao.creer( secteur );
+//                secteurDao.creer( secteur );
                 resultat = "Succès de la création du secteur.";
             } else {
                 resultat = "Échec de la création du secteur.";

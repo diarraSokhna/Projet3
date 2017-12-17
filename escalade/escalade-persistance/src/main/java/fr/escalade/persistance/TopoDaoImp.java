@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.escalade.beans.Site;
 import fr.escalade.beans.Topo;
 import fr.escalade.persistance.DaoException;
 import fr.escalade.persistance.TopoDao;
@@ -18,6 +19,7 @@ import fr.escalade.persistance.TopoDao;
 public class TopoDaoImp implements TopoDao{
 	
     private static final String SQL_INSERT = "INSERT INTO topo(nom, description, nbr_page, id_user, image) VALUES(?, ?, ?, ?, ?)";
+    private static final String SQL_INSERT_ = "INSERT INTO j_topo_site(jts_id, id_site, id_topo) VALUES(?, ?, ?)";
     private static final String SQL_SELECT = "SELECT id_topo, nom, description, nbr_page, id_user, image FROM topo ORDER BY id_topo";
     private static final String SQL_SELECT_PAR_NOM = "SELECT id_topo, nom,description, nbr_page, id_user, image FROM topo WHERE nom = ?";
     private static final String SQL_SELECT_PAR_ID = "SELECT id_topo, nom,description, nbr_page, id_user, image FROM topo WHERE id_topo = ?";
@@ -31,6 +33,7 @@ public class TopoDaoImp implements TopoDao{
 	 public void creer( Topo topo ) throws DaoException {
 	        Connection connexion = null;
 	        PreparedStatement preparedStatement = null;
+	        PreparedStatement preparedStatement1 = null;
 	        ResultSet valeursAutoGenerees = null;
 
 	        try {
@@ -41,20 +44,50 @@ public class TopoDaoImp implements TopoDao{
 	                    topo.getNbpage(), 
 	                    topo.getUtilisateur().getIduser(), 
 	                    topo.getImage() );
+	            
 	            int statut = preparedStatement.executeUpdate();
 	            if ( statut == 0 ) {
 	                throw new DaoException( "Échec de la création du topo, aucune ligne ajoutée dans la table." );
 	            }
 	            valeursAutoGenerees = preparedStatement.getGeneratedKeys();
 	            if ( valeursAutoGenerees.next() ) {
-	                topo.setIdtopo( valeursAutoGenerees.getLong( 1 ) );
+	               topo.setIdtopo( valeursAutoGenerees.getLong( 1 ) );
+	                
+	               for(Site site: topo.getListSite()){
+			        	
+			        	if(site.getIdsite() == 0){
+			        		SiteDao siteDao = daoFactory.getSiteDao();
+			        		site = siteDao.creer(site);
+			        	}
+			        	
+			        	ResultSet result = connexion.createStatement(
+	                        		ResultSet.TYPE_SCROLL_INSENSITIVE, 
+	                        		ResultSet.CONCUR_UPDATABLE).executeQuery(
+	                            	"SELECT NEXTVAL('topo_site_id_seq') as id");	
+			        	if(result.first()){
+			        		long id_to_si = result.getLong("id");
+			                preparedStatement1 = connexion.prepareStatement(SQL_INSERT_);
+			                preparedStatement1.setLong(1, id_to_si);
+			                preparedStatement1.setLong(2, site.getIdsite());
+			                preparedStatement1.setLong(3, topo.getIdtopo());
+			                int	statut1 = preparedStatement1.executeUpdate();
+			                		
+			          if ( statut1 == 0 ) {
+			        	 throw new DaoException( "Échec de l'insertion dans topo site, aucune ligne ajoutée dans la table." );
+			        	            }
+			                    }
+		            }
+	               
 	            } else {
 	                throw new DaoException( "Échec de la création du topo en base, aucun ID auto-généré retourné." );
 	            }
+	            
+	            
 	        } catch ( SQLException e ) {
 	            throw new DaoException( e );
 	        } finally {
 	            fermeturesSilencieuses( valeursAutoGenerees, preparedStatement, connexion );
+	            fermeturesSilencieuses(preparedStatement1, connexion );
 	        }
 	    }
 

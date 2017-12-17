@@ -37,7 +37,6 @@
       <file-size-threshold>1048576</file-size-threshold>
     </multipart-config>
   </servlet>
-  
   <servlet>
     <servlet-name>AjoutSite</servlet-name>
     <servlet-class>fr.escalade_presentation.controller.AjoutSite</servlet-class>
@@ -52,31 +51,25 @@
       <file-size-threshold>1048576</file-size-threshold>
     </multipart-config>
   </servlet>
-  
   <servlet-mapping>
     <servlet-name>CreationTopo</servlet-name>
     <url-pattern>/CreationTopo</url-pattern>
   </servlet-mapping>
-  
   <servlet-mapping>
     <servlet-name>AjoutArticle</servlet-name>
     <url-pattern>/AjoutArticle</url-pattern>
   </servlet-mapping>
-  
-    <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>AjoutSite</servlet-name>
     <url-pattern>/AjoutSite</url-pattern>
   </servlet-mapping>
-  
   <servlet-mapping>
     <servlet-name>Image</servlet-name>
     <url-pattern>/images/*</url-pattern>
   </servlet-mapping>
-  
   <listener>
     <listener-class>fr.escalade.config.InitialisationDaoFactory</listener-class>
   </listener>
-  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>

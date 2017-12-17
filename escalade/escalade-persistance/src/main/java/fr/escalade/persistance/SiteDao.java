@@ -8,7 +8,7 @@ import fr.escalade.beans.Site;
 
 public interface SiteDao {
 	
-	  void creer(Site site) throws DaoException;
+	  Site creer(Site site) throws DaoException;
 	  
 	  List<Site> lister() throws DaoException;
 	  

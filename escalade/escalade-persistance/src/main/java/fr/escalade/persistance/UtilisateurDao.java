@@ -2,7 +2,7 @@ package fr.escalade.persistance;
 
 import java.util.List;
 
-import org.springframework.data.repository.CrudRepository;
+
 
 import fr.escalade.beans.Utilisateur;
 

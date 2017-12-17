@@ -37,7 +37,7 @@
  <div class="panel panel-default">
   <div class="panel-heading"><h2>Vous aussi exprimez vous</h2></div>
  <div class="panel-body">
-				<form method="post" action="<c:url value="/AjoutCommentaire"> 
+				<form method="post" accept-charset="UTF-8" action="<c:url value="/AjoutCommentaire"> 
 	                    <c:param name="titrearticle" value="${ article.titre }" > </c:param>
 	                    <c:param name="idArt" value="${ article.id_art }" > </c:param></c:url>" class="form-inline">
 					<div class="form-group">

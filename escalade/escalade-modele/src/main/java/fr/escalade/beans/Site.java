@@ -1,6 +1,7 @@
 package fr.escalade.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Site implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -10,16 +11,19 @@ public class Site implements Serializable{
 	private Pays pays;
 	private String image;
 	private Classement classement;
+	private ArrayList<Secteur> listeSecteur= new ArrayList<Secteur>();
 	
 	public Site() {}
 	
-	public Site(long idsite, String nomsite, Pays pays, String image, Classement classement) {
+	public Site(long idsite, String nomsite, Pays pays, String image, Classement classement,
+			ArrayList<Secteur> listeSecteur) {
 		super();
 		this.idsite = idsite;
 		this.nomsite = nomsite;
 		this.pays = pays;
 		this.image = image;
 		this.classement = classement;
+		this.listeSecteur = listeSecteur;
 	}
 
 	public long getIdsite() {
@@ -62,5 +66,24 @@ public class Site implements Serializable{
 		this.classement = classement;
 	}
 
+	public ArrayList<Secteur> getListeSecteur() {
+		return listeSecteur;
+	}
+
+	public void setListeSecteur(ArrayList<Secteur> listeSecteur) {
+		this.listeSecteur = listeSecteur;
+	}
+
+	public void addSecteur(Secteur secteur){
+		this.listeSecteur.add(secteur);
+	}
+	
+	 public void removeSite(Site site ) {
+		    this.listeSecteur.remove(site);
+		  }
+	
+	public Secteur getSecteur(int indice){
+		return this.listeSecteur.get(indice);
+	}
 	
 }

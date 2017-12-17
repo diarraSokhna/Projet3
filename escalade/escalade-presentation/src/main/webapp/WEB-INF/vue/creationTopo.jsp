@@ -7,7 +7,7 @@
 </head>
 <body>
 <%@ include file="menu.jsp" %>
-
+<jsp:useBean id="site" class="fr.escalade.beans.Site" scope="session"/>
 <div class="container">
  <div class="panel panel-default">
  <div class="panel-heading"><h2>Proposez un topo</h2></div>
@@ -27,13 +27,15 @@
                        <div class="form-group">
         <label class="col-xs-3 control-label">Site</label>
         <div class="col-sm-9 selectContainer">
-            <select multiple class="form-control" name="idsite" id="idsite">
+            <select multiple class="form-control" name="listeSite" id="listeSite">
             <option value="0"> Choisir un site </option>
              <c:forEach var = "site" items = "${ sites }">
-                <option value="<c:out value="${ site.idsite}" />"><c:out value="${ site.nomsite}" /></option>
+                <option value="${site.idsite}" ${param.site eq site.idsite ? 'selected' : ''}>${site.nomsite}</option>
+  
+<%--                 <option value="<c:out value="${ site.idsite}" />"><c:out value="${ site.nomsite}" /></option> --%>
                </c:forEach>
             </select>
-            <span class="erreur">${form.erreurs['idsite']}</span>
+            <span class="erreur">${form.erreurs['listeSite']}</span>
           
 
               Si le site n'existe pas vous pouvez l'<a href="<c:url value="/AjoutSite" />">ajouter</a>
@@ -52,7 +54,7 @@
                         <label for="nbpage" class="col-sm-3 control-label">Nombre de page</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="nbrpage" name="nbrpage" value="<c:out value="${topo.nbpage}"/>" >
-                            <span class="erreur">${form.erreurs['nbpage']}</span>
+                            <span class="erreur">${form.erreurs['nbrpage']}</span>
                         </div>
                     </div>
                     

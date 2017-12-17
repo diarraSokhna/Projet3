@@ -9,7 +9,7 @@ public class Voie implements Serializable{
 	
 	private long id_voie;
 	private String nom_voie;  
-	private float altitude;
+	private double altitude;
 	private int nbr_longueur;
 	private Secteur secteur;
 	private Cotation cotation;
@@ -17,7 +17,7 @@ public class Voie implements Serializable{
 	
 	public Voie() {}
 
-	public Voie(long id_voie, String nom_voie, float altitude, int nbr_longueur, Secteur secteur, Cotation cotation,
+	public Voie(long id_voie, String nom_voie, double altitude, int nbr_longueur, Secteur secteur, Cotation cotation,
 			Exposition exposition) {
 		super();
 		this.id_voie = id_voie;
@@ -47,11 +47,11 @@ public class Voie implements Serializable{
 		this.nom_voie = nom_voie;
 	}
 
-	public float getAltitude() {
+	public double getAltitude() {
 		return altitude;
 	}
 
-	public void setAltitude(float altitude) {
+	public void setAltitude(double altitude) {
 		this.altitude = altitude;
 	}
 

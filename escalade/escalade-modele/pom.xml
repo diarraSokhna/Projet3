@@ -32,19 +32,7 @@
       <scope>test</scope>
     </dependency>
     
-     <!-- Dépendances vers spring -->
-    <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-context</artifactId>
-        
-    </dependency>
-    <dependency>
-    <groupId>org.springframework.data</groupId>
-    <artifactId>spring-data-jpa</artifactId>
-    <version>2.0.1.RELEASE</version>
-</dependency>
-
-    <!-- JSR-250 -->
+   
 <dependency>
     <groupId>javax.annotation</groupId>
     <artifactId>javax.annotation-api</artifactId>

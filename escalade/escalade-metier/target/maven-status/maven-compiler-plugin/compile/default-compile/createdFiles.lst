@@ -1,8 +1,12 @@
 fr\escalade_metier\forms\AjoutPaysForm.class
 fr\escalade_metier\forms\FormValidationException.class
+fr\escalade_metier\forms\ReservationForm.class
+fr\escalade_metier\forms\AjoutSecteurForm.class
 fr\escalade_metier\forms\ConnexionForm.class
+fr\escalade_metier\forms\AjoutVoieForm.class
 fr\escalade_metier\forms\AjoutCommentaireForm.class
 fr\escalade_metier\forms\AjoutArticleForm.class
 fr\escalade_metier\forms\AjoutSiteForm.class
 fr\escalade_metier\forms\CreationTopoForm.class
 fr\escalade_metier\forms\InscriptionForm.class
+fr\escalade_metier\forms\RechercheForm.class

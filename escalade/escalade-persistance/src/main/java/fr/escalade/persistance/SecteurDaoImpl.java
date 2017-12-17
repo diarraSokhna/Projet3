@@ -35,7 +35,7 @@ public class SecteurDaoImpl implements SecteurDao {
 	        try {
 	            connexion = daoFactory.getConnection();
 	            preparedStatement = initialisationRequetePreparee( connexion, SQL_INSERT, true,
-	            		 secteur.getSite().getIdsite(),
+	            		// secteur.getSite().getIdsite(),
 	            		 secteur.getNomsect());
 	            
 	            int statut = preparedStatement.executeUpdate();
@@ -122,7 +122,7 @@ public class SecteurDaoImpl implements SecteurDao {
 	        secteur.setNomsect(resultSet.getString( "nom_secteur"));
 	        
 	        SiteDao siteDao = daoFactory.getSiteDao();
-	        secteur.setSite(siteDao.trouver(resultSet.getLong("id_site")));
+	       // secteur.setSite(siteDao.trouver(resultSet.getLong("id_site")));
 	        return secteur;
 	    }
 }
