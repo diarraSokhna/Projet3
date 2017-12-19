@@ -12,9 +12,9 @@ public interface ReservationDao {
 	  
 	  List<Reservation> lister() throws DaoException;
 	  
-	  Reservation trouver( Date dateresa ) throws DaoException;
+	  Reservation trouver( Date dateresa, long id_resa ) throws DaoException;
 	  
-	  Reservation trouver( Long id_resa ) throws DaoException;
+	  Reservation trouver( long id_resa ) throws DaoException;
 	  
 	  void supprimer( Reservation reservation ) throws DaoException;
 	

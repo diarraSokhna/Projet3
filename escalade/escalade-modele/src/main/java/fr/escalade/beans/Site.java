@@ -11,19 +11,19 @@ public class Site implements Serializable{
 	private Pays pays;
 	private String image;
 	private Classement classement;
-	private ArrayList<Secteur> listeSecteur= new ArrayList<Secteur>();
+	private Secteur secteur;
 	
 	public Site() {}
 	
 	public Site(long idsite, String nomsite, Pays pays, String image, Classement classement,
-			ArrayList<Secteur> listeSecteur) {
+			Secteur secteur) {
 		super();
 		this.idsite = idsite;
 		this.nomsite = nomsite;
 		this.pays = pays;
 		this.image = image;
 		this.classement = classement;
-		this.listeSecteur = listeSecteur;
+		this.secteur = secteur;
 	}
 
 	public long getIdsite() {
@@ -66,24 +66,13 @@ public class Site implements Serializable{
 		this.classement = classement;
 	}
 
-	public ArrayList<Secteur> getListeSecteur() {
-		return listeSecteur;
+	public Secteur getSecteur() {
+		return secteur;
 	}
 
-	public void setListeSecteur(ArrayList<Secteur> listeSecteur) {
-		this.listeSecteur = listeSecteur;
+	public void setSecteur(Secteur secteur) {
+		this.secteur = secteur;
 	}
 
-	public void addSecteur(Secteur secteur){
-		this.listeSecteur.add(secteur);
-	}
-	
-	 public void removeSite(Site site ) {
-		    this.listeSecteur.remove(site);
-		  }
-	
-	public Secteur getSecteur(int indice){
-		return this.listeSecteur.get(indice);
-	}
-	
+
 }

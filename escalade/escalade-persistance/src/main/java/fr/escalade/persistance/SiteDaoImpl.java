@@ -20,6 +20,10 @@ public class SiteDaoImpl implements SiteDao{
     private static final String SQL_SELECT = "SELECT * FROM site ORDER BY id_site";
     private static final String SQL_SELECT_PAR_ID = "SELECT * FROM site WHERE id_site = ?";
     private static final String SQL_SELECT_PAR_NOM = "SELECT * FROM site WHERE nom_site = ?";
+    private static final String SQL_SELECT_PAR_TOPO = "SELECT nom_site FROM site"+
+                                                      " INNER JOIN topo_site ON site.id_site = topo_site.id_site"+
+                                                      " INNER JOIN topo ON topo_site.id_topo = topo.id_topo"+
+                                                      " WHERE topo.id_topo = ?";
     private static final String SQL_SELECT_PAR_PAYS = "SELECT * FROM  site s, pays p WHERE s.id_pays=p.id_pays AND s.id_pays=?";
     private static final String SQL_DELETE_PAR_ID = "DELETE FROM site WHERE id_site = ?";
 	
@@ -176,7 +180,29 @@ public class SiteDaoImpl implements SiteDao{
         return site;
     }
 
+	@Override
+	public List<Site> listerParTopo(long idtopo) throws DaoException {
+		Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Site> sites = new ArrayList<Site>();
 
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee( connection, SQL_SELECT_PAR_TOPO, false, idtopo);
+                    resultSet = preparedStatement.executeQuery();
+            while ( resultSet.next() ) {
+            	sites.add( map( resultSet ) );
+            }
+        } catch ( SQLException e ) {
+            throw new DaoException( e );
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connection );
+        }
+
+        return sites;
+
+	}
 	
 }
 

@@ -25,19 +25,16 @@
                         </div>
                     </div>
                        <div class="form-group">
-        <label class="col-xs-3 control-label">Site</label>
+        <label class="col-xs-3 control-label">La liste des sites<span class="requis">*</span></label>
         <div class="col-sm-9 selectContainer">
             <select multiple class="form-control" name="listeSite" id="listeSite">
-            <option value="0"> Choisir un site </option>
+<!--             <option value="0"> Choisir un site </option> -->
              <c:forEach var = "site" items = "${ sites }">
                 <option value="${site.idsite}" ${param.site eq site.idsite ? 'selected' : ''}>${site.nomsite}</option>
-  
-<%--                 <option value="<c:out value="${ site.idsite}" />"><c:out value="${ site.nomsite}" /></option> --%>
                </c:forEach>
             </select>
             <span class="erreur">${form.erreurs['listeSite']}</span>
           
-
               Si le site n'existe pas vous pouvez l'<a href="<c:url value="/AjoutSite" />">ajouter</a>
         </div>
     </div>

@@ -52,31 +52,7 @@ public class TopoDaoImp implements TopoDao{
 	            valeursAutoGenerees = preparedStatement.getGeneratedKeys();
 	            if ( valeursAutoGenerees.next() ) {
 	               topo.setIdtopo( valeursAutoGenerees.getLong( 1 ) );
-	                
-	               for(Site site: topo.getListSite()){
-			        	
-			        	if(site.getIdsite() == 0){
-			        		SiteDao siteDao = daoFactory.getSiteDao();
-			        		site = siteDao.creer(site);
-			        	}
-			        	
-			        	ResultSet result = connexion.createStatement(
-	                        		ResultSet.TYPE_SCROLL_INSENSITIVE, 
-	                        		ResultSet.CONCUR_UPDATABLE).executeQuery(
-	                            	"SELECT NEXTVAL('topo_site_id_seq') as id");	
-			        	if(result.first()){
-			        		long id_to_si = result.getLong("id");
-			                preparedStatement1 = connexion.prepareStatement(SQL_INSERT_);
-			                preparedStatement1.setLong(1, id_to_si);
-			                preparedStatement1.setLong(2, site.getIdsite());
-			                preparedStatement1.setLong(3, topo.getIdtopo());
-			                int	statut1 = preparedStatement1.executeUpdate();
-			                		
-			          if ( statut1 == 0 ) {
-			        	 throw new DaoException( "Échec de l'insertion dans topo site, aucune ligne ajoutée dans la table." );
-			        	            }
-			                    }
-		            }
+	            
 	               
 	            } else {
 	                throw new DaoException( "Échec de la création du topo en base, aucun ID auto-généré retourné." );

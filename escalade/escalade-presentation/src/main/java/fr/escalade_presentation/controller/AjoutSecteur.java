@@ -1,9 +1,7 @@
 package fr.escalade_presentation.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,17 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.escalade.beans.Secteur;
-import fr.escalade.beans.Site;
-import fr.escalade.beans.Voie;
-import fr.escalade.persistance.ClassementDao;
 import fr.escalade.persistance.CotationDao;
 import fr.escalade.persistance.DaoFactory;
 import fr.escalade.persistance.ExpositionDao;
-import fr.escalade.persistance.PaysDao;
 import fr.escalade.persistance.SecteurDao;
-import fr.escalade.persistance.SiteDao;
 import fr.escalade_metier.forms.AjoutSecteurForm;
-import fr.escalade_metier.forms.AjoutSiteForm;
 
 @WebServlet("/AjoutSecteur")
 public class AjoutSecteur extends HttpServlet {

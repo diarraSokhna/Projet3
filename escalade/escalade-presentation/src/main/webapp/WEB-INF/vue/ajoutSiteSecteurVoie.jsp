@@ -23,7 +23,7 @@
 					
 					
 					
-<form method="post" accept-charset="UTF-8" action="" enctype="multipart/form-data"  >
+<form method="post" accept-charset="UTF-8" action="AjoutSite" enctype="multipart/form-data"  >
 						<div class="panel-body form-horizontal payment-form">
 				 <fieldset>
 									
@@ -46,6 +46,8 @@
 											</button>
 										</div>
 									</div>
+									
+									
 									</fieldset>
 </div>
 

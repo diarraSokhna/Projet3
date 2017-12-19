@@ -21,7 +21,7 @@
         <c:set var="classement" value="${ site.classement }" scope="request" />
       
 			<Strong>Rechercher par </strong>
-			<select class="form-control form-control-lg" name="idpays" id="idpays" >
+			<select class="form-control form-control-lg" name="idpays" id="idpays">
 				<option value="0">Pays</option>
 				<c:forEach var="pays" items="${ payss }">
 					<option value="<c:out value="${pays.idpays}"/>"><c:out

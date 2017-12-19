@@ -1,6 +1,7 @@
 package fr.escalade_metier.forms;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,9 @@ import fr.escalade.persistance.SecteurDao;
 public class AjoutSecteurForm {
 
 	 private static final String CHAMP_NOM_SECTEUR       = "nomsect";
+	 private static final String CHAMP_SITE      = "site";
+	   
+	 public static final String SESSION_SITES  = "sessionSite";
 	
 	 private String  resultat;
 	 private Map<String, String> erreurs = new HashMap<String, String>();
@@ -36,6 +40,12 @@ public class AjoutSecteurForm {
     
 	public Secteur creerSecteur( HttpServletRequest request ) {
 		
+		
+		String nomSite = getValeurChamp( request, CHAMP_SITE);
+        HttpSession session = request.getSession();
+        Site  site =  (Site) session.getAttribute( SESSION_SITES );
+    	
+		
 		String nomsect = getValeurChamp( request, CHAMP_NOM_SECTEUR );
         
 		
@@ -43,6 +53,7 @@ public class AjoutSecteurForm {
 
         traiterNomSecteur( nomsect, secteur );
         
+        secteur.setSite(site);
         
         try {
             if ( erreurs.isEmpty() ) {

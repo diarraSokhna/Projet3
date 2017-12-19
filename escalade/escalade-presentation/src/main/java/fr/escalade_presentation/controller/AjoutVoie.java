@@ -73,16 +73,7 @@ public class AjoutVoie extends HttpServlet {
 		if ( formvoie.getErreurs().isEmpty() ) {
 			
 			
-//	  	 Map<String, Secteur> secteurs = (HashMap<String, Secteur>) session.getAttribute( SESSION_SECTEURS );
-//            /* Si aucune map n'existe, alors initialisation d'une nouvelle map */
-//	            if ( secteurs == null ) {
-//	            	secteurs = new HashMap<String, Secteur>();
-//	            }
-//	            /* Puis ajout de la voie de du secteur courant dans la map */
-//	            secteurs.put( voie.getSecteur().getNomsect(), voie.getSecteur() );
-//	            /* Et enfin (ré)enregistrement de la map en session */
-//	            session.setAttribute( SESSION_SECTEURS, secteurs );
-//           
+        
 			LinkedHashMap<String, Voie> voies = (LinkedHashMap<String, Voie>) session.getAttribute( SESSION_VOIES );
            
             if ( voies == null ) {

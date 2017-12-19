@@ -62,6 +62,8 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	
 		  request.setAttribute("sites", siteDao.lister(id_pays)); 
 		  
+		  request.setAttribute("payss", paysDao.lister());
+		  request.setAttribute("classements", classementDao.lister());
 		  this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	
 }

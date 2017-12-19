@@ -22,7 +22,17 @@
 					<li><b>Nombre de pages: </b> <c:out value="${ topo.nbpage}" /> pages</li>
 					<li><b>Proposé par: </b> <c:out value="${ topo.utilisateur.nom}" /> <c:out value="${ topo.utilisateur.prenom}" /> </li>
 				</ul>
-				    <p> <a href="<c:url value="/Reservation" />" class="btn btn-primary" role="button">Réserver</a>
+				
+					 La liste des sites du topo :
+					 <c:forEach var = "site" items = "${ sites }">
+				<ul class="items">
+				
+					<li><c:out value="${ site.nomsite}" /></li>
+					
+				</ul>
+				</c:forEach>
+				
+				    <p> <a href="<c:url value="/ReservationTopo" > <c:param name="idtopo" value="${ topo.idtopo }" /> </c:url>" class="btn btn-primary" role="button">Réserver</a>
                                 <a href="<c:url value="/ListeTopo"/>" class="btn btn-primary" role="button">Retour</a></p>
                             </div>
                         </div>

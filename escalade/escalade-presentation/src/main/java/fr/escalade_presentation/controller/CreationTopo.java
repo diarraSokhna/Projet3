@@ -28,12 +28,13 @@ public class CreationTopo extends HttpServlet {
 	
 		private TopoDao topoDao;
 		private SiteDao siteDao;
-	       
+		 private TopoSiteDao topoSiteDao;   
     
 	public void init() throws ServletException {
 		 this.topoDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTopoDao();
 		 this.siteDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getSiteDao();	
-				
+		 this.topoSiteDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTopoSiteDao();	
+					
 	}
   
     public CreationTopo() { }
@@ -49,7 +50,7 @@ public class CreationTopo extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String chemin = this.getServletConfig().getInitParameter( CHEMIN );
 
-		CreationTopoForm form = new CreationTopoForm( topoDao, siteDao );
+		CreationTopoForm form = new CreationTopoForm( topoDao, siteDao, topoSiteDao );
 
         Topo topo = form.creerTopo( request, chemin );
 
@@ -59,6 +60,7 @@ public class CreationTopo extends HttpServlet {
         if ( form.getErreurs().isEmpty() ) {
         	response.sendRedirect(VUE_SUCCES);
         }else {
+        	request.setAttribute("sites", siteDao.lister());
         	this.getServletContext().getRequestDispatcher( VUE_FORM ).forward( request, response );
         }
 	}

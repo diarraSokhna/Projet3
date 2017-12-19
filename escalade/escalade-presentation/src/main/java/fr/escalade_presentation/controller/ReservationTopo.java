@@ -7,18 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+import fr.escalade.beans.Reservation;
 import fr.escalade.persistance.DaoFactory;
 import fr.escalade.persistance.ReservationDao;
 import fr.escalade.persistance.TopoDao;
 import fr.escalade_metier.forms.ReservationForm;
 
-@WebServlet("/Reservation")
-public class Reservation extends HttpServlet {
+@WebServlet("/ReservationTopo")
+public class ReservationTopo extends HttpServlet {
 	   private static final long serialVersionUID = 1L;
     
 	    public static final String CONF_DAO_FACTORY = "daofactory";
 	    public static final String ATT_RESERVATION      = "reservation";
+	    public static final String PARAM_ID_TOPO = "idtopo";
 	    public static final String ATT_FORM         = "form";
 	    
 	    public static final String VUE    = "/WEB-INF/vue/reservationTopo.jsp";
@@ -32,11 +33,15 @@ public class Reservation extends HttpServlet {
 			 	
 		}    
 	    
-    public Reservation() { }
+    public ReservationTopo() { }
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("topos", topoDao.lister());
+		
+		String idtopo = getValeurParametre( request, PARAM_ID_TOPO );
+		long id_topo = Long.parseLong(idtopo);
+		request.setAttribute("topo", topoDao.trouver(id_topo));
 		request.setAttribute("reservations", reservationDao.lister());
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	
@@ -48,7 +53,7 @@ public class Reservation extends HttpServlet {
 		
 		ReservationForm form = new ReservationForm(reservationDao,topoDao);
         
-		fr.escalade.beans.Reservation reservation = form.creerReservation(request);
+	    Reservation reservation = form.creerReservation(request);
         
 
         request.setAttribute( ATT_RESERVATION, reservation );
@@ -58,4 +63,13 @@ public class Reservation extends HttpServlet {
     	
 	}
 
+	
+	 private static String getValeurParametre( HttpServletRequest request, String nomChamp ) {
+	        String valeur = request.getParameter( nomChamp );
+	        if ( valeur == null || valeur.trim().length() == 0 ) {
+	            return null;
+	        } else {
+	            return valeur;
+	        }
+	    }
 }

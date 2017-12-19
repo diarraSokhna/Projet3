@@ -9,11 +9,14 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 
@@ -22,10 +25,12 @@ import fr.escalade.beans.Site;
 import fr.escalade.beans.Classement;
 import fr.escalade.beans.Exposition;
 import fr.escalade.beans.Pays;
+import fr.escalade.beans.Secteur;
 import fr.escalade.persistance.ClassementDao;
 import fr.escalade.persistance.DaoException;
 import fr.escalade.persistance.ExpositionDao;
 import fr.escalade.persistance.PaysDao;
+import fr.escalade.persistance.SecteurDao;
 import fr.escalade.persistance.SiteDao;
 
 public class AjoutSiteForm {
@@ -34,6 +39,8 @@ public class AjoutSiteForm {
 	    private static final String CHOIX_PAYS = "idpays";
 	    private static final String CHAMP_IMAGE     = "image";
 	    private static final String CHOIX_CLASSEMENT = "idclass";
+	    
+	    public static final String SESSION_SECTEURS  = "sessionSecteur";
 	    
 	    private static final int    TAILLE_TAMPON   = 10240;  // 10ko
 	    
@@ -44,6 +51,7 @@ public class AjoutSiteForm {
 	    private SiteDao siteDao;
 	    private PaysDao paysDao;
 	    private ClassementDao classementDao;
+	    private SecteurDao secteurDao;
 	    
 	    
 	    
@@ -64,7 +72,8 @@ public class AjoutSiteForm {
 	    }
 	    
 	
-	    public Site creerSite(HttpServletRequest request, String chemin){
+	    @SuppressWarnings( "unchecked" )
+		public Site creerSite(HttpServletRequest request, String chemin){
 	    	Site site = new Site();
 	    	
 	    	String idpays = getValeurChamp( request, CHOIX_PAYS);
@@ -75,8 +84,13 @@ public class AjoutSiteForm {
 	    	Long id_class = Long.parseLong(idclass);
 	    	Classement classement = classementDao.trouver(id_class);
 	    	
-	        
-	    	String nom = getValeurChamp( request, CHAMP_NOM );
+	    	HttpSession session = request.getSession();
+	    	
+	    	//secteur
+	    	 LinkedHashMap<String, Secteur> secteurs = (LinkedHashMap<String, Secteur>) session.getAttribute( SESSION_SECTEURS );
+		       
+	    	
+	    	 String nom = getValeurChamp( request, CHAMP_NOM );
 	    	
 	    	 if ( pays == null ) {
 		            setErreur( CHOIX_PAYS, "Merci de choisir un pays.");
@@ -97,6 +111,13 @@ public class AjoutSiteForm {
 	            if ( erreurs.isEmpty() ) {
 	            	
 //	                siteDao.creer(site);
+	                
+	              
+//	                for(Secteur secteur: secteurs.){
+//			    
+//			        		 secteurDao.creer(secteur);
+//			        	}
+//			        	
 	                resultat = "Succès de la création du site.";
 	            } else {
 	                resultat = "Échec de la création du site.";

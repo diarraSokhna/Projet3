@@ -1,5 +1,5 @@
 
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <title>Escalade</title>
@@ -15,7 +15,7 @@
  <div class="panel panel-default">
  <div class="panel-heading"><h2>Réserver un topo</h2></div>
  <div class="panel-body">
- <form method="post" accept-charset="UTF-8" action="Reservation" >
+ <form method="post" accept-charset="UTF-8" action="ReservationTopo" >
 
              <div class="panel-body form-horizontal payment-form">
               <fieldset>
@@ -24,27 +24,13 @@
               <div class="form-group">
                         <label for="nom" class="col-sm-3 control-label">Date réservation <span class="requis">*</span></label>
                         <div class="col-sm-9">
-                      <input id="datepicker" name="datepicker" class="form-control" value="<c:out value="${ reservation.date_resa}" />"/>
+                      <input id="dateresa" name="dateresa" placeholder="jj-mm-aaaa" class="form-control" value="<c:out value="${ reservation.date_resa}" />"/>
                       </div>
                     </div>
-                    
-                       <div class="form-group">
-        <label class="col-xs-3 control-label">Topo</label>
-        <div class="col-sm-9 selectContainer">
-            <select  class="form-control" name="topo" id="topo">
-            <option value="0"> Choisir un topo </option>
-             <c:forEach var = "topo" items = "${ topos }">
-                <option value="<c:out value="${ topo.idtopo}" />"><c:out value="${ topo.nom}" /></option>
-                            
-               </c:forEach>
-            </select>
-            <span class="erreur">${form.erreurs['topo']}</span>
-          
-
-              Si le site n'existe pas vous pouvez l'<a href="<c:url value="/CreationTopo" />">ajouter</a>
-        </div>
-    </div>
-                   
+                     <span class="erreur">${form.erreurs['dateresa']}</span>
+       
+                    <input type="hidden"  class="form-control" id="idtopo" name="idtopo" value="<c:out value="${topo.idtopo}"/>" >
+                          
                        
                     <div class="form-group">
                         <div class="col-sm-12 text-right">
@@ -62,13 +48,24 @@
                         <c:when test="${ empty sessionScope.sessionUtilisateur }">
                 <p class="erreur">Veuillez vous connecter d'abord! <a href="<c:url value="/Connection" />">ici</a></p>
             </c:when>
-            <c:otherwise>   <input type="text"  class="form-control" id="utilisateur" name="utilisateur" value="<c:out value="${sessionScope.sessionUtilisateur.iduser}"/>" >
-                           <span class="erreur">${form.erreurs['utilisateur']}</span>
+            <c:otherwise>   <input type="hidden"  class="form-control" id="utilisateur" name="utilisateur" value="<c:out value="${sessionScope.sessionUtilisateur.iduser}"/>" >
+                            
+                          
+                          
                        
-                      
+                      <p class="${empty form.erreurs ? 'succes' : 'erreur'}"> ${form.resultat}</p>
 </c:otherwise>
 </c:choose>
-                     <p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>
+
+<c:choose>
+ <c:when test="${ !empty form.resultat }">
+ <h4>Récapitulatif</h4>
+Date de réservation : <b> <fmt:formatDate pattern="dd-MM-yyyy" value="${reservation.date_resa}" /></b><br/>
+Nom du topo  : <b><c:out value="${ reservation.topo.nom}" /></b>
+
+</c:when>
+</c:choose>
+                     
               </fieldset>
                 </div>
                

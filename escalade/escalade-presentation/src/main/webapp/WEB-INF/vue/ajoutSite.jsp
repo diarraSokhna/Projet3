@@ -15,7 +15,7 @@
 										<div class="col-sm-6">
 											<input type="text" class="form-control" id="nom" name="nom"
 												value="<c:out value="${site.nomsite}"/>"> 
-												 <span class="erreur">${form.erreurs['nom']}</span>
+												 <span class="erreur">${formsite.erreurs['nom']}</span>
 										</div>
 									</div>
 									<div class="form-group">
@@ -27,7 +27,7 @@
 													<option value="<c:out value="${ classement.id_class}" />"><c:out
 															value="${ classement.libelle_class}" /></option>
 												</c:forEach>
-											</select> <span class="erreur">${form.erreurs['idclass']}</span>
+											</select> <span class="erreur">${formsite.erreurs['idclass']}</span>
 										</div>
 									</div>
 
@@ -40,7 +40,7 @@
 													<option value="<c:out value="${ pays.idpays}" />"><c:out
 															value="${ pays.nompays}" /></option>
 												</c:forEach>
-											</select> <span class="erreur">${form.erreurs['idpays']}</span> Si le
+											</select> <span class="erreur">${formsite.erreurs['idpays']}</span> Si le
 											pays n'existe pas vous pouvez <a href="">l'ajouter</a>
 										</div>
 									</div>
@@ -50,7 +50,7 @@
 										<div class="col-sm-6">
 											<input type="file" class="form-control-file" id="image"
 												name="image" value="<c:out value="${site.image}"/>"
-												onchange="" multiple /> <span class="erreur">${form.erreurs['image']}</span>
+												onchange="" multiple /> <span class="erreur">${formsite.erreurs['image']}</span>
 										</div>
 										<div class="col-sm-3 text-right">
 											<button type="submit" 

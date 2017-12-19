@@ -14,6 +14,8 @@ public interface SiteDao {
 	  
 	  List<Site> lister(long idpays) throws DaoException;
 	  
+	  List<Site> listerParTopo(long idtopo) throws DaoException;
+	  
 	  void supprimer( Site site ) throws DaoException;
 	  
 	  Site trouver( Long id_site ) throws DaoException;

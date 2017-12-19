@@ -18,7 +18,7 @@ public class ReservationDaoImpl implements ReservationDao {
 
 	private static final String SQL_INSERT = "INSERT INTO reservation(date_resa, id_topo, id_user) VALUES(?, ?, ?)";
     private static final String SQL_SELECT = "SELECT * FROM reservation ORDER BY id";
-    private static final String SQL_SELECT_PAR_DATE = "SELECT * FROM reservation WHERE date_resa = ?";
+    private static final String SQL_SELECT_PAR_DATE_TOPO = "SELECT * FROM reservation WHERE date_resa = ? and id_topo= ?";
     private static final String SQL_SELECT_PAR_ID = "SELECT * FROM reservation WHERE id = ?";
     private static final String SQL_DELETE_PAR_ID = "DELETE FROM reservation WHERE id = ?";
 	
@@ -82,12 +82,12 @@ public class ReservationDaoImpl implements ReservationDao {
 	    }
 	 
 		@Override
-		public Reservation trouver(Date dateresa) throws DaoException {
-			return trouver (SQL_SELECT_PAR_DATE, dateresa);
+		public Reservation trouver(Date dateresa, long id_topo) throws DaoException {
+			return trouver (SQL_SELECT_PAR_DATE_TOPO, dateresa, id_topo);
 		}
 
 		@Override
-		public Reservation trouver(Long id_resa) throws DaoException {
+		public Reservation trouver(long id_resa) throws DaoException {
 			return trouver(SQL_SELECT_PAR_ID, id_resa);
 		}
 	 

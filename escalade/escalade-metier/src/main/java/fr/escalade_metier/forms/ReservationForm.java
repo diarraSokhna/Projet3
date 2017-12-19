@@ -21,10 +21,9 @@ import fr.escalade.persistance.TopoDao;
 public class ReservationForm {
    
 	    
-	    private static final String CHAMP_UTILISATEUR = "utilisateur";
-	    private static final String CHAMP_DATE = "datepicker";
-	    private static final String CHOIX_TOPO    = "topo";
-	
+	    private static final String CHAMP_DATE = "dateresa";
+	    private static final String CHAMP_TOPO= "idtopo";
+	    
 	    private static final String SESSION_UTILISATEURS        = "sessionUtilisateur";
 	    
 	    private String   resultat;
@@ -32,6 +31,7 @@ public class ReservationForm {
 	    
 	    private ReservationDao reservationDao;
 	    private TopoDao topoDao;
+	    
 		public ReservationForm(ReservationDao reservationDao, TopoDao topoDao) {
 			this.reservationDao = reservationDao;
 			this.topoDao = topoDao;
@@ -49,39 +49,28 @@ public class ReservationForm {
 	    	 HttpSession session = request.getSession();
 	         Utilisateur utilisateur =  (Utilisateur) session.getAttribute( SESSION_UTILISATEURS);
 
-	         String idtopo = getValeurChamp( request, CHOIX_TOPO);
-	         
-	       
+	         String idtopo = getValeurChamp( request, CHAMP_TOPO);
 	         Long id_topo = Long.parseLong(idtopo);
 		     Topo topo = topoDao.trouver(id_topo);
 	         
 		     Reservation reservation = new Reservation();
 		     
-		     SimpleDateFormat formatter = new SimpleDateFormat("yyy-MMM-dd");
-		     Date datepicher;
+		     
+		     java.text.DateFormat format = new java.text.SimpleDateFormat("dd-MM-yyyy");
+		     java.util.Date date;
+		     String date_resa = getValeurChamp( request, CHAMP_DATE );
 			try {
-				datepicher = formatter.parse(getValeurChamp( request, CHAMP_DATE ));
-				 reservation.setDate_resa(datepicher);
+				date = format.parse(date_resa);
+				java.sql.Date dateresa = new java.sql.Date(date.getTime());
+				 reservation.setDate_resa(dateresa);
 			} catch (ParseException e1) {
-				
 				e1.printStackTrace();
 			}
-		        
 		     
-	        
-	         
-		      
-	         if ( topo == null ) {
-		            setErreur( CHOIX_TOPO, "Merci de choisir un topo.");
-		            }
-	         
-	         if ( utilisateur == null ) {
-		            setErreur( CHAMP_UTILISATEUR, "Merci de choisir un utilisateur.");
-		            }
-	       
-	         
-//	         traiterDate( datepicher, reservation );
-	         
+	        traiterDateResa(date_resa, idtopo ,  reservation);
+			
+	         reservation.setTopo(topo);
+	         reservation.setUtilisateur(utilisateur);
 	        
 	       
 	        try {
@@ -89,52 +78,71 @@ public class ReservationForm {
 	            	
 	              reservationDao.creer( reservation );
 	                
-	                resultat = "Succès de la création de la réservation.";
+	                resultat = "Succès  de la réservation.";
 	            } else {
-	                resultat = "Échec de la création de la réservation.";
+	                resultat = "Échec  de la réservation.";
 	            }
 	        } catch ( DaoException e ) {
-	            setErreur( "imprévu", "Erreur imprévue lors de la création." );
-	            resultat = "Échec de la création de la réservation : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
+	            setErreur( "imprévu", "Erreur imprévue lors de la réservation." );
+	            resultat = "Échec  de la réservation : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
 	            e.printStackTrace();
 	        }
 
 	        return reservation;
 	    }
 	    
-//	    private void traiterDate(String datepicher, Reservation reservation) {
-// 			
-// 			Date date= null;
-// 			   try {
-// 				  date= validationDate( datepicher );
-// 		        } catch ( FormValidationException e ) {
-// 		            setErreur( CHAMP_DATE, e.getMessage() );
-// 		        }
-// 		        reservation.setDate_resa(date);
-// 			
-// 		}
-//	    
-//	private Date validationDate(String datepicher) throws FormValidationException {
-//			
-//		    Date temp;
-//	        if ( datepicher != null ) {
-//	            try {
-//	                temp = Date.parse(datepicher);
-//	                if ( temp < 0 ) {
-//	                    throw new FormValidationException( "Le nombre de page doit être un nombre positif." );
-//	                }
-//	            } catch ( NumberFormatException e ) {
-//	                temp = 0;
-//	                throw new FormValidationException( "Le nombre de page doit être un nombre." );
-//	            }
-//	        } else {
-//	            temp = 0;
-//	            throw new FormValidationException( "Merci d'entrer le nombre de page." );
-//	        }
-//	        return temp;
-//	    }
-//			
+	 
+
+	    private void traiterDateResa( String date_resa, String idtopo, Reservation reservation ) {
+	    	
+	    	
+	    	java.text.DateFormat format = new java.text.SimpleDateFormat("dd-MM-yyyy");
+	    	java.util.Date date;
+				try {
+					date = format.parse(date_resa);
+					java.sql.Date dateresa = new java.sql.Date(date.getTime());
+					
+					 reservation.setDate_resa(dateresa);
+				        
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
+	    	
+	        try {
+	            validationDateResa( date_resa, idtopo );
+	        } catch ( FormValidationException e ) {
+	            setErreur( CHAMP_DATE, e.getMessage() );
+	        }
+	       
+	        
+	    }
+
+	    private void validationDateResa( String date_resa , String idtopo) throws FormValidationException {
+	    	if (date_resa == null){
+	        	throw new FormValidationException( "Merci de choisir une date de séservation." );
+	        	
+			}
+	    	
+	    	long temp = Long.parseLong(idtopo);
 	    
+	    	java.text.DateFormat format = new java.text.SimpleDateFormat("dd-MM-yyyy");
+	    	java.util.Date date;
+				try {
+					date = format.parse(date_resa);
+					java.sql.Date dateresa = new java.sql.Date(date.getTime());
+				    
+					if ( reservationDao.trouver( dateresa, temp ) != null ){
+		                throw new FormValidationException( "Ce topo est réservé pour cette date, Merci d'en choisir une autre." );
+		        }
+		       
+					
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
+				
+				
+	    }
+	   
 	    
 		private String getValeurChamp(HttpServletRequest request, String nomChamp) {
 			 String valeur = request.getParameter( nomChamp );

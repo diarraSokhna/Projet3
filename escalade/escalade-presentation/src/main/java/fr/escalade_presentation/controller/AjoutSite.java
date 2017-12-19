@@ -30,7 +30,7 @@ public class AjoutSite extends HttpServlet {
 	public static final String CONF_DAO_FACTORY = "daofactory";
     public static final String CHEMIN           = "chemin";
     public static final String ATT_Site      = "site";
-    public static final String ATT_FORM         = "form";
+    public static final String ATT_FORMSITE         = "formsite";
     
     public static final String ATT_SECTEUR      = "secteur";
     public static final String ATT_FORMSECT        = "formsect";
@@ -77,17 +77,17 @@ public class AjoutSite extends HttpServlet {
 		//ajout site
 		String chemin =  this.getServletConfig().getInitParameter(CHEMIN);
 		
-		AjoutSiteForm form = new AjoutSiteForm( siteDao, paysDao, classementDao );
-		Site site = form.creerSite(request, chemin);
+		AjoutSiteForm formsite = new AjoutSiteForm( siteDao, paysDao, classementDao );
+		Site site = formsite.creerSite(request, chemin);
 		
 		request.setAttribute(ATT_Site, site);
-		request.setAttribute(ATT_FORM, form);
+		request.setAttribute(ATT_FORMSITE, formsite);
 		
 		HttpSession session = request.getSession();
-		
-		if ( form.getErreurs().isEmpty() ) {
+		session.setAttribute( SESSION_SITES, site );
+		if ( formsite.getErreurs().isEmpty() ) {
             
-			session.setAttribute( SESSION_SITES, site );
+			session.invalidate();
             }else {
             	session.setAttribute( SESSION_SITES, null );
 		

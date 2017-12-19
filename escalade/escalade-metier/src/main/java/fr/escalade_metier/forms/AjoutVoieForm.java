@@ -94,7 +94,7 @@ public class AjoutVoieForm {
 	        try {
 	            if ( erreurs.isEmpty() ) {
 	            	
-
+//                    voieDao.creer(voie);
 	                resultat = "Succès d'ajout de la voie.";
 	            } else {
 	                resultat = "Échec d'ajout de la voie.";
