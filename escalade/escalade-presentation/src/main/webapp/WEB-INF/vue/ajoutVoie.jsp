@@ -1,4 +1,4 @@
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <form method="post" accept-charset="UTF-8" action="AjoutVoie"  >
 							<div class="panel-body form-horizontal payment-form">
@@ -16,6 +16,25 @@
 													class="erreur">${formvoie.erreurs['nomvoie']}</span>
 											</div>
 										</div>
+										
+											<div class="form-group">
+											<label class="col-xs-3 control-label">Secteur</label>
+											<div class="col-sm-6 selectContainer">
+												<select class="form-control" name="secteur" id="secteur">
+													<option value="0">Sélectionnez un secteur</option>
+													
+													<c:forEach items="${ sessionScope.sessionSecteur}" var="secteurs">
+														<option value="<c:out value="${ secteurs.key}" />"><c:out
+																value="${ secteurs.key}" /></option>
+													</c:forEach>
+													
+												</select> 
+												<span class="erreur">${formvoie.erreurs['secteur']}</span>
+												Si le secteur n'existe pas vous pouvez <a href="">l'ajouter</a>
+												
+											</div>
+										</div>
+										
 
 										<div class="form-group">
 											<label for="altitude" class="col-sm-3 control-label">Altitude
@@ -49,7 +68,7 @@
 													</c:forEach>
 												</select> 
 												<span class="erreur">${formvoie.erreurs['idcotation']}</span>
-												Si le pays n'existe pas vous pouvez <a href="">l'ajouter</a>
+												Si la cotation n'existe pas vous pouvez <a href="">l'ajouter</a>
 												
 											</div>
 										</div>
@@ -65,7 +84,7 @@
 													</c:forEach>
 												</select> 	
 												<span class="erreur">${formvoie.erreurs['idexposition']}</span>
-											Si le pays n'existe pas vous pouvez <a href="">l'ajouter</a>
+											Si l'exposition n'existe pas vous pouvez <a href="">l'ajouter</a>
 												</div>
 											<div class="col-sm-3 text-right">
 											<button type="submit" class="btn btn-default preview-add-button">Ajouter à secteur
@@ -74,50 +93,11 @@
 										   </div>
 										</div>
 
-                                 <div class="col-sm-6">
-				<c:if test="${ !empty sessionScope.sessionSecteur }">
-					<c:forEach items="${ sessionScope.sessionSecteur}" var="secteurs"
-						varStatus="loop">
-						<c:if test="${loop.last}">
-							<input type="text" class="form-control" id="secteur"
-								name="secteur" value="<c:out value="${ secteurs.key} "></c:out>">
-							<span class="erreur">${formsect.erreurs['secteur']}</span>
-
-						</c:if>
-					</c:forEach>
-				</c:if>
-
-
-			</div>
-
+     
 										<hr/>
-										<c:if test="${ !empty sessionScope.sessionVoie }">
-										
-										<h4>La liste des voies du secteur 
-										
-										<c:if test="${ !empty sessionScope.sessionSecteur }">
-					                   <c:forEach items="${ sessionScope.sessionSecteur}" var="secteurs" varStatus="loop">
-						                <c:if test="${loop.last}">
-										<c:out value="${ secteurs.key} "></c:out>
-										</c:if>
-										</c:forEach>
-									</c:if> </h4> 
-										
-										 <br/>
-									  <c:forEach items="${ sessionScope.sessionVoie}" var="voies" >
-									   <ul>
-									 <li>
-									 <c:out value="${ voies.key }"></c:out>
-									 <c:out value="${ voies.value.cotation.libelle_cot }"></c:out>
-									 <c:out value="${ voies.value.exposition.libelle_expo }"></c:out>
-									 <c:out value="${ voies.value.altitude }"></c:out>
-									 <c:out value="${ voies.value.nbr_longueur }"></c:out>
-									 <c:out value="${ voies.value.secteur.nomsect }"></c:out>
-									 </li>
-									 </ul>
-									<br/>
-									  </c:forEach>
-									 </c:if>
+	
+
+									
 									
 									<p class="${empty formvoie.erreurs ? 'succes' : 'erreur'}">${formvoie.resultat}</p>
 								</fieldset>

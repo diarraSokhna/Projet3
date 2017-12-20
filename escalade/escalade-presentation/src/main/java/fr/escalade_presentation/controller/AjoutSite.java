@@ -54,8 +54,8 @@ public class AjoutSite extends HttpServlet {
     	this.siteDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getSiteDao();
     	this.paysDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getPaysDao();
     	this.classementDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getClassementDao();
-    	 this.cotationDao =( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getCotationDao();
-    	    this.expositionDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getExpositionDao();
+    	this.cotationDao =( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getCotationDao();
+    	this.expositionDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getExpositionDao();
      	  
     }
 	
@@ -70,11 +70,10 @@ public class AjoutSite extends HttpServlet {
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	
 	}
-
 	
-	@SuppressWarnings("unchecked")
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//ajout site
+		
 		String chemin =  this.getServletConfig().getInitParameter(CHEMIN);
 		
 		AjoutSiteForm formsite = new AjoutSiteForm( siteDao, paysDao, classementDao );
@@ -84,19 +83,19 @@ public class AjoutSite extends HttpServlet {
 		request.setAttribute(ATT_FORMSITE, formsite);
 		
 		HttpSession session = request.getSession();
-		session.setAttribute( SESSION_SITES, site );
+		
 		if ( formsite.getErreurs().isEmpty() ) {
-            
-			session.invalidate();
+			session.setAttribute( SESSION_SITES, site );
+			
             }else {
             	session.setAttribute( SESSION_SITES, null );
-		
-		
 	}
 			
 		request.setAttribute("payss", paysDao.lister());
 	    request.setAttribute("classements", classementDao.lister());
-		
+		request.setAttribute("cotations", cotationDao.lister());
+		request.setAttribute("expositions",expositionDao.lister());
+	    
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 		
 }

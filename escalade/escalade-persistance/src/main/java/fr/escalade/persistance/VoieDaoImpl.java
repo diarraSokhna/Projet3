@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.escalade.beans.Secteur;
 import fr.escalade.beans.Site;
 import fr.escalade.beans.Voie;
 
@@ -28,7 +29,7 @@ public class VoieDaoImpl implements VoieDao {
 	}
 
 	@Override
-	public void creer(Voie voie) throws DaoException {
+	public void creer(Voie voie, Secteur secteur) throws DaoException {
 		    Connection connexion = null;
 	        PreparedStatement preparedStatement = null;
 	        ResultSet valeursAutoGenerees = null;
@@ -36,7 +37,7 @@ public class VoieDaoImpl implements VoieDao {
 	        try {
 	            connexion = daoFactory.getConnection();
 	            preparedStatement = initialisationRequetePreparee( connexion, SQL_INSERT, true,
-	            		voie.getSecteur().getIdsect(),
+	            		secteur.getIdsect(),
 	            		voie.getCotation().getIdcot(),
 	                    voie.getNom_voie(),
 	                    voie.getAltitude(),

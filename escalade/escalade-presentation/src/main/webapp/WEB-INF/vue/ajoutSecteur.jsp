@@ -1,6 +1,5 @@
 <form method="post" accept-charset="UTF-8" action="AjoutSecteur"  >
 							<div class="panel-body form-horizontal payment-form">
-							
 											<fieldset>
 											<legend>Ajouter secteur </legend>
 									<div class="form-group">
@@ -20,31 +19,18 @@
 																		
                                     <div class="col-sm-6">
 											<input type="hidden" class="form-control" id="site" name="site"
-												value="<c:out value="${sessionScope.sessionSite.idsite}"/>"> <span
+												value="<c:out value="${sessionScope.sessionSite.nomsite}"/>"> <span
 												class="erreur">${formsect.erreurs['site']}</span>
 											
 										</div>
 										<hr/>
-										<c:if test="${ !empty sessionScope.sessionSecteur }">
-										
-										 <h4>La liste des secteurs :</h4>  <br/>  
-									  <c:forEach items="${ sessionScope.sessionSecteur}" var="secteurs" >
-								
-									 <ul>
-									 <li>
-									 <c:out value="${ secteurs.key }"></c:out> 
-									 </li>
-									</ul> 
-									 <br/>
-									
-									  </c:forEach>
-									 </c:if>
+
 								
 									<p class="${empty formSect.erreurs ? 'succes' : 'erreur'}">${formSect.resultat}</p>
 
 
-									
-							</fieldset>
+
+		</fieldset>
 					
 			</div>
 			</form>				

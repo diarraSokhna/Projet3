@@ -14,6 +14,10 @@ import javax.servlet.http.HttpSession;
 
 import fr.escalade.beans.Site;
 import fr.escalade.beans.Voie;
+import fr.escalade.persistance.DaoFactory;
+import fr.escalade.persistance.SecteurDao;
+import fr.escalade.persistance.SiteDao;
+import fr.escalade.persistance.VoieDao;
 import fr.escalade_metier.forms.AjoutSiteForm;
 import fr.escalade_metier.forms.AjoutSiteSecteurVoieForm;
 
@@ -21,6 +25,8 @@ import fr.escalade_metier.forms.AjoutSiteSecteurVoieForm;
 @WebServlet("/AjoutSiteSecteurVoie")
 public class AjoutSiteSecteurVoie extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	public static final String CONF_DAO_FACTORY = "daofactory";
 	public static final String SESSION_SITES  = "sessionSite";
 
     public static final String ATT_Site      = "site";
@@ -28,8 +34,17 @@ public class AjoutSiteSecteurVoie extends HttpServlet {
 
     public static final String VUE    = "/WEB-INF/vue/ajoutSiteSecteurVoie.jsp";
    
+    private SiteDao siteDao;
+    private SecteurDao secteurDao;
+    private VoieDao voieDao;
     public AjoutSiteSecteurVoie() { }
 
+    public void init() throws ServletException{
+    	this.siteDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getSiteDao();
+    	this.secteurDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getSecteurDao();
+    	this.voieDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getVoieDao();
+    	
+    }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);	}
@@ -37,7 +52,7 @@ public class AjoutSiteSecteurVoie extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		AjoutSiteSecteurVoieForm form = new AjoutSiteSecteurVoieForm();
+		AjoutSiteSecteurVoieForm form = new AjoutSiteSecteurVoieForm(siteDao, secteurDao, voieDao);
 		
 		Site site = form.ajouterSiteSecteurVoie(request);
 		
@@ -47,7 +62,7 @@ public class AjoutSiteSecteurVoie extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		session.setAttribute( SESSION_SITES, site );
+//		session.setAttribute( SESSION_SITES, site );
 		if ( form.getErreurs().isEmpty() ) {
 		
 			session.invalidate();

@@ -2,8 +2,11 @@
 
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%-- 	<jsp:useBean id="site" class="fr.escalade.beans.Site" scope="session" />	 --%>
+		
 						<form method="post" accept-charset="UTF-8" action="AjoutSite" enctype="multipart/form-data"  >
 							<div class="panel-body form-horizontal payment-form">
+								
 								<c:set var="pays" value="${ site.pays }" scope="request" />
 								<c:set var="classement" value="${ site.classement }"
 									scope="request" />
@@ -59,9 +62,23 @@
 
 										</div>
 									</div>
-									
-									 <c:if test="${ !empty sessionScope.sessionSite }">
-									   <c:out value="${sessionScope.sessionSite.nomsite}"/>
+								<c:if test="${ !empty sessionScope.sessionSite }">
+									<c:if test="${ !empty sessionScope.sessionSecteur }">
+									<h4>La liste des secteurs du site  "<c:out value="${sessionScope.sessionSite.nomsite}"/>"</h4>
+									   
+									   <c:forEach items="${sessionScope.sessionSite.secteurs}" var="secteurs" >
+									   <ul>
+									   <li><c:out value="${secteurs.nomsect}"/> </li>
+									   </ul>
+									   <c:if test="${ !empty sessionScope.sessionVoie }">
+									  
+									   <c:forEach items="${secteurs.voies}" var="voies" >
+									  <c:out value="${ voies.nom_voie }"/> <br/>
+									       </c:forEach>
+									   </c:if>
+									   
+									   </c:forEach>
+									   </c:if>
 								 </c:if>
 	
 					</div>

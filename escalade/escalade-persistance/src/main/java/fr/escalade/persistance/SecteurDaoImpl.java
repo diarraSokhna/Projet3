@@ -27,7 +27,7 @@ public class SecteurDaoImpl implements SecteurDao {
 	}
 
 	@Override
-	public void creer(Secteur secteur) throws DaoException {
+	public void creer(Secteur secteur, Site site) throws DaoException {
 		    Connection connexion = null;
 	        PreparedStatement preparedStatement = null;
 	        ResultSet valeursAutoGenerees = null;
@@ -35,7 +35,7 @@ public class SecteurDaoImpl implements SecteurDao {
 	        try {
 	            connexion = daoFactory.getConnection();
 	            preparedStatement = initialisationRequetePreparee( connexion, SQL_INSERT, true,
-	            		// secteur.getSite().getIdsite(),
+	            		 site.getIdsite(),
 	            		 secteur.getNomsect());
 	            
 	            int statut = preparedStatement.executeUpdate();
@@ -122,7 +122,7 @@ public class SecteurDaoImpl implements SecteurDao {
 	        secteur.setNomsect(resultSet.getString( "nom_secteur"));
 	        
 	        SiteDao siteDao = daoFactory.getSiteDao();
-	       // secteur.setSite(siteDao.trouver(resultSet.getLong("id_site")));
+	        secteur.setSite(siteDao.trouver(resultSet.getLong("id_site")));
 	        return secteur;
 	    }
 }

@@ -29,7 +29,15 @@ public class AjoutSiteSecteurVoieForm {
 	    private SecteurDao secteurDao;
 	    private VoieDao voieDao;
 	 
-	 private String   resultat;
+	    
+	 public AjoutSiteSecteurVoieForm(SiteDao siteDao, SecteurDao secteurDao,VoieDao voieDao) {
+			super();
+			this.siteDao = siteDao;
+			this.secteurDao = secteurDao;
+			this.voieDao = voieDao;
+		}
+
+	private String   resultat;
 	 private Map<String, String> erreurs = new HashMap<String, String>();
 	    
 	 
@@ -41,28 +49,37 @@ public class AjoutSiteSecteurVoieForm {
 	        return resultat;
 	    }
 	    
-	 @SuppressWarnings("unchecked")
+	
 	public Site ajouterSiteSecteurVoie(HttpServletRequest request){
 	    	
 		    
 	        HttpSession session = request.getSession();
 	        
 	        Site  site =  (Site) session.getAttribute( SESSION_SITES );
-	        
-	        LinkedHashMap<String, Secteur> secteurs = (LinkedHashMap<String, Secteur>) session.getAttribute( SESSION_SECTEURS );
-	       
-	        LinkedHashMap<String, Voie> voies = (LinkedHashMap<String, Voie>) session.getAttribute( SESSION_VOIES );
-	           
-	       
+  
 	        try {
-	            if ( erreurs.isEmpty() ) {
+	            if ( site != null ) {
 	            	
 	            	siteDao.creer(site);
+	             
 	            
-//                 voieDao.creer(voie);
-	                resultat = "Succès d'ajout de la voie.";
+	            	site = siteDao.trouver(site.getIdsite());
+	            	
+	            	for(Secteur secteur : site.getSecteurs()){
+	            		secteurDao.creer(secteur, site);
+	            		
+	            		secteur = secteurDao.trouver(secteur.getIdsect());
+	            		
+	            		for(Voie voie : secteur.getVoies()){
+	            			voieDao.creer(voie, secteur);
+	            			
+	            		}
+	            	}
+	            	
+
+	                resultat = "Succès d'ajout du site secteur .";
 	            } else {
-	                resultat = "Échec d'ajout de la voie.";
+	                resultat = "Échec d'ajout du site secteur.";
 	            }
 	        } catch ( DaoException e ) {
 	            setErreur( "imprévu", "Erreur imprévue lors de l'ajout." );

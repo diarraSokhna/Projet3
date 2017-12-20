@@ -1,8 +1,10 @@
 package fr.escalade_presentation.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -72,14 +74,12 @@ public class AjoutVoie extends HttpServlet {
 		
 		if ( formvoie.getErreurs().isEmpty() ) {
 			
-			
-        
-			LinkedHashMap<String, Voie> voies = (LinkedHashMap<String, Voie>) session.getAttribute( SESSION_VOIES );
+			List<Voie> voies = (ArrayList<Voie>) session.getAttribute( SESSION_VOIES );
            
             if ( voies == null ) {
-                 voies = new LinkedHashMap<String, Voie>();
+                 voies = new ArrayList<Voie>();
             }
-           voies.put( voie.getNom_voie(), voie );
+           voies.add( voie );
            session.setAttribute( SESSION_VOIES, voies );
 	}
 		

@@ -1,8 +1,10 @@
 package fr.escalade_metier.forms;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import fr.escalade.beans.Cotation;
 import fr.escalade.beans.Exposition;
 import fr.escalade.beans.Secteur;
+import fr.escalade.beans.Site;
 import fr.escalade.beans.Voie;
 import fr.escalade.persistance.CotationDao;
 import fr.escalade.persistance.DaoException;
@@ -21,7 +24,7 @@ public class AjoutVoieForm {
 	    private static final String CHAMP_NOM       = "nomvoie";
 	    private static final String CHAMP_Altitude       = "altitude";
 	    private static final String CHAMP_NBRLONGUEUR       = "nbrlongueur";
-	    private static final String CHAMP_SECTEUR       = "secteur";
+	    private static final String CHOIX_SECTEUR       = "secteur";
 	    private static final String CHOIX_COTATION = "idcotation";
 	    private static final String CHOIX_EXPOSITION = "idexposition";
 	    
@@ -49,7 +52,8 @@ public class AjoutVoieForm {
 	        return resultat;
 	    }
 	    
-	    @SuppressWarnings("unchecked")
+	
+		@SuppressWarnings("unchecked")
 		public Voie ajouterVoie(HttpServletRequest request){
 	    	Voie voie = new Voie();
 	    	
@@ -61,17 +65,24 @@ public class AjoutVoieForm {
 	    	Long id_expo = Long.parseLong(idexpo);
 	    	Exposition exposition = expositionDao.trouver(id_expo);
 	    	
-	    	String nomSecteur = getValeurChamp( request, CHAMP_SECTEUR);
-	        HttpSession session = request.getSession();
-            Secteur  secteur =  ((LinkedHashMap<String, Secteur>) session.getAttribute( SESSION_SECTEURS )).get( nomSecteur );
-	    	
-	    	
-	    	
-	    	
 	    	String nomvoie = getValeurChamp( request, CHAMP_NOM );
 	    	String altitude = getValeurChamp( request, CHAMP_Altitude );
 	    	String nbrlongueur = getValeurChamp( request, CHAMP_NBRLONGUEUR );
 	    	
+	    	
+	    	
+	    	
+            HttpSession session = request.getSession();
+	        
+            LinkedHashMap<String, Secteur> secteurs = (LinkedHashMap<String, Secteur>) session.getAttribute( SESSION_SECTEURS );
+          
+            String nomsecteur = getValeurChamp(request, CHOIX_SECTEUR);
+            Secteur secteur = (Secteur) secteurs.get(nomsecteur);
+            
+	    	if ( secteur == null ) {
+	            setErreur( CHOIX_SECTEUR, "Merci de sélectionner un secteur.");
+	            }
+        
 	    	 if ( cotation == null ) {
 		            setErreur( CHOIX_COTATION, "Merci de choisir une cotation.");
 		            }
@@ -80,21 +91,17 @@ public class AjoutVoieForm {
 		            setErreur( CHOIX_EXPOSITION, "Merci de choisir une exposition.");
 		            }
 	    	 
-	    	 
-	        voie.setCotation(cotation);
-	        voie.setExposition(exposition);
-	        voie.setSecteur(secteur);
-	        
-	        
 	        traiterNom( nomvoie, voie );
 	        traiterAltitude( altitude, voie );
 	        traiterNbrLongueur( nbrlongueur, voie );
 	        
-            
+	        voie.setCotation(cotation);
+	        voie.setExposition(exposition);
+	        
+	        secteur.addVoie(voie);
+	       
 	        try {
 	            if ( erreurs.isEmpty() ) {
-	            	
-//                    voieDao.creer(voie);
 	                resultat = "Succès d'ajout de la voie.";
 	            } else {
 	                resultat = "Échec d'ajout de la voie.";
@@ -165,7 +172,10 @@ public class AjoutVoieForm {
 	                temp = 0.0;
 	                throw new FormValidationException( "L'altitude  doit être un double." );
 	            }
-	        } 
+	        } else {
+            	throw new FormValidationException( "Veuillez entrer l'altitude." );
+	 	           
+            }
 	        return temp;
 	    }
         
@@ -182,7 +192,11 @@ public class AjoutVoieForm {
 	                temp = 0;
 	                throw new FormValidationException( "Le nombre de longueur doit être un nombre." );
 	            }
-	        } 
+	        } else {
+            	throw new FormValidationException( "Veuillez entrer le nombre de longueur." );
+	 	           
+            }
+	        
 	        return temp;
 	    }
     	

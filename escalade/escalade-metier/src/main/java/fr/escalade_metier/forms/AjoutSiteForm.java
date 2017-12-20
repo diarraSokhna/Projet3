@@ -100,8 +100,10 @@ public class AjoutSiteForm {
 		            setErreur( CHOIX_CLASSEMENT, "Merci de choisir un classement.");
 		            }
 	    	 
+	    	 
 	        site.setPays(pays);
 	        site.setClassement(classement);
+	        
 	        
 	        traiterNom( nom, site );
 	        traiterImage( site, request, chemin );
@@ -110,14 +112,6 @@ public class AjoutSiteForm {
 	        try {
 	            if ( erreurs.isEmpty() ) {
 	            	
-//	                siteDao.creer(site);
-	                
-	              
-//	                for(Secteur secteur: secteurs.){
-//			    
-//			        		 secteurDao.creer(secteur);
-//			        	}
-//			        	
 	                resultat = "Succès de la création du site.";
 	            } else {
 	                resultat = "Échec de la création du site.";

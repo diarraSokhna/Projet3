@@ -10,7 +10,7 @@
 </head>
 <body>
 	<%@ include file="menu.jsp"%>
-	<jsp:useBean id="site" class="fr.escalade.beans.Site" scope="session" />
+	
 
 	<div class="container">
 		<div class="panel panel-default">
@@ -21,20 +21,27 @@
 				<div id="collapse1" class="panel-collapse collapse in">
 					<div class="panel-body">
 					
-					
-					
-<form method="post" accept-charset="UTF-8" action="AjoutSite" enctype="multipart/form-data"  >
-						<div class="panel-body form-horizontal payment-form">
-				 <fieldset>
-									
-			
-						<%@ include file="ajoutSite.jsp"%>
+							<%@ include file="ajoutSite.jsp"%>
 						<hr/>
 						<%@ include file="ajoutSecteur.jsp"%>
 						<hr/>
 						<%@ include file="ajoutVoie.jsp"%>
+					
+<form method="post" accept-charset="UTF-8" action="AjoutSiteSecteurVoie"  >
+
+						<div class="panel-body form-horizontal payment-form">
+				 <fieldset>
+									
+			
+				
 
      <hr/>
+     
+     <c:if test="${ !empty sessionScope.sessionSite }">
+     <c:out value="${sessionScope.sessionSite.nomsite}"/>
+									   
+     </c:if>
+     </fieldset>
 <div class="form-group">
 										<div class="col-sm-12 text-right">
 											<button type="submit"
@@ -47,8 +54,9 @@
 										</div>
 									</div>
 									
+									<p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>
+								
 									
-									</fieldset>
 </div>
 
 </form>

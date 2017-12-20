@@ -2,13 +2,13 @@ package fr.escalade.persistance;
 
 import java.util.List;
 
-
+import fr.escalade.beans.Secteur;
 import fr.escalade.beans.Voie;
 
 
 public interface VoieDao {
 
-    void creer(Voie voie) throws DaoException;
+    void creer(Voie voie, Secteur secteur) throws DaoException;
 	
     Voie trouver (long id_voie) throws DaoException;
 	

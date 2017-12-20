@@ -13,13 +13,13 @@ import fr.escalade.beans.Site;
 import fr.escalade.beans.Utilisateur;
 import fr.escalade.persistance.DaoException;
 import fr.escalade.persistance.SecteurDao;
-
 public class AjoutSecteurForm {
 
 	 private static final String CHAMP_NOM_SECTEUR       = "nomsect";
 	 private static final String CHAMP_SITE      = "site";
 	   
 	 public static final String SESSION_SITES  = "sessionSite";
+	 public static final String SESSION_SECTEURS  = "sessionSecteur";
 	
 	 private String  resultat;
 	 private Map<String, String> erreurs = new HashMap<String, String>();
@@ -40,24 +40,20 @@ public class AjoutSecteurForm {
     
 	public Secteur creerSecteur( HttpServletRequest request ) {
 		
-		
-		String nomSite = getValeurChamp( request, CHAMP_SITE);
-        HttpSession session = request.getSession();
-        Site  site =  (Site) session.getAttribute( SESSION_SITES );
-    	
-		
+	    Secteur secteur = new Secteur();
+	    
 		String nomsect = getValeurChamp( request, CHAMP_NOM_SECTEUR );
-        
-		
-        Secteur secteur = new Secteur();
-
         traiterNomSecteur( nomsect, secteur );
         
-        secteur.setSite(site);
+        HttpSession session = request.getSession();
+        Site  site =  (Site) session.getAttribute( SESSION_SITES );
+        
+        
+         site.addSecteur(secteur);
+      
         
         try {
             if ( erreurs.isEmpty() ) {
-//                secteurDao.creer( secteur );
                 resultat = "Succès de la création du secteur.";
             } else {
                 resultat = "Échec de la création du secteur.";

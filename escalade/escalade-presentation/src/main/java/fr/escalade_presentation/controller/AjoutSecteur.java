@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.escalade.beans.Secteur;
+import fr.escalade.beans.Site;
 import fr.escalade.persistance.CotationDao;
 import fr.escalade.persistance.DaoFactory;
 import fr.escalade.persistance.ExpositionDao;
@@ -27,7 +28,7 @@ public class AjoutSecteur extends HttpServlet {
     public static final String ATT_FORMSECT        = "formsect";
     
     public static final String SESSION_SECTEURS  = "sessionSecteur";
-    public static final String SESSION_VOIES  = "sessionVoie";
+    public static final String SESSION_SITES  = "sessionSite";
 
     public static final String VUE    = "/WEB-INF/vue/ajoutSiteSecteurVoie.jsp";
 	
@@ -47,7 +48,9 @@ public class AjoutSecteur extends HttpServlet {
     }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+		request.setAttribute("cotations", cotationDao.lister());
+		request.setAttribute("expositions",expositionDao.lister());
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	
 	}
@@ -65,26 +68,15 @@ public class AjoutSecteur extends HttpServlet {
 			request.setAttribute(ATT_SECTEUR, secteur);
 			request.setAttribute(ATT_FORMSECT, formsect);
 		
-			
-			
 			if ( formsect.getErreurs().isEmpty() ) {
 				
-//				 Map<String, Voie> voies = (HashMap<String, Voie>) session.getAttribute( SESSION_VOIES );
-//		            /* Si aucune map n'existe, alors initialisation d'une nouvelle map */
-//		            if ( voies == null ) {
-//		                voies = new HashMap<String, Voie>();
-//		            }
-//		            /* Puis ajout du client de la commande courante dans la map */
-//		            voies.put( secteur.getVoie().getNom_voie(), secteur.getVoie() );
-//		            /* Et enfin (ré)enregistrement de la map en session */
-//		            session.setAttribute( SESSION_VOIES, voies );
-
-	           
+	            
 				LinkedHashMap<String, Secteur> secteurs = (LinkedHashMap<String, Secteur>) session.getAttribute( SESSION_SECTEURS );
-	           
+			
 	            if ( secteurs == null ) {
-	                secteurs = new LinkedHashMap<String, Secteur>();
+	                 secteurs = new LinkedHashMap<String, Secteur>();
 	            }
+	            
 	           secteurs.put( secteur.getNomsect(), secteur );
 	           session.setAttribute( SESSION_SECTEURS, secteurs );
 		}

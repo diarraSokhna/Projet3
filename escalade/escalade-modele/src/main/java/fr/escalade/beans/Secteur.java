@@ -2,6 +2,7 @@ package fr.escalade.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Secteur implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -9,19 +10,17 @@ public class Secteur implements Serializable{
 	private long  idsect;
 	private String nomsect; 
 	private Site site;
-	private Voie voie ;
+	private List<Voie> voies = new ArrayList<Voie>();
 	
 	
 	public Secteur() {}
 
-
-
-	public Secteur(long idsect, String nomsect, Site site, Voie voie) {
+	public Secteur(long idsect, String nomsect, Site site, List<Voie> voies) {
 		super();
 		this.idsect = idsect;
 		this.nomsect = nomsect;
 		this.site = site;
-		this.voie = voie;
+		this.voies = voies;
 	}
 
 
@@ -50,14 +49,21 @@ public class Secteur implements Serializable{
 		this.site = site;
 	}
 
-	public Voie getVoie() {
-		return voie;
+	public List<Voie> getVoies() {
+		return voies;
 	}
 
-	public void setVoie(Voie voie) {
-		this.voie = voie;
+	public void setVoies(List<Voie> voies) {
+		this.voies = voies;
 	}
 
+	public void addVoie(Voie voie){
+		this.voies.add(voie);
+	}
+	
+	 public void removeVoie(Voie voie ) {
+		    this.voies.remove(voie);
+		  }
 
 	
 
