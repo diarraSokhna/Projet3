@@ -14,7 +14,11 @@ import javax.servlet.http.HttpSession;
 
 import fr.escalade.beans.Site;
 import fr.escalade.beans.Voie;
+import fr.escalade.persistance.ClassementDao;
+import fr.escalade.persistance.CotationDao;
 import fr.escalade.persistance.DaoFactory;
+import fr.escalade.persistance.ExpositionDao;
+import fr.escalade.persistance.PaysDao;
 import fr.escalade.persistance.SecteurDao;
 import fr.escalade.persistance.SiteDao;
 import fr.escalade.persistance.VoieDao;
@@ -33,21 +37,34 @@ public class AjoutSiteSecteurVoie extends HttpServlet {
     public static final String ATT_FORM         = "form";
 
     public static final String VUE_SUCCES    = "/escalade-presentation/ListeSite";
-    public static final String VUE    = "/WEB-INF/vue/ajoutSiteSecteurVoie.jsp";
+    public static final String VUE    = "/restreint/ajoutSiteSecteurVoie.jsp";
    
     private SiteDao siteDao;
     private SecteurDao secteurDao;
     private VoieDao voieDao;
+    private PaysDao paysDao;
+    private ClassementDao classementDao;
+    private CotationDao cotationDao;
+    private ExpositionDao expositionDao;
+    
     public AjoutSiteSecteurVoie() { }
 
     public void init() throws ServletException{
     	this.siteDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getSiteDao();
     	this.secteurDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getSecteurDao();
-    	this.voieDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getVoieDao();
+    	this.paysDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getPaysDao();
+    	this.classementDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getClassementDao();
+    	this.cotationDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getCotationDao();
+    	this.expositionDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getExpositionDao();
     	
     }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setAttribute("payss", paysDao.lister());
+		request.setAttribute("classements", classementDao.lister());
+		request.setAttribute("cotations", cotationDao.lister());
+		request.setAttribute("expositions",expositionDao.lister());
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);	}
 
 	

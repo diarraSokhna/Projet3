@@ -24,7 +24,7 @@
                                 <h3><c:out value="${ topo.nom }"/> </h3>
                                 <p><c:out value="${ topo.description}" /></p>
                                 
-                                <a href="<c:url value="/DetailsTopo"><c:param name="nomtopo" value="${ topo.nom }" ></c:param></c:url>">
+                                <a href="<c:url value="/DetailsTopo"><c:param name="idtopo" value="${ topo.idtopo }" ></c:param><c:param name="nomtopo" value="${ topo.nom }" ></c:param></c:url>">
                               Voir détail</a>
                             </div>
                         </div>

@@ -35,7 +35,7 @@ public class AjoutVoie extends HttpServlet {
     
     public static final String SESSION_SECTEURS  = "sessionSecteur";
 
-    public static final String VUE    = "/WEB-INF/vue/ajoutSiteSecteurVoie.jsp";
+    public static final String VUE    = "/restreint/ajoutSiteSecteurVoie.jsp";
 	
     private VoieDao voieDao;
     private CotationDao cotationDao;

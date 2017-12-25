@@ -67,6 +67,16 @@
     <servlet-name>Image</servlet-name>
     <url-pattern>/images/*</url-pattern>
   </servlet-mapping>
+  
+  <filter>
+	<filter-name>RestrictionFiltre</filter-name>
+	<filter-class>fr.escalade_presentation.filtre.RestrictionFiltre</filter-class>
+</filter>
+<filter-mapping>
+	<filter-name>RestrictionFiltre</filter-name>
+	<url-pattern>/restreint/*</url-pattern>
+</filter-mapping>
+  
   <listener>
     <listener-class>fr.escalade.config.InitialisationDaoFactory</listener-class>
   </listener>

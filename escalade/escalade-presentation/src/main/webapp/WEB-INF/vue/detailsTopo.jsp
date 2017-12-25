@@ -17,7 +17,7 @@
                 <div class="media-left">
                   
                  
-                         <img class="media-object" src="<c:url value="/images/${ topo.image }"/>" alt="" width="550" height="400"> 
+                         <img class="media-object " src="<c:url value="/images/${ topo.image }"/>" alt="" > 
                 </div>
               
                 <div class="media-body">
@@ -32,7 +32,7 @@
                          <section style="margin-top: 75px">
 		                    
 		                    <i class="glyphicon glyphicon-comment"></i>2
-		                     <p> <a href="<c:url value="/ReservationTopo" > <c:param name="idtopo" value="${ topo.idtopo }" /> </c:url>" class="btn btn-primary" role="button">Réserver</a>
+		                     <p> <a href="<c:url value="ReservationTopo" > <c:param name="idtopo" value="${ topo.idtopo }" /> </c:url>" class="btn btn-primary" role="button">Réserver</a>
                                 <a href="<c:url value="/ListeTopo"/>" class="btn btn-primary" role="button">Retour</a></p>
                     </section>
                </div>
@@ -46,37 +46,21 @@
  <div class="panel panel-default">
   <div class="panel-heading"><h2>Vous aussi exprimez vous</h2></div>
  <div class="panel-body">
-				<form method="post" accept-charset="UTF-8" action="<c:url value="/AjoutCommentaire"> 
-	                    <c:param name="nomtopo" value="${ topo.nom }" > </c:param>
-	                    <c:param name="idtopo" value="${ topo.idtopo }" > </c:param></c:url>" class="form-inline">
-					<div class="form-group">
-					<input type="hidden" class="form-control" id="topo" name= "topo" placeholder=""
-						value="<c:out value="${topo.idtopo}"/>" size="20"maxlength="60" /> 
-						<span class="erreur">${form.erreurs['topo']}</span>
-						
-						</div>
-					 
-						<input type="text" id="libelle" name="libelle" value="<c:out value="${commentaire.libelle}"/>" 
-						   class="form-control" placeholder="Votre message ici..." /> 
-						<button type="submit" value="" class="btn btn-primary btn-sm" OnClick="" >Ajouter
-							commentaire </button>
-							<span class="erreur">${form.erreurs['libelle']}</span>
-					
-					<c:choose>
-						<c:when test="${ empty sessionScope.sessionUtilisateur }">
-							<p class="erreur">
-								Merci de vous connecter d'abord! <a
-									href="<c:url value="/Connection" />">ici</a>
-							</p>
+			
+			
+			<c:choose>
+						<c:when test="${ !empty sessionScope.sessionUtilisateur }">
+							<%@ include file="/restreint/ajoutCommentaire.jsp" %>	
 						</c:when>
-						<c:otherwise>
-							<input type="hidden" class="form-control" id="utilisateur"
-								name="utilisateur"
-								value="<c:out value="${sessionScope.sessionUtilisateur.iduser}"/>">
-							<span class="erreur">${form.erreurs['utilisateur']}</span>
-						</c:otherwise>
-					</c:choose>
-				</form>
+					<c:otherwise>
+					        <h3>Merci de vous <a href="<c:url value="/Connection" />" >connecter </a>pour laisser un commentaire!</h3>
+					
+					</c:otherwise>
+					
+					</c:choose>	
+			
+			
+			
 </div>
 				<c:forEach var="commentaire" items="${ commentaires }">
 					<hr data-brackets-id="12673">

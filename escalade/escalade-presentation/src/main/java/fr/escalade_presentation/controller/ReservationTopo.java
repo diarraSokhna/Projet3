@@ -22,7 +22,7 @@ public class ReservationTopo extends HttpServlet {
 	    public static final String PARAM_ID_TOPO = "idtopo";
 	    public static final String ATT_FORM         = "form";
 	    
-	    public static final String VUE    = "/WEB-INF/vue/reservationTopo.jsp";
+	    public static final String VUE    = "/restreint/reservationTopo.jsp";
    
 	    private ReservationDao reservationDao;
 	    private TopoDao topoDao;

@@ -45,7 +45,7 @@
         <a class="dropdown-toggle" data-toggle="dropdown"  href="">Topo
         <span class="caret"></span></a>
          <ul class="dropdown-menu">
-           <li class=""><a href="<c:url value="/CreationTopo" />">Proposer topo</a></li> 
+           <li class=""><a href="<c:url value="CreationTopo" />">Proposer topo</a></li> 
            <li class=""><a href="<c:url value="/ListeTopo" />">Liste des topos</a></li> 
             
         </ul>

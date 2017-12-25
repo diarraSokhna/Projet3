@@ -2,7 +2,6 @@ fr\escalade\beans\Voie.class
 fr\escalade\beans\Utilisateur.class
 fr\escalade\beans\TopoSite.class
 fr\escalade\beans\Classement.class
-fr\escalade\beans\Departement.class
 fr\escalade\beans\Commentaire.class
 fr\escalade\beans\Site.class
 fr\escalade\beans\BeanException.class
