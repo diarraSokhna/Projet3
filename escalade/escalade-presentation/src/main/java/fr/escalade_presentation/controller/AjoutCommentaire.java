@@ -11,6 +11,7 @@ import fr.escalade.beans.Commentaire;
 import fr.escalade.persistance.ArticleDao;
 import fr.escalade.persistance.CommentaireDao;
 import fr.escalade.persistance.DaoFactory;
+import fr.escalade.persistance.TopoDao;
 import fr.escalade_metier.forms.AjoutCommentaireForm;
 
 
@@ -23,18 +24,18 @@ public class AjoutCommentaire extends HttpServlet {
 	 public static final String ATT_FORM         = "form";
 	 
 
-	 public static final String PARAM_TITRE_ART = "titrearticle";
-	 public static final String PARAM_ID_ART = "idArt";
+	 public static final String PARAM_NOM_TOPO= "nomtopo";
+	 public static final String PARAM_ID_TOPO = "idtopo";
 	 
-	 public static final String VUE     = "/escalade-presentation/DetailsArticle";
-	 public static final String VUE_FORM  = "/WEB-INF/vue/detailArticle.jsp";
+	 public static final String VUE     = "/escalade-presentation/DetailsTopo";
+	 public static final String VUE_FORM  = "/WEB-INF/vue/detailsTopo.jsp";
 	 
 	
 	 private CommentaireDao commentaireDao;
-	 private ArticleDao articleDao;
+	 private TopoDao topoDao;
 	
 	public void init() throws ServletException {
-		   this.articleDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getArticleDao();
+		   this.topoDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTopoDao();
 	       this.commentaireDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getCommentaireDao();
 	}
 		
@@ -45,18 +46,18 @@ public class AjoutCommentaire extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    AjoutCommentaireForm form = new AjoutCommentaireForm(commentaireDao,articleDao);
+	    AjoutCommentaireForm form = new AjoutCommentaireForm(commentaireDao,topoDao);
         Commentaire commentaire = form.ajouterCommentaire( request );
        
         request.setAttribute( ATT_FORM, form );
         request.setAttribute( ATT_COMMENTAIRE, commentaire );
 
-        String titrearticle = getValeurParametre( request, PARAM_TITRE_ART ); 
-		request.setAttribute("article", articleDao.trouver(titrearticle));
+        String nomtopo = getValeurParametre( request, PARAM_NOM_TOPO ); 
+		request.setAttribute("topo", topoDao.trouver(nomtopo));
 		
 	
-		Long idArt = Long.parseLong(getValeurParametre( request, PARAM_ID_ART )); 
-		request.setAttribute("commentaires", commentaireDao.lister(idArt));
+		Long idtopo = Long.parseLong(getValeurParametre( request, PARAM_ID_TOPO )); 
+		request.setAttribute("commentaires", commentaireDao.lister(idtopo));
 		this.getServletContext().getRequestDispatcher(VUE_FORM).forward(request, response);
 		
       

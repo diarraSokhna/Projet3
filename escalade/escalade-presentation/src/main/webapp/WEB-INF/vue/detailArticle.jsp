@@ -9,24 +9,34 @@
 
 <div class="container">
  <div class="panel panel-default">
-  <div class="panel-heading"><h2><c:out value="${ article.titre }"/></h2></div>
+  <div class="panel-heading"><h2><c:out value="${ topo.nom }"/></h2></div>
  <div class="panel-body">
          
             <div class="media">
                 <div class="media-left">
                    
-                         <img class="media-object" src="<c:url value="/images/${ article.photo }"/>" alt="" width="250" height="250"> 
+                         <img class="media-object" src="<c:url value="/images/${ topo.image }"/>" alt="" width="250" height="250"> 
                 </div>
                 <div class="media-body">
-                <h3 class="media-heading"><c:out value="${ article.titre }"/></h3><br/>
-                Ecrit par  <c:out value="${ article.utilisateur.nom }"/> <c:out value="${ article.utilisateur.prenom }"/><br/><br/>
-                <c:out value="${ article.contenu}" /> <br/>
+                <h3 class="media-heading"><c:out value="${  topo.nom  }"/></h3><br/>
+                Ecrit par  <c:out value="${ topo.utilisateur.nom }"/> <c:out value="${ topo.utilisateur.prenom }"/><br/><br/>
+                <c:out value="${ topo.description}" /> <br/>
+                <b>Nombre de pages: </b> <c:out value="${ topo.nbpage}" /> pages
+                 La liste des sites du topo :
+					 <c:forEach var = "site" items = "${ sites }">
+				<ul class="items">
+				
+					<li><c:out value="${ site.nomsite}" /></li>
+					
+				</ul>
+				</c:forEach>
                          <section style="margin-top: 75px">
 		                    
 		                    <i class="glyphicon glyphicon-comment"></i>2
                             <i class="glyphicon glyphicon-calendar"></i><fmt:formatDate pattern="dd-MM-yyyy" value="${article.datepubli}" />
-		                    <a href="<c:url value="/ListeArticle"/>" class="btn btn-default btn-sm pull-right">Retour</a>
-		                </section>
+		                     <p> <a href="<c:url value="/ReservationTopo" > <c:param name="idtopo" value="${ topo.idtopo }" /> </c:url>" class="btn btn-primary" role="button">Réserver</a>
+                                <a href="<c:url value="/ListeTopo"/>" class="btn btn-primary" role="button">Retour</a></p>
+                    </section>
                </div>
             </div>
           
@@ -38,12 +48,12 @@
   <div class="panel-heading"><h2>Vous aussi exprimez vous</h2></div>
  <div class="panel-body">
 				<form method="post" accept-charset="UTF-8" action="<c:url value="/AjoutCommentaire"> 
-	                    <c:param name="titrearticle" value="${ article.titre }" > </c:param>
-	                    <c:param name="idArt" value="${ article.id_art }" > </c:param></c:url>" class="form-inline">
+	                    <c:param name="nomtopo" value="${ topo.nom }" > </c:param>
+	                    <c:param name="idtopo" value="${ topo.id_topo }" > </c:param></c:url>" class="form-inline">
 					<div class="form-group">
-					<input type="hidden" class="form-control" id="article"name= "article" placeholder="Article"
-						value="<c:out value="${article.id_art}"/>" size="20"maxlength="60" /> 
-						<span class="erreur">${form.erreurs['article']}</span>
+					<input type="hidden" class="form-control" id="topo" name= "topo" placeholder=""
+						value="<c:out value="${topo.id_topo}"/>" size="20"maxlength="60" /> 
+						<span class="erreur">${form.erreurs['topo']}</span>
 						
 						</div>
 					 

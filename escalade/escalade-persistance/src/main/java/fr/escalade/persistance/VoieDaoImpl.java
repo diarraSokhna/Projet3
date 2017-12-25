@@ -20,7 +20,7 @@ public class VoieDaoImpl implements VoieDao {
     private static final String SQL_SELECT = "SELECT * FROM voie ORDER BY id_voie";
     private static final String SQL_SELECT_PAR_ID = "SELECT * FROM voie WHERE id_voie = ?";
     private static final String SQL_SELECT_PAR_NOM = "SELECT * FROM voie WHERE nom_voie = ?";
-    private static final String SQL_SELECT_PAR_SECTEUR = "SELECT * FROM  voie v, secteur s WHERE v.id_secteur=s.id_secteur AND v.id_secteur=?";
+    private static final String SQL_SELECT_PAR_SITE = "SELECT * FROM  voie v, secteur s ,site si WHERE v.id_secteur=s.id_secteur AND s.id_site=si.id_site AND si.id_site=?";
    
     private  DaoFactory  daoFactory;
     
@@ -120,7 +120,7 @@ public class VoieDaoImpl implements VoieDao {
 	}
 
 	@Override
-	public List<Voie> lister(long idsect) throws DaoException {
+	public List<Voie> lister(long idsite) throws DaoException {
 		Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -128,7 +128,7 @@ public class VoieDaoImpl implements VoieDao {
 
         try {
             connection = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee( connection, SQL_SELECT_PAR_SECTEUR, false, idsect);
+            preparedStatement = initialisationRequetePreparee( connection, SQL_SELECT_PAR_SITE, false, idsite);
                     resultSet = preparedStatement.executeQuery();
             while ( resultSet.next() ) {
             	voies.add( map( resultSet ) );

@@ -1,52 +1,42 @@
 $(document).ready(function () {
-    var counter = 0;
-    var counterv = 0;
+  var navListItems = $('div.setup-panel div a'),
+          allWells = $('.setup-content'),
+          allNextBtn = $('.nextBtn');
 
-    $("#addrow").on("click", function () {
-        var newRow = $("<tr>");
-        var cols = "";
+  allWells.hide();
 
-        cols += '<td><input type="text" class="form-control" name="nomsecteur' + counter + '"/></td>';
+  navListItems.click(function (e) {
+      e.preventDefault();
+      var $target = $($(this).attr('href')),
+              $item = $(this);
 
-        cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
-        newRow.append(cols);
-        $("table.order-list").append(newRow);
-        counter++;
-    });
+      if (!$item.hasClass('disabled')) {
+          navListItems.removeClass('btn-primary').addClass('btn-default');
+          $item.addClass('btn-primary');
+          allWells.hide();
+          $target.show();
+          $target.find('input:eq(0)').focus();
+      }
+  });
 
-    $("#addrowv").on("click", function () {
-        var newRowv = $("<tr>");
-        var colsv = "";
+  allNextBtn.click(function(){
+      var curStep = $(this).closest(".setup-content"),
+          curStepBtn = curStep.attr("id"),
+          nextStepWizard = $('div.setup-panel div a[href="<c:url value=' + '"'+curStepBtn +'"'+ '"]').parent().next().children("a"),
+          curInputs = curStep.find("input[type='text'],input[type='url']"),
+          isValid = true;
 
-        colsv += '<td><input type="text" class="form-control" name="nomvoie' + counterv + '"/></td>';
+      $(".form-group").removeClass("has-error");
+      for(var i=0; i<curInputs.length; i++){
+          if (!curInputs[i].validity.valid){
+              isValid = false;
+              $(curInputs[i]).closest(".form-group").addClass("has-error");
+          }
+      }
 
-        colsv += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
-        newRowv.append(colsv);
-        $("table.order-list").append(newRowv);
-        counterv++;
-    });
+      if (isValid)
+          nextStepWizard.removeAttr('disabled').trigger('click');
+  });
 
-
-    $("table.order-list").on("click", ".ibtnDel", function (event) {
-        $(this).closest("tr").remove();       
-        counter -= 1;
-        counterv -=1;
-    });
-
-
+  $('div.setup-panel div a.btn-primary').trigger('click');
 });
-
-
-
-function calculateRow(row) {
-    var price = +row.find('input[name^="price"]').val();
-
-}
-
-function calculateGrandTotal() {
-    var grandTotal = 0;
-    $("table.order-list").find('input[name^="price"]').each(function () {
-        grandTotal += +$(this).val();
-    });
-    $("#grandtotal").text(grandTotal.toFixed(2));
-}

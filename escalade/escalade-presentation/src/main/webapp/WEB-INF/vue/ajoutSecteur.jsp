@@ -1,7 +1,9 @@
-<form method="post" accept-charset="UTF-8" action="AjoutSecteur"  >
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<form method="post" name="boite" id="boite" accept-charset="UTF-8" action="AjoutSecteur" style="display:none" >
 							<div class="panel-body form-horizontal payment-form">
 											<fieldset>
-											<legend>Ajouter secteur </legend>
+											<legend>Ajouter secteur</legend>
 									<div class="form-group">
 										<label for="nom" class="col-sm-3 control-label">Nom secteur <span class="requis">*</span></label>
 										<div class="col-sm-6">
@@ -10,27 +12,24 @@
 												class="erreur">${formsect.erreurs['nomsect']}</span>
 												
 										</div>
+										
+										
 										<div class="col-sm-3 text-right">
-											<button type="submit" class="btn btn-default preview-add-button">Ajouter à site
+											<button type="submit" class="btn btn-default preview-add-button">Ajouter
 											</button>
 
-										</div>	
+										</div>
+										
+											
 									</div>
 																		
-                                    <div class="col-sm-6">
-											<input type="hidden" class="form-control" id="site" name="site"
-												value="<c:out value="${sessionScope.sessionSite.nomsite}"/>"> <span
-												class="erreur">${formsect.erreurs['site']}</span>
-											
-										</div>
+                                    
 										<hr/>
-
 								
 									<p class="${empty formSect.erreurs ? 'succes' : 'erreur'}">${formSect.resultat}</p>
-
-
-
 		</fieldset>
 					
 			</div>
-			</form>				
+			</form>	
+			
+			</div>			

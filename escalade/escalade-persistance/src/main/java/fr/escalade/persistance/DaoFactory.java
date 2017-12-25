@@ -136,4 +136,8 @@ public class DaoFactory {
 	   public CotationDao getCotationDao(){
 		   return new CotationDaoImpl(this);
 	   }
+	   
+	   public VilleDao getVilleDao(){
+		   return new VilleDaoImpl(this);
+	   }
 }

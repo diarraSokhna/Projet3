@@ -10,17 +10,19 @@ import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 
 import fr.escalade.beans.Article;
 import fr.escalade.beans.Commentaire;
+import fr.escalade.beans.Topo;
 import fr.escalade.beans.Utilisateur;
 import fr.escalade.persistance.ArticleDao;
 import fr.escalade.persistance.CommentaireDao;
 import fr.escalade.persistance.DaoException;
+import fr.escalade.persistance.TopoDao;
 import fr.escalade.persistance.UtilisateurDao;
 
 public class AjoutCommentaireForm {
 
 	 private static final String CHAMP_lIBELLE     = "libelle";
 	 private static final String CHAMP_UTILISATEUR        = "utilisateur";
-	 private static final String CHAMP_ARTICLE       = "article";
+	 private static final String CHAMP_TOPO       = "topo";
 	 
 	 private static final String SESSION_UTILISATEURS        = "sessionUtilisateur";
     
@@ -28,11 +30,11 @@ public class AjoutCommentaireForm {
      private Map<String, String> erreurs = new HashMap<String, String>();
   
 	 private CommentaireDao  commentaireDao;
-	 private ArticleDao articleDao;
+	 private TopoDao topoDao;
 
-     public AjoutCommentaireForm(CommentaireDao commentaireDao, ArticleDao articleDao) {
+     public AjoutCommentaireForm(CommentaireDao commentaireDao, TopoDao topoDao) {
 		this.commentaireDao = commentaireDao;
-		this.articleDao = articleDao;
+		this.topoDao = topoDao;
 	}
 
 
@@ -51,9 +53,9 @@ public class AjoutCommentaireForm {
           
 		   Utilisateur utilisateur =  (Utilisateur) session.getAttribute( SESSION_UTILISATEURS);
          
-		   String idart = getValeurChamp(request, CHAMP_ARTICLE);
-		   Long id_art = Long.parseLong(idart);
-		   Article article = articleDao.trouver(id_art);
+		   String idtopo = getValeurChamp(request, CHAMP_TOPO);
+		   Long id_topo = Long.parseLong(idtopo);
+		   Topo topo = topoDao.trouver(id_topo);
 		   
 		   String libelle = getValeurChamp( request, CHAMP_lIBELLE );
 	       Commentaire commentaire = new Commentaire();
@@ -62,7 +64,7 @@ public class AjoutCommentaireForm {
 	    try {
 	    	
 	    	commentaire.setUtilisateur(utilisateur);
-	        commentaire.setArticle(article);
+	        commentaire.setTopo(topo);
 	        traiterLibelle( libelle, commentaire );
 	        
 	        if ( erreurs.isEmpty() ) {

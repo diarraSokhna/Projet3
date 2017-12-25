@@ -10,7 +10,7 @@ public interface CommentaireDao {
 	
 	 void laisser( Commentaire commentaire ) throws DaoException;
 	 
-	 List<Commentaire> lister(Long idArt) throws DaoException;
+	 List<Commentaire> lister(Long idtopo) throws DaoException;
 	 
 	 void supprimer( Commentaire commentaire ) throws DaoException;
 	 

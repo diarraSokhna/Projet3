@@ -13,6 +13,8 @@ public interface SecteurDao {
 	
 	List<Secteur> lister() throws DaoException;
 	
+	List<Secteur> lister(long idsite) throws DaoException;
+	
 	Secteur trouver(String nomsect) throws DaoException;
 	 
 }

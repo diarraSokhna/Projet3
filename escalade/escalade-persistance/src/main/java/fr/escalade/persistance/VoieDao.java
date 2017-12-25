@@ -14,7 +14,7 @@ public interface VoieDao {
 	
 	List<Voie> lister() throws DaoException;
 	
-	List<Voie> lister(long idsect) throws DaoException;
+	List<Voie> lister(long idsite) throws DaoException;
 	
 	Voie trouver(String nomvoie) throws DaoException;
 	 

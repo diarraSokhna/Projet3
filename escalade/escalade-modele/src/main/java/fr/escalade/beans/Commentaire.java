@@ -10,18 +10,18 @@ public class Commentaire implements Serializable {
 	private String libelle; 
 	private Date datecom;
 	private Utilisateur utilisateur;
-	private Article article;
+	private Topo topo;
 	
 	public Commentaire() {}
 
 	
-	public Commentaire(long id_com, String libelle, Date datecom, Utilisateur utilisateur, Article article) {
+	public Commentaire(long id_com, String libelle, Date datecom, Utilisateur utilisateur, Topo topo) {
 		super();
 		this.id_com = id_com;
 		this.libelle = libelle;
 		this.datecom = datecom;
 		this.utilisateur = utilisateur;
-		this.article = article;
+		this.topo = topo;
 	}
 
 
@@ -35,13 +35,13 @@ public class Commentaire implements Serializable {
 	}
 
 
-	public Article getArticle() {
-		return article;
+	public Topo getTopo() {
+		return topo;
 	}
 
 
-	public void setArticle(Article article) {
-		this.article = article;
+	public void setTopo(Topo topo) {
+		this.topo = topo;
 	}
 
 

@@ -18,6 +18,7 @@ public class SecteurDaoImpl implements SecteurDao {
 	private static final String SQL_INSERT = "INSERT INTO secteur(id_site, nom_secteur) VALUES(?, ?)";
     private static final String SQL_SELECT = "SELECT * FROM secteur ORDER BY id_secteur";
     private static final String SQL_SELECT_PAR_ID = "SELECT * FROM secteur WHERE id_secteur = ?";
+    private static final String SQL_SELECT_PAR_SITE= "SELECT * FROM secteur WHERE id_site= ?";
     private static final String SQL_SELECT_PAR_NOM = "SELECT * FROM secteur WHERE nom_secteur = ?";
    
     private  DaoFactory  daoFactory;
@@ -125,4 +126,27 @@ public class SecteurDaoImpl implements SecteurDao {
 	        secteur.setSite(siteDao.trouver(resultSet.getLong("id_site")));
 	        return secteur;
 	    }
+
+	@Override
+	public List<Secteur> lister(long idsite) throws DaoException {
+		Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Secteur> secteurs = new ArrayList<Secteur>();
+
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee( connection, SQL_SELECT_PAR_SITE, false, idsite);
+                    resultSet = preparedStatement.executeQuery();
+            while ( resultSet.next() ) {
+            	secteurs.add( map( resultSet ) );
+            }
+        } catch ( SQLException e ) {
+            throw new DaoException( e );
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connection );
+        }
+
+        return secteurs;
+	}
 }

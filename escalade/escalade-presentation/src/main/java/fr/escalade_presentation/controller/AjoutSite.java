@@ -39,6 +39,7 @@ public class AjoutSite extends HttpServlet {
     
     public static final String SESSION_SITES  = "sessionSite";
 
+    
     public static final String VUE    = "/WEB-INF/vue/ajoutSiteSecteurVoie.jsp";
 	
     private SiteDao siteDao;

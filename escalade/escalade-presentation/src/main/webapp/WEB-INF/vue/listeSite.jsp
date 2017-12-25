@@ -8,62 +8,65 @@
 <body>
 <%@ include file="menu.jsp" %>
 
-
+<jsp:useBean id="site" class="fr.escalade.beans.Site" scope="request" />
 
 	<div class="container">
 
 	 <div class="panel panel-default">
   <div class="panel-heading"><h2>La liste des sites</h2></div>
  <div class="panel-body">
+		<div class="pos">
+		<form method="post" action="ListeSite" class="form-inline recadre col-sm-7">
 		
-		<form method="post" action="ListeSite" class="form-inline recadre">
        <c:set var="pays" value="${ site.pays }" scope="request" />
         <c:set var="classement" value="${ site.classement }" scope="request" />
-      
+        
+                            
 			<Strong>Rechercher par </strong>
-			<select class="form-control form-control-lg" name="idpays" id="idpays">
+			<select class="form-control form-control-lg" name="idpays" id="idpays"   onchange="">
 				<option value="0">Pays</option>
 				<c:forEach var="pays" items="${ payss }">
-					<option value="<c:out value="${pays.idpays}"/>"><c:out
+				  	<option value="<c:out value="${pays.idpays}"/>"><c:out
 							value="${pays.nompays}" /></option>
 				</c:forEach>
 			</select> /
-			<select class="form-control" name="iddep" id="iddep">
-				<option value="0">Département</option>
-				<c:forEach var="departement" items="${ departements }">
-					<option value="<c:out value="${ departement.id_dep}" />"><c:out
-							value="${ departement.nom_dep}" /></option>
+			<select class="form-control" name="idville" id="idville" onchange="this.form.submit();">
+				<option value="0">Ville</option>
+				<c:forEach var="ville" items="${ villes }">
+					<option value="<c:out value="${ ville.id_ville}" />"><c:out
+							value="${ ville.nom_ville}" /></option>
 				</c:forEach>
 			</select>/
 			
-			</select> <select class="form-control" name="idcot" id="idcot">
+			 <select class="form-control" name="idcotation" id="idcotation" onchange="this.form.submit();">
 				<option value="0">Cotation</option>
 				<c:forEach var="cotation" items="${ cotations }">
 					<option value="<c:out value="${ cotation.idcot}" />"><c:out
 							value="${ cotation.libelle_cot}" /></option>
 				</c:forEach>
 			</select>/
-			</select> <select class="form-control" name="idclass" id="idclass">
+			 
+			<select class="form-control" name="idclass" id="idclass" onchange="this.form.submit();">
 				<option value="0">Classement</option>
 				<c:forEach var="classement" items="${ classements }">
 					<option value="<c:out value="${ classement.id_class}" />"><c:out
 							value="${ classement.libelle_class}" /></option>
 				</c:forEach>
 			</select>
-          <div class="form-group">
-                        <div class="col-sm-12 text-right">
-                            <button type="submit" class="btn btn-default preview-add-button">
-                                Rechercher
-                            </button>
-                        </div>
-                    </div>
-                    
+	
 		</form>
-				<hr/>
+		
+		<form method="get" action="ListeSite" class="col-sm-5">	
+          <div class="form-group">
+                            <button type="submit" class="btn btn-default preview-add-button" >Tous les sites</button>
+                    </div>
+                 </form> 
+		</div>	
 			<c:forEach var="site" items="${ sites }">
 				<div class="col-sm-6 col-md-3 colonn">
 					<div class="thumbnail">
-					 <a href="<c:url value="/DetailsSite"><c:param name="nomsite" value="${ site.nomsite }" ></c:param></c:url>">	
+					 <a href="<c:url value="/DetailsSite"><c:param name="nomsite" value="${ site.nomsite }" ></c:param>
+					 <c:param name="idsite" value="${ site.idsite }" ></c:param></c:url>">	
 					 <img src="<c:url value="/images/${ site.image }"/>"  alt="" /></a>
   								<div class="caption">
 								Nom du site : <Strong><c:out value="${ site.nomsite  }" /></Strong><br/>

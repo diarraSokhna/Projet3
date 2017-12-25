@@ -75,7 +75,7 @@ public final class ConnexionForm {
    
     private void validationEmailPasse( String email, String motDePasse) throws Exception {
         if ( utilisateurDao.trouver(email,motDePasse) == null  ) {
-            throw new Exception( "L'adresse mail ou le mot de passe est incorrect." );
+            throw new Exception( "L'adresse mail ou le mot de passe est vide ou incorrect." );
         }
     }
     

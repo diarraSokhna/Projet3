@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.escalade.beans.Topo;
+import fr.escalade.persistance.CommentaireDao;
 import fr.escalade.persistance.DaoException;
 import fr.escalade.persistance.TopoDao;
 import fr.escalade.persistance.DaoFactory;
@@ -28,10 +29,13 @@ public class DetailsTopo extends HttpServlet {
 	    
 	private TopoDao topoDao;
 	private SiteDao siteDao;
+	private CommentaireDao commentaireDao;
+    
 	
 	public void init() throws ServletException {
 	  this.topoDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getTopoDao();
 	  this.siteDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getSiteDao();
+	  this.commentaireDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getCommentaireDao();
 		
 	}
 	
@@ -43,8 +47,11 @@ public class DetailsTopo extends HttpServlet {
 		String nomtopo = getValeurParametre( request, PARAM_NOM_TOPO ); 
 		String idtopo = getValeurParametre( request, PARAM_ID_TOPO );
 		long id_topo = Long.parseLong(idtopo);
+		Topo topo = topoDao.trouver(id_topo);
 		
-		request.setAttribute("sites", siteDao.lister(id_topo));
+		request.setAttribute("sites", siteDao.listerParTopo(id_topo));
+		
+		request.setAttribute("commentaires", commentaireDao.lister(id_topo));
 		
 		request.setAttribute("topo", topoDao.trouver(nomtopo));
 		

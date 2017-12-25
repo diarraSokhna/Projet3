@@ -61,25 +61,17 @@ public class AjoutSiteSecteurVoieForm {
 	            if ( site != null ) {
 	            	
 	            	siteDao.creer(site);
-	             
-	            
-	            	site = siteDao.trouver(site.getIdsite());
 	            	
 	            	for(Secteur secteur : site.getSecteurs()){
 	            		secteurDao.creer(secteur, site);
-	            		
-	            		secteur = secteurDao.trouver(secteur.getIdsect());
-	            		
 	            		for(Voie voie : secteur.getVoies()){
 	            			voieDao.creer(voie, secteur);
-	            			
 	            		}
 	            	}
 	            	
-
-	                resultat = "Succès d'ajout du site secteur .";
+	                resultat = "Succès d'ajout du site .";
 	            } else {
-	                resultat = "Échec d'ajout du site secteur.";
+	                resultat = "Échec d'ajout du site .";
 	            }
 	        } catch ( DaoException e ) {
 	            setErreur( "imprévu", "Erreur imprévue lors de l'ajout." );

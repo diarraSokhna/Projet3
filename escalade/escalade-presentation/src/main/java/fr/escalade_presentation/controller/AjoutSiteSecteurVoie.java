@@ -32,6 +32,7 @@ public class AjoutSiteSecteurVoie extends HttpServlet {
     public static final String ATT_Site      = "site";
     public static final String ATT_FORM         = "form";
 
+    public static final String VUE_SUCCES    = "/escalade-presentation/ListeSite";
     public static final String VUE    = "/WEB-INF/vue/ajoutSiteSecteurVoie.jsp";
    
     private SiteDao siteDao;
@@ -64,13 +65,14 @@ public class AjoutSiteSecteurVoie extends HttpServlet {
 		
 //		session.setAttribute( SESSION_SITES, site );
 		if ( form.getErreurs().isEmpty() ) {
-		
 			session.invalidate();
+			 response.sendRedirect(VUE_SUCCES);
+		}else {
+			
+			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 		}
 		
-		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
-	 	   
-        
+		
         
 	}
 	

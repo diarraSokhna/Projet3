@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<form method="post" accept-charset="UTF-8" action="AjoutVoie"  >
+<form method="post" accept-charset="UTF-8" action="AjoutVoie" name="voie" id="voie" style="display:none">
 							<div class="panel-body form-horizontal payment-form">
 								<c:set var="cotation" value="${ voie.cotation }" scope="request" />
 								<c:set var="exposition" value="${ voie.exposition }" scope="request" />
@@ -87,19 +87,13 @@
 											Si l'exposition n'existe pas vous pouvez <a href="">l'ajouter</a>
 												</div>
 											<div class="col-sm-3 text-right">
-											<button type="submit" class="btn btn-default preview-add-button">Ajouter à secteur
+											<button type="submit" class="btn btn-default preview-add-button">Ajouter
 											</button>
 
 										   </div>
 										</div>
 
      
-										<hr/>
-	
-
-									
-									
-									<p class="${empty formvoie.erreurs ? 'succes' : 'erreur'}">${formvoie.resultat}</p>
 								</fieldset>
 							</div>
 

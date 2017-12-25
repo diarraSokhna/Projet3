@@ -14,8 +14,8 @@ import fr.escalade.beans.Commentaire;
 
 public class CommentaireDaoImpl  implements CommentaireDao{
 
-	   private static final String SQL_SELECT_PAR_ART = "SELECT c.id_com, libelle_com, c.id_art , c.id_user, c.date_com FROM  commentaire c, article a WHERE c.id_art=a.id_art AND c.id_art=?";
-	   private static final String SQL_INSERT = "INSERT INTO commentaire (libelle_com, date_com, id_user, id_art) VALUES (?, NOW(), ?, ?)";
+	   private static final String SQL_SELECT_PAR_TOPO = "SELECT c.id_com, libelle_com, c.id_topo , c.id_user, c.date_com FROM  commentaire c, topo t WHERE c.id_topo=t.id_topo AND c.id_topo=?";
+	   private static final String SQL_INSERT = "INSERT INTO commentaire (libelle_com, date_com, id_user, id_topo) VALUES (?, NOW(), ?, ?)";
 	   private static final String SQL_DELETE_PAR_ID = "DELETE FROM commentaire WHERE id_com = ?";
 	   
 	   private DaoFactory  daoFactory;
@@ -39,7 +39,7 @@ public class CommentaireDaoImpl  implements CommentaireDao{
             preparedStatement = initialisationRequetePreparee( connexion, SQL_INSERT, true, 
             		commentaire.getLibelle(),
             		commentaire.getUtilisateur().getIduser(),
-            		commentaire.getArticle().getId_art());
+            		commentaire.getTopo().getIdtopo());
                     
             int  statut = preparedStatement.executeUpdate();
             if ( statut == 0 ) {
@@ -61,7 +61,7 @@ public class CommentaireDaoImpl  implements CommentaireDao{
 		
 	}
 	
-	public List<Commentaire> lister(Long id_Art) throws DaoException {
+	public List<Commentaire> lister(Long id_topo) throws DaoException {
 		Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -69,7 +69,7 @@ public class CommentaireDaoImpl  implements CommentaireDao{
 
         try {
             connection = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee( connection, SQL_SELECT_PAR_ART, true, id_Art);
+            preparedStatement = initialisationRequetePreparee( connection, SQL_SELECT_PAR_TOPO, true, id_topo);
                     resultSet = preparedStatement.executeQuery();
             while ( resultSet.next() ) {
                 commentaires.add( map( resultSet ) );
@@ -92,8 +92,8 @@ public class CommentaireDaoImpl  implements CommentaireDao{
 		UtilisateurDao utilisateurDao = daoFactory.getUtilisateurDao();
 		commentaire.setUtilisateur(utilisateurDao.trouver(resultSet.getLong("id_user")));
 		
-		ArticleDao articleDao = daoFactory.getArticleDao();
-	    commentaire.setArticle(articleDao.trouver(resultSet.getLong("id_art")));
+		TopoDao topoDao = daoFactory.getTopoDao();
+	    commentaire.setTopo(topoDao.trouver(resultSet.getLong("id_topo")));
 	    
 	    return commentaire;
 	}

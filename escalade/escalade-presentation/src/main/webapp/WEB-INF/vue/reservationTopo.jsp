@@ -38,9 +38,7 @@
                                 Réserver
                             </button>
                             
-                             <button type="reset" class="btn btn-default preview-add-button">
-                                 Annuler
-                            </button>
+                             <a href="<c:url value="/DetailsTopo"/>" class="btn btn-primary" role="button">Retour</a></p>
                         </div>
                     </div>
                     

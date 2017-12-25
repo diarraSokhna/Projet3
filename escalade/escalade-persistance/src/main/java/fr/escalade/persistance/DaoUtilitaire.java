@@ -8,11 +8,7 @@ import java.sql.Statement;
 
 public class DaoUtilitaire {
 
-	
-	//Initialise la requête préparée basée sur la connexion passée en argument, avec la requête SQL et les objets donnés.
-		//en déclarant notre methode ainsi Object... objets on peut l'appler avec autant e param kon veut
-		//méthode purement utilitaire, que nous pourrons réutiliser telle quelle dans n'importe quel DAO !
-		public static PreparedStatement initialisationRequetePreparee( Connection connexion, String sql, boolean returnGeneratedKeys, Object... objets ) throws SQLException {
+	public static PreparedStatement initialisationRequetePreparee( Connection connexion, String sql, boolean returnGeneratedKeys, Object... objets ) throws SQLException {
 		    PreparedStatement preparedStatement = connexion.prepareStatement( sql, returnGeneratedKeys ? Statement.RETURN_GENERATED_KEYS : Statement.NO_GENERATED_KEYS );
 		    for ( int i = 0; i < objets.length; i++ ) {
 		        preparedStatement.setObject( i + 1, objets[i] );
@@ -20,7 +16,6 @@ public class DaoUtilitaire {
 		    return preparedStatement;
 		}
 		
-		/* Fermeture silencieuse du resultset */
 		public static void fermetureSilencieuse( ResultSet resultSet ) {
 		    if ( resultSet != null ) {
 		        try {
@@ -31,7 +26,6 @@ public class DaoUtilitaire {
 		    }
 		}
 
-		/* Fermeture silencieuse du statement */
 		public static void fermetureSilencieuse( Statement statement ) {
 		    if ( statement != null ) {
 		        try {
@@ -42,7 +36,6 @@ public class DaoUtilitaire {
 		    }
 		}
 
-		/* Fermeture silencieuse de la connexion */
 		public static void fermetureSilencieuse( Connection connexion ) {
 		    if ( connexion != null ) {
 		        try {
@@ -53,13 +46,11 @@ public class DaoUtilitaire {
 		    }
 		}
 
-		/* Fermetures silencieuses du statement et de la connexion */
 		public static void fermeturesSilencieuses( Statement statement, Connection connexion ) {
 		    fermetureSilencieuse( statement );
 		    fermetureSilencieuse( connexion );
 		}
 
-		/* Fermetures silencieuses du resultset, du statement et de la connexion */
 		public static void fermeturesSilencieuses( ResultSet resultSet, Statement statement, Connection connexion ) {
 		    fermetureSilencieuse( resultSet );
 		    fermetureSilencieuse( statement );

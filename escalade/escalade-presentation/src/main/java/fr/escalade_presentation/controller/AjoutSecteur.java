@@ -79,7 +79,7 @@ public class AjoutSecteur extends HttpServlet {
 	            
 	           secteurs.put( secteur.getNomsect(), secteur );
 	           session.setAttribute( SESSION_SECTEURS, secteurs );
-		}
+		}else {}
 			
 			request.setAttribute("cotations", cotationDao.lister());
 			request.setAttribute("expositions",expositionDao.lister());
