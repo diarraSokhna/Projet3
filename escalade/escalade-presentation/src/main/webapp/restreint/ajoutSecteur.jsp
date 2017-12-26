@@ -1,6 +1,6 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<form method="post" name="boite" id="boite" accept-charset="UTF-8" action="AjoutSecteur" style="display:none" >
+<form method="post"  accept-charset="UTF-8" action="AjoutSecteur" >
 							<div class="panel-body form-horizontal payment-form">
 											<fieldset>
 											<legend>Ajouter secteur</legend>
@@ -13,7 +13,6 @@
 												
 										</div>
 										
-										
 										<div class="col-sm-3 text-right">
 											<button type="submit" class="btn btn-default preview-add-button">Ajouter
 											</button>
@@ -24,8 +23,7 @@
 									</div>
 																		
                                     
-										<hr/>
-								
+									
 									<p class="${empty formSect.erreurs ? 'succes' : 'erreur'}">${formSect.resultat}</p>
 		</fieldset>
 					

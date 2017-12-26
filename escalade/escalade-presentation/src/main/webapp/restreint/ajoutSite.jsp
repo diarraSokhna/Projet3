@@ -10,14 +10,7 @@ etat=document.getElementById(elem).style.display;
 if(etat=="none"){document.getElementById(elem).style.display="block";} 
 else{document.getElementById(elem).style.display="none";} 
 } 
-
-function inverse(elem) 
-{ 
-
-etat=document.getElementById(elem).style.display; 
-if(etat=="bock"){document.getElementById(elem).style.display="none";} 
-else{document.getElementById(elem).style.display="block";} 
-} 
+ 
 </script> 
 
 </head>
@@ -25,10 +18,7 @@ else{document.getElementById(elem).style.display="block";}
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%-- 	<jsp:useBean id="site" class="fr.escalade.beans.Site" scope="session" />	 --%>
-		
-		<div class="row"> 
-		<div class="col-sm-7">
-						<form method="post" name="site" id="site" accept-charset="UTF-8" action="AjoutSite" enctype="multipart/form-data" style="display:block"  >
+						<form method="post"  accept-charset="UTF-8" action="AjoutSite" enctype="multipart/form-data"  >
 							<div class="panel-body form-horizontal payment-form">
 								<fieldset>
 								<c:set var="pays" value="${ site.pays }" scope="request" />
@@ -82,7 +72,7 @@ else{document.getElementById(elem).style.display="block";}
                                        
 									</div>
 									</div>
-									<hr/>
+								
 									<c:choose>
 									<c:when test="${ empty sessionScope.sessionSite }">
 									<div class="form-group">
@@ -93,77 +83,12 @@ else{document.getElementById(elem).style.display="block";}
 										</div>
 										</div>
 									</c:when>
-									
-								
-											
-									<c:otherwise>
-									<div class="form-group">
-									 <div class="col-sm-12 text-center">
-											<button type="button" onClick="bascule('boite');"
-												class="btn btn-default preview-add-button">Ajouter des secteurs
-											</button>
-										</div>
-										</div>
-									</c:otherwise>
-									</c:choose>
-						       
-						       		<c:choose>
-									<c:when test="${ !empty sessionScope.sessionSecteur }">
-									<div class="form-group">
-									 <div class="col-sm-12 text-center">
-											<button type="button" onClick="bascule('voie');"
-												class="btn btn-default preview-add-button">Ajouter voie
-											</button>
-										</div>
-										</div>
-									</c:when>
 									</c:choose>
 									
-											<c:choose>
-									<c:when test="${ !empty sessionScope.sessionVoie}">
-									<div class="form-group">
-									 <div class="col-sm-12 text-center">
-											<button type="button" onClick="bascule('site');"
-												class="btn btn-default preview-add-button">Finir
-											</button>
-										</div>
-										</div>
-									</c:when>
-									</c:choose>
+						    
 						</fieldset>
 	</div>
 	<p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>
 								
 	</form>	
-	</div>
-	
-	
-		<div class="col-sm-4">		
-	<c:if test="${ !empty sessionScope.sessionSite }">
-									<c:if test="${ !empty sessionScope.sessionSecteur }">
-									<legend>Récapitulatif</legend>
-									<h4>La liste des secteurs du site  "<c:out value="${sessionScope.sessionSite.nomsite}"/>"</h4>
-									   
-									   <c:forEach items="${sessionScope.sessionSite.secteurs}" var="secteurs" >
-                                         <c:if test="${ secteurs.nomsect != null }">
-					<div class="list-group">
-					
-						<div class="list-group-item ">
-							<h4 class="list-group-item-heading"><c:out value="${secteurs.nomsect}"/></h4>
-							<c:if test="${ !empty sessionScope.sessionVoie }">
-							<c:forEach items="${secteurs.voies}" var="voies" >
-							<p class="list-group-item-text">
-							<ul><li><c:out value="${ voies.nom_voie }"/> </li></ul></p>
-							</c:forEach>
-							</c:if>
-						
-						</div>
-					</div>
-
-									  </c:if> 
-									   </c:forEach>
-									   </c:if>
-								 </c:if>
-	
-			</div>				
-	</div>					
+				

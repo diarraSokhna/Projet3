@@ -69,9 +69,6 @@ public class AjoutVoieForm {
 	    	String altitude = getValeurChamp( request, CHAMP_Altitude );
 	    	String nbrlongueur = getValeurChamp( request, CHAMP_NBRLONGUEUR );
 	    	
-	    	
-	    	
-	    	
             HttpSession session = request.getSession();
 	        
             LinkedHashMap<String, Secteur> secteurs = (LinkedHashMap<String, Secteur>) session.getAttribute( SESSION_SECTEURS );

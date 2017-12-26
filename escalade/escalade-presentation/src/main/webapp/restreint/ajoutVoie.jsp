@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<form method="post" accept-charset="UTF-8" action="AjoutVoie" name="voie" id="voie" style="display:none">
+<form method="post" accept-charset="UTF-8" action="AjoutVoie" >
 							<div class="panel-body form-horizontal payment-form">
 								<c:set var="cotation" value="${ voie.cotation }" scope="request" />
 								<c:set var="exposition" value="${ voie.exposition }" scope="request" />

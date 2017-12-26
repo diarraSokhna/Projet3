@@ -49,7 +49,7 @@ public class AjoutSecteurForm {
         Site  site =  (Site) session.getAttribute( SESSION_SITES );
         
         
-         site.addSecteur(secteur);
+        site.addSecteur(secteur);
       
         
         try {
