@@ -80,9 +80,13 @@ public final class CreationTopoForm {
 	         String nom = getValeurChamp( request, CHAMP_NOM );
 	         String description = getValeurChamp( request, CHAMP_DESCRIPTION );
 	         String nbrpage = getValeurChamp( request, CHAMP_NOMBRE_PAGE );
-	        
+	         String[] listeSite = request.getParameterValues(LISTE_SITE);
 
-		       
+	         if ( listeSite == null ) {
+		            setErreur( LISTE_SITE, "Veuillez choisir au moins un site!" );
+	        }
+	         
+	         
 	         traiterNom( nom, topo );
 	         traiterDescription( description, topo );
 	         traiterNbrPage( nbrpage, topo );
@@ -95,8 +99,7 @@ public final class CreationTopoForm {
 	            if ( erreurs.isEmpty() ) {
 	            	
 	                topoDao.creer( topo );
-	                String[] listeSite = request.getParameterValues("listeSite");
-	               
+	                
 	                for(int i = 0 ; i < listeSite.length ; i++ ){
 	                long id_site = Long.parseLong(listeSite[i]);
 	                Site site = siteDao.trouver(id_site);

@@ -23,7 +23,6 @@ public class AjoutCommentaire extends HttpServlet {
 	 public static final String ATT_COMMENTAIRE        = "commentaire";
 	 public static final String ATT_FORM         = "form";
 	 
-
 	 public static final String PARAM_NOM_TOPO= "nomtopo";
 	 public static final String PARAM_ID_TOPO = "idtopo";
 	 
@@ -58,6 +57,7 @@ public class AjoutCommentaire extends HttpServlet {
 	
 		Long idtopo = Long.parseLong(getValeurParametre( request, PARAM_ID_TOPO )); 
 		request.setAttribute("commentaires", commentaireDao.lister(idtopo));
+		request.setAttribute("rowCount", commentaireDao.count(idtopo));
 		this.getServletContext().getRequestDispatcher(VUE_FORM).forward(request, response);
 		
       

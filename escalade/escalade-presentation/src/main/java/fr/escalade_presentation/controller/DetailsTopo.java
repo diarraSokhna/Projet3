@@ -47,15 +47,15 @@ public class DetailsTopo extends HttpServlet {
 		String nomtopo = getValeurParametre( request, PARAM_NOM_TOPO ); 
 		String idtopo = getValeurParametre( request, PARAM_ID_TOPO );
 		long id_topo = Long.parseLong(idtopo);
-		Topo topo = topoDao.trouver(id_topo);
 		
-		request.setAttribute("sites", siteDao.listerParTopo(id_topo));
+//		request.setAttribute("sites", siteDao.listerParTopo(id_topo));
 		
 		request.setAttribute("commentaires", commentaireDao.lister(id_topo));
-		
 		request.setAttribute("topo", topoDao.trouver(nomtopo));
 		
-	   this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+		request.setAttribute("rowCount", commentaireDao.count(id_topo));
+		
+	    this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 		
 		
 		

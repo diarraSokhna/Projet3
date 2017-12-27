@@ -21,11 +21,10 @@ public class ArticleDaoImpl implements ArticleDao{
 	   private static final String SQL_SELECT_PAR_ID = "SELECT * FROM article WHERE id_art = ?";
 	   private static final String SQL_SELECT = "SELECT * FROM article ORDER BY id_art";
 	   private static final String SQL_INSERT = "INSERT INTO article (date, titre, contenu, id_user, photoa) VALUES (NOW(), ?, ?, ?, ?)";
-	   private static final String SQL_COUNT = "SELECT COUNT(*) from article a,commentaire c where a.id_art=? AND a.id_art=c.id_art";
 	   private static final String SQL_DELETE_PAR_ID = "DELETE FROM article WHERE id_art = ?";
 	   
 	   private  DaoFactory  daoFactory;
-	   private Integer rowCount;
+	 
 	   
 	public ArticleDaoImpl(DaoFactory daoFactory) {
 		this.daoFactory = daoFactory;
@@ -120,29 +119,7 @@ public class ArticleDaoImpl implements ArticleDao{
 	        return articles;
 	}
 	
-	public int count(int idArt) throws DaoException {
-		
-	    Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-         
- 
-        try {
-            connection = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee( connection, SQL_COUNT, true, idArt);
-            resultSet = preparedStatement.executeQuery();
-             
-             rowCount = resultSet.getInt(1);
-             
-             
-        } catch ( SQLException e ) {
-            throw new DaoException( e );
-        } finally {
-            fermeturesSilencieuses( resultSet, preparedStatement, connection );
-        }
- 
-        return rowCount;
-}
+	
 	
 	private  Article map( ResultSet resultSet ) throws SQLException {
 		Article article = new Article();

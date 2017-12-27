@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.escalade.beans.Reservation;
 import fr.escalade.persistance.DaoFactory;
@@ -22,7 +23,10 @@ public class ReservationTopo extends HttpServlet {
 	    public static final String PARAM_ID_TOPO = "idtopo";
 	    public static final String ATT_FORM         = "form";
 	    
-	    public static final String VUE    = "/restreint/reservationTopo.jsp";
+	    public static final String ATT_SESSION_RESERVATION = "sessionReservation";
+	    
+	    public static final String VUE_FORM    = "/restreint/reservationTopo.jsp";
+	    public static final String VUE_SUCCES    = "/escalade-presentation/DetailsTopo";
    
 	    private ReservationDao reservationDao;
 	    private TopoDao topoDao;
@@ -43,7 +47,7 @@ public class ReservationTopo extends HttpServlet {
 		long id_topo = Long.parseLong(idtopo);
 		request.setAttribute("topo", topoDao.trouver(id_topo));
 		request.setAttribute("reservations", reservationDao.lister());
-		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+		this.getServletContext().getRequestDispatcher(VUE_FORM).forward(request, response);
 	
 	}
 
@@ -54,13 +58,20 @@ public class ReservationTopo extends HttpServlet {
 		ReservationForm form = new ReservationForm(reservationDao,topoDao);
         
 	    Reservation reservation = form.creerReservation(request);
-        
 
         request.setAttribute( ATT_RESERVATION, reservation );
         request.setAttribute( ATT_FORM, form );
         
-        this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-    	
+          HttpSession session = request.getSession();
+         
+        if ( form.getErreurs().isEmpty()) {
+            session.setAttribute( ATT_SESSION_RESERVATION, reservation );
+
+        }
+        String idtopo = getValeurParametre( request, PARAM_ID_TOPO );
+		long id_topo = Long.parseLong(idtopo);
+		request.setAttribute("topo", topoDao.trouver(id_topo));
+        this.getServletContext().getRequestDispatcher(VUE_FORM).forward(request, response);
 	}
 
 	

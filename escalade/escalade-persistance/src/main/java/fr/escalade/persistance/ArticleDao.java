@@ -17,6 +17,6 @@ public interface ArticleDao {
 	 
 	 void supprimer( Article article ) throws DaoException;
 	 
-	 int count(int idArt) throws DaoException;
+	 
 	    
 }

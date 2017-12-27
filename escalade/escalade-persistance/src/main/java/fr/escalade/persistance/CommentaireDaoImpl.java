@@ -17,9 +17,10 @@ public class CommentaireDaoImpl  implements CommentaireDao{
 	   private static final String SQL_SELECT_PAR_TOPO = "SELECT c.id_com, libelle_com, c.id_topo , c.id_user, c.date_com FROM  commentaire c, topo t WHERE c.id_topo=t.id_topo AND c.id_topo=?";
 	   private static final String SQL_INSERT = "INSERT INTO commentaire (libelle_com, date_com, id_user, id_topo) VALUES (?, NOW(), ?, ?)";
 	   private static final String SQL_DELETE_PAR_ID = "DELETE FROM commentaire WHERE id_com = ?";
-	   
+	   private static final String SQL_COUNT = "SELECT COUNT(*) from topo t,commentaire c where t.id_topo=? AND t.id_topo=c.id_topo";
+		  
 	   private DaoFactory  daoFactory;
-	 
+	   private Integer rowCount;
 	
 	public CommentaireDaoImpl(DaoFactory daoFactory) {
 		this.daoFactory = daoFactory;
@@ -60,6 +61,30 @@ public class CommentaireDaoImpl  implements CommentaireDao{
     	
 		
 	}
+	
+			public int count(long idtopo) throws DaoException {
+					
+				    Connection connection = null;
+			        PreparedStatement preparedStatement = null;
+			        ResultSet resultSet = null;
+			         
+			 
+			        try {
+			            connection = daoFactory.getConnection();
+			            preparedStatement = initialisationRequetePreparee( connection, SQL_COUNT, false, idtopo);
+			            resultSet = preparedStatement.executeQuery();
+			            while ( resultSet.next() ) {
+			             rowCount = resultSet.getInt(1);
+			            }
+			             
+			        } catch ( SQLException e ) {
+			            throw new DaoException( e );
+			        } finally {
+			            fermeturesSilencieuses( resultSet, preparedStatement, connection );
+			        }
+			 
+			        return rowCount;
+			}
 	
 	public List<Commentaire> lister(Long id_topo) throws DaoException {
 		Connection connection = null;

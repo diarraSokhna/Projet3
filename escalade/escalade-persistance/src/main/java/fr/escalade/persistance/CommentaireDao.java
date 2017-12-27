@@ -14,6 +14,7 @@ public interface CommentaireDao {
 	 
 	 void supprimer( Commentaire commentaire ) throws DaoException;
 	 
+	 int count(long idtopo) throws DaoException;
 	 
 
 }

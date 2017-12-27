@@ -59,6 +59,11 @@ public class ReservationForm {
 		     java.text.DateFormat format = new java.text.SimpleDateFormat("dd-MM-yyyy");
 		     java.util.Date date;
 		     String date_resa = getValeurChamp( request, CHAMP_DATE );
+		     
+//		     if (date_resa == null){
+//		    	 setErreur( CHAMP_DATE, "Veuillez choisir une date" );
+//		     }
+		     
 			try {
 				date = format.parse(date_resa);
 				java.sql.Date dateresa = new java.sql.Date(date.getTime());
@@ -94,8 +99,6 @@ public class ReservationForm {
 	 
 
 	    private void traiterDateResa( String date_resa, String idtopo, Reservation reservation ) {
-	    	
-	    	
 	    	java.text.DateFormat format = new java.text.SimpleDateFormat("dd-MM-yyyy");
 	    	java.util.Date date;
 				try {
@@ -118,10 +121,7 @@ public class ReservationForm {
 	    }
 
 	    private void validationDateResa( String date_resa , String idtopo) throws FormValidationException {
-	    	if (date_resa == null){
-	        	throw new FormValidationException( "Merci de choisir une date de séservation." );
-	        	
-			}
+	   
 	    	
 	    	long temp = Long.parseLong(idtopo);
 	    
