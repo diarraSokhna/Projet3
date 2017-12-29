@@ -121,7 +121,7 @@ public class ReservationDaoImpl implements ReservationDao {
 		        
 		        UtilisateurDao utilisateurDao = daoFactory.getUtilisateurDao();
 		        TopoDao topoDao = daoFactory.getTopoDao();
-		        reservation.setUtilisateur(utilisateurDao.trouver(resultSet.getLong("id_user")));
+		        reservation.setUtilisateur(utilisateurDao.trouverParId(resultSet.getLong("id_user")));
 		        reservation.setTopo(topoDao.trouver(resultSet.getLong("id_topo")));
 		       
 		        return reservation;

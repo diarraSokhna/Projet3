@@ -116,7 +116,7 @@ public final class InscriptionForm {
         if ( email != null ) {
             if ( !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
                 throw new FormValidationException( "Merci de saisir une adresse mail valide." );
-            } else if ( utilisateurDao.trouver( email ) != null ) {
+            } else if ( utilisateurDao.trouverParMail( email ) != null ) {
                 throw new FormValidationException( "Cette adresse email est déjà utilisée, merci d'en choisir une autre." );
             }
         } else {

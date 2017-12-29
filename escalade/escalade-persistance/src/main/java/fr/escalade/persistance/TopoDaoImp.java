@@ -123,7 +123,7 @@ public class TopoDaoImp implements TopoDao{
 	        topo.setNbpage(resultSet.getInt( "nbr_page"));
 	        
 	        UtilisateurDao utilisateurDao = daoFactory.getUtilisateurDao();
-	        topo.setUtilisateur(utilisateurDao.trouver(resultSet.getLong("id_user")));;
+	        topo.setUtilisateur(utilisateurDao.trouverParId(resultSet.getLong("id_user")));;
 	        topo.setImage( resultSet.getString( "image" ) );
 	       
 	        return topo;

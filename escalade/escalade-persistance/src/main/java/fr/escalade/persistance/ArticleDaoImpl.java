@@ -129,7 +129,7 @@ public class ArticleDaoImpl implements ArticleDao{
 	    article.setContenu( resultSet.getString( "contenu" ));
 	    
 	    UtilisateurDao utilisateurDao = daoFactory.getUtilisateurDao();
-	    article.setUtilisateur(utilisateurDao.trouver(resultSet.getLong("id_user")));
+	    article.setUtilisateur(utilisateurDao.trouverParId(resultSet.getLong("id_user")));
 	    article.setPhoto( resultSet.getString( "photoa" ) );
 	    
 	    return article;

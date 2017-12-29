@@ -115,7 +115,7 @@ public class CommentaireDaoImpl  implements CommentaireDao{
 		commentaire.setDatecom( resultSet.getDate( "date_com" ));
 		
 		UtilisateurDao utilisateurDao = daoFactory.getUtilisateurDao();
-		commentaire.setUtilisateur(utilisateurDao.trouver(resultSet.getLong("id_user")));
+		commentaire.setUtilisateur(utilisateurDao.trouverParId(resultSet.getLong("id_user")));
 		
 		TopoDao topoDao = daoFactory.getTopoDao();
 	    commentaire.setTopo(topoDao.trouver(resultSet.getLong("id_topo")));

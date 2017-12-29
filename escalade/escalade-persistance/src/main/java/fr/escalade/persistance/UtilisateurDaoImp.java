@@ -89,17 +89,17 @@ public class UtilisateurDaoImp implements UtilisateurDao{
 
 
 	
-	public Utilisateur trouver(Long idUser) throws DaoException {
+	public Utilisateur trouverParId(Long idUser) throws DaoException {
 		 return trouver( SQL_SELECT_PAR_ID, idUser );
 	}
 	
 	
 	  
-	public Utilisateur trouver( String email, String motpasse ) throws DaoException {
+	public Utilisateur trouverParMailPass( String email, String motpasse ) throws DaoException {
 			 return trouver( SQL_SELECT_PAR_EMAIL_PASS, email, motpasse);
 	    }
 	
-	public Utilisateur trouver(String email) throws DaoException {
+	public Utilisateur trouverParMail(String email) throws DaoException {
 		   return trouver( SQL_SELECT_PAR_EMAIL, email);
 	}
 
