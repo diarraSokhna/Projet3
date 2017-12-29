@@ -9,21 +9,23 @@
 
 <div class="container">
  <div class="panel panel-default">
-  <div class="panel-heading"><h2><c:out value="${ topo.nom }"/></h2></div>
+  <div class="panel-heading"><h4><b><c:out value="${ topo.nom }"/></b></h4></div>
 
  <div class="panel-body">
  
            <div class="row">
-            <div class ="col-md-4 text-left ">
-            <div class="thumbnail">
+            <div class ="col-md-6 text-left ">
+           
               <img  src="<c:url value="/images/${ topo.image }"/>" alt="" class="img-thumbnail taille"> 
-</div>
+
             </div>
 	        <div class ="col-md-6 text-left ">
                 <h3 class="top_title" style=""><c:out value="${  topo.nom  }"/></h3>
-                <span class="para_text" style=""> Poposé par  <c:out value="${ topo.utilisateur.nom }"/> <c:out value="${ topo.utilisateur.prenom }"/><br/><br/>
-                <c:out value="${ topo.description }"/><br/>
-                 <b>Nombre de pages: </b> <c:out value="${ topo.nbpage}" /> pages<br/>
+                <span class="para_text" style=""> Poposé par <b><c:out value="${ topo.utilisateur.nom }"/> <c:out value="${ topo.utilisateur.prenom }"/></b> <br/><br/>
+                <c:out value="${ topo.description }"/><br/><br/>
+                Nombre de pages:  <b> <c:out value="${ topo.nbpage}" /> </b> pages<br/><br/>
+                
+                <i class="glyphicon glyphicon-comment right"></i><c:out value="${ rowCount }" />
 <!--                  La liste des sites du topo : -->
 					
 <%-- 					 <c:forEach var = "site" items = "${ sites }"> --%>
@@ -34,10 +36,10 @@
                 <section style="margin-top: 75px">
 		                    
 		                    
-		                     <p> <a href="<c:url value="ReservationTopo" > <c:param name="idtopo" value="${ topo.idtopo }" /> </c:url>" class="btn btn-primary" role="button">Réserver</a>
-                                <a href="<c:url value="/ListeTopo"/>" class="btn btn-primary" role="button">Retour</a></p>
+		                     <p> <a href="<c:url value="ReservationTopo" > <c:param name="idtopo" value="${ topo.idtopo }" /> </c:url>" class="btn btn-default" role="button">Réserver</a>
+                                <a href="<c:url value="/ListeTopo"/>" class="btn btn-default" role="button">Retour</a></p>
                     </section>
-                    <i class="glyphicon glyphicon-comment right"></i><c:out value="${ rowCount }" />
+                    
             </div>
             
         
@@ -48,7 +50,7 @@
     </div>
     
  <div class="panel panel-default">
-  <div class="panel-heading"><h2>Vous aussi exprimez vous</h2></div>
+  <div class="panel-heading"><h4><b>Vous aussi exprimez vous</b></h4></div>
  <div class="panel-body">
 			
 			

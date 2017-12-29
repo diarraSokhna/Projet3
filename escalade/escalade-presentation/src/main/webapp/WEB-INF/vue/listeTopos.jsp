@@ -10,7 +10,7 @@
 
 
  <div class="panel panel-default">
-  <div class="panel-heading"><h2>La liste des Topos</h2></div>
+  <div class="panel-heading"><h4><b>La liste des Topos</b></h4></div>
  <div class="panel-body">
  <c:forEach var = "topo" items = "${ topos }">
                     <div class="col-sm-6 col-md-3 colonn">

@@ -50,12 +50,15 @@
             
         </ul>
         </li>
-     
+      <c:choose>
+							<c:when test="${ empty sessionScope.sessionUtilisateur }">
        
         <li><a href="<c:url value="/Inscription" />">S'inscrire</a></li>
+        </c:when>
+        </c:choose>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      <c:choose>
+                      <c:choose>
 							<c:when test="${ empty sessionScope.sessionUtilisateur }">
 							<li><a href="<c:url value="/Connection" />"><span class="glyphicon glyphicon-log-in"></span> Connexion </a></li>
 							</c:when>
@@ -69,6 +72,5 @@
     </div>
   </div>
 </nav>
-
 </body>
 </html>

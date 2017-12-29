@@ -19,7 +19,8 @@ public class VilleDaoImpl implements VilleDao {
     private static final String SQL_SELECT = "SELECT * FROM ville ORDER BY id_ville";
     private static final String SQL_SELECT_PAR_ID = "SELECT * FROM ville WHERE id_ville = ?";
     private static final String SQL_SELECT_PAR_NOM = "SELECT * FROM ville WHERE nom_ville = ?";
-   
+    private static final String SQL_SELECT_PAR_PAYS = "SELECT * FROM ville WHERE id_pays = ?";
+    
     private  DaoFactory  daoFactory;
     
 	public VilleDaoImpl(DaoFactory daoFactory) {
@@ -81,6 +82,32 @@ public class VilleDaoImpl implements VilleDao {
 	        return ville;
 	    }
 
+	 @Override
+		public Ville trouverpar(long id_pays) throws DaoException {
+		
+	       Connection connexion = null;
+	        PreparedStatement preparedStatement = null;
+	        ResultSet resultSet = null;
+	        Ville ville = null;
+
+	        try {
+	            connexion = daoFactory.getConnection();
+	            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_PAR_PAYS, false, id_pays );
+	            resultSet = preparedStatement.executeQuery();
+	           
+	            if ( resultSet.next() ) {
+	                ville = map( resultSet );
+	            }
+	        } catch ( SQLException e ) {
+	            throw new DaoException( e );
+	        } finally {
+	            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+	        }
+
+	        return ville;
+		 
+		}
+
 
 	
 	
@@ -130,4 +157,5 @@ public class VilleDaoImpl implements VilleDao {
 	        return ville;
 	    }
 
+	
 }

@@ -36,13 +36,15 @@ public class Connection extends HttpServlet {
     }
 
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+    	
+    	 
          this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
     }
 
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         ConnexionForm form = new ConnexionForm(utilisateurDao);
-
         Utilisateur utilisateur = form.connecterUtilisateur( request );
+        
         request.setAttribute( ATT_FORM, form );
         request.setAttribute( ATT_USER, utilisateur );
      

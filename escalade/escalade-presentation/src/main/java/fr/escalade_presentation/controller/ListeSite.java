@@ -2,6 +2,7 @@ package fr.escalade_presentation.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
 
 import fr.escalade.beans.Article;
 import fr.escalade.beans.Classement;
@@ -61,10 +64,24 @@ public void init() throws ServletException {
 public ListeSite() {}
 
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	  request.setAttribute("payss", paysDao.lister());
-	  request.setAttribute("classements", classementDao.lister());
-	  request.setAttribute("cotations", cotationDao.lister());
-	  request.setAttribute("villes", villeDao.lister());
+	    request.setAttribute("payss", paysDao.lister());
+	    request.setAttribute("classements", classementDao.lister());
+	    request.setAttribute("cotations", cotationDao.lister());
+	  
+	  
+		String selectedValue = request.getParameter(CHOIX_PAYS);
+		System.out.println("id pays:"+selectedValue );
+		if (selectedValue != null){
+		long idpays = Long.parseLong(selectedValue);
+	    Map<Long, Long> villes = (Map<Long, Long>) villeDao.trouverpar(idpays);
+	    String json = new Gson().toJson(villes);
+	    response.setContentType("application/json");
+	    response.setCharacterEncoding("UTF-8");
+	    response.getWriter().write(json);
+	}
+	  //  else {
+//	  request.setAttribute("villes", villeDao.lister());
+//		}
 	  request.setAttribute("sites", siteDao.lister());
 	
       this.getServletContext().getRequestDispatcher(VUE).forward(request, response);

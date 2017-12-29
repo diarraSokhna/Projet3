@@ -8,14 +8,14 @@
 
   <div class="container">
     <div class="panel panel-default">
-  <div class="panel-heading"><h2>Inscrivez vous c'est gratuit!</h2></div>
+  <div class="panel-heading"><h4><b>Inscrivez vous c'est gratuit!</b></h4></div>
  <div class="panel-body">
 		
         <form method="post" accept-charset="UTF-8" action="Inscription">
              <div class="panel-body form-horizontal payment-form">
               <fieldset>
              <div class="form-group">
-						<label for="nom" class="col-sm-5 control-label">Nom d'utilisateur<span class="requis">*</span>
+						<label for="nom" class="col-sm-5 control-label">Nom d'utilisateur
 						</label>
 						<div class="col-sm-5">
 							<input type="text" class="form-control" id="nom" name="nom"
@@ -27,7 +27,7 @@
 					</div>
 					
 					 <div class="form-group">
-						<label for="prenom" class="col-sm-5 control-label">Prénom<span class="requis">*</span>
+						<label for="prenom" class="col-sm-5 control-label">Prénom
 						</label>
 						<div class="col-sm-5">
 							<input type="text" class="form-control" id="prenom" name="prenom"
@@ -62,25 +62,25 @@
                </div>
 
               <div class="form-group">
-                        <div class="col-sm-12 text-right">
+                        <div class="col-sm-10 text-right">
                          <a href="<c:url value="/Connection" />"> Déjà membre?</a>
-                          <button  type="submit" value="Inscription" class="btn btn-primary">
+                          <button  type="submit" value="Inscription" class="btn btn-default">
                                 Inscription
                             </button>
-                             <button type="reset" class="btn btn-primary">
+                             <button type="reset" class="btn btn-default">
                                  Annuler
                             </button>
            
                  </div>
                     </div>
                <p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>
-               	<c:if test="${!empty sessionScope.sessionUtilisateur}">
-								<%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
-								<p class="succes">Vous êtes connecté(e) avec l'adresse :
-									${sessionScope.sessionUtilisateur.email} passe:
-									${sessionScope.sessionUtilisateur.motpass}
-									${sessionScope.sessionUtilisateur.iduser}</p>
-							</c:if>
+<%--                	<c:if test="${!empty sessionScope.sessionUtilisateur}"> --%>
+<%-- 								Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
+<!-- 								<p class="succes">Vous êtes connecté(e) avec l'adresse : -->
+<%-- 									${sessionScope.sessionUtilisateur.email} passe: --%>
+<%-- 									${sessionScope.sessionUtilisateur.motpass} --%>
+<%-- 									${sessionScope.sessionUtilisateur.iduser}</p> --%>
+<%-- 							</c:if> --%>
                </fieldset>
           </div>
    

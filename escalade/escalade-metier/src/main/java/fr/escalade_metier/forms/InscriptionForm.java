@@ -86,10 +86,10 @@ public final class InscriptionForm {
             setErreur( CHAMP_CONF, null );
         }
         
-//        StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
-//        String motDePasseChiffre = passwordEncryptor.encryptPassword(motDePasse);
-//        
-           utilisateur.setMotpass( motDePasse );
+        StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+        String motDePasseChiffre = passwordEncryptor.encryptPassword(motDePasse);
+        
+        utilisateur.setMotpass( motDePasseChiffre );
     }
   
     private void traiterNom( String nom, Utilisateur utilisateur ) {

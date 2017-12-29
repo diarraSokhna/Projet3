@@ -22,8 +22,7 @@ public final class ConnexionForm {
     StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
     
     
-    private UtilisateurDao      utilisateurDao;
-    Utilisateur utilisateur = new Utilisateur();
+    private UtilisateurDao  utilisateurDao;
     
 
 	public ConnexionForm() {
@@ -46,37 +45,70 @@ public final class ConnexionForm {
         String email = getValeurChamp( request, CHAMP_EMAIL );
         String motDePasse = getValeurChamp( request, CHAMP_PASS );
 
+        
         Utilisateur utilisateur = new Utilisateur();
-
-       
+  
         try {
-            validationEmailPasse(email,motDePasse);
-        } catch ( Exception e ) {
-            setErreur( CHAMP_EMAIL, e.getMessage() );
-            setErreur( CHAMP_PASS, e.getMessage() );
-        }
-    
-         utilisateur.setEmail( email );
-         utilisateur.setMotpass(motDePasse);
-         
-          //  String motdepassbase = utilisateurDao.trouver(email).getMotpass();
-         // && passwordEncryptor.checkPassword(motDePasse, motdepassbase)
-     
-        if ( erreurs.isEmpty()) {
+        traiterEmail( email, utilisateur );
+        traiterMotsDePasse( motDePasse, email , utilisateur );
+        
+
+        if ( erreurs.isEmpty() ) {
             resultat = "Succès de la connexion.";
-            utilisateur.setId_user(utilisateurDao.trouver(email, motDePasse).getIduser());
+//            utilisateur.setId_user(utilisateurDao.trouver(email, motDePasse).getIduser());
         } else {
             resultat = "Échec de la connexion.";
         }
+        } catch ( DaoException e ) {
+	        resultat = "Échec de la connexion : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
+	        e.printStackTrace();
+	    }
 
         return utilisateur;
     }
 
-   
-    private void validationEmailPasse( String email, String motDePasse) throws Exception {
-        if ( utilisateurDao.trouver(email,motDePasse) == null  ) {
-            throw new Exception( "L'adresse mail ou le mot de passe est vide ou incorrect." );
+    
+    private void traiterEmail( String email, Utilisateur utilisateur ) {
+        try {
+            validationEmail( email );
+        } catch ( FormValidationException e ) {
+            setErreur( CHAMP_EMAIL, e.getMessage() );
         }
+        utilisateur.setEmail( email );
+    }
+   
+    
+    private void traiterMotsDePasse( String motDePasse, String email, Utilisateur utilisateur ) {
+        try {
+            validationMotsDePasse( motDePasse, email );
+        } catch ( FormValidationException e ) {
+            setErreur( CHAMP_PASS, e.getMessage() );
+        } 
+        utilisateur.setMotpass( motDePasse );
+    }
+    
+    
+    private void validationEmail( String email ) throws FormValidationException {
+        if ( email != null  ) {
+        	if (utilisateurDao.trouver( email ) == null){
+        	System.out.println("email  : "+  utilisateurDao.trouver( email ));
+           throw new FormValidationException( "Merci de saisir une adresse mail valide." );}
+             }else {
+            throw new FormValidationException( "Merci de saisir une adresse mail." );
+        }
+    }
+    
+    
+    private void validationMotsDePasse( String motDePasse ,  String email) throws FormValidationException {
+          if (motDePasse != null){
+        	  if(passwordEncryptor.checkPassword(motDePasse, utilisateurDao.trouver(email).getMotpass())){
+        	  System.out.println("pass  : "+  utilisateurDao.trouver(email).getMotpass() );
+        	  throw new FormValidationException( "Merci de saisir un mot de passe valide." );}
+       
+        } else {
+        	 throw new FormValidationException( "Veuillez entrer un mot de passe." );
+        }
+        
     }
     
  

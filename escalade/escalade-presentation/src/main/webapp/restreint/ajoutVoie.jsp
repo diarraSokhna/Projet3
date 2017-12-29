@@ -21,7 +21,7 @@
 											<label class="col-xs-3 control-label">Secteur</label>
 											<div class="col-sm-6 selectContainer">
 												<select class="form-control" name="secteur" id="secteur">
-													<option value="0">SÃ©lectionnez un secteur</option>
+													<option value="0">Sélectionnez un secteur</option>
 													
 													<c:forEach items="${ sessionScope.sessionSecteur}" var="secteurs">
 														<option value="<c:out value="${ secteurs.key}" />"><c:out
