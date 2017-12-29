@@ -3,23 +3,22 @@
 <html>
 <head>
 <link rel="shortcut icon" type="image/x-icon" href="/escalade-presentation/img/favicon.png" />
+
+<script src="bootstrap/js/jquery-3.1.1.min.js"></script>
 <script>
 $(document).ready(function() {
-    $('#idpays').change(function() {
-        var idpays = $(this).val();
-        var servletUrl = 'idvilleoptions?value=' + idpays;
+$('#idpays').change(function(event) {
+    var idpays = $("select#idpays").val();
+    $.get('ListeSite', {
+    	idPays : idpays
+    }, function(response) {
 
-        $.getJSON(servletUrl, function(villes) {
-            var ville = $('#idville');
-            $('>option', idville).remove(); // Clean old options first.
-            if (villes) {
-                $.each(opts, function(key, value) {
-                    idville.append($('<option/>').val(key).text(value));
-                });
-            } else {
-                idville.append($('<option/>').text("Please select dropdown1"));
-            }
-        });
+    var select = $('#idville');
+    select.find('option').remove();
+      $.each(response, function(index, value) {
+      $('<option>').val(value).text(value).appendTo(select);
+  });
+    });
     });
 });
 </script>
@@ -42,8 +41,8 @@ $(document).ready(function() {
         
                             
 			<Strong>Rechercher par </strong>
-			<select class="form-control form-control-lg" name="idpays" id="idpays"   onchange="change()">
-				<option value="0">Pays</option>
+			<select class="form-control form-control-lg" name="idpays" id="idpays"  >
+<!-- 				<option value="0">Pays</option> -->
 				<c:forEach var="pays" items="${ payss }">
 				  	<option value="<c:out value="${pays.idpays}" /> "><c:out value="${pays.nompays}" /></option>
 				</c:forEach>

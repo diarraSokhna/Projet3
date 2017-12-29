@@ -63,29 +63,30 @@ public void init() throws ServletException {
 
 public ListeSite() {}
 
+@SuppressWarnings("unchecked")
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    request.setAttribute("payss", paysDao.lister());
-	    request.setAttribute("classements", classementDao.lister());
-	    request.setAttribute("cotations", cotationDao.lister());
-	  
-	  
-		String selectedValue = request.getParameter(CHOIX_PAYS);
-		System.out.println("id pays:"+selectedValue );
-		if (selectedValue != null){
-		long idpays = Long.parseLong(selectedValue);
-	    Map<Long, Long> villes = (Map<Long, Long>) villeDao.trouverpar(idpays);
-	    String json = new Gson().toJson(villes);
-	    response.setContentType("application/json");
-	    response.setCharacterEncoding("UTF-8");
-	    response.getWriter().write(json);
-	}
-	  //  else {
-//	  request.setAttribute("villes", villeDao.lister());
+		request.setAttribute("payss", paysDao.lister());
+		request.setAttribute("classements", classementDao.lister());
+		request.setAttribute("cotations", cotationDao.lister());
+
+		String idPays = request.getParameter(CHOIX_PAYS);
+		System.out.println("idpays"+idPays);
+		if (idPays != null) {
+			long id_pays = Long.parseLong(idPays);
+		
+			Map<Long, Long> villes = (Map<Long, Long>) villeDao.trouverpar(id_pays);
+			String json = new Gson().toJson(villes);
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write(json);
+		} 
+//			else {
+//			request.setAttribute("villes", villeDao.lister());
 //		}
-	  request.setAttribute("sites", siteDao.lister());
-	
-      this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-}
+		request.setAttribute("sites", siteDao.lister());
+
+		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+	}
 
 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

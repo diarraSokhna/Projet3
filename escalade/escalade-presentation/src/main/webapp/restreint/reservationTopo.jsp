@@ -13,7 +13,7 @@
 
 <div class="container">
  <div class="panel panel-default">
- <div class="panel-heading"><h2>Réserver un topo </h2></div>
+ <div class="panel-heading"><h4><b>Réserver un topo </b></h4></div>
  <div class="panel-body">
  
 
@@ -34,11 +34,11 @@
                     <input type="hidden"  class="form-control" id="idtopo" name="idtopo" value="<c:out value="${topo.idtopo}"/>" >
                          
                     <div class="form-group">
-                        <div class="col-sm-12 text-right">
+                        <div class="col-sm-9 text-right">
                             <button type="submit" class="btn btn-default preview-add-button">
                                 Réserver
                             </button>
-                            <a href="<c:url value="/DetailsTopo"><c:param name="idtopo" value="${ topo.idtopo }" ></c:param><c:param name="nomtopo" value="${ topo.nom }" ></c:param></c:url>" class="btn btn-primary" role="button">Retour</a></p>
+                            <a href="<c:url value="/DetailsTopo"><c:param name="idtopo" value="${ topo.idtopo }" ></c:param><c:param name="nomtopo" value="${ topo.nom }" ></c:param></c:url>" class="btn btn-default" role="button">Retour</a></p>
                      
                               </div>
                     </div>

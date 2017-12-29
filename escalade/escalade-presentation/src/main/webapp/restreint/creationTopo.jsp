@@ -14,7 +14,7 @@
 
 
  <div class="panel panel-default">
- <div class="panel-heading"><h2>Proposez un topo</h2></div>
+ <div class="panel-heading"><h4><b>Proposez un topo</b></h4></div>
  <div class="panel-body">
  <form method="post" accept-charset="UTF-8" action="CreationTopo" enctype="multipart/form-data">
 

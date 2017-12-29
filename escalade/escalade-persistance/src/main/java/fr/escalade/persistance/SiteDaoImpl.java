@@ -24,7 +24,7 @@ public class SiteDaoImpl implements SiteDao{
     private static final String SQL_SELECT = "SELECT * FROM site ORDER BY id_site";
     private static final String SQL_SELECT_PAR_ID = "SELECT * FROM site WHERE id_site = ?";
     private static final String SQL_SELECT_PAR_NOM = "SELECT * FROM site WHERE nom_site = ?";
-    private static final String SQL_SELECT_PAR_TOPO = "SELECT nom_site FROM site INNER JOIN topo_site ON site.id_site = topo_site.id_site"+
+    private static final String SQL_SELECT_PAR_TOPO = "SELECT * FROM site INNER JOIN topo_site ON site.id_site = topo_site.id_site"+
                                                       " INNER JOIN topo ON topo_site.id_topo = topo.id_topo WHERE topo.id_topo = ?";
     private static final String SQL_SELECT_PAR_PAYS = "SELECT * FROM  site s, pays p WHERE s.id_pays=p.id_pays AND s.id_pays=?";
     private static final String SQL_SELECT_PAR_VILLE = "SELECT * FROM  site s, pays p, ville v WHERE s.id_pays=p.id_pays "+ 

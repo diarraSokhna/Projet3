@@ -47,8 +47,6 @@ public class AjoutSecteurForm {
         
         HttpSession session = request.getSession();
         Site  site =  (Site) session.getAttribute( SESSION_SITES );
-        
-        
         site.addSecteur(secteur);
       
         

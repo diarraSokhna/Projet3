@@ -20,7 +20,7 @@ import fr.escalade.persistance.VilleDao;
 public class Recherche extends HttpServlet {
 	 private static final long serialVersionUID = 1L; 
 	 public static final String CONF_DAO_FACTORY = "daofactory";
-     private static final String CHOIX_PAYS = "idpays";
+     private static final String CHOIX_PAYS = "nomPays";
 	 private static final String CHOIX_VILLE = "idville";
 	 private VilleDao villeDao;
 	 private PaysDao paysDao;
@@ -28,8 +28,6 @@ public class Recherche extends HttpServlet {
     public Recherche() { }
 
     public void init() throws ServletException {
-    	
-       
         this.paysDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getPaysDao();
     	this.villeDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getVilleDao();
 
@@ -39,9 +37,10 @@ public class Recherche extends HttpServlet {
     
 	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String selectedValue = request.getParameter(CHOIX_PAYS);
-		long idpays = Long.parseLong(selectedValue);
-	    Map<Long, Long> villes = (Map<Long, Long>) villeDao.trouverpar(idpays);
+		String nomPays = request.getParameter(CHOIX_PAYS);
+		long id_pays = paysDao.trouver(nomPays).getIdpays();
+		
+	    Map<Long, Long> villes = (Map<Long, Long>) villeDao.trouverpar(id_pays);
 	    String json = new Gson().toJson(villes);
 	    response.setContentType("application/json");
 	    response.setCharacterEncoding("UTF-8");

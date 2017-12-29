@@ -5,12 +5,7 @@
 </head>
 <body>
 <%@ include file="menu.jsp" %>
-
-
-
 	<div class="container">
-
-
 <div class="panel-group" id="accordion">
     <div class="panel panel-default">
       <div class="panel-heading">

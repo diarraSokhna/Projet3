@@ -48,7 +48,7 @@ public class DetailsTopo extends HttpServlet {
 		String idtopo = getValeurParametre( request, PARAM_ID_TOPO );
 		long id_topo = Long.parseLong(idtopo);
 		
-//		request.setAttribute("sites", siteDao.listerParTopo(id_topo));
+	    request.setAttribute("sites", siteDao.listerParTopo(id_topo));
 		
 		request.setAttribute("commentaires", commentaireDao.lister(id_topo));
 		request.setAttribute("topo", topoDao.trouver(nomtopo));

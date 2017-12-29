@@ -43,18 +43,16 @@ public final class ConnexionForm {
 		String email = getValeurChamp(request, CHAMP_EMAIL);
 		String motDePasse = getValeurChamp(request, CHAMP_PASS);
 		
-//		Utilisateur u = utilisateurDao.trouverParMail("toto@toto.com");
-//		
-//		System.out.println("u "+ u.getEmail());
-		
-		Utilisateur utilisateur=new Utilisateur();
+
+		Utilisateur utilisateur = new Utilisateur();
 
 		try {
 			traiterEmail(email, utilisateur);
 			traiterMotsDePasse(motDePasse, email, utilisateur);
 
-			if (erreurs.isEmpty() && passwordEncryptor.checkPassword(motDePasse, utilisateurDao.trouverParMail(email).getMotpass())) {
+			if (erreurs.isEmpty()) {
 				resultat = "Succès de la connexion.";
+				utilisateur = utilisateurDao.trouverParMail(email);
 				
 			} else {
 				resultat = "Échec de la connexion.";
@@ -88,8 +86,6 @@ public final class ConnexionForm {
 	private void validationEmail(String email) throws FormValidationException {
 		if (email != null) {
 			if (utilisateurDao.trouverParMail(email) == null) {
-				System.out.println("utilisateur : " + utilisateurDao.trouverParMail(email));
-				System.out.println("email  : " + email);
 				throw new FormValidationException("Merci de saisir une adresse mail valide.");
 			}
 		} else {
@@ -102,7 +98,6 @@ public final class ConnexionForm {
 			Utilisateur utilisateur = utilisateurDao.trouverParMail(email);
 			String modepassbase = utilisateur.getMotpass();
 			if (!passwordEncryptor.checkPassword(motDePasse, modepassbase)) {
-			
 				throw new FormValidationException("Veuillez saisir un mot de passe valide");
 			}
 

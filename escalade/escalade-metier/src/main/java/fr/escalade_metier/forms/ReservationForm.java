@@ -55,24 +55,10 @@ public class ReservationForm {
 	         
 		     Reservation reservation = new Reservation();
 		     
-		     
-		     java.text.DateFormat format = new java.text.SimpleDateFormat("dd-MM-yyyy");
-		     java.util.Date date;
+		
 		     String date_resa = getValeurChamp( request, CHAMP_DATE );
-		     
-//		     if (date_resa == null){
-//		    	 setErreur( CHAMP_DATE, "Veuillez choisir une date" );
-//		     }
-		     
-			try {
-				date = format.parse(date_resa);
-				java.sql.Date dateresa = new java.sql.Date(date.getTime());
-				 reservation.setDate_resa(dateresa);
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			}
-		     
-	        traiterDateResa(date_resa, idtopo ,  reservation);
+
+	         traiterDateResa(date_resa, idtopo ,  reservation);
 			
 	         reservation.setTopo(topo);
 	         reservation.setUtilisateur(utilisateur);
@@ -101,21 +87,28 @@ public class ReservationForm {
 	    private void traiterDateResa( String date_resa, String idtopo, Reservation reservation ) {
 	    	java.text.DateFormat format = new java.text.SimpleDateFormat("dd-MM-yyyy");
 	    	java.util.Date date;
+	    	if (date_resa != null){
 				try {
 					date = format.parse(date_resa);
 					java.sql.Date dateresa = new java.sql.Date(date.getTime());
+					
+//					if(dateresa != date){
+//						setErreur( CHAMP_DATE," format invalide" );
+//					}
+					
+					 try {
+				            validationDateResa( date_resa, idtopo );
+				        } catch ( FormValidationException e ) {
+				            setErreur( CHAMP_DATE, e.getMessage() );
+				        }
 					
 					 reservation.setDate_resa(dateresa);
 				        
 				} catch (ParseException e1) {
 					e1.printStackTrace();
 				}
-	    	
-	        try {
-	            validationDateResa( date_resa, idtopo );
-	        } catch ( FormValidationException e ) {
-	            setErreur( CHAMP_DATE, e.getMessage() );
-	        }
+	    	}else {setErreur( CHAMP_DATE, "Veuillez entrer une date" );}
+	       
 	       
 	        
 	    }

@@ -55,39 +55,36 @@ public class AjoutSecteur extends HttpServlet {
 	
 	}
 
-	
 	@SuppressWarnings("unchecked")
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		   
-	 		AjoutSecteurForm formsect = new AjoutSecteurForm( secteurDao );
-	 		Secteur secteur = formsect.creerSecteur(request);
-			
-	 	    HttpSession session = request.getSession();
-	 		
-			request.setAttribute(ATT_SECTEUR, secteur);
-			request.setAttribute(ATT_FORMSECT, formsect);
-		
-			if ( formsect.getErreurs().isEmpty() ) {
-				
-	            
-				LinkedHashMap<String, Secteur> secteurs = (LinkedHashMap<String, Secteur>) session.getAttribute( SESSION_SECTEURS );
-			
-	            if ( secteurs == null ) {
-	                 secteurs = new LinkedHashMap<String, Secteur>();
-	            }
-	            
-	           secteurs.put( secteur.getNomsect(), secteur );
-	           session.setAttribute( SESSION_SECTEURS, secteurs );
-		}else {}
-			
-			request.setAttribute("cotations", cotationDao.lister());
-			request.setAttribute("expositions",expositionDao.lister());
-			
-			this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-	 	   
-		
+		AjoutSecteurForm formsect = new AjoutSecteurForm(secteurDao);
+		Secteur secteur = formsect.creerSecteur(request);
+
+		HttpSession session = request.getSession();
+
+		request.setAttribute(ATT_SECTEUR, secteur);
+		request.setAttribute(ATT_FORMSECT, formsect);
+
+		if (formsect.getErreurs().isEmpty()) {
+			LinkedHashMap<String, Secteur> secteurs = (LinkedHashMap<String, Secteur>) session
+					.getAttribute(SESSION_SECTEURS);
+
+			if (secteurs == null) {
+				secteurs = new LinkedHashMap<String, Secteur>();
+			}
+
+			secteurs.put(secteur.getNomsect(), secteur);
+			session.setAttribute(SESSION_SECTEURS, secteurs);
+		} else {
+		}
+
+		request.setAttribute("cotations", cotationDao.lister());
+		request.setAttribute("expositions", expositionDao.lister());
+
+		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+
 	}
 
 }
