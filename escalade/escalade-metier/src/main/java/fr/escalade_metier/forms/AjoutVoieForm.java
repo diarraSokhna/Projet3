@@ -24,7 +24,7 @@ public class AjoutVoieForm {
 	    private static final String CHAMP_NOM       = "nomvoie";
 	    private static final String CHAMP_Altitude       = "altitude";
 	    private static final String CHAMP_NBRLONGUEUR       = "nbrlongueur";
-	    private static final String CHOIX_SECTEUR       = "secteur";
+	    private static final String CHOIX_SECTEUR       = "idsecteur";
 	    private static final String CHOIX_COTATION = "idcotation";
 	    private static final String CHOIX_EXPOSITION = "idexposition";
 	    
@@ -73,14 +73,7 @@ public class AjoutVoieForm {
 	        
             LinkedHashMap<String, Secteur> secteurs = (LinkedHashMap<String, Secteur>) session.getAttribute( SESSION_SECTEURS );
           
-            String nomsecteur = getValeurChamp(request, CHOIX_SECTEUR);
-            Secteur secteur = (Secteur) secteurs.get(nomsecteur);
-            
-	    	if ( secteur == null ) {
-	            setErreur( CHOIX_SECTEUR, "Merci de sélectionner un secteur.");
-	            }
-        
-	    	 if ( cotation == null ) {
+            if ( cotation == null ) {
 		            setErreur( CHOIX_COTATION, "Merci de choisir une cotation.");
 		            }
 	        
@@ -92,11 +85,19 @@ public class AjoutVoieForm {
 	        traiterAltitude( altitude, voie );
 	        traiterNbrLongueur( nbrlongueur, voie );
 	        
+	        
 	        voie.setCotation(cotation);
 	        voie.setExposition(exposition);
 	        
+	        String nomsecteur = getValeurChamp(request, CHOIX_SECTEUR);
+            Secteur secteur = (Secteur) secteurs.get(nomsecteur);
+            if (secteur != null){
 	        secteur.addVoie(voie);
-	       
+	        }else {
+	        	 setErreur( CHOIX_SECTEUR, "Veuillez choisir un secteur!" );
+	        	
+	        }
+	        
 	        try {
 	            if ( erreurs.isEmpty() ) {
 	                resultat = "Succès d'ajout de la voie.";
@@ -111,7 +112,9 @@ public class AjoutVoieForm {
 	        return voie;
 	    }
 	    
-	    private void traiterNom(String nomvoie, Voie voie) {
+	  
+
+		private void traiterNom(String nomvoie, Voie voie) {
 			
 			   try {
 		            validationNom( nomvoie );
@@ -169,10 +172,8 @@ public class AjoutVoieForm {
 	                temp = 0.0;
 	                throw new FormValidationException( "L'altitude  doit être un double." );
 	            }
-	        } else {
-            	throw new FormValidationException( "Veuillez entrer l'altitude." );
-	 	           
-            }
+	        }
+            
 	        return temp;
 	    }
         
@@ -189,10 +190,7 @@ public class AjoutVoieForm {
 	                temp = 0;
 	                throw new FormValidationException( "Le nombre de longueur doit être un nombre." );
 	            }
-	        } else {
-            	throw new FormValidationException( "Veuillez entrer le nombre de longueur." );
-	 	           
-            }
+	        } 
 	        
 	        return temp;
 	    }

@@ -11,7 +11,7 @@ import fr.escalade.persistance.PaysDao;
 
 public class AjoutPaysForm {
 	
-	private static final String CHAMP_NOM  = "nom";
+	private static final String CHAMP_NOM  = "nomPays";
 	private String resultat;
 	
 	private Map<String, String> erreurs = new HashMap<String, String>();
@@ -35,11 +35,9 @@ public class AjoutPaysForm {
 	    }
 
 	public Pays creerPays( HttpServletRequest request ) {
-		String nom = getValeurChamp( request, CHAMP_NOM );
-		
+		String nompays = getValeurChamp( request, CHAMP_NOM );
 		Pays pays = new Pays();
-		
-		traiterNom(nom,pays);
+		traiterNom(nompays,pays);
 		
         try {
             if ( erreurs.isEmpty() ) {
@@ -59,22 +57,22 @@ public class AjoutPaysForm {
 		
 	}
 	
-	private void traiterNom(String nom, Pays pays) {
+	private void traiterNom(String nompays, Pays pays) {
 		   try {
-	            validationNom( nom );
+	            validationNom( nompays );
 	        } catch ( FormValidationException e ) {
 	            setErreur( CHAMP_NOM, e.getMessage() );
 	        }
-	        pays.setNompays(nom);
+	        pays.setNompays(nompays);
 	}
 
 	
 	
-	private void validationNom(String nom) throws FormValidationException {
+	private void validationNom(String nompays) throws FormValidationException {
 		
-		 if ( nom != null && nom.length() < 2 ) {
-	            throw new FormValidationException( "Le nom du payss doit contenir au moins 2 caractères." );
-	        }else {
+		 if ( nompays != null && nompays.length() < 2 ) {
+	            throw new FormValidationException( "Le nom du pays doit contenir au moins 2 caractères." );
+	        }else if(nompays == null){
 	        	throw new FormValidationException( "Le nom du pays est obligatoire." );
 		 	       
 	        }

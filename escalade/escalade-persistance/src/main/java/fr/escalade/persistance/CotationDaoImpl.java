@@ -15,7 +15,7 @@ import fr.escalade.beans.Site;
 
 public class CotationDaoImpl implements CotationDao {
     
-	private static final String SQL_INSERT = "INSERT INTO cotation(type_escalde, libelle_cotation) VALUES(?, ?)";
+	private static final String SQL_INSERT = "INSERT INTO cotation(type_escalade, libelle_cotation) VALUES(?, ?)";
     private static final String SQL_SELECT = "SELECT * FROM cotation ORDER BY id_cotation";
     private static final String SQL_SELECT_PAR_ID = "SELECT * FROM cotation WHERE id_cotation = ?";
     private static final String SQL_SELECT_PAR_LIBELLE = "SELECT * FROM cotation WHERE libelle_cotation = ?";

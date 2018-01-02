@@ -44,6 +44,7 @@ public class ListeSite extends HttpServlet {
 
     public static final String VUE  = "/WEB-INF/vue/listeSite.jsp";
     public static final String PARAM_ID = "id";
+    public static final String PARAM_NOM_PAYS = "nomPays";
     
     private SiteDao siteDao;
     private PaysDao paysDao;
@@ -68,40 +69,43 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		request.setAttribute("payss", paysDao.lister());
 		request.setAttribute("classements", classementDao.lister());
 		request.setAttribute("cotations", cotationDao.lister());
+		request.setAttribute("villes", villeDao.lister());
 
-		String idPays = request.getParameter(CHOIX_PAYS);
-		System.out.println("idpays"+idPays);
-		if (idPays != null) {
-			long id_pays = Long.parseLong(idPays);
-		
-			Map<Long, Long> villes = (Map<Long, Long>) villeDao.trouverpar(id_pays);
-			String json = new Gson().toJson(villes);
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			response.getWriter().write(json);
-		} 
-//			else {
-//			request.setAttribute("villes", villeDao.lister());
-//		}
 		request.setAttribute("sites", siteDao.lister());
 
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
 
 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	
+		String idpays = getValeurParametre( request, CHOIX_PAYS).trim();
+		long id_pays = Long.parseLong(idpays);
+		Pays pays = paysDao.trouver(id_pays);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute(ATT_SESSION_PAYS, pays);
+        
+		if (ATT_SESSION_PAYS != null){
+			
+			request.setAttribute("sites", siteDao.listerParPays(id_pays));
+		}
+		
+		request.setAttribute("payss", paysDao.lister());
+		request.setAttribute("classements", classementDao.lister());
+		request.setAttribute("cotations", cotationDao.lister());
+		request.setAttribute("villes", villeDao.lister());
 
-	
-	
+		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	
 }
-private String getValeurChamp(HttpServletRequest request, String nomChamp) {
-	 String valeur = request.getParameter( nomChamp );
-       if ( valeur == null || valeur.trim().length() == 0 ) {
-           return null;
-       } else {
-           return valeur;
-       }
-      
+private static String getValeurParametre( HttpServletRequest request, String nomChamp ) {
+    String valeur = request.getParameter( nomChamp );
+    if ( valeur == null || valeur.trim().length() == 0 ) {
+        return null;
+    } else {
+        return valeur;
+    }
 }
 
 }

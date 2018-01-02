@@ -1,6 +1,5 @@
-package fr.escalade_presentation.controller;
 //package fr.escalade_presentation.controller;
-//
+//package fr.escalade_presentation.controller;
 //
 //import java.io.IOException;
 //

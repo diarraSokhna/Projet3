@@ -30,7 +30,8 @@ public class AjoutSecteur extends HttpServlet {
     public static final String SESSION_SECTEURS  = "sessionSecteur";
     public static final String SESSION_SITES  = "sessionSite";
 
-    public static final String VUE    = "/restreint/ajoutSiteSecteurVoie.jsp";
+    public static final String VUE_SUCCES    = "/escalade-presentation/AjoutSiteSecteurVoie";
+    public static final String VUE_FORM    = "/restreint/ajoutSecteur.jsp";
 	
 
     private SecteurDao secteurDao;
@@ -51,7 +52,7 @@ public class AjoutSecteur extends HttpServlet {
 
 		request.setAttribute("cotations", cotationDao.lister());
 		request.setAttribute("expositions",expositionDao.lister());
-		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+		this.getServletContext().getRequestDispatcher(VUE_FORM).forward(request, response);
 	
 	}
 
@@ -77,13 +78,16 @@ public class AjoutSecteur extends HttpServlet {
 
 			secteurs.put(secteur.getNomsect(), secteur);
 			session.setAttribute(SESSION_SECTEURS, secteurs);
+			
+			request.setAttribute("cotations", cotationDao.lister());
+			request.setAttribute("expositions", expositionDao.lister());
+			response.sendRedirect(VUE_SUCCES);
+			
 		} else {
+			this.getServletContext().getRequestDispatcher(VUE_FORM).forward(request, response);
 		}
 
-		request.setAttribute("cotations", cotationDao.lister());
-		request.setAttribute("expositions", expositionDao.lister());
-
-		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+		
 
 	}
 

@@ -32,8 +32,10 @@ public class RestrictionFiltre implements Filter {
         HttpSession session = request.getSession();
 
          if ( session.getAttribute( ATT_SESSION_USER ) == null ) {
-            response.sendRedirect( request.getContextPath() + ACCES_CONNEXION );
+             response.sendRedirect( request.getContextPath() + ACCES_CONNEXION );
         } else {
+            request.setCharacterEncoding("UTF-8" ); 
+            response.setCharacterEncoding("UTF-8" ); 
             chain.doFilter( request, response );
         }
 	}

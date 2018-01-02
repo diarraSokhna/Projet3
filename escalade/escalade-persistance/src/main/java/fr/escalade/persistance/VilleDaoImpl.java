@@ -42,14 +42,14 @@ public class VilleDaoImpl implements VilleDao {
 	            
 	            int statut = preparedStatement.executeUpdate();
 	            if ( statut == 0 ) {
-	                throw new DaoException( "Échec de la création du secteur, aucune ligne ajoutée dans la table." );
+	                throw new DaoException( "Échec de la création de la ville, aucune ligne ajoutée dans la table." );
 	            }
 	            valeursAutoGenerees = preparedStatement.getGeneratedKeys();
 	            if ( valeursAutoGenerees.next() ) {
 	            	ville.setId_ville( valeursAutoGenerees.getLong( 1 ) );
 	                
 	            } else {
-	                throw new DaoException( "Échec de la création du secteur en base, aucun ID auto-généré retourné." );
+	                throw new DaoException( "Échec de la création de la ville en base, aucun ID auto-généré retourné." );
 	            }
 	        } catch ( SQLException e ) {
 	            throw new DaoException( e );

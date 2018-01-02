@@ -35,8 +35,9 @@ public class AjoutVoie extends HttpServlet {
     
     public static final String SESSION_SECTEURS  = "sessionSecteur";
 
-    public static final String VUE    = "/restreint/ajoutSiteSecteurVoie.jsp";
-	
+    public static final String VUE    = "/restreint/ajoutVoie.jsp";
+    public static final String VUE_SUCCES    = "/escalade-presentation/AjoutSiteSecteurVoie";
+    
     private VoieDao voieDao;
     private CotationDao cotationDao;
     private ExpositionDao expositionDao;
@@ -81,14 +82,16 @@ public class AjoutVoie extends HttpServlet {
             }
            voies.add( voie );
            session.setAttribute( SESSION_VOIES, voies );
-	}
-		
-		request.setAttribute("cotations", cotationDao.lister());
-		request.setAttribute("expositions",expositionDao.lister());
-		
+           
+           request.setAttribute("cotations", cotationDao.lister());
+           request.setAttribute("expositions",expositionDao.lister());
+   		   response.sendRedirect(VUE_SUCCES);
+	}else {
+		 request.setAttribute("cotations", cotationDao.lister());
+         request.setAttribute("expositions",expositionDao.lister());
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 
-	
+	}
 }
 	
 	}

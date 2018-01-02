@@ -1,81 +1,119 @@
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="taglib.jsp"%>
 <html>
 <head>
-<link rel="shortcut icon" type="image/x-icon" href="/escalade-presentation/img/favicon.png" />
-
+<%@ include file="head.jsp"%>
 </head>
 <body>
-<%@ include file="menu.jsp" %>
+	<%@ include file="menu.jsp"%>
 
-<div class="container">
- <div class="panel panel-default">
-  <div class="panel-heading"><h2><c:out value="${ topo.nom }"/></h2></div>
+	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>
+					<b><c:out value="${ topo.nom }" /></b>
+				</h4>
+			</div>
 
- <div class="panel-body">
-          
-            <div class="media">
-                <div class="media-left">
-                  
-                 
-                         <img class="media-object" src="<c:url value="/images/${ topo.image }"/>" alt="" width="550" height="400"> 
-                </div>
-              
-                <div class="media-body">
-                <h3 class="media-heading"><c:out value="${  topo.nom  }"/></h3><br/>
-                Poposé par  <c:out value="${ topo.utilisateur.nom }"/> <c:out value="${ topo.utilisateur.prenom }"/><br/><br/>
-                <b>Nombre de pages: </b> <c:out value="${ topo.nbpage}" /> pages<br/>
-                 La liste des sites du topo :
-					
-					 <c:forEach var = "site" items = "${ sites }">
-				<ul><li><c:out value="${ site.nomsite}" /></li></ul>
-				</c:forEach>
-                         <section style="margin-top: 75px">
-		                    
-		                    <i class="glyphicon glyphicon-comment"></i>2
-		                     <p> <a href="<c:url value="/ReservationTopo" > <c:param name="idtopo" value="${ topo.idtopo }" /> </c:url>" class="btn btn-primary" role="button">Réserver</a>
-                                <a href="<c:url value="/ListeTopo"/>" class="btn btn-primary" role="button">Retour</a></p>
-                    </section>
-               </div>
-              
-            </div>
-          
-        </div>
-    </div>
-    
-    
- <div class="panel panel-default">
-  <div class="panel-heading"><h2>Vous aussi exprimez vous</h2></div>
- <div class="panel-body">
-			
-		<%@ include file="/restreint/ajoutCommentaire.jsp" %>	
-			
-			
-			
-</div>
-				<c:forEach var="commentaire" items="${ commentaires }">
-					<hr data-brackets-id="12673">
-					<ul data-brackets-id="12674" id="sortable"
-						class="list-unstyled ui-sortable">
-						<strong class="pull-left primary-font"> <i
-							class="glyphicon glyphicon-user"></i>
-						<c:out value="${ commentaire.utilisateur.nom }" /> <c:out
-								value="${ commentaire.utilisateur.prenom }" /></strong>
-						<small class="pull-right text-muted"> <i
-							class="glyphicon glyphicon-calendar"></i></span> <fmt:formatDate
-								pattern="dd-MM-yyyy" value="${commentaire.datecom}" />
-						</small>
-						</br>
+			<div class="panel-body">
+
+				<div class="row">
+					<div class="col-md-6 text-left ">
+
+						<img src="<c:url value="/images/${ topo.image }"/>" alt=""
+							class="img-thumbnail taille">
+
+					</div>
+					<div class="col-md-6 text-left ">
+						<h3 class="top_title" style="">
+							<c:out value="${  topo.nom  }" />
+						</h3>
+						<span class="para_text" style=""> PoposÃ© par <b><c:out
+									value="${ topo.utilisateur.nom }" /> <c:out
+									value="${ topo.utilisateur.prenom }" /></b>  <c:out
+								value="${ topo.description }" /> <br /> Nombre de
+							pages: <b> <c:out value="${ topo.nbpage}" />
+						</b> pages<br />
+						<br /> <c:if test="${ sites != null}">
+						La liste des sites du topo : <c:forEach var="site"
+									items="${ sites }">
+									<ul>
+										<li><a
+											href="<c:url value="/DetailsSite"><c:param name="nomsite" value="${ site.nomsite }" ></c:param>
+					 <c:param name="idsite" value="${ site.idsite }" ></c:param></c:url>"><c:out
+													value="${ site.nomsite}" /></a></li>
+									</ul>
+								</c:forEach>
+							</c:if> <br />
 						<br />
-						<li class="ui-state-default"><c:out
-								value="${ commentaire.libelle }" /></li>
+						<br /> <i class="glyphicon glyphicon-comment right"></i> <c:out
+								value="${ rowCount }" />
 
-					</ul>
-				</c:forEach>
+						</span>
+
+						<section style="margin-top: 75px">
+
+							<p>
+								<a
+									href="<c:url value="ReservationTopo" > <c:param name="idtopo" value="${ topo.idtopo }" /> </c:url>"
+									class="btn btn-default" role="button">RÃ©server</a> <a
+									href="<c:url value="/ListeTopo"/>" class="btn btn-default"
+									role="button">Retour</a>
+							</p>
+						</section>
+
+					</div>
+				</div>
 
 			</div>
-    
-   
-</div>
+		</div>
 
-  </body>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>
+					<b>Vous aussi exprimez vous</b>
+				</h4>
+			</div>
+			<div class="panel-body">
+				<c:choose>
+					<c:when test="${ !empty sessionScope.sessionUtilisateur }">
+						<%@ include file="/restreint/ajoutCommentaire.jsp"%>
+					</c:when>
+					<c:otherwise>
+						<h3>
+							Merci de vous <a href="<c:url value="/Connection" />">connecter
+							</a>pour laisser un commentaire!
+						</h3>
+
+					</c:otherwise>
+
+				</c:choose>
+			</div>
+			<c:forEach var="commentaire" items="${ commentaires }">
+				<hr data-brackets-id="12673">
+				<ul data-brackets-id="12674" id="sortable"
+					class="list-unstyled ui-sortable">
+					<strong class="pull-left primary-font"> <i
+						class="glyphicon glyphicon-user"></i> <c:out
+							value="${ commentaire.utilisateur.nom }" /> <c:out
+							value="${ commentaire.utilisateur.prenom }" /></strong>
+					<small class="pull-right text-muted"> <i
+						class="glyphicon glyphicon-calendar"></i></span> <fmt:formatDate
+							pattern="dd-MM-yyyy" value="${commentaire.datecom}" />
+					</small>
+					</br>
+					<br />
+					<li class="ui-state-default"><c:out
+							value="${ commentaire.libelle }" /></li>
+
+				</ul>
+			</c:forEach>
+
+		</div>
+
+
+	</div>
+
+</body>
 </html>

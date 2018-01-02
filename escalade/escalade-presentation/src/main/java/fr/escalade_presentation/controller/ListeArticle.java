@@ -27,8 +27,7 @@ public class ListeArticle extends HttpServlet {
 	public void init() throws ServletException {
 		
         this.articleDao = ( (DaoFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getArticleDao();
-        
-		
+   
 	}
 	
     public ListeArticle() {}

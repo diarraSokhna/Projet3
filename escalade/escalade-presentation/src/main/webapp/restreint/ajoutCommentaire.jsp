@@ -7,11 +7,14 @@
 						<span class="erreur">${form.erreurs['topo']}</span>
 						
 						</div>
-					 
+						<div class="form-group">
+					   <div class="col-sm-12">
 						<input type="text" id="libelle" name="libelle" value="<c:out value="${commentaire.libelle}"/>" 
 						   class="form-control" placeholder="Votre message ici..." /> 
-						<button type="submit" value="" class="btn btn-primary btn-sm" OnClick="" >Ajouter
+						 <button type="submit" value="" class="btn btn-primary btn-sm" OnClick="" >Ajouter
 							commentaire </button>
+							</div>
+							</div>
 							<span class="erreur">${form.erreurs['libelle']}</span>
 					
 					<c:choose>

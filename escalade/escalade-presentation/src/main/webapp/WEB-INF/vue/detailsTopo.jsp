@@ -1,9 +1,9 @@
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="taglib.jsp"%>
 <html>
 <head>
-<link rel="shortcut icon" type="image/x-icon"
-	href="/escalade-presentation/img/favicon.png" />
-
+<%@ include file="head.jsp"%>
 </head>
 <body>
 	<%@ include file="menu.jsp"%>
@@ -29,32 +29,35 @@
 						<h3 class="top_title" style="">
 							<c:out value="${  topo.nom  }" />
 						</h3>
-						<span class="para_text" style=""> Poposé par <b><c:out
+						<span class="para_text" style=""> PoposÃ© par <b><c:out
 									value="${ topo.utilisateur.nom }" /> <c:out
-									value="${ topo.utilisateur.prenom }" /></b> <br />
-						<br /> <c:out value="${ topo.description }" /><br />
-						<br /> Nombre de pages: <b> <c:out value="${ topo.nbpage}" />
-						</b> pages<br /><br />
-						<c:if test="${ sites != null}">
-						La liste des sites du topo : <c:forEach var="site" items="${ sites }">
-								<ul>
-									<li><c:out value="${ site.nomsite}" /></li>
-								</ul>
-							</c:forEach>
-							</c:if>
-							<br /><br /><br />
-						 <i class="glyphicon glyphicon-comment right"></i>
-						<c:out value="${ rowCount }" /> 
-						
+									value="${ topo.utilisateur.prenom }" /></b>  <c:out
+								value="${ topo.description }" /> <br /> Nombre de
+							pages: <b> <c:out value="${ topo.nbpage}" />
+						</b> pages<br />
+						<br /> <c:if test="${ sites != null}">
+						La liste des sites du topo : <c:forEach var="site"
+									items="${ sites }">
+									<ul>
+										<li><a
+											href="<c:url value="/DetailsSite"><c:param name="nomsite" value="${ site.nomsite }" ></c:param>
+					 <c:param name="idsite" value="${ site.idsite }" ></c:param></c:url>"><c:out
+													value="${ site.nomsite}" /></a></li>
+									</ul>
+								</c:forEach>
+							</c:if> <br />
+						<br />
+						<br /> <i class="glyphicon glyphicon-comment right"></i> <c:out
+								value="${ rowCount }" />
+
 						</span>
 
 						<section style="margin-top: 75px">
 
-
 							<p>
 								<a
 									href="<c:url value="ReservationTopo" > <c:param name="idtopo" value="${ topo.idtopo }" /> </c:url>"
-									class="btn btn-default" role="button">Réserver</a> <a
+									class="btn btn-default" role="button">RÃ©server</a> <a
 									href="<c:url value="/ListeTopo"/>" class="btn btn-default"
 									role="button">Retour</a>
 							</p>
@@ -73,8 +76,6 @@
 				</h4>
 			</div>
 			<div class="panel-body">
-
-
 				<c:choose>
 					<c:when test="${ !empty sessionScope.sessionUtilisateur }">
 						<%@ include file="/restreint/ajoutCommentaire.jsp"%>
@@ -88,9 +89,6 @@
 					</c:otherwise>
 
 				</c:choose>
-
-
-
 			</div>
 			<c:forEach var="commentaire" items="${ commentaires }">
 				<hr data-brackets-id="12673">

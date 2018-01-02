@@ -26,8 +26,8 @@ public class AjoutArticle extends HttpServlet {
     public static final String ATT_FORM         = "form";
     public static final String SESSION_ARTICLES  = "sessionArticle";
 
-    public static final String VUE_SUCCES       = "/escalade-presentation/ListeArticle";
-    public static final String VUE_FORM         = "/WEB-INF/vue/ajoutArticle.jsp";
+    public static final String VUE_SUCCES       = "/escalade-presentation/Accueil";
+    public static final String VUE_FORM         = "/restreint/ajoutArticle.jsp";
 
     private ArticleDao  articleDao;
 
