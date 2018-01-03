@@ -23,10 +23,9 @@ public class Inscription extends HttpServlet {
     public static final String CONF_DAO_FACTORY = "daofactory";
     public static final String ATT_USER         = "utilisateur";
     public static final String ATT_FORM         = "form";
-    public static final String SESSION_UTILISATEURS  = "sessionUtilisateur";
     
     public static final String VUE_FORM              = "/WEB-INF/vue/inscription.jsp";
-    public static final String VUE_SUCCES         = "/WEB-INF/affichicherUtilisateur.jsp";
+    public static final String VUE_SUCCES         = "/escalade-presentation/Connection";
    
     public Inscription() { }
 
@@ -47,23 +46,18 @@ public class Inscription extends HttpServlet {
 		
         InscriptionForm form = new InscriptionForm( utilisateurDao );
         Utilisateur utilisateur = form.inscrireUtilisateur( request );
-
-        HttpSession session = request.getSession();
+        
+        request.setAttribute( ATT_FORM, form );
+        request.setAttribute( ATT_USER, utilisateur );
         
         if ( form.getErreurs().isEmpty()) {
-           session.setAttribute( SESSION_UTILISATEURS, utilisateur );
+           response.sendRedirect(VUE_SUCCES);
             
         } else {
-            session.setAttribute( SESSION_UTILISATEURS, null );
-            
+        	this.getServletContext().getRequestDispatcher( VUE_FORM ).forward( request, response );
+          
         }
-
-         request.setAttribute( ATT_FORM, form );
-        request.setAttribute( ATT_USER, utilisateur );
-
-        this.getServletContext().getRequestDispatcher( VUE_FORM ).forward( request, response );
-   
-        
+  
 	}
 
 }

@@ -10,5 +10,6 @@ fr\escalade\beans\Topo.class
 fr\escalade\beans\Article.class
 fr\escalade\beans\Exposition.class
 fr\escalade\beans\Reservation.class
+fr\escalade\beans\Ville.class
 fr\escalade\beans\Secteur.class
 fr\escalade\beans\Cotation.class
