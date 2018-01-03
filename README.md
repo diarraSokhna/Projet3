@@ -49,6 +49,6 @@ Application
 
 - importer le projet dans votre IDE
 
-- placer le dossier fichiers dans votre disque C
+- placer le dossier 'fichiers' dans votre disque C
 
 -	lancer le module escalade-presentation dans le serveur et enjoy
