@@ -1,45 +1,47 @@
-<%-- <%@page import="javax.swing.text.StyledEditorKit.ForegroundAction"%> --%>
-<%-- <%@page import="java.util.Iterator"%> --%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page isELIgnored="false" %> 
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="taglib.jsp"%>
 <html>
 <head>
- <meta charset="utf-8" />
-        <title>Escalade</title>
-        
-<link rel="shortcut icon" type="image/x-icon" href="/escalade-presentation/img/favicon.png" />
- <link href="/escalade-presentation/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
- <link rel="stylesheet" href="/escalade-presentation/css/style.css" type="text/css">
- 
-<script src="bootstrap/js/jquery-3.1.1.min.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-
+<%@ include file="head.jsp"%>
 </head>
 <body>
-<%@ include file="menu.jsp" %>
-
-<div class="container">
- <div class="row">
- <c:forEach var = "topo" items = "${ topos }">
-                    <div class="col-sm-6 col-md-3 colonn">
-                        <div class="thumbnail">
-                            <img src="/escalade-presentation/img/1.jpg" alt=""/>
-                            <div class="caption">
-                            
-                                <h3><c:out value="${ topo.nom }"/> </h3>
-                                <p><c:out value="${ topo.description}" /></p>
-                                <p> <a href="#" class="btn btn-default boutton" role="button">Voir détail</a></p>
-                            </div>
-                        </div>
-                    </div>
-                 
-                     </c:forEach>
-</div>
+	<%@ include file="menu.jsp"%>
+	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>
+					<b>La liste des Topos</b>
+				</h4>
+			</div>
+			<div class="panel-body">
+				<c:forEach var="topo" items="${ topos }">
+					<div class="col-sm-6 col-md-3 colonn">
+						<div class="thumbnail">
 
 
+							<img src="<c:url value="/images/${ topo.image }"/>" alt="" />
 
+							<div class="caption">
+
+								<h3>
+									<c:out value="${ topo.nom }" />
+								</h3>
+								<p>
+									<c:out value="${ topo.description}" />
+								</p>
+
+								<a
+									href="<c:url value="/DetailsTopo"><c:param name="idtopo" value="${ topo.idtopo }" ></c:param><c:param name="nomtopo" value="${ topo.nom }" ></c:param></c:url>">
+									Voir dÃ©tail</a>
+							</div>
+						</div>
+					</div>
+
+				</c:forEach>
+			</div>
+		</div>
 
 	</div>
-  </body>
+</body>
 </html>

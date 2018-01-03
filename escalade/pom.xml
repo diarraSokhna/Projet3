@@ -12,12 +12,32 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+     <spring.version>4.3.11.RELEASE</spring.version>
   </properties>
 
+
+   
    <modules>
     <module>escalade-presentation</module>
     <module>escalade-metier</module>
     <module>escalade-persistance</module>
     <module>escalade-modele</module>
    </modules>
+   
+   <dependencyManagement>
+        <dependencies>
+         
+            
+             <!-- Drivers JDBC PostgreSQL -->
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>9.4.1212</version>
+                <scope>runtime</scope>
+            </dependency>
+            
+        </dependencies>
+    </dependencyManagement>
+    
+  
 </project>

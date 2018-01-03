@@ -1,23 +1,55 @@
 package fr.escalade.beans;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Utilisateur {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-	private int id_user;
-	private String nom;
-	private String prenom;
+
+
+public class Utilisateur implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+
+	private long iduser;
+	private String nom; 
+	private String prenom; 
 	private String adresse;
 	private int tel;
 	private String email;
 	private String motpass;
 	private Timestamp dateinscription;
 	private String photo;
-	public int getId_user() {
-		return id_user;
+	
+	public Utilisateur() {}
+	
+	
+	public Utilisateur(String nom, String prenom, String adresse, int tel, String email, String motpass,
+			Timestamp dateinscription, String photo) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.adresse = adresse;
+		this.tel = tel;
+		this.email = email;
+		this.motpass = motpass;
+		this.dateinscription = dateinscription;
+		this.photo = photo;
 	}
-	public void setId_user(int id_user) {
-		this.id_user = id_user;
+
+
+	public long getIduser() {
+		return iduser;
+	}
+	public void setId_user(Long iduser) {
+		this.iduser = iduser;
 	}
 	
 	
