@@ -20,15 +20,14 @@ import fr.escalade.beans.Ville;
 
 public class SiteDaoImpl implements SiteDao{
     
-	private static final String SQL_INSERT = "INSERT INTO site(nom_site, id_pays, image,id_class) VALUES(?, ?, ?, ?)";
+	private static final String SQL_INSERT = "INSERT INTO site(nom_site, id_pays, image,id_class,id_ville) VALUES(?, ?, ?, ?,?)";
     private static final String SQL_SELECT = "SELECT * FROM site ORDER BY id_site";
     private static final String SQL_SELECT_PAR_ID = "SELECT * FROM site WHERE id_site = ?";
     private static final String SQL_SELECT_PAR_NOM = "SELECT * FROM site WHERE nom_site = ?";
     private static final String SQL_SELECT_PAR_TOPO = "SELECT * FROM site INNER JOIN topo_site ON site.id_site = topo_site.id_site"+
                                                       " INNER JOIN topo ON topo_site.id_topo = topo.id_topo WHERE topo.id_topo = ?";
     private static final String SQL_SELECT_PAR_PAYS = "SELECT * FROM  site s, pays p WHERE s.id_pays=p.id_pays AND s.id_pays=?";
-    private static final String SQL_SELECT_PAR_VILLE = "SELECT * FROM  site s, pays p, ville v WHERE s.id_pays=p.id_pays "+ 
-                                                       "AND p.id_pays=v.id_pays AND v.id_ville=?";
+    private static final String SQL_SELECT_PAR_VILLE = "SELECT * FROM  site s, ville v WHERE s.id_ville=v.id_ville AND v.id_ville=?";
     private static final String SQL_SELECT_PAR_CLASSEMENT = "SELECT * FROM  site s, classement c WHERE s.id_class=c.id_class AND s.id_class=?";
     private static final String SQL_SELECT_PAR_COTATION = "SELECT * FROM  site s, secteur se,voie v, cotation c WHERE s.id_site=se.id_site"+
     													  " AND se.id_secteur=v.id_secteur AND v.id_cotation=c.id_cotation AND c.id_cotation=?";
@@ -51,7 +50,8 @@ public class SiteDaoImpl implements SiteDao{
 	                    site.getNomsite(),
 	                    site.getPays().getIdpays(),
 	                    site.getImage(),
-	                    site.getClassement().getId_class());
+	                    site.getClassement().getId_class(),
+	                    site.getVille().getId_ville());
 	            
 	            int statut = preparedStatement.executeUpdate();
 	            if ( statut == 0 ) {
@@ -277,6 +277,10 @@ public class SiteDaoImpl implements SiteDao{
         
         ClassementDao classementDao = daoFactory.getClassementDao();
         site.setClassement(classementDao.trouver(resultSet.getLong("id_class")));
+        
+        VilleDao villeDao = daoFactory.getVilleDao();
+        site.setVille(villeDao.trouver(resultSet.getLong("id_ville")));
+        
         
         return site;
     }
