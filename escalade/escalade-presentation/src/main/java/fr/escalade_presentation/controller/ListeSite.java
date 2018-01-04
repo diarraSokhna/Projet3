@@ -82,7 +82,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		String idpays = getValeurParametre( request, CHOIX_PAYS).trim();
 		long id_pays = Long.parseLong(idpays);
 		Pays pays = paysDao.trouver(id_pays);
-		
+	
 		HttpSession session = request.getSession();
 		session.setAttribute(ATT_SESSION_PAYS, pays);
         

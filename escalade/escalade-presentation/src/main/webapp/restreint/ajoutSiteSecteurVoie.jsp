@@ -5,7 +5,6 @@
 <%@ include file="../WEB-INF/vue/head.jsp"%>
 <script src="js/jquery-1.11.1.js" type="text/javascript"></script>
 <script src="js/js.js" type="text/javascript"></script>
-
 <script language="Javascript"> 
 function bascule(elem) 
 { 

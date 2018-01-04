@@ -32,7 +32,7 @@ import fr.escalade_metier.forms.AjoutSiteForm;
 
 public class AjoutSite extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	public static final String CONF_DAO_FACTORY = "daofactory";
 	public static final String CHEMIN = "chemin";
 	public static final String ATT_Site = "site";
