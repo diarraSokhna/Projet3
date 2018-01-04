@@ -50,14 +50,14 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="description" class="col-sm-4 control-label">Description
+								<label for="description"  class="col-sm-4 control-label">Description
 									<span class="requis">*</span>
 								</label>
 								<div class="col-sm-5">
-									<textarea class="form-control" id="description"
+								<textarea class="form-control" id="description" rows="5"
 										name="description"
 										value="<c:out value="${topo.description}"/>">
-                           </textarea>
+                                 </textarea>
 									<span class="erreur">${form.erreurs['description']}</span>
 								</div>
 							</div>

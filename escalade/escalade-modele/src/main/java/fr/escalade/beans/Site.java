@@ -13,12 +13,13 @@ public class Site implements Serializable{
 	private String image;
 	private Classement classement;
 	private List<Secteur> secteurs = new ArrayList<Secteur>();
+	private Ville ville;
 	
 	public Site() {}
 
 
 	public Site(long idsite, String nomsite, Pays pays, String image, Classement classement,
-			List<Secteur> secteurs) {
+			List<Secteur> secteurs, Ville ville) {
 		super();
 		this.idsite = idsite;
 		this.nomsite = nomsite;
@@ -26,6 +27,7 @@ public class Site implements Serializable{
 		this.image = image;
 		this.classement = classement;
 		this.secteurs = secteurs;
+		this.ville = ville;
 	}
 
 
@@ -86,6 +88,16 @@ public class Site implements Serializable{
 	 public void removeSecteur(Secteur secteur ) {
 		    this.secteurs.remove(secteur);
 		  }
+
+
+	public Ville getVille() {
+		return ville;
+	}
+
+
+	public void setVille(Ville ville) {
+		this.ville = ville;
+	}
 	
 	
 

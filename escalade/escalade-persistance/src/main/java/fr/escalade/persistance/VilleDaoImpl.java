@@ -10,7 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.escalade.beans.Pays;
 import fr.escalade.beans.Secteur;
+import fr.escalade.beans.Site;
 import fr.escalade.beans.Ville;
 
 public class VilleDaoImpl implements VilleDao {
@@ -156,6 +158,29 @@ public class VilleDaoImpl implements VilleDao {
 	        
 	        return ville;
 	    }
+
+	@Override
+	public List<Ville> lister(long idpays) throws DaoException {
+		Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Ville> villes = new ArrayList<Ville>();
+
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee( connection, SQL_SELECT_PAR_PAYS, false, idpays);
+                    resultSet = preparedStatement.executeQuery();
+            while ( resultSet.next() ) {
+            	villes.add( map( resultSet ) );
+            }
+        } catch ( SQLException e ) {
+            throw new DaoException( e );
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connection );
+        }
+
+        return villes;
+	}
 
 	
 }

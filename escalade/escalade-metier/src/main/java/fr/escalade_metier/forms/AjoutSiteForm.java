@@ -22,6 +22,7 @@ import javax.servlet.http.Part;
 
 import eu.medsea.mimeutil.MimeUtil;
 import fr.escalade.beans.Site;
+import fr.escalade.beans.Ville;
 import fr.escalade.beans.Classement;
 import fr.escalade.beans.Exposition;
 import fr.escalade.beans.Pays;
@@ -32,6 +33,7 @@ import fr.escalade.persistance.ExpositionDao;
 import fr.escalade.persistance.PaysDao;
 import fr.escalade.persistance.SecteurDao;
 import fr.escalade.persistance.SiteDao;
+import fr.escalade.persistance.VilleDao;
 
 public class AjoutSiteForm {
 		
@@ -39,6 +41,7 @@ public class AjoutSiteForm {
 	    private static final String CHOIX_PAYS = "idpays";
 	    private static final String CHAMP_IMAGE     = "image";
 	    private static final String CHOIX_CLASSEMENT = "idclass";
+	    private static final String CHOIX_VILLE = "idville";
 	    
 	    public static final String SESSION_SECTEURS  = "sessionSecteur";
 	    
@@ -51,16 +54,17 @@ public class AjoutSiteForm {
 	    private SiteDao siteDao;
 	    private PaysDao paysDao;
 	    private ClassementDao classementDao;
-	    private SecteurDao secteurDao;
+	    private VilleDao villeDao;
 	    
 	    
 	    
 	    public AjoutSiteForm() {}
 
-		public AjoutSiteForm(SiteDao siteDao, PaysDao paysDao, ClassementDao classementDao){
+		public AjoutSiteForm(SiteDao siteDao, PaysDao paysDao, ClassementDao classementDao, VilleDao villeDao){
 	    	this.siteDao = siteDao;
 	    	this.paysDao =  paysDao;
 	    	this.classementDao = classementDao;
+	    	this.villeDao = villeDao;
 	    }
 	    
 	    public Map<String, String> getErreurs() {
@@ -84,6 +88,10 @@ public class AjoutSiteForm {
 	    	Long id_class = Long.parseLong(idclass);
 	    	Classement classement = classementDao.trouver(id_class);
 	    	
+	    	String idville = getValeurChamp( request, CHOIX_VILLE);
+	    	Long id_ville = Long.parseLong(idville);
+	    	Ville ville = villeDao.trouver(id_ville);
+	    	
 	    	HttpSession session = request.getSession();
 	    	
 	    	//secteur
@@ -99,11 +107,15 @@ public class AjoutSiteForm {
 	    	 if ( classement == null ) {
 		            setErreur( CHOIX_CLASSEMENT, "Merci de choisir un classement.");
 		            }
+	    	
+	    	 if ( ville == null ) {
+		            setErreur( CHOIX_VILLE, "Merci de choisir un classement.");
+		            }
 	    	 
 	    	 
 	        site.setPays(pays);
 	        site.setClassement(classement);
-	        
+	        site.setVille(ville);
 	        
 	        traiterNom( nom, site );
 	        traiterImage( site, request, chemin );

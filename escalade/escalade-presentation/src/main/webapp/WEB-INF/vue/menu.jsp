@@ -48,10 +48,11 @@
       <ul class="nav navbar-nav navbar-right">
                       <c:choose>
 							<c:when test="${ empty sessionScope.sessionUtilisateur }">
-							<li><a href="<c:url value="/Connection" />"><span class="glyphicon glyphicon-log-in"></span> Connexion </a></li>
+							<li><a href="<c:url value="/Connection" />"> <span class="glyphicon glyphicon-log-in"></span> Connexion </a></li>
 							</c:when>
 							<c:otherwise>
-							<li><a href="<c:url value="/Deconnexion" />"><span class="glyphicon glyphicon-log-in"></span> Deconnexion</a></li>
+							
+							<li><a href="<c:url value="/Deconnexion" />">Bonjour <c:out value="${ sessionScope.sessionUtilisateur.nom }"></c:out>!&nbsp; &nbsp;<span class="glyphicon glyphicon-log-in"></span> Deconnexion</a></li>
 
 							</c:otherwise>
 						</c:choose>
