@@ -34,7 +34,7 @@
 				<label class="col-xs-4 control-label">Pays<span
 					class="requis">*</span></label>
 				<div class="col-sm-5 selectContainer">
-					<select class="form-control" name="idpays" id="idpays" >
+					<select class="form-control" name="idpays" id="idpays">
 						<option value="0">Choisir un pays</option>
 						<c:forEach var="pays" items="${ payss }">
 							<option value="<c:out value="${ pays.idpays}" />"><c:out
@@ -53,10 +53,10 @@
 				<div class="col-sm-5 selectContainer">
 					<select class="form-control" name="idville" id="idville">
 						<option value="0">Choisir une ville</option>
-												<c:forEach var="ville" items="${ villes }">
-													<option value="<c:out value="${ ville.id_ville}" />"><c:out
-															value="${ ville.nom_ville}" /></option>
-												</c:forEach>
+						<c:forEach var="ville" items="${ villes }">
+							<option value="<c:out value="${ ville.id_ville}" />"><c:out
+									value="${ ville.nom_ville}" /></option>
+						</c:forEach>
 					</select> <span class="erreur">${formsite.erreurs['idville']}</span> Si la
 					ville n'existe pas vous pouvez <a
 						href="<c:url value="AjoutVille" /> ">l'ajouter</a>

@@ -234,8 +234,8 @@ public final class CreationTopoForm {
 		}
 		
 		private void validationDescription(String description) throws FormValidationException {
-			 if ( description != null && description.length() < 10 ) {
-		            throw new FormValidationException( "La description  du topo doit contenir au moins 10 caractères." );
+			 if ( description != null && description.length() > 200 ) {
+		            throw new FormValidationException( "La description  du topo ne doit pas dépasser 200 caractères." );
 		        }else if(description == null) {
 		        	throw new FormValidationException( "Il faut une description du topo." );
 			 	       

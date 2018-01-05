@@ -72,36 +72,14 @@ public class AjoutSite extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setAttribute("payss", paysDao.lister());
-		 request.setAttribute("villes", villeDao.lister());
+		request.setAttribute("villes", villeDao.lister());
 		request.setAttribute("classements", classementDao.lister());
 		request.setAttribute("cotations", cotationDao.lister());
 		request.setAttribute("expositions", expositionDao.lister());
 		request.setAttribute("sites", siteDao.lister());
 
-		String idpays = getValeurParametre( request, PARAM_ID_PAYS );
-		List<Ville> villes = new ArrayList<Ville>();
-		String json = null;
-		if (idpays != null) {
-			long id_pays = Long.parseLong(idpays);
-			System.out.println(id_pays);
-			villes = villeDao.lister(id_pays);
-			System.out.println(villes);
-			request.setAttribute("villes", villes);
-			json = new Gson().toJson(villes);
-			response.setContentType("application/json");
-			response.getWriter().write(json);
 		
 
-		}
-//		 else {
-//		 villes = villeDao.lister();
-//		 request.setAttribute("villes", villes);
-//		 json = new Gson().toJson(villes);
-//		 response.setContentType("application/json");
-//		 response.getWriter().write(json);
-//		
-//		
-//		 }
 
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 

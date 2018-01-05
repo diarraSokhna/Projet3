@@ -28,24 +28,13 @@ public class ChargerVille extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	public static final String CONF_DAO_FACTORY = "daofactory";
-	private static final String CHOIX_PAYS = "idpays";
+	public static final String PARAM_ID_PAYS = "idpays";
 	   
-	 public static final String VUE    = "/restreint/ajoutSiteSecteurVoie.jsp";
-		private SiteDao siteDao;
-		private PaysDao paysDao;
-		private ClassementDao classementDao;
-		private VilleDao villeDao;
-		private CotationDao cotationDao;
-		private ExpositionDao expositionDao;
+	private VilleDao villeDao;
     public ChargerVille() {
        
     }
 	public void init() throws ServletException {
-		this.siteDao = ((DaoFactory) getServletContext().getAttribute(CONF_DAO_FACTORY)).getSiteDao();
-		this.paysDao = ((DaoFactory) getServletContext().getAttribute(CONF_DAO_FACTORY)).getPaysDao();
-		this.classementDao = ((DaoFactory) getServletContext().getAttribute(CONF_DAO_FACTORY)).getClassementDao();
-		this.cotationDao = ((DaoFactory) getServletContext().getAttribute(CONF_DAO_FACTORY)).getCotationDao();
-		this.expositionDao = ((DaoFactory) getServletContext().getAttribute(CONF_DAO_FACTORY)).getExpositionDao();
 		this.villeDao = ((DaoFactory) getServletContext().getAttribute(CONF_DAO_FACTORY)).getVilleDao();
 		
 
@@ -53,22 +42,18 @@ public class ChargerVille extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String idpays = request.getParameter(CHOIX_PAYS);
-		
-		if(idpays != null){
+		String idpays = getValeurParametre( request, PARAM_ID_PAYS ).trim();
+		List<Ville> villes = new ArrayList<Ville>();
+		String json = null;
+		if (idpays != null) {
 			long id_pays = Long.parseLong(idpays);
-			request.setAttribute("villes", villeDao.lister(id_pays));
-//			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+			villes = villeDao.lister(id_pays);
+			request.setAttribute("villes", villes);
+			json = new Gson().toJson(villes);
+			response.setContentType("application/json");
+			response.getWriter().write(json);
 
 		}
-//		else {
-//			
-//			request.setAttribute("villes", villeDao.lister());
-////			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-//
-//		}
-		
-	
 	}
 
 	

@@ -1,6 +1,9 @@
 package fr.escalade_presentation.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.escalade.beans.Pays;
+import fr.escalade.beans.Site;
 import fr.escalade.beans.Ville;
 import fr.escalade.persistance.ClassementDao;
 import fr.escalade.persistance.CotationDao;
@@ -27,6 +31,7 @@ public class ListeSiteParVille extends HttpServlet {
     public static final String ATT_SITE       = "site";
     public static final String ATT_FORM         = "form";
     public static final String ATT_SESSION_VILLE = "sessionVille";
+    public static final String ATT_SESSION_SITE = "sessionSite";
 	
     public static final String VUE  = "/WEB-INF/vue/listeSite.jsp";
     public static final String PARAM_ID = "id";
@@ -72,14 +77,19 @@ public class ListeSiteParVille extends HttpServlet {
         
 		if (ATT_SESSION_VILLE != null){
 			
-			request.setAttribute("sites", siteDao.listerParVille(id_ville));
+			List<Site> sites = new ArrayList<Site>();
+			sites = siteDao.listerParVille(id_ville);
+			session.setAttribute(ATT_SESSION_SITE, sites);
+			request.setAttribute("sites", sites);
+		
+	        
 		}
 		
 		request.setAttribute("payss", paysDao.lister());
 		request.setAttribute("classements", classementDao.lister());
 		request.setAttribute("cotations", cotationDao.lister());
 		request.setAttribute("villes", villeDao.lister());
-
+        
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	
 		

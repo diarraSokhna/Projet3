@@ -1,6 +1,9 @@
 package fr.escalade_presentation.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,8 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.escalade.beans.Cotation;
-import fr.escalade.beans.Pays;
-import fr.escalade.beans.Ville;
+import fr.escalade.beans.Site;
 import fr.escalade.persistance.ClassementDao;
 import fr.escalade.persistance.CotationDao;
 import fr.escalade.persistance.DaoFactory;
@@ -26,6 +28,7 @@ public class ListeSiteParCotation extends HttpServlet {
 	private static final String CHOIX_COTATION = "idcotation";
 
     public static final String ATT_SESSION_COTATION = "sessionCotation";
+    public static final String ATT_SESSION_SITE = "sessionSite";
 	
     public static final String VUE  = "/WEB-INF/vue/listeSite.jsp";
     public static final String PARAM_ID = "id";
@@ -70,8 +73,10 @@ public class ListeSiteParCotation extends HttpServlet {
 		session.setAttribute(ATT_SESSION_COTATION, cotation);
         
 		if (ATT_SESSION_COTATION != null){
-			
-			request.setAttribute("sites", siteDao.listerParCotation(id_cotation));
+			List<Site> sites = new ArrayList<Site>();
+			sites = siteDao.listerParCotation(id_cotation);
+			session.setAttribute(ATT_SESSION_SITE, sites);
+			request.setAttribute("sites", sites);
 		}
 		
 		request.setAttribute("payss", paysDao.lister());
@@ -80,7 +85,7 @@ public class ListeSiteParCotation extends HttpServlet {
 		request.setAttribute("villes", villeDao.lister());
 
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-	
+	    
 		
 	}
 	
