@@ -200,7 +200,8 @@ CREATE TABLE site (
     nom_site character varying(150) NOT NULL,
     id_pays integer NOT NULL,
     image character varying(200),
-    id_class integer
+    id_class integer,
+	id_ville integer NOT NULL
 );
 
 
@@ -344,6 +345,11 @@ ALTER TABLE ONLY site
     ADD CONSTRAINT site_id_pays_fkey FOREIGN KEY (id_pays) REFERENCES pays(id_pays) ON DELETE SET NULL;
 
 
+
+ALTER TABLE ONLY site
+    ADD CONSTRAINT site_id_ville_fkey FOREIGN KEY (id_ville) REFERENCES ville(id_ville) ON DELETE SET NULL;
+
+	
 --
 -- TOC entry 1952 (class 2606 OID 33607)
 -- Name: site_secteur_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres

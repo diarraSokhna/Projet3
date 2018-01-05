@@ -57,14 +57,15 @@ INSERT INTO ville(id_pays, nom_ville, cp) VALUES (1, 'Paris', 75000);
 INSERT INTO ville(id_pays, nom_ville, cp) VALUES (1, 'Toulouse', 31000);
 INSERT INTO ville(id_pays, nom_ville, cp) VALUES (2, 'Dakar', 44000);
 INSERT INTO ville(id_pays, nom_ville, cp) VALUES (2, 'Thies', 44000);
-INSERT INTO ville(id_pays, nom_ville, cp) VALUES (3, 'Marrakech', 50000);
+INSERT INTO ville(id_pays, nom_ville, cp) VALUES (5, 'Marrakech', 50000);
+INSERT INTO ville(id_pays, nom_ville, cp) VALUES (4, 'Rome', 60000);
 
-INSERT INTO site(nom_site, id_pays, image, id_class) VALUES ('Ablon', 2, 'site1.jpg', 1);
-INSERT INTO site(nom_site, id_pays, image, id_class) VALUES ('Cap Dramont', 2, 'site2.jpg', 1);
-INSERT INTO site(nom_site, id_pays, image, id_class) VALUES ('Mamelles', 3, 'site3.jpg', 2);
-INSERT INTO site(nom_site, id_pays, image, id_class) VALUES ('Ngor', 3, 'site4.jpg', 1);
-INSERT INTO site(nom_site, id_pays, image, id_class) VALUES ('Cantobre', 4, 'site5.jpg', 2);
-INSERT INTO site(nom_site, id_pays, image, id_class) VALUES ('Badami', 5, 'site6.jpg', 1);
+INSERT INTO site(nom_site, id_pays, image, id_class, id_ville) VALUES ('Ablon', 1, 'site1.jpg', 1, 1);
+INSERT INTO site(nom_site, id_pays, image, id_class, id_ville) VALUES ('Cap Dramont', 1, 'site2.jpg', 1, 2);
+INSERT INTO site(nom_site, id_pays, image, id_class, id_ville) VALUES ('Mamelles', 2, 'site3.jpg', 2, 3);
+INSERT INTO site(nom_site, id_pays, image, id_class, id_ville) VALUES ('Ngor', 2, 'site4.jpg', 1, 4);
+INSERT INTO site(nom_site, id_pays, image, id_class, id_ville) VALUES ('Cantobre', 4, 'site5.jpg', 2, 6);
+INSERT INTO site(nom_site, id_pays, image, id_class, id_ville) VALUES ('Badami', 5, 'site6.jpg', 1, 5);
 
 INSERT INTO secteur(id_site, nom_secteur) VALUES (1, 'Dunes');
 INSERT INTO secteur(id_site, nom_secteur) VALUES (1, 'Sdf');
