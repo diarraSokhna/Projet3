@@ -66,7 +66,6 @@ public class AjoutSiteSecteurVoie extends HttpServlet {
 		request.setAttribute("expositions",expositionDao.lister());
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);	}
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		AjoutSiteSecteurVoieForm form = new AjoutSiteSecteurVoieForm(siteDao, secteurDao, voieDao);
