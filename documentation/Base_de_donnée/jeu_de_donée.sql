@@ -17,6 +17,14 @@ INSERT INTO exposition(libelle_expo) VALUES ('Nord-Sud');
 INSERT INTO exposition(libelle_expo) VALUES ('Nord-Ouest');
 INSERT INTO exposition(libelle_expo) VALUES ('Nord-Est');
 INSERT INTO exposition(libelle_expo) VALUES ('Est-Sud');
+INSERT INTO exposition(libelle_expo) VALUES ('Est-Ouest');
+INSERT INTO exposition(libelle_expo) VALUES ('Est-Nord');
+INSERT INTO exposition(libelle_expo) VALUES ('Ouest-Sud');
+INSERT INTO exposition(libelle_expo) VALUES ('Ouest-Nord');
+INSERT INTO exposition(libelle_expo) VALUES ('Ouest-Est');
+INSERT INTO exposition(libelle_expo) VALUES ('Sud-Ouest');
+INSERT INTO exposition(libelle_expo) VALUES ('Sud-Est');
+INSERT INTO exposition(libelle_expo) VALUES ('Sud-Nord');
 
 INSERT INTO pays(nom_pays) VALUES ('France');
 INSERT INTO pays(nom_pays) VALUES ('Sénégal');
@@ -95,9 +103,12 @@ INSERT INTO topo_site(id_site, id_topo) VALUES (6, 6);
 
 
 INSERT INTO voie(id_secteur, id_cotation, nom_voie, altitude, nbr_longueur, id_expo) VALUES ( 1, 1, 'Bellimo', 50, 20, 1);
-INSERT INTO voie(id_secteur, id_cotation, nom_voie, altitude, nbr_longueur, id_expo) VALUES ( 1, 2, 'Esdrados', 20, 50, 1);
-INSERT INTO voie(id_secteur, id_cotation, nom_voie, altitude, nbr_longueur, id_expo) VALUES ( 1, 3, 'Nabrellera', 30, 20, 2);
-INSERT INTO voie(id_secteur, id_cotation, nom_voie, altitude, nbr_longueur, id_expo) VALUES ( 1, 1, 'Nadrassa', 50, 60, 3);
-INSERT INTO voie(id_secteur, id_cotation, nom_voie, altitude, nbr_longueur, id_expo) VALUES ( 1, 4, 'Ibliss', 10, 30, 2);
-INSERT INTO voie(id_secteur, id_cotation, nom_voie, altitude, nbr_longueur, id_expo) VALUES ( 1, 2, 'Sabrosades', 50, 25, 4);
-INSERT INTO voie(id_secteur, id_cotation, nom_voie, altitude, nbr_longueur, id_expo) VALUES ( 1, 3, 'Esmaderas', 60, 30, 1);
+INSERT INTO voie(id_secteur, id_cotation, nom_voie, altitude, nbr_longueur, id_expo) VALUES ( 2, 2, 'Esdrados', 20, 50, 1);
+INSERT INTO voie(id_secteur, id_cotation, nom_voie, altitude, nbr_longueur, id_expo) VALUES ( 3, 3, 'Nabrellera', 30, 20, 2);
+INSERT INTO voie(id_secteur, id_cotation, nom_voie, altitude, nbr_longueur, id_expo) VALUES ( 4, 1, 'Nadrassa', 50, 60, 3);
+INSERT INTO voie(id_secteur, id_cotation, nom_voie, altitude, nbr_longueur, id_expo) VALUES ( 5, 4, 'Ibliss', 10, 30, 2);
+INSERT INTO voie(id_secteur, id_cotation, nom_voie, altitude, nbr_longueur, id_expo) VALUES ( 6, 2, 'Sabrosades', 50, 25, 4);
+INSERT INTO voie(id_secteur, id_cotation, nom_voie, altitude, nbr_longueur, id_expo) VALUES ( 7, 3, 'Esmaderas', 60, 30, 5);
+INSERT INTO voie(id_secteur, id_cotation, nom_voie, altitude, nbr_longueur, id_expo) VALUES ( 8, 2, 'Prada', 60, 30, 7);
+INSERT INTO voie(id_secteur, id_cotation, nom_voie, altitude, nbr_longueur, id_expo) VALUES ( 9, 3, 'Magmag', 80, 50, 10);
+INSERT INTO voie(id_secteur, id_cotation, nom_voie, altitude, nbr_longueur, id_expo) VALUES ( 10, 4, 'Nebras', 20, 45, 1);
