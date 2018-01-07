@@ -46,7 +46,7 @@
 
 										</div>
 									</div>
-									<p class="${empty formSect.erreurs ? 'succes' : 'erreur'}">${formSect.resultat}</p>
+									<p class="${empty formsect.erreurs ? 'succes' : 'erreur'}">${formsect.resultat}</p>
 								</fieldset>
 
 							</div>

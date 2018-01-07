@@ -161,6 +161,9 @@ public class AjoutSiteForm {
 		}
 		
 		private void validationNom(String nom) throws FormValidationException {
+			if( siteDao.trouver(nom) != null){
+				 throw new FormValidationException( "Ce site existe déja" );
+			}
 			 if ( nom != null && nom.length() < 2 ) {
 		            throw new FormValidationException( "Le nom du site doit contenir au moins 2 caractères." );
 		        }

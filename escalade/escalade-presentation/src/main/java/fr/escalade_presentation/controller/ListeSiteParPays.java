@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fr.escalade.beans.Classement;
-import fr.escalade.beans.Cotation;
 import fr.escalade.beans.Pays;
 import fr.escalade.beans.Site;
 import fr.escalade.beans.Ville;
@@ -23,19 +21,19 @@ import fr.escalade.persistance.PaysDao;
 import fr.escalade.persistance.SiteDao;
 import fr.escalade.persistance.VilleDao;
 
-@WebServlet("/ListeSiteParClassement")
-public class ListeSiteParClassement extends HttpServlet {
+@WebServlet("/ListeSiteParPays")
+public class ListeSiteParPays extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	public static final String CONF_DAO_FACTORY = "daofactory";
-	private static final String CHOIX_CLASSEMENT = "idclass";
+	private static final String CHOIX_PAYS = "idpays";
 
-    public static final String ATT_SESSION_CLASSEMENT = "sessionClassement";
+    public static final String ATT_SESSION_PAYS= "sessionPays";
     public static final String ATT_SESSION_SITE = "sessionSite";
 	
-    public static final String VUE  = "/WEB-INF/vue/listeSite.jsp";
-    public static final String PARAM_ID = "id";
-    public static final String PARAM_LIBELLE_CLASSEMENT = "libelleClassement";
+    public static final String VUE = "/WEB-INF/vue/listeSite.jsp";
+	public static final String PARAM_ID = "id";
+	public static final String PARAM_NOM_PAYS = "nomPays";
     
     private SiteDao siteDao;
     private PaysDao paysDao;
@@ -43,7 +41,7 @@ public class ListeSiteParClassement extends HttpServlet {
     private ClassementDao classementDao;
     private VilleDao villeDao;
     
-    public ListeSiteParClassement() {}
+    public ListeSiteParPays() {}
 
     public void init() throws ServletException {
     	
@@ -68,26 +66,30 @@ public class ListeSiteParClassement extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String idclassement = getValeurParametre( request, CHOIX_CLASSEMENT).trim();
-		long id_classement = Long.parseLong(idclassement);
-		Classement classement = classementDao.trouver(id_classement);
-		
+		String idpays = getValeurParametre(request, CHOIX_PAYS).trim();
+		long id_pays = Long.parseLong(idpays);
+		Pays pays = paysDao.trouver(id_pays);
+
 		HttpSession session = request.getSession();
-		session.setAttribute(ATT_SESSION_CLASSEMENT, classement);
-        
-		if (ATT_SESSION_CLASSEMENT != null){
-			request.setAttribute("sites", siteDao.listerParClassement(id_classement));
+		session.setAttribute(ATT_SESSION_PAYS, pays);
+
+		if (ATT_SESSION_PAYS != null) {
+			request.setAttribute("sites", siteDao.listerParPays(id_pays));
+			
 		}
-		
+
 		request.setAttribute("payss", paysDao.lister());
 		request.setAttribute("classements", classementDao.lister());
 		request.setAttribute("cotations", cotationDao.lister());
 		request.setAttribute("villes", villeDao.lister());
 
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-	
+
 		
-	}
+	        
+		}
+		
+
 	
 	private static String getValeurParametre( HttpServletRequest request, String nomChamp ) {
 	    String valeur = request.getParameter( nomChamp );

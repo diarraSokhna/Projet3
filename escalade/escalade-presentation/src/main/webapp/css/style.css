@@ -59,6 +59,14 @@ figure img{
     width: 100%;
     height: 100%;
 }
+.cad{
+	border:1px solid #FFFFFF;
+  border-radius:10px;
+  height:auto;
+  margin:-15px 360px 25px;
+  padding:15px;
+  width:350px;
+}
 .glyphicon-folder-open,
 .glyphicon-user,
 .glyphicon-calendar,

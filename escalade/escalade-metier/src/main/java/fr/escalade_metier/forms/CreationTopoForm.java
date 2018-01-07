@@ -246,6 +246,10 @@ public final class CreationTopoForm {
 	
 
 		private void validationNom(String nom) throws FormValidationException {
+			if (topoDao.trouver(nom) != null){
+				 throw new FormValidationException( "Ce topo existe déjà." );
+			}
+			
 			 if ( nom != null && nom.length() < 2 ) {
 		            throw new FormValidationException( "Le nom du topo doit contenir au moins 2 caractères." );
 		        }else if(nom == null) {

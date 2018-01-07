@@ -46,7 +46,6 @@ public class ReservationTopo extends HttpServlet {
 		String idtopo = getValeurParametre( request, PARAM_ID_TOPO );
 		long id_topo = Long.parseLong(idtopo);
 		request.setAttribute("topo", topoDao.trouver(id_topo));
-		request.setAttribute("reservations", reservationDao.lister());
 		this.getServletContext().getRequestDispatcher(VUE_FORM).forward(request, response);
 	
 	}
@@ -67,6 +66,8 @@ public class ReservationTopo extends HttpServlet {
         if ( form.getErreurs().isEmpty()) {
             session.setAttribute( ATT_SESSION_RESERVATION, reservation );
 
+        }else {
+        	 session.setAttribute( ATT_SESSION_RESERVATION, null );
         }
         String idtopo = getValeurParametre( request, PARAM_ID_TOPO );
 		long id_topo = Long.parseLong(idtopo);

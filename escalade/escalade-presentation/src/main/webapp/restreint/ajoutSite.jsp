@@ -85,8 +85,6 @@
 					</div>
 				</c:when>
 			</c:choose>
-
-
 		</fieldset>
 	</div>
 	<p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>

@@ -37,14 +37,14 @@ else{document.getElementById(elem).style.display="none";}
 									<c:if test="${ !empty sessionScope.sessionSecteur }">
 										<h4>La liste de ses secteurs:</h4>
 									</c:if>
-									<c:forEach items="${sessionScope.sessionSite.getSecteurs()}" var="secteurs">
-											<c:if test="${ secteurs.nomsect != null }">
+									<c:forEach items="${sessionScope.sessionSecteur}" var="secteurs">
+											<c:if test="${ secteurs.key != null }">
 												<ul class="api-list">
-												<li><c:out value="${secteurs.nomsect}" /></li>
+												<li><c:out value="${secteurs.key}" /></li>
 												
 												<c:if test="${ !empty sessionScope.sessionVoie }">
 												
-													<c:forEach items="${secteurs.getVoies()}" var="voies">
+													<c:forEach items="${secteurs.value.getVoies()}" var="voies">
 														<ul>
 														   <c:if test="${ voies.nom_voie != null }">
 															<li><c:out value="${ voies.nom_voie}" /></li>

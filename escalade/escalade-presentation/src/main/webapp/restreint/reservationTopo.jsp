@@ -27,7 +27,7 @@
 										réservation <span class="requis">*</span>
 									</label>
 									<div class="col-sm-5">
-										<input id="dateresa" name="dateresa" placeholder="jj-mm-aaaa"
+										<input type="date" id="dateresa" name="dateresa"
 											class="form-control"
 											value="<c:out value="${ reservation.date_resa}" />" /> <span
 											class="erreur">${form.erreurs['dateresa']} </span>
@@ -65,10 +65,43 @@
 
 				</div>
 
+				<c:choose>
+					<c:when test="${ !empty form.resultat}">
 
+						<div id="recap" class="col-sm-12 cad" style="display: block">
+							<h4>Récapitulatif</h4>
+							Date de réservation : <b> <fmt:formatDate
+									pattern="dd-MM-yyyy" value="${reservation.date_resa}" /></b> <br />
+							Nom du topo : <b><c:out value="${ reservation.topo.nom}" /></b>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div id="recap" class="col-sm-12 cad" style="display: none">
+							<h4>Récapitulatif</h4>
+							Date de réservation : <b> <fmt:formatDate
+									pattern="dd-MM-yyyy" value="${reservation.date_resa}" /></b> <br />
+							Nom du topo : <b><c:out value="${ reservation.topo.nom}" /></b>
+
+
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</div>
 
+
+
+
+
+	<script language="Javascript"> 
+function bascule(elem) 
+{ 
+etat=document.getElementById(elem).style.display; 
+if(etat=="none"){document.getElementById(elem).style.display="block";} 
+else{document.getElementById(elem).style.display="none";} 
+} 
+ 
+</script>
 </body>
 </html>

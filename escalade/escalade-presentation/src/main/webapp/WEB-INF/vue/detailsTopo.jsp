@@ -31,7 +31,8 @@
 						</h3>
 						<span class="para_text" style=""> Poposé par <b><c:out
 									value="${ topo.utilisateur.nom }" /> <c:out
-									value="${ topo.utilisateur.prenom }" /></b>  <c:out
+									value="${ topo.utilisateur.prenom }" /></b> <br/>
+									 <c:out
 								value="${ topo.description }" /> <br /> Nombre de
 							pages: <b> <c:out value="${ topo.nbpage}" />
 						</b> pages<br />

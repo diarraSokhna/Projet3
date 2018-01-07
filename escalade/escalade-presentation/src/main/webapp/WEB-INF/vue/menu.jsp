@@ -35,6 +35,7 @@
          <ul class="dropdown-menu">
            <li class=""><a href="<c:url value="CreationTopo" />">Proposer topo</a></li> 
            <li class=""><a href="<c:url value="/ListeTopo" />">Liste des topos</a></li> 
+           <li class=""><a href="<c:url value="/ListeReservation" />">Mes réservations</a></li> 
             
         </ul>
         </li>

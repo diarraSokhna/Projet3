@@ -28,6 +28,8 @@ public class AjoutSiteSecteurVoie extends HttpServlet {
 	
 	public static final String CONF_DAO_FACTORY = "daofactory";
 	public static final String SESSION_SITES  = "sessionSite";
+	public static final String SESSION_SECTEURS  = "sessionSecteur";
+	public static final String SESSION_VOIES  = "sessionVoie";
 
     public static final String ATT_Site      = "site";
     public static final String ATT_FORM         = "form";
@@ -71,15 +73,16 @@ public class AjoutSiteSecteurVoie extends HttpServlet {
 		
 		Site site = form.ajouterSiteSecteurVoie(request);
 		
-		
 		request.setAttribute(ATT_Site, site);
 		request.setAttribute(ATT_FORM, form);
 		
 		HttpSession session = request.getSession();
 		
-//		session.setAttribute( SESSION_SITES, site );
 		if ( form.getErreurs().isEmpty() ) {
-			session.invalidate();
+		
+			 session.removeAttribute(SESSION_SITES);
+			 session.removeAttribute(SESSION_SECTEURS);
+			 session.removeAttribute(SESSION_VOIES);
 			 response.sendRedirect(VUE_SUCCES);
 		}else {
 			

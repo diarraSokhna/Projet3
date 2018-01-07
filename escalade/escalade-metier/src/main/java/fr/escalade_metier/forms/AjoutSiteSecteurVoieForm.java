@@ -53,7 +53,10 @@ public class AjoutSiteSecteurVoieForm {
 				for (Secteur secteur : site.getSecteurs()) {
 					secteurDao.creer(secteur, site);
 					for (Voie voie : secteur.getVoies()) {
-						voieDao.creer(voie, secteur);
+						voieDao.creerVoie(voie, secteur);
+//						System.out.println("lissecteur "+secteur.getVoies());
+//						System.out.println("voie "+voie);
+//						System.out.println("secteur "+secteur);
 					}
 				}
 

@@ -29,7 +29,7 @@ public class VoieDaoImpl implements VoieDao {
 	}
 
 	@Override
-	public void creer(Voie voie, Secteur secteur) throws DaoException {
+	public void creerVoie(Voie voie, Secteur secteur) throws DaoException {
 		    Connection connexion = null;
 	        PreparedStatement preparedStatement = null;
 	        ResultSet valeursAutoGenerees = null;

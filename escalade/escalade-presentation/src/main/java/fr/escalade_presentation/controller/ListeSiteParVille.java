@@ -28,8 +28,6 @@ public class ListeSiteParVille extends HttpServlet {
 	public static final String CONF_DAO_FACTORY = "daofactory";
 	private static final String CHOIX_VILLE = "idville";
 
-    public static final String ATT_SITE       = "site";
-    public static final String ATT_FORM         = "form";
     public static final String ATT_SESSION_VILLE = "sessionVille";
     public static final String ATT_SESSION_SITE = "sessionSite";
 	
@@ -76,13 +74,7 @@ public class ListeSiteParVille extends HttpServlet {
 		session.setAttribute(ATT_SESSION_VILLE, ville);
         
 		if (ATT_SESSION_VILLE != null){
-			
-			List<Site> sites = new ArrayList<Site>();
-			sites = siteDao.listerParVille(id_ville);
-			session.setAttribute(ATT_SESSION_SITE, sites);
-			request.setAttribute("sites", sites);
-		
-	        
+			request.setAttribute("sites", siteDao.listerParVille(id_ville));
 		}
 		
 		request.setAttribute("payss", paysDao.lister());

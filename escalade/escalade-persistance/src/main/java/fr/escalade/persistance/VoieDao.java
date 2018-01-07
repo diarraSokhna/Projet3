@@ -8,7 +8,7 @@ import fr.escalade.beans.Voie;
 
 public interface VoieDao {
 
-    void creer(Voie voie, Secteur secteur) throws DaoException;
+    void creerVoie(Voie voie, Secteur secteur) throws DaoException;
 	
     Voie trouver (long id_voie) throws DaoException;
 	

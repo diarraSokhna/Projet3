@@ -5,9 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.w3c.dom.html.HTMLParagraphElement;
 
 import fr.escalade.beans.Cotation;
 import fr.escalade.beans.Exposition;
@@ -29,6 +32,7 @@ public class AjoutVoieForm {
 	    private static final String CHOIX_EXPOSITION = "idexposition";
 	    
 	    public static final String SESSION_SECTEURS  = "sessionSecteur";
+	    public static final String SESSION_VOIES  = "sessionVoie";
 	    
         private String   resultat;
 	    
@@ -56,6 +60,7 @@ public class AjoutVoieForm {
 		@SuppressWarnings("unchecked")
 		public Voie ajouterVoie(HttpServletRequest request){
 	    	Voie voie = new Voie();
+	    	HttpSession session = request.getSession();
 	    	
 	    	String idcotation = getValeurChamp( request, CHOIX_COTATION);
 	    	Long id_cotation = Long.parseLong(idcotation);
@@ -65,11 +70,11 @@ public class AjoutVoieForm {
 	    	Long id_expo = Long.parseLong(idexpo);
 	    	Exposition exposition = expositionDao.trouver(id_expo);
 	    	
-	    	String nomvoie = getValeurChamp( request, CHAMP_NOM );
+	    	
 	    	String altitude = getValeurChamp( request, CHAMP_Altitude );
 	    	String nbrlongueur = getValeurChamp( request, CHAMP_NBRLONGUEUR );
-	    	
-            HttpSession session = request.getSession();
+	    	String nomvoie = getValeurChamp( request, CHAMP_NOM );
+         
 	        
             LinkedHashMap<String, Secteur> secteurs = (LinkedHashMap<String, Secteur>) session.getAttribute( SESSION_SECTEURS );
           
@@ -81,7 +86,10 @@ public class AjoutVoieForm {
 		            setErreur( CHOIX_EXPOSITION, "Merci de choisir une exposition.");
 		            }
 	    	 
-	        traiterNom( nomvoie, voie );
+	    	
+		      
+		        
+	        traiterNom( nomvoie, voie , session);
 	        traiterAltitude( altitude, voie );
 	        traiterNbrLongueur( nbrlongueur, voie );
 	        
@@ -90,16 +98,17 @@ public class AjoutVoieForm {
 	        voie.setExposition(exposition);
 	        
 	        String nomsecteur = getValeurChamp(request, CHOIX_SECTEUR);
-            Secteur secteur = (Secteur) secteurs.get(nomsecteur);
-            if (secteur != null){
-	        secteur.addVoie(voie);
-	        }else {
-	        	 setErreur( CHOIX_SECTEUR, "Veuillez choisir un secteur!" );
-	        	
-	        }
+           
 	        
 	        try {
 	            if ( erreurs.isEmpty() ) {
+	            	Secteur secteur = (Secteur) secteurs.get(nomsecteur);
+	                if (secteur != null){
+	    	        secteur.addVoie(voie);
+	    	        }else {
+	    	        	 setErreur( CHOIX_SECTEUR, "Veuillez choisir un secteur!" );
+	    	        	
+	    	        }
 	                resultat = "Succès d'ajout de la voie.";
 	            } else {
 	                resultat = "Échec d'ajout de la voie.";
@@ -114,10 +123,10 @@ public class AjoutVoieForm {
 	    
 	  
 
-		private void traiterNom(String nomvoie, Voie voie) {
+		private void traiterNom(String nomvoie, Voie voie, HttpSession session) {
 			
 			   try {
-		            validationNom( nomvoie );
+		            validationNom( nomvoie, session );
 		        } catch ( FormValidationException e ) {
 		            setErreur( CHAMP_NOM, e.getMessage() );
 		        }
@@ -149,7 +158,22 @@ public class AjoutVoieForm {
      			
      		}
         
-    	private void validationNom(String nomvoie) throws FormValidationException {
+    	@SuppressWarnings("unchecked")
+		private void validationNom(String nomvoie, HttpSession session) throws FormValidationException {
+    		LinkedHashMap<String, Voie> voies = (LinkedHashMap<String, Voie>) session
+    				.getAttribute(SESSION_VOIES);
+    		
+    		if (voies != null ) {
+    			Voie voieSession = (Voie) voies.get(nomvoie);
+
+    			if (voieSession != null ) {
+    				throw new FormValidationException("Cette voie existe déjà");
+    			}
+    		}
+
+		     if (voieDao.trouver(nomvoie) != null){
+					throw new FormValidationException("Cette voie existe déjà");
+				}
 			 if ( nomvoie != null && nomvoie.length() < 2 ) {
 		            throw new FormValidationException( "Le nom de la voie doit contenir au moins 2 caractères." );
 		        }else if(nomvoie == null) {

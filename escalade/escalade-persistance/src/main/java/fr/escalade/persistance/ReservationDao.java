@@ -12,6 +12,8 @@ public interface ReservationDao {
 	  
 	  List<Reservation> lister() throws DaoException;
 	  
+	  List<Reservation> lister(long id_user) throws DaoException;
+	  
 	  Reservation trouver( Date dateresa, long id_resa ) throws DaoException;
 	  
 	  Reservation trouver( long id_resa ) throws DaoException;

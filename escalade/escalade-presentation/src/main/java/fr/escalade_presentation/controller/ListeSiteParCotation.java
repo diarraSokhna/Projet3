@@ -73,10 +73,7 @@ public class ListeSiteParCotation extends HttpServlet {
 		session.setAttribute(ATT_SESSION_COTATION, cotation);
         
 		if (ATT_SESSION_COTATION != null){
-			List<Site> sites = new ArrayList<Site>();
-			sites = siteDao.listerParCotation(id_cotation);
-			session.setAttribute(ATT_SESSION_SITE, sites);
-			request.setAttribute("sites", sites);
+			request.setAttribute("sites", siteDao.listerParCotation(id_cotation));
 		}
 		
 		request.setAttribute("payss", paysDao.lister());

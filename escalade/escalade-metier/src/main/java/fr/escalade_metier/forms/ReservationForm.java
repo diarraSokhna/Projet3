@@ -55,9 +55,7 @@ public class ReservationForm {
 	         
 		     Reservation reservation = new Reservation();
 		     
-		
 		     String date_resa = getValeurChamp( request, CHAMP_DATE );
-
 	         traiterDateResa(date_resa, idtopo ,  reservation);
 			
 	         reservation.setTopo(topo);
@@ -82,19 +80,16 @@ public class ReservationForm {
 	        return reservation;
 	    }
 	    
+	   
 	 
 
 	    private void traiterDateResa( String date_resa, String idtopo, Reservation reservation ) {
-	    	java.text.DateFormat format = new java.text.SimpleDateFormat("dd-MM-yyyy");
+	    	java.text.DateFormat format = new java.text.SimpleDateFormat("yyyy-MM-dd");
 	    	java.util.Date date;
 	    	if (date_resa != null){
 				try {
 					date = format.parse(date_resa);
 					java.sql.Date dateresa = new java.sql.Date(date.getTime());
-					
-//					if(dateresa != date){
-//						setErreur( CHAMP_DATE," format invalide" );
-//					}
 					
 					 try {
 				            validationDateResa( date_resa, idtopo );
@@ -109,31 +104,22 @@ public class ReservationForm {
 				}
 	    	}else {setErreur( CHAMP_DATE, "Veuillez entrer une date" );}
 	       
-	       
-	        
 	    }
 
 	    private void validationDateResa( String date_resa , String idtopo) throws FormValidationException {
-	   
-	    	
 	    	long temp = Long.parseLong(idtopo);
-	    
-	    	java.text.DateFormat format = new java.text.SimpleDateFormat("dd-MM-yyyy");
-	    	java.util.Date date;
+	    	java.text.DateFormat format = new java.text.SimpleDateFormat("yyyy-MM-dd");
+	        java.util.Date date;
 				try {
 					date = format.parse(date_resa);
 					java.sql.Date dateresa = new java.sql.Date(date.getTime());
 				    
 					if ( reservationDao.trouver( dateresa, temp ) != null ){
 		                throw new FormValidationException( "Ce topo est réservé pour cette date, Merci d'en choisir une autre." );
-		        }
-		       
-					
+		        }	
 				} catch (ParseException e1) {
 					e1.printStackTrace();
 				}
-				
-				
 	    }
 	   
 	    

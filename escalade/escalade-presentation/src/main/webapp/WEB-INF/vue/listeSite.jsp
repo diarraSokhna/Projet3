@@ -24,7 +24,7 @@
 						</h4>
 					</div>
 					<form method="post"
-						action="<c:url value="ListeSite" > <c:param name="id" value="${ sessionScope.sessionPays.idpays }" /><c:param name="nomPays" value="${ sessionScope.sessionPays.nompays }" /> </c:url>"
+						action="<c:url value="ListeSiteParPays" > <c:param name="id" value="${ sessionScope.sessionPays.idpays }" /><c:param name="nomPays" value="${ sessionScope.sessionPays.nompays }" /> </c:url>"
 						class="form  col-sm-2">
 
 						<c:set var="pays" value="${ site.pays }" scope="request" />
@@ -92,12 +92,12 @@
 
 				<div style="">
 
-					<c:choose>
-						<c:when test="${ empty sessionScope.sessionSite  }">
-							<h1>La recherche n'a rien donné</h1>
+<%-- 					<c:choose> --%>
+<%-- 						<c:when test="${ empty sessionScope.sessionSite  }"> --%>
+<!-- 							<h1>La recherche n'a rien donné</h1> -->
 
-						</c:when>
-						<c:otherwise>
+<%-- 						</c:when> --%>
+<%-- 						<c:otherwise> --%>
 							<c:forEach var="site" items="${ sites }">
 								<div class="col-sm-6 col-md-3 colonn">
 									<div class="thumbnail">
@@ -118,8 +118,8 @@
 
 							</c:forEach>
 
-						</c:otherwise>
-					</c:choose>
+<%-- 						</c:otherwise> --%>
+<%-- 					</c:choose> --%>
 
 				</div>
 			</div>

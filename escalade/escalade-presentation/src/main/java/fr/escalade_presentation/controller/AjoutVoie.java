@@ -75,13 +75,13 @@ public class AjoutVoie extends HttpServlet {
 		
 		if ( formvoie.getErreurs().isEmpty() ) {
 			
-			List<Voie> voies = (ArrayList<Voie>) session.getAttribute( SESSION_VOIES );
+			LinkedHashMap<String, Voie> voies = (LinkedHashMap<String, Voie>) session.getAttribute(SESSION_VOIES);
            
             if ( voies == null ) {
-                 voies = new ArrayList<Voie>();
+            	voies = new LinkedHashMap<String, Voie>();
             }
-           voies.add( voie );
-           session.setAttribute( SESSION_VOIES, voies );
+            voies.put(voie.getNom_voie(), voie);
+            session.setAttribute( SESSION_VOIES, voies );
            
            request.setAttribute("cotations", cotationDao.lister());
            request.setAttribute("expositions",expositionDao.lister());

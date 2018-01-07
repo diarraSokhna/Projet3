@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 import fr.escalade.beans.Reservation;
+import fr.escalade.beans.Site;
 import fr.escalade.beans.Topo;
 
 public class ReservationDaoImpl implements ReservationDao {
@@ -20,6 +21,7 @@ public class ReservationDaoImpl implements ReservationDao {
     private static final String SQL_SELECT = "SELECT * FROM reservation ORDER BY id";
     private static final String SQL_SELECT_PAR_DATE_TOPO = "SELECT * FROM reservation WHERE date_resa = ? and id_topo= ?";
     private static final String SQL_SELECT_PAR_ID = "SELECT * FROM reservation WHERE id = ?";
+    private static final String SQL_SELECT_PAR_USER = "SELECT id, date_resa, r.id_topo, r.id_user, nom FROM  reservation r, topo t WHERE r.id_topo = t.id_topo AND r.id_user=?";
     private static final String SQL_DELETE_PAR_ID = "DELETE FROM reservation WHERE id = ?";
 	
     private DaoFactory daoFactory;
@@ -147,6 +149,29 @@ public class ReservationDaoImpl implements ReservationDao {
 	            fermeturesSilencieuses( preparedStatement, connexion );
 	        }
 		
+	}
+
+	@Override
+	public List<Reservation> lister(long id_user) throws DaoException {
+		Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Reservation> reservations = new ArrayList<Reservation>();
+
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee( connection, SQL_SELECT_PAR_USER, false, id_user);
+                    resultSet = preparedStatement.executeQuery();
+            while ( resultSet.next() ) {
+            	reservations.add( map( resultSet ) );
+            }
+        } catch ( SQLException e ) {
+            throw new DaoException( e );
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connection );
+        }
+
+        return reservations;
 	}
 
 }
