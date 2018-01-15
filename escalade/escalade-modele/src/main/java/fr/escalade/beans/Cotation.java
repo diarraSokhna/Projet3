@@ -2,14 +2,15 @@ package fr.escalade.beans;
 
 import java.io.Serializable;
 
-public class Cotation implements Serializable{
+public class Cotation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private long idcot;
 	private String type_escalade;
 	private String libelle_cot;
-	
-	public Cotation() {}
+
+	public Cotation() {
+	}
 
 	public Cotation(long idcot, String type_escalade, String libelle_cot) {
 		super();
@@ -40,9 +41,6 @@ public class Cotation implements Serializable{
 
 	public void setLibelle_cot(String libelle_cot) {
 		this.libelle_cot = libelle_cot;
-	} 
-	
-	
-	
-	
+	}
+
 }

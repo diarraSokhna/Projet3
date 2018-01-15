@@ -28,7 +28,7 @@ public class Accueil extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		request.setAttribute("articles", articleDao.lister());
 		this.getServletContext().getRequestDispatcher("/WEB-INF/vue/accueil.jsp").forward(request, response);
 

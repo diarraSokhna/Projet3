@@ -2,13 +2,14 @@ package fr.escalade.beans;
 
 import java.io.Serializable;
 
-public class Exposition implements Serializable{
+public class Exposition implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private long id_expo;
 	private String libelle_expo;
-	
-	public Exposition() {}
+
+	public Exposition() {
+	}
 
 	public Exposition(long id_expo, String libelle_expo) {
 		super();
@@ -31,8 +32,5 @@ public class Exposition implements Serializable{
 	public void setLibelle_expo(String libelle_expo) {
 		this.libelle_expo = libelle_expo;
 	}
-	
-	
-	
 
 }

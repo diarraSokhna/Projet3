@@ -2,13 +2,14 @@ package fr.escalade.beans;
 
 import java.io.Serializable;
 
-public class Pays implements Serializable{
+public class Pays implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private long idpays;
 	private String nompays;
-	
-	public Pays() {}
+
+	public Pays() {
+	}
 
 	public Pays(long idpays, String nompays) {
 		super();
@@ -31,8 +32,5 @@ public class Pays implements Serializable{
 	public void setNompays(String nompays) {
 		this.nompays = nompays;
 	}
-
-	
-	
 
 }

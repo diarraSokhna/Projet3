@@ -7,17 +7,14 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import fr.escalade.beans.Article;
 import fr.escalade.beans.Secteur;
 import fr.escalade.beans.Site;
-import fr.escalade.beans.Utilisateur;
 import fr.escalade.persistance.DaoException;
 import fr.escalade.persistance.SecteurDao;
 
 public class AjoutSecteurForm {
 
 	private static final String CHAMP_NOM_SECTEUR = "nomsect";
-	private static final String CHAMP_SITE = "site";
 
 	public static final String SESSION_SITES = "sessionSite";
 	public static final String SESSION_SECTEURS = "sessionSecteur";
@@ -58,7 +55,7 @@ public class AjoutSecteurForm {
 		if (secteurs != null) {
 			Secteur secteurSession = (Secteur) secteurs.get(nomsect);
 
-			if (secteurSession != null ) {
+			if (secteurSession != null) {
 				setErreur(CHAMP_NOM_SECTEUR, "Ce secteur existe déjà.");
 			}
 		}
@@ -88,7 +85,7 @@ public class AjoutSecteurForm {
 	}
 
 	private void validationNomSecteur(String nomsect) throws FormValidationException {
-		if (secteurDao.trouver(nomsect) != null){
+		if (secteurDao.trouver(nomsect) != null) {
 			throw new FormValidationException("Ce secteur existe déjà");
 		}
 

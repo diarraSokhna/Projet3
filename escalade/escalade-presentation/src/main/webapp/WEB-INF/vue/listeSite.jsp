@@ -92,34 +92,34 @@
 
 				<div style="">
 
-<%-- 					<c:choose> --%>
-<%-- 						<c:when test="${ empty sessionScope.sessionSite  }"> --%>
-<!-- 							<h1>La recherche n'a rien donné</h1> -->
+					<%-- 					<c:choose> --%>
+					<%-- 						<c:when test="${ empty sessionScope.sessionSite  }"> --%>
+					<!-- 							<h1>La recherche n'a rien donné</h1> -->
 
-<%-- 						</c:when> --%>
-<%-- 						<c:otherwise> --%>
-							<c:forEach var="site" items="${ sites }">
-								<div class="col-sm-6 col-md-3 colonn">
-									<div class="thumbnail">
-										<a
-											href="<c:url value="/DetailsSite"><c:param name="nomsite" value="${ site.nomsite }" ></c:param>
+					<%-- 						</c:when> --%>
+					<%-- 						<c:otherwise> --%>
+					<c:forEach var="site" items="${ sites }">
+						<div class="col-sm-6 col-md-3 colonn">
+							<div class="thumbnail">
+								<a
+									href="<c:url value="/DetailsSite"><c:param name="nomsite" value="${ site.nomsite }" ></c:param>
 					 <c:param name="idsite" value="${ site.idsite }" ></c:param></c:url>">
-											<img src="<c:url value="/images/${ site.image }"/>" alt="" />
-										</a>
-										<div class="caption">
-											Nom du site : <Strong><c:out
-													value="${ site.nomsite  }" /></Strong><br /> Pays du site : <Strong><c:out
-													value="${ site.pays.nompays}" /></Strong><br /> Classement du site
-											: <Strong><c:out
-													value="${ site.classement.libelle_class}" /></Strong>
-										</div>
-									</div>
+									<img src="<c:url value="/images/${ site.image }"/>" alt="" />
+								</a>
+								<div class="caption">
+									Nom du site : <Strong><c:out
+											value="${ site.nomsite  }" /></Strong><br /> Pays du site : <Strong><c:out
+											value="${ site.pays.nompays}" /></Strong><br /> Classement du site :
+									<Strong><c:out
+											value="${ site.classement.libelle_class}" /></Strong>
 								</div>
+							</div>
+						</div>
 
-							</c:forEach>
+					</c:forEach>
 
-<%-- 						</c:otherwise> --%>
-<%-- 					</c:choose> --%>
+					<%-- 						</c:otherwise> --%>
+					<%-- 					</c:choose> --%>
 
 				</div>
 			</div>

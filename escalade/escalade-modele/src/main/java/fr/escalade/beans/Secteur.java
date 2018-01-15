@@ -4,16 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Secteur implements Serializable{
+public class Secteur implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	private long  idsect;
-	private String nomsect; 
+
+	private long idsect;
+	private String nomsect;
 	private Site site;
 	private List<Voie> voies = new ArrayList<Voie>();
-	
-	
-	public Secteur() {}
+
+	public Secteur() {
+	}
 
 	public Secteur(long idsect, String nomsect, Site site, List<Voie> voies) {
 		super();
@@ -22,8 +22,6 @@ public class Secteur implements Serializable{
 		this.site = site;
 		this.voies = voies;
 	}
-
-
 
 	public long getIdsect() {
 		return idsect;
@@ -57,14 +55,12 @@ public class Secteur implements Serializable{
 		this.voies = voies;
 	}
 
-	public void addVoie(Voie voie){
+	public void addVoie(Voie voie) {
 		this.voies.add(voie);
 	}
-	
-	 public void removeVoie(Voie voie ) {
-		    this.voies.remove(voie);
-		  }
 
-	
+	public void removeVoie(Voie voie) {
+		this.voies.remove(voie);
+	}
 
 }

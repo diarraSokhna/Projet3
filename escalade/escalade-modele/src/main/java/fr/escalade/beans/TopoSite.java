@@ -2,14 +2,15 @@ package fr.escalade.beans;
 
 import java.io.Serializable;
 
-public class TopoSite  implements Serializable{
+public class TopoSite implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long id_topo_site;
 	private Topo topo;
 	private Site site;
-	
-	public TopoSite() {}
+
+	public TopoSite() {
+	}
 
 	public TopoSite(Long id_topo_site, Topo topo, Site site) {
 		super();
@@ -41,5 +42,5 @@ public class TopoSite  implements Serializable{
 	public void setSite(Site site) {
 		this.site = site;
 	}
-	
+
 }

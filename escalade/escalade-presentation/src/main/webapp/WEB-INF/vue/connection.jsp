@@ -52,13 +52,13 @@
 								</div>
 
 								<p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>
-										</fieldset>
+							</fieldset>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-<%-- 	<%@ include file="footer.jsp" %> --%>
+	<%-- 	<%@ include file="footer.jsp" %> --%>
 </body>
 </html>

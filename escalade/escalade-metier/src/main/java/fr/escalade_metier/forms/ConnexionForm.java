@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
 import fr.escalade.beans.Utilisateur;
@@ -42,7 +41,6 @@ public final class ConnexionForm {
 
 		String email = getValeurChamp(request, CHAMP_EMAIL);
 		String motDePasse = getValeurChamp(request, CHAMP_PASS);
-		
 
 		Utilisateur utilisateur = new Utilisateur();
 
@@ -53,7 +51,7 @@ public final class ConnexionForm {
 			if (erreurs.isEmpty()) {
 				resultat = "Succès de la connexion.";
 				utilisateur = utilisateurDao.trouverParMail(email);
-				
+
 			} else {
 				resultat = "Échec de la connexion.";
 			}
@@ -94,9 +92,10 @@ public final class ConnexionForm {
 	}
 
 	private void validationMotsDePasse(String motDePasse, String email) throws FormValidationException {
-		if (motDePasse != null ) {
+		if (motDePasse != null) {
 			Utilisateur utilisateur = utilisateurDao.trouverParMail(email);
 			String modepassbase = utilisateur.getMotpass();
+
 			if (!passwordEncryptor.checkPassword(motDePasse, modepassbase)) {
 				throw new FormValidationException("Veuillez saisir un mot de passe valide");
 			}

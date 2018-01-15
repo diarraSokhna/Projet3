@@ -1,42 +1,29 @@
 package fr.escalade_presentation.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-
-import fr.escalade.beans.Pays;
-import fr.escalade.beans.Secteur;
 import fr.escalade.beans.Site;
-import fr.escalade.beans.Ville;
 import fr.escalade.persistance.ClassementDao;
 import fr.escalade.persistance.CotationDao;
 import fr.escalade.persistance.DaoFactory;
 import fr.escalade.persistance.ExpositionDao;
 import fr.escalade.persistance.PaysDao;
-import fr.escalade.persistance.SecteurDao;
 import fr.escalade.persistance.SiteDao;
 import fr.escalade.persistance.VilleDao;
-import fr.escalade_metier.forms.AjoutSecteurForm;
 import fr.escalade_metier.forms.AjoutSiteForm;
 
 public class AjoutSite extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	public static final String CONF_DAO_FACTORY = "daofactory";
 	public static final String CHEMIN = "chemin";
 	public static final String ATT_Site = "site";
-	private static final String CHOIX_PAYS = "idpays";
 	public static final String ATT_FORMSITE = "formsite";
 
 	public static final String PARAM_ID_PAYS = "idpays";
@@ -78,9 +65,6 @@ public class AjoutSite extends HttpServlet {
 		request.setAttribute("expositions", expositionDao.lister());
 		request.setAttribute("sites", siteDao.lister());
 
-		
-
-
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 
 	}
@@ -107,7 +91,7 @@ public class AjoutSite extends HttpServlet {
 
 		request.setAttribute("payss", paysDao.lister());
 
-		 request.setAttribute("villes", villeDao.lister());
+		request.setAttribute("villes", villeDao.lister());
 		request.setAttribute("classements", classementDao.lister());
 		request.setAttribute("cotations", cotationDao.lister());
 		request.setAttribute("expositions", expositionDao.lister());
@@ -116,12 +100,4 @@ public class AjoutSite extends HttpServlet {
 
 	}
 
-	private static String getValeurParametre(HttpServletRequest request, String nomChamp) {
-		String valeur = request.getParameter(nomChamp);
-		if (valeur == null || valeur.trim().length() == 0) {
-			return null;
-		} else {
-			return valeur;
-		}
-	}
 }

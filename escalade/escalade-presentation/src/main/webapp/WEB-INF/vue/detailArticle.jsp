@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ include file="taglib.jsp"%>
 <html>
 <head>
@@ -28,8 +29,7 @@
 						<br /> Publié par
 						<c:out value="${ article.utilisateur.nom }" />
 						<c:out value="${ article.utilisateur.prenom }" />
-						<br />
-						<br />
+						<br /> <br />
 						<c:out value="${ article.contenu}" />
 						<br />
 						<section style="margin-top: 75px">

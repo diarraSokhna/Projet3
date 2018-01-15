@@ -1,18 +1,16 @@
 package fr.escalade.beans;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Date;
 
-public class Reservation implements Serializable{
+public class Reservation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private long id_resa;
 	private Date date_resa;
 	private Topo topo;
 	private Utilisateur utilisateur;
-	
-	
+
 	public Reservation(long id_resa, Date date_resa, Topo topo, Utilisateur utilisateur) {
 		super();
 		this.id_resa = id_resa;
@@ -21,7 +19,8 @@ public class Reservation implements Serializable{
 		this.utilisateur = utilisateur;
 	}
 
-	public Reservation() {}
+	public Reservation() {
+	}
 
 	public long getId_resa() {
 		return id_resa;
@@ -55,6 +54,4 @@ public class Reservation implements Serializable{
 		this.utilisateur = utilisateur;
 	}
 
-
-	
-} 
+}

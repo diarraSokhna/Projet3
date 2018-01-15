@@ -1,21 +1,21 @@
 package fr.escalade.beans;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
-public class Voie implements Serializable{
+public class Voie implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private long id_voie;
-	private String nom_voie;  
+	private String nom_voie;
 	private double altitude;
 	private int nbr_longueur;
 	private Secteur secteur;
 	private Cotation cotation;
 	private Exposition exposition;
-	
-	public Voie() {}
+
+	public Voie() {
+	}
 
 	public Voie(long id_voie, String nom_voie, double altitude, int nbr_longueur, Secteur secteur, Cotation cotation,
 			Exposition exposition) {
@@ -28,8 +28,6 @@ public class Voie implements Serializable{
 		this.cotation = cotation;
 		this.exposition = exposition;
 	}
-
-
 
 	public long getId_voie() {
 		return id_voie;
@@ -86,7 +84,5 @@ public class Voie implements Serializable{
 	public void setExposition(Exposition exposition) {
 		this.exposition = exposition;
 	}
-
-	
 
 }

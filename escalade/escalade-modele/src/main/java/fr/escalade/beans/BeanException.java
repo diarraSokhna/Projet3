@@ -1,9 +1,11 @@
 package fr.escalade.beans;
 
-public class BeanException extends Exception{
+public class BeanException extends Exception {
 
-	 public BeanException(String message) {
-	        super(message);
-	    }
-	
+	private static final long serialVersionUID = 1L;
+
+	public BeanException(String message) {
+		super(message);
+	}
+
 }

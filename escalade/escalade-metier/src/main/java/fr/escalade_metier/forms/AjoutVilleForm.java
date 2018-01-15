@@ -117,7 +117,7 @@ public class AjoutVilleForm {
 				temp = 0;
 				throw new FormValidationException("Le code postal doit être un nombre.");
 			}
-		}else {
+		} else {
 			throw new FormValidationException("Il faut un code postal");
 		}
 		return temp;

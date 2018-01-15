@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-
 import fr.escalade.beans.Secteur;
 import fr.escalade.beans.Site;
 import fr.escalade.beans.Voie;
@@ -54,9 +53,6 @@ public class AjoutSiteSecteurVoieForm {
 					secteurDao.creer(secteur, site);
 					for (Voie voie : secteur.getVoies()) {
 						voieDao.creerVoie(voie, secteur);
-//						System.out.println("lissecteur "+secteur.getVoies());
-//						System.out.println("voie "+voie);
-//						System.out.println("secteur "+secteur);
 					}
 				}
 
@@ -66,7 +62,7 @@ public class AjoutSiteSecteurVoieForm {
 			}
 		} catch (DaoException e) {
 			setErreur("imprévu", "Erreur imprévue lors de l'ajout.");
-			resultat = "Échec de l'ajout de la voie : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
+			resultat = "Échec de l'ajout du site: une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
 			e.printStackTrace();
 		}
 		return site;

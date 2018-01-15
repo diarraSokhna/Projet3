@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ include file="../WEB-INF/vue/taglib.jsp"%>
 <html>
 <head>
@@ -16,30 +17,34 @@
 			<div class="panel-body">
 				<div id="collapse1" class="panel-collapse collapse in">
 					<div class="panel-body">
-						<form method="post" accept-charset="UTF-8" action="AjoutExposition">
+						<form method="post" accept-charset="UTF-8"
+							action="AjoutExposition">
 							<div class="panel-body form-horizontal payment-form">
 								<fieldset>
-									
+
 									<div class="form-group">
-										<label for="nom" class="col-sm-4 control-label">Libelle exposition
-											<span class="requis">*</span>
+										<label for="nom" class="col-sm-4 control-label">Libelle
+											exposition <span class="requis">*</span>
 										</label>
 										<div class="col-sm-5">
 											<input type="text" class="form-control" id="libelleExpo"
-												name="libelleExpo" value="<c:out value="${ exposition.libelle_expo}" />">
+												name="libelleExpo"
+												value="<c:out value="${ exposition.libelle_expo}" />">
 											<span class="erreur">${form.erreurs['libelleExpo']}</span>
 
 										</div>
-										
+
 									</div>
 									<div class="form-group">
 										<div class="col-sm-9 text-right">
 											<button type="submit"
 												class="btn btn-default preview-add-button">Ajouter
 											</button>
-										<a href="<c:url value="AjoutVoie"/> ">	<button type="button"
-												class="btn btn-default preview-add-button">Retour
-											</button></a>
+											<a href="<c:url value="AjoutVoie"/> ">
+												<button type="button"
+													class="btn btn-default preview-add-button">Retour
+												</button>
+											</a>
 										</div>
 									</div>
 

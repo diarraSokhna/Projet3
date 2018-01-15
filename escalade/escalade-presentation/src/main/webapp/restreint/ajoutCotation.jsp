@@ -1,11 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ include file="../WEB-INF/vue/taglib.jsp"%>
 <html>
 <head>
 <%@ include file="../WEB-INF/vue/head.jsp"%>
 </head>
 <body>
-<%@ include file="../WEB-INF/vue/menu.jsp" %>
+	<%@ include file="../WEB-INF/vue/menu.jsp"%>
 	<div class="container">
 		<div class="panel panel-default">
 			<div class="panel-heading">

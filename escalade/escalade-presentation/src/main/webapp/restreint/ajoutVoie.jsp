@@ -107,11 +107,11 @@
 															value="${ exposition.libelle_expo}" /></option>
 												</c:forEach>
 											</select> <span class="erreur">${formvoie.erreurs['idexposition']}</span>
-<!-- 											Si l'exposition n'existe pas vous pouvez <a -->
-<%-- 												href="<c:url value="AjoutExposition" />">l'ajouter</a> --%>
+											<!-- 											Si l'exposition n'existe pas vous pouvez <a -->
+											<%-- 												href="<c:url value="AjoutExposition" />">l'ajouter</a> --%>
 										</div>
 									</div>
-										<div class="form-group">
+									<div class="form-group">
 										<div class="col-sm-9 text-right" style="margin-top: 50px">
 											<button type="submit"
 												class="btn btn-default preview-add-button">Ajouter

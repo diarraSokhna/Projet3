@@ -1,18 +1,13 @@
 package fr.escalade_presentation.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import fr.escalade.beans.Pays;
-import fr.escalade.beans.Site;
 import fr.escalade.persistance.ClassementDao;
 import fr.escalade.persistance.CotationDao;
 import fr.escalade.persistance.DaoFactory;
@@ -48,7 +43,6 @@ public class ListeSite extends HttpServlet {
 	public ListeSite() {
 	}
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setAttribute("payss", paysDao.lister());
@@ -63,8 +57,6 @@ public class ListeSite extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-
 	}
-
 
 }

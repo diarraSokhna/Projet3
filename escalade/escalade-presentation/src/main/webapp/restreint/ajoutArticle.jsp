@@ -1,18 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ include file="../WEB-INF/vue/taglib.jsp"%>
 <html>
 <head>
 <%@ include file="../WEB-INF/vue/head.jsp"%>
 </head>
 <body>
-<%@ include file="../WEB-INF/vue/menu.jsp" %>
+	<%@ include file="../WEB-INF/vue/menu.jsp"%>
 
-<div class="container">
- <div class="panel panel-default">
-  <div class="panel-heading"><h4><b>Ajouter un article</b></h4></div>
- <div class="panel-body">
-		
- <form method="post" accept-charset="UTF-8" action="AjoutArticle" enctype="multipart/form-data">
+	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>
+					<b>Ajouter un article</b>
+				</h4>
+			</div>
+			<div class="panel-body">
+
+				<form method="post" accept-charset="UTF-8" action="AjoutArticle"
+					enctype="multipart/form-data">
 					<div class="panel-body form-horizontal payment-form">
 						<fieldset>
 							<div class="form-group">
@@ -78,18 +84,18 @@
 								</c:otherwise>
 							</c:choose>
 						</fieldset>
-						
-						
-						
+
+
+
 					</div>
 
 
 				</form>
- 
-</div>
-</div>
 
- 
-</div>
+			</div>
+		</div>
+
+
+	</div>
 </body>
 </html>

@@ -4,22 +4,22 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Site implements Serializable{
+public class Site implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private long idsite;
-	private String nomsite; 
+	private String nomsite;
 	private Pays pays;
 	private String image;
 	private Classement classement;
 	private List<Secteur> secteurs = new ArrayList<Secteur>();
 	private Ville ville;
-	
-	public Site() {}
 
+	public Site() {
+	}
 
-	public Site(long idsite, String nomsite, Pays pays, String image, Classement classement,
-			List<Secteur> secteurs, Ville ville) {
+	public Site(long idsite, String nomsite, Pays pays, String image, Classement classement, List<Secteur> secteurs,
+			Ville ville) {
 		super();
 		this.idsite = idsite;
 		this.nomsite = nomsite;
@@ -29,7 +29,6 @@ public class Site implements Serializable{
 		this.secteurs = secteurs;
 		this.ville = ville;
 	}
-
 
 	public long getIdsite() {
 		return idsite;
@@ -71,35 +70,28 @@ public class Site implements Serializable{
 		this.classement = classement;
 	}
 
-
 	public List<Secteur> getSecteurs() {
 		return secteurs;
 	}
 
-
 	public void setSeteurs(List<Secteur> secteurs2) {
 		this.secteurs = secteurs2;
 	}
-	
-	public void addSecteur(Secteur secteur){
+
+	public void addSecteur(Secteur secteur) {
 		this.secteurs.add(secteur);
 	}
-	
-	 public void removeSecteur(Secteur secteur ) {
-		    this.secteurs.remove(secteur);
-		  }
 
+	public void removeSecteur(Secteur secteur) {
+		this.secteurs.remove(secteur);
+	}
 
 	public Ville getVille() {
 		return ville;
 	}
 
-
 	public void setVille(Ville ville) {
 		this.ville = ville;
 	}
-	
-	
-
 
 }

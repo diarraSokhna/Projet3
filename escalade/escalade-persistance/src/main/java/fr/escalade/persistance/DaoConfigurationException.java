@@ -2,20 +2,18 @@ package fr.escalade.persistance;
 
 public class DaoConfigurationException extends RuntimeException {
 
-	
-	 /*
-     * Constructeurs
-     */
-    public DaoConfigurationException( String message ) {
-        super( message );
-    }
+	private static final long serialVersionUID = 1L;
 
-    public DaoConfigurationException( String message, Throwable cause ) {
-        super( message, cause );
-    }
+	public DaoConfigurationException(String message) {
+		super(message);
+	}
 
-    public DaoConfigurationException( Throwable cause ) {
-        super( cause );
-    }
-	
+	public DaoConfigurationException(String message, Throwable cause) {
+		super(message, cause);
+	}
+
+	public DaoConfigurationException(Throwable cause) {
+		super(cause);
+	}
+
 }

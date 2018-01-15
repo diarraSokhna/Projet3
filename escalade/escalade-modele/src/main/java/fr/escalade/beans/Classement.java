@@ -2,13 +2,14 @@ package fr.escalade.beans;
 
 import java.io.Serializable;
 
-public class Classement implements Serializable{
+public class Classement implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private long id_class;
 	private String libelle_class;
-	
-	public Classement() {}
+
+	public Classement() {
+	}
 
 	public Classement(long id_class, String libelle_class) {
 		super();
@@ -31,9 +32,5 @@ public class Classement implements Serializable{
 	public void setLibelle_class(String libelle_class) {
 		this.libelle_class = libelle_class;
 	}
-	
-	
-	
-	
 
 }

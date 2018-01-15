@@ -17,24 +17,26 @@
 			</div>
 			<div class="panel-body">
 				<table class="table table-striped table-bordered">
-						<thead>
-							<tr>
-								<th>Date Réservation</th>
-								<th>Topo réservé</th>
-							</tr>
-						</thead>
-						<tbody>
-					
-					<c:forEach var="reservation" items="${ reservations }">
+					<thead>
 						<tr>
-						
-							<td><fmt:formatDate pattern="dd-MM-yyyy" value="${reservation.date_resa }" /></td>
-							<td><a href="<c:url value="/DetailsTopo"><c:param name="idtopo" value="${ reservation.topo.idtopo }" ></c:param><c:param name="nomtopo" value="${ reservation.topo.nom }" ></c:param></c:url>">${ reservation.topo.nom }</a></td>
+							<th>Date Réservation</th>
+							<th>Topo réservé</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						<c:forEach var="reservation" items="${ reservations }">
+							<tr>
+
+								<td><fmt:formatDate pattern="dd-MM-yyyy"
+										value="${reservation.date_resa }" /></td>
+								<td><a
+									href="<c:url value="/DetailsTopo"><c:param name="idtopo" value="${ reservation.topo.idtopo }" ></c:param><c:param name="nomtopo" value="${ reservation.topo.nom }" ></c:param></c:url>">${ reservation.topo.nom }</a></td>
 							</tr>
 
-					</c:forEach>
-				</tbody>
-			</table>
+						</c:forEach>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>

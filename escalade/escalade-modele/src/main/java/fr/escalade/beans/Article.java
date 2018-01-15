@@ -3,18 +3,18 @@ package fr.escalade.beans;
 import java.io.Serializable;
 import java.util.Date;
 
-
 public class Article implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private long id_art;
 	private Date datepubli;
-	private String titre; 
-	private String contenu; 
+	private String titre;
+	private String contenu;
 	private Utilisateur utilisateur;
 	private String photo;
-	
-	public Article() {}
+
+	public Article() {
+	}
 
 	public Article(long id_art, Date datepubli, String titre, String contenu, Utilisateur utilisateur, String photo) {
 		super();
@@ -25,8 +25,6 @@ public class Article implements Serializable {
 		this.utilisateur = utilisateur;
 		this.photo = photo;
 	}
-
-
 
 	public long getId_art() {
 		return id_art;
@@ -60,18 +58,13 @@ public class Article implements Serializable {
 		this.contenu = contenu;
 	}
 
-	
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
 	}
 
-
-
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
-
-
 
 	public String getPhoto() {
 		return photo;
@@ -80,6 +73,5 @@ public class Article implements Serializable {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
-	
-	
+
 }

@@ -2,15 +2,16 @@ package fr.escalade.beans;
 
 import java.io.Serializable;
 
-public class Ville implements Serializable{
+public class Ville implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-    private long id_ville;
-    private Pays pays;
-    private String nom_ville;
-    private int cp;
-    
-	public Ville() {}
+
+	private long id_ville;
+	private Pays pays;
+	private String nom_ville;
+	private int cp;
+
+	public Ville() {
+	}
 
 	public Ville(long id_ville, Pays pays, String nom_ville, int cp) {
 		super();
@@ -20,7 +21,6 @@ public class Ville implements Serializable{
 		this.cp = cp;
 	}
 
-
 	public Pays getPays() {
 		return pays;
 	}
@@ -28,8 +28,6 @@ public class Ville implements Serializable{
 	public void setPays(Pays pays) {
 		this.pays = pays;
 	}
-
-	
 
 	public long getId_ville() {
 		return id_ville;
@@ -54,6 +52,5 @@ public class Ville implements Serializable{
 	public void setCp(int cp) {
 		this.cp = cp;
 	}
-    
-    
+
 }

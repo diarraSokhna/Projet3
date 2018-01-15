@@ -94,14 +94,15 @@
 
 
 
-	<script language="Javascript"> 
-function bascule(elem) 
-{ 
-etat=document.getElementById(elem).style.display; 
-if(etat=="none"){document.getElementById(elem).style.display="block";} 
-else{document.getElementById(elem).style.display="none";} 
-} 
- 
-</script>
+	<script language="Javascript">
+		function bascule(elem) {
+			etat = document.getElementById(elem).style.display;
+			if (etat == "none") {
+				document.getElementById(elem).style.display = "block";
+			} else {
+				document.getElementById(elem).style.display = "none";
+			}
+		}
+	</script>
 </body>
 </html>

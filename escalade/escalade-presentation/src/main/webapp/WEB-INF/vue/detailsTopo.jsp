@@ -31,12 +31,10 @@
 						</h3>
 						<span class="para_text" style=""> Poposé par <b><c:out
 									value="${ topo.utilisateur.nom }" /> <c:out
-									value="${ topo.utilisateur.prenom }" /></b> <br/>
-									 <c:out
-								value="${ topo.description }" /> <br /> Nombre de
-							pages: <b> <c:out value="${ topo.nbpage}" />
-						</b> pages<br />
-						<br /> <c:if test="${ sites != null}">
+									value="${ topo.utilisateur.prenom }" /></b> <br /> <c:out
+								value="${ topo.description }" /> <br /> Nombre de pages: <b>
+								<c:out value="${ topo.nbpage}" />
+						</b> pages<br /> <br /> <c:if test="${ sites != null}">
 						La liste des sites du topo : <c:forEach var="site"
 									items="${ sites }">
 									<ul>
@@ -46,9 +44,8 @@
 													value="${ site.nomsite}" /></a></li>
 									</ul>
 								</c:forEach>
-							</c:if> <br />
-						<br />
-						<br /> <i class="glyphicon glyphicon-comment right"></i> <c:out
+							</c:if> <br /> <br /> <br /> <i
+							class="glyphicon glyphicon-comment right"></i> <c:out
 								value="${ rowCount }" />
 
 						</span>
