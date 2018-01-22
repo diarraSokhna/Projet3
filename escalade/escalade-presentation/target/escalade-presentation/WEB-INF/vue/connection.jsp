@@ -46,19 +46,19 @@
 								<div class="form-group">
 									<div class="col-sm-9 text-right">
 										<button type="submit" value="Connection"
-											class="btn btn-default">Connection</button>
+											class="btn btn-default">Connexion</button>
 										<button type="reset" class="btn btn-default">Annuler</button>
 									</div>
 								</div>
 
 								<p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>
-										</fieldset>
+							</fieldset>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-<%-- 	<%@ include file="footer.jsp" %> --%>
+	<%-- 	<%@ include file="footer.jsp" %> --%>
 </body>
 </html>

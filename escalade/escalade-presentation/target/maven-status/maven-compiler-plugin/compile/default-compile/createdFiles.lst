@@ -1,8 +1,10 @@
 fr\escalade_presentation\filtre\RestrictionFiltre.class
+fr\escalade_presentation\controller\ChargerVille.class
 fr\escalade_presentation\controller\ListeTopo.class
 fr\escalade_presentation\controller\Accueil.class
 fr\escalade_presentation\controller\AjoutArticle.class
 fr\escalade_presentation\controller\ListeArticle.class
+fr\escalade_presentation\controller\ListeReservation.class
 fr\escalade_presentation\controller\Inscription.class
 fr\escalade_presentation\controller\DetailsTopo.class
 fr\escalade_presentation\controller\Recherche.class
@@ -19,6 +21,7 @@ fr\escalade_presentation\controller\Deconnexion.class
 fr\escalade_presentation\controller\AjoutSite.class
 fr\escalade_presentation\controller\ListeSite.class
 fr\escalade_presentation\controller\AjoutPays.class
+fr\escalade_presentation\controller\ListeSiteParPays.class
 fr\escalade_presentation\controller\AjoutCommentaire.class
 fr\escalade_presentation\controller\AjoutVoie.class
 fr\escalade_presentation\controller\Connection.class

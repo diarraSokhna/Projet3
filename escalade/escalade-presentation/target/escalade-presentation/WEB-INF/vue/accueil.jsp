@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ include file="taglib.jsp"%>
 <html>
 <head>
@@ -43,8 +44,10 @@
 												<!--<img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg" style="width: 100px;height:100px;">-->
 											</div>
 											<div class="col-sm-6">
-												<p><b>Film : L’Académie de l’Aventure © The Roof en stage
-													"grande voie" avec Daniel Du Lac à la Jonte</b></p>
+												<p>
+													<b>Film : L’Académie de l’Aventure © The Roof en stage
+														"grande voie" avec Daniel Du Lac à la Jonte</b>
+												</p>
 												<small> 9 décembre 2017 à 07:58</small>
 											</div>
 										</div>
@@ -59,8 +62,10 @@
 													src="/escalade-presentation/img/slide1.jpg">
 											</div>
 											<div class="col-sm-6">
-												<p><b>Catherine Destivelle présente son nouveau livre pour
-													enfants : « L’escalade tu connais ? »</b></p>
+												<p>
+													<b>Catherine Destivelle présente son nouveau livre pour
+														enfants : « L’escalade tu connais ? »</b>
+												</p>
 												<small>17 novembre 2017 à 12:30</small>
 											</div>
 										</div>
@@ -75,7 +80,9 @@
 													src="/escalade-presentation/img/slide3.jpg">
 											</div>
 											<div class="col-sm-6">
-												<p><b>Romain Desgranges gagne la coupe du monde 2017 !</b></p>
+												<p>
+													<b>Romain Desgranges gagne la coupe du monde 2017 !</b>
+												</p>
 												<small>12 novembre 2017 à 00:09</small>
 											</div>
 										</div>
@@ -122,8 +129,7 @@
 									<br /> Publié par
 									<c:out value="${ article.utilisateur.nom }" />
 									<c:out value="${ article.utilisateur.prenom }" />
-									<br />
-									<br />
+									<br /> <br />
 									<c:out value="${ article.contenu}" />
 									<br />
 									<section style="margin-top: 75px">
@@ -148,6 +154,6 @@
 			</div>
 		</div>
 	</div>
-<%-- <%@ include file="footer.jsp" %> --%>
+	<%-- <%@ include file="footer.jsp" %> --%>
 </body>
 </html>

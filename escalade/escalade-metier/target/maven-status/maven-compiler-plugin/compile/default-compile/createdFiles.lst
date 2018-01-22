@@ -13,4 +13,3 @@ fr\escalade_metier\forms\ReservationForm.class
 fr\escalade_metier\forms\AjoutSiteForm.class
 fr\escalade_metier\forms\AjoutVilleForm.class
 fr\escalade_metier\forms\CreationTopoForm.class
-fr\escalade_metier\forms\RechercheForm.class

@@ -79,7 +79,8 @@
 									<a href="<c:url value="/Connection" />"> Déjà membre?</a>
 									<button type="submit" value="Inscription"
 										class="btn btn-default">Inscription</button>
-									<a href="<c:url value="Accueil" />"><button type="button" class="btn btn-default">Annuler</button></a>
+									<a href="<c:url value="Accueil" />"><button type="button"
+											class="btn btn-default">Annuler</button></a>
 
 								</div>
 							</div>
