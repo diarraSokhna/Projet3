@@ -5,7 +5,7 @@ import java.util.List;
 import fr.escalade.beans.Pays;
 
 public interface PaysDao {
-
+	
 	void creer(Pays pays) throws DaoException;
 
 	List<Pays> lister() throws DaoException;

@@ -56,7 +56,6 @@
 
 	</dependencies>
 
-
 	<build>
 		<finalName>escalade-presentation</finalName>
 		<plugins>
