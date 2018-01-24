@@ -15,7 +15,7 @@ import fr.escalade.persistance.TopoDao;
 import fr.escalade.persistance.UtilisateurDao;
 
 public class DaoFactory {
-	private static final String FICHIER_PROPERTIES = "/fr/escalade/persistance/dao.properties";
+	private static final String FICHIER_PROPERTIES = "fr/escalade/config/dao.properties";
 	private static final String PROPERTY_URL = "url";
 	private static final String PROPERTY_DRIVER = "driver";
 	private static final String PROPERTY_NOM_UTILISATEUR = "nomutilisateur";
