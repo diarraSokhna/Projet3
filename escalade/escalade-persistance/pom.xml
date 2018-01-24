@@ -69,11 +69,11 @@
 					<goal>copy-resources</goal>
 				</goals>
 				<configuration>
-					<outputDirectory>${basedir}/target/classes/fr/escalade/config</outputDirectory>
+					<outputDirectory>${basedir}/target/classes/fr/escalade/ressources</outputDirectory>
 					<resources>
 						<resource>
-							<directory>src/main/java/fr/escalade/config</directory>
-							 <filtering>true</filtering>
+							<directory>src/main/java/fr/escalade/ressources</directory>
+						
 							<includes>
 								<include>dao.properties</include>
 							</includes>
