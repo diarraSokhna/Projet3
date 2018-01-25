@@ -35,6 +35,7 @@ _Outils_
 
 * **Eclipse**
 * **Papyrus**
+* **PgAdmin**
 * **SQL Power Architect**
 
 _Intallation des outils_
