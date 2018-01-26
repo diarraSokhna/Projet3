@@ -47,9 +47,9 @@ _Intallation des outils_
 
 * lancer l’icône **PgAdminII** et créer une base de données: **escalade1**,
 
-* exécuter le script du fichier : **escalade1.sql**,
+* exécuter le script du fichier : **documentation\Base_de_donnée\escalade1.sql**,
 
-* exécuter ensuite le script du fichier **jeu_de_donnée.sql** : pour le jeu de données
+* exécuter ensuite le script du fichier **documentation\Base_de_donnée\jeu_de_donnée.sql** : pour le jeu de données
 
 **Pour Java 8 (JDK 8) il faut:**
 
